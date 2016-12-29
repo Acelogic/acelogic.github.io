@@ -4,57 +4,43 @@
 <head lang="en">
     <!-- MetaData --->
     <meta charset="utf-8">
-
     <!--Scripts & Link Dependencies-->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-deep_purple.min.css" />
     <link rel="stylesheet" href="styles.css">
-
-    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
-
     <title>Welcome</title>
-
-
 </head>
 
 <body>
-    <div>
-        <!-- Simple header with fixed tabs. -->
-        <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--fixed-tabs">
-            <header class="mdl-layout__header">
-                <div class="mdl-layout__header-row">
-                    <!-- Title -->
-                    <span class="mdl-layout-title">Acelogic</span>
-                </div>
-                <!-- Tabs -->
-                <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
-                    <a href="#fixed-tab-1" class="mdl-layout__tab is-active">Welcome</a>
-                    <a href="#fixed-tab-2" class="mdl-layout__tab">About me</a>
-                    <a href="#fixed-tab-3" class="mdl-layout__tab">Projects</a>
-                </div>
-            </header>
-            <div class="mdl-layout__drawer">
-                <span class="mdl-layout-title">Sections</span>
+    <div class="demo-layout-transparent mdl-layout mdl-js-layout">
+        <header class="mdl-layout__header mdl-layout__header--transparent">
+            <div class="mdl-layout__header-row">
+                <!-- Title -->
+                <span class="mdl-layout-title">Acelogic.Tech</span>
+                <!-- Add spacer, to align navigation to the right -->
+                <div class="mdl-layout-spacer"></div>
+                <!-- Navigation -->
+                <nav class="mdl-navigation">
+                    <a class="mdl-navigation__link" href="">About Me</a>
+                    <a class="mdl-navigation__link" href="">Projects</a>
+                    <a class="mdl-navigation__link" href="">Contact Me</a>
+                    <a class="mdl-navigation__link" href="">Links</a>
+                </nav>
             </div>
-            <main class="mdl-layout__content">
-                <section class="mdl-layout__tab-panel is-active" id="fixed-tab-1">
-                    <div class="page-content">
-                        <!-- Your content goes here -->
-                    </div>
-                </section>
-                <section class="mdl-layout__tab-panel" id="fixed-tab-2">
-                    <div class="page-content">
-                        <!-- Your content goes here -->
-                    </div>
-                </section>
-                <section class="mdl-layout__tab-panel" id="fixed-tab-3">
-                    <div class="page-content">
-                        <!-- Your content goes here -->
-                    </div>
-                </section>
-            </main>
+        </header>
+        <div class="mdl-layout__drawer">
+            <span class="mdl-layout-title">Options</span>
+            <nav class="mdl-navigation">
+                <a class="mdl-navigation__link" href="">About Me</a>
+                <a class="mdl-navigation__link" href="">Projects</a>
+                <a class="mdl-navigation__link" href="">Contact Me</a>
+                <a class="mdl-navigation__link" href="">Links</a>
+            </nav>
+        </div>
+        <main class="mdl-layout__content">
+        </main>
     </div>
-    </div>
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
 </body>
 
 </html>
