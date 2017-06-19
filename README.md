@@ -1,6 +1,4 @@
-# AcelogicSite
+#About 
+Personal Website This is the personal website for Miguel Cruz, hosted using github pages. website url: 
+https://acelogic.github.io/
 
-# Heres the site so far....
-![alt tag](http://i.imgur.com/KuW2RZu.png)
-![alt tag](http://i.imgur.com/Q6xlKlA.png)
-# Ugly I know, I have horrible designing skills, will fix soon. 
