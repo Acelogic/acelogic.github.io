@@ -19,7 +19,10 @@ body {
   background-color: #842896;
   color: black;
 }
-
+.navbar a.active {
+    background-color: #4CAF50;
+    color: white;
+}
 .header-img-placeholder {
   width: 1920px;
 }
