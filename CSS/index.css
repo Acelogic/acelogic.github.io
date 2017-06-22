@@ -1,0 +1,36 @@
+/*Css For index.html */
+
+body {
+  /*background-image: url('blurredBackground.jpg'); */
+  background-repeat: repeat;
+}
+
+.navbar a {
+  float: left;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.navbar a:hover {
+  background-color: #842896;
+  color: black;
+}
+
+.header-img-placeholder {
+  width: 1920px;
+}
+
+#header-image {
+  width: 1920px;
+  height: 200px;
+}
+
+.navbar-background {
+  background-color: #333;
+  width: 1920px;
+  height: 50px;
+}
