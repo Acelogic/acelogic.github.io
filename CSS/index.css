@@ -16,12 +16,12 @@ body {
 }
 
 .navbar a:hover {
-  background-color: #842896;
-  color: black;
+  background-color: #942896;
+  color: #34f309;
 }
 .navbar a.active {
-    background-color: #4CAF50;
-    color: white;
+    background-color: #e20d0d;
+    color: #11f9e9;
 }
 .header-img-placeholder {
   width: 1920px;
@@ -29,7 +29,7 @@ body {
 
 #header-image {
   width: 1920px;
-  height: 200px;
+  height: 500px;
 }
 
 .navbar-background {
