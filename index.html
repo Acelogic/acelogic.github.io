@@ -2,65 +2,24 @@
 <html lang="en">
 
 <head>
-  <title>Welcome 🔥</title>
-  <link rel="stylesheet" type="text/css" href="CSS/index.css"></link>
+  <title>Welcome</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      $('#place_holder').load("navBar.html");
+    });
+  </script>
+  <link rel="stylesheet" type="text/css" href="CSS/index.css">
   <meta charset="utf-8">
+
 </head>
 
 <body>
-  <!-- Header Starts -->
-  <header id="header" class="header">
-    <div class="header-img-placeholder">
-      <img src="Assets/blurredBackground.jpg" height="497" id="header-image">
-    </div>
-        <div class = "navbar-background">
-          <nav class="navbar">
-            <a href="index.html">Home</a>
-            <a href="Projects.html">Projects</a>
-            <a href="ContactMe.html">Contact</a>
-            <a href=" Skills.html"> Skills </a>
-          </nav>
-        </div>
-  </header>
-  <!-- Header Ends-->
-  		
-        <!--Slide Show Content Starts Here-->
-  <div id="contentDIV" class="contentDIV">
-    <div class = "slideShow">
-		</div>
-  <div class="slideshow-container">
-  	<div class="mySlides fade">
-    	<div class="numbertext">1 / 3</div>
-    	<img src="Assets/sampleOne.jpg" style="width:100%">
-    	<div class="text">Sample Image One</div>
-  	</div>
 
-  	<div class="mySlides fade">
-    	<div class="numbertext">2 / 3</div>
-    	<img src="Assets/sampleTwo.jpg" style="width:100%">
-    	<div class="text">Sample Image Two</div>
-  	</div>
-
-    <div class="mySlides fade">
-        <div class="numbertext">3 / 3</div>
-        <img src="Assets/sampleThree.jpg" style="width:100%">
-        <div class="text">Sameple Image Three</div>
-    </div>
-  <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-  <a class="next" onclick="plusSlides(1)">&#10095;</a>
-	</div>
-
-<br>
-
-    <div style="text-align:center">
-      <span class="dot" onclick="currentSlide(1)"></span> 
-      <span class="dot" onclick="currentSlide(2)"></span> 
-      <span class="dot" onclick="currentSlide(3)"></span> 
-    </div>
-		<!--Slide Show Content Stops Here--> 
+  <div id="place_holder"></div>
+  This is index
 </body>
 
-<script src="JS/main.js"></script>
-<script src="JS/jquery-3.2.1.min.js"></script>
+
 
 </html>
