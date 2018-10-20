@@ -3,16 +3,26 @@
 
 <head>
   <title>Welcome</title>
-  <link rel="import" href="navBar.html">
-  <link rel="stylesheet" type="text/css" href="CSS/index.css"></link>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  
+  <script>
+    $(document).ready(function(){
+   
+   $('#content').load("navBar.html");
+
+});
+</script>
+  <link rel="stylesheet" type="text/css" href="CSS/index.css">
+  </link>
+
+
+
 </head>
 
 <body>
+  <div id="content"></div>
+   This is index
 
- 
-  This is index
+
 </body>
 
 
