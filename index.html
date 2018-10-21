@@ -9,6 +9,8 @@
   </link>
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css">
   </link>
+  <link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
+  </link>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
@@ -29,34 +31,42 @@
   <!-- NavBar insertation Code-->
   <div id="content"></div>
   <!-- Hero Framework Component-->
-  <section class="hero is-primary has-background-link ">
+  <section class="hero is-parent has-background-link">
     <div class="hero-body">
       <div class="container">
-        <h1 class="title">
+        <h1 class="title has-text-centered has-text-white">
           Hello There :)
         </h1>
-        <h2 class="subtitle">
+        <h2 class="subtitle has-text-centered has-text-white">
           The website is still under construction
-          <progress class="progress is-primary" value="15" max="100">15%</progress> 15%
+          <progress class="progress is-black" value="15" max="100">16%</progress> 16%
         </h2>
       </div>
     </div>
   </section>
   <!--Content-->
+  <div class="hero-body">
+    <div class="container has-text-centered">
+      <div class="columns">
+        <div class="column is-half is-offset-one-quarter">
+          <h3 class="subtitle is-3 has-text-justified has-text-weight-light">
+            I'm
+            <strong>Miguel Cruz</strong>, a Computer Engineering student <i class="em em-male-technologist"></i>
+            interested in Computer Architecture <i class="em em-art"></i>
+            and Operating Systems <i class="em em-male-mechanic"></i>
+          </h3>
+          <article class="tile is-child notification is-info">
+            <p class="title">The OG CPU</p>
+            <p class="subtitle">While You're Waiting. Enjoy This Picture of Me Holding a Pentium 4</p>
+            <figure class="image is-4by3">
+              <img src="Assets/CPU.jpg">
+            </figure>
+          </article>
+        </div>
+      </div>
 
-  <div class="tile is-parent is-5">
-    <article class="tile is-child notification is-info">
-      <p class="title">The OG CPU</p>
-      <p class="subtitle">While You're Waiting. Enjoy This Picture of Me Holding a Pentium 4</p>
-      <figure class="image is-4by3">
-        <img src="Assets/CPU.jpg">
-      </figure>
-    </article>
-  </div>
-  </div>
-
-  <!--Footer-->
-  <div id="footer"></div>
+      <!--Footer-->
+      <div id="footer"></div>
 </body>
 
 
