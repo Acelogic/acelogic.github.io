@@ -1,20 +1,25 @@
 /*Css For index.html */
-body{
-background-image: url(/Assets/bg.jpg)
-
-
+body {
+    background-image: url(/Assets/bg.jpg)
 }
 
-.vid-overlay{
-    background: rgba(0,0,0,0);
+.vid-overlay {
+    background: rgba(0, 0, 0, 0);
     position: absolute;
-    top: 0; right: 0; bottom: 0; left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 0;
     display: flex;
     align-items: center;
     justify-content: center;
-  }
- 
-  .MainText{
-position:relative   
 }
-  
+.heroPOS{
+z-index: 1;
+position: relative
+}
+.columns {
+    position: relative;
+    display: flex;
+}
