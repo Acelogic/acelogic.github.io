@@ -1,10 +1,14 @@
 /*Css For index.html */
 
+.vid-container{
+    position: relative;
+} 
+
 
 .vid-overlay {
     background: rgba(0, 0, 0, 0);
     position: absolute;
-    top: 0;
+    top: 0px;
     right: 0;
     bottom: 0px;
     left: 0;
@@ -16,8 +20,4 @@
 .heroPOS{
 z-index: 1;
 position: relative
-}
-.columns {
-    position: relative;
-    display: flex;
 }
