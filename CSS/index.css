@@ -2,7 +2,11 @@
 
 .vid-container{
     position: relative;
+    background-image: url("/Assets/Coding.jpg"); 
+    background-repeat: no-repeat;
 } 
+
+
 
 
 .vid-overlay {
