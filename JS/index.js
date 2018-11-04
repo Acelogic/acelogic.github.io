@@ -1,4 +1,3 @@
-new TypeIt('#intro', {
-  speed: 75,
-  startDelay: 900
+new TypeIt('.type-it', {
+  strings: 'This is my string!'
 });
