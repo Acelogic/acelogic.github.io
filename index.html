@@ -3,14 +3,19 @@
 
 <head>
   <title>Welcome</title>
+
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css">
+  </link>
+
   <link rel="stylesheet" type="text/css" href="CSS/index.css">
   </link>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="JS/compLoader.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/typeit@5.10.7/dist/typeit.min.js"></script>
-  
-  
+  <script src="https://cdn.jsdelivr.net/npm/progressively/dist/progressively.min.js"></script>
+
+
 
 </head>
 
@@ -29,7 +34,7 @@
         </h1>
         <h2 class="subtitle has-text-centered has-text-white">
           The website is still under construction
-          <progress class="progress is-link" value="20" max="100">20%</progress> 20%
+          <progress class="progress is-link" value="20" max="100">25%</progress> 25%
         </h2>
       </div>
     </div>
@@ -44,17 +49,17 @@
       <div class="columns">
         <div class="column is-half is-offset-one-quarter">
           <div class="hero-body">
-            <h3 class="subtitle is-3 has-text-centered has-text-weight-light has-text-white " >
-             <span class="type-it"> I'm
-              <strong class="has-text-white">Miguel Cruz</strong>, a Computer Engineering student <i class="em em-male-technologist"></i>
-              interested in Computer Architecture <i class="em em-male-mechanic"></i>
-              and Operating Systems <i class="fab fa-linux"></i> </span>
+            <h3 class="subtitle is-3 has-text-centered has-text-weight-light has-text-white ">
+              <span class="type-it"> I'm
+                <strong class="has-text-white">Miguel Cruz</strong>, a Computer Engineering student <i class="em em-male-technologist"></i>
+                interested in Computer Architecture <i class="em em-male-mechanic"></i>
+                and Operating Systems <i class="fab fa-linux"></i> </span>
             </h3>
           </div>
         </div>
       </div>
     </div>
-</div>
+  </div>
 
 
   <div class="hero-body">
@@ -64,8 +69,8 @@
           <article class="tile is-child notification is-danger">
             <p class="title">MaterialatorEMU <i class="em em-video_game"></i></p>
             <p class="subtitle">Check out my emulator in the project section of the website</p>
-            <figure class="image is-4by3">
-              <img src="Assets/SMB3.gif">
+            <figure class="image is-4by3 progressive">
+              <img class="progressive__img progressive--not-loaded" data-progressive="Assets/SMB3.gif" src="Assets/SMB3-lowly.jpg">
             </figure>
           </article>
         </div>
@@ -81,8 +86,8 @@
           <article class="tile is-child notification is-link">
             <p class="title">The OG CPU</p>
             <p class="subtitle">While You're Waiting. Enjoy This Picture of Me Holding a Pentium 4</p>
-            <figure class="image is-4by3">
-              <img src="Assets/CPU.jpg">
+            <figure class="image is-4by3 progressive">
+              <img class="progressive__img progressive--not-loaded" data-progressive="Assets/CPU.jpg" src="Assets/CPU-lowly.jpg">
             </figure>
           </article>
         </div>
