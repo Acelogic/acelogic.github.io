@@ -3,29 +3,36 @@
 
 <head>
   <title>Welcome</title>
-
-  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css">
-  </link>
-
-  <link rel="stylesheet" type="text/css" href="CSS/index.css">
-  </link>
-
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0,  user-scalable=0, maximum-scale=1.0">
+  
+  <link rel="stylesheet" type="text/css" href="CSS/font.css"></link>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/progressively/dist/progressively.min.css"></link>
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css"></link>
+  <link rel="stylesheet" type="text/css" href="CSS/global.css"></link>
+  <link rel="stylesheet" type="text/css" href="CSS/index.css"></link>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=VT323" ></link>
+  <link rel="stylesheet" href="https://afeld.github.io/emoji-css/emoji.css" ></link>  
+  
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="JS/compLoader.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/typeit@5.10.7/dist/typeit.min.js"></script>
+  <script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js"></script>
+  <script src="JS/LocalLibs/pace.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/progressively/dist/progressively.min.js"></script>
+  <script async src="https://cdn.jsdelivr.net/npm/typeit@5.10.7/dist/typeit.min.js"></script>
+  <script async src="JS/index.js"></script>
 
-
-
+  
+  
 </head>
+
 
 <body>
   <div id="master"></div>
-  <!--Font Modifier-->
-  <div id="fontMod"></div>
   <!-- NavBar insertation Code-->
   <div id="navBar"></div>
-  <!-- Hero Framework Component-->
+
+  <!-- Title Hero-->
   <section class="hero is-parent has-background-black  heroPOS ">
     <div class="hero-body ">
       <div class="container">
@@ -41,7 +48,7 @@
   </section>
   <!--Content-->
   <div class="vid-container">
-    <video height="100%" width="100%" playsinline autoplay muted loop poster="/Assets/Coding.jpg">
+    <video async height="100%" width="100%" playsinline autoplay muted loop poster="/Assets/Coding.jpg">
       <source src="Assets\Coding.webm" type="video/webm">
     </video>
 
@@ -96,10 +103,7 @@
   </div>
 
 
-  <!--Footer-->
+  <!--Footer Insertion Code-->
   <div id="footer"></div>
 </body>
-
-<script src="JS/index.js"></script>
-
 </html>
