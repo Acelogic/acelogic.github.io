@@ -3,24 +3,32 @@
 
 <head>
   <title>Projects</title>
-  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css">
-  </link>
-  <link rel="stylesheet" type="text/css" href="CSS/projects.css">
-  </link>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0,  user-scalable=0, maximum-scale=1.0">
+  
+  <link rel="stylesheet" type="text/css" href="CSS/font.css"></link>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/progressively/dist/progressively.min.css"></link>
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css"></link>
+  <link rel="stylesheet" type="text/css" href="CSS/global.css"></link>
+  <link rel="stylesheet" type="text/css" href="CSS/projects.css"></link>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=VT323" ></link>
+  <link rel="stylesheet" href="https://afeld.github.io/emoji-css/emoji.css" ></link>  
+  
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="JS/compLoader.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/typeit@5.10.7/dist/typeit.min.js"></script>
+  <script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js"></script>
+  <script src="JS/LocalLibs/pace.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/progressively/dist/progressively.min.js"></script>
-
+  <script async src="https://cdn.jsdelivr.net/npm/typeit@5.10.7/dist/typeit.min.js"></script>
+  <script async src="JS/projects.js"></script>
 </head>
 
 <body>
   <div id="master"></div>
-  <!--Font Modifier-->
-  <div id="fontMod"></div>
   <!-- NavBar insertation Code-->
   <div id="navBar"></div>
-  <!-- Page Start-->
+
+  <!-- Title Hero-->
   <section class="hero is-primary has-background-black">
     <div class="hero-body">
       <div class="container">
@@ -50,7 +58,8 @@
         </header>
         <div class="card-content">
           <figure class="image progressive">
-            <img class="progressive__img progressive--not-loaded" data-progressive="Assets/emu.png" src="Assets/emu-lowly.jpg" alt="MaterialatorEMU">
+            <img class="progressive__img progressive--not-loaded" data-progressive="Assets/emu.png" src="Assets/emu-lowly.jpg"
+              alt="MaterialatorEMU">
           </figure>
           <div style="margin-top:1em" class="content">
             A Gameboy emulator for Android with a UI inspired from the newest material design guidelines.
@@ -133,7 +142,8 @@
         </header>
         <div class="card-content">
           <figure class="image">
-             <img class="progressive__img progressive--not-loaded" data-progressive="Assets/Website.jpg" src="Assets/Website-lowly.jpg" alt="This Website">
+            <img class="progressive__img progressive--not-loaded" data-progressive="Assets/Website.jpg" src="Assets/Website-lowly.jpg"
+              alt="This Website">
           </figure>
           <div style="margin-top:1em" class="content">
             First website of mines made from scratch
@@ -164,10 +174,8 @@
       </div>
     </div>
   </div>
-  <!--Footer-->
+  <!--Footer Insertion Code-->
   <div id="footer"></div>
-
 </body>
-<script src="JS/projects.js"></script>
 
 </html>
