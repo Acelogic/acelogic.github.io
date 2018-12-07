@@ -1,7 +1,13 @@
 /*Css For index.html */
 
+body{
+    background-color: black
+}
 
 
+.roundit{
+border-radius: 12px;
+}
 
 .vid-container{
     position: relative;

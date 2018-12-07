@@ -20,3 +20,8 @@
   width: 100%;
   height: 2px;
 }
+
+
+.roundit{
+  border-radius: 12px;
+  }
