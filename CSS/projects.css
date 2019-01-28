@@ -1,3 +1,21 @@
+.has-same-height .card {
+  height: 100%;
+  overflow: hidden;
+  
+  
+}
+
+@media (min-width: 0px) and (max-width: 767px)  {
+  .card-content {
+    height: 100%;
+  }
+}
+@media (min-width: 768px) {
+  .card-content {
+    height: 475px; 
+  }
+}
+
 
 .card {
     margin-bottom: 3rem;
@@ -12,9 +30,6 @@
   }
   .card-header-title {
     display: block;
-  }
-  .card-content p {
-    margin-bottom: 2rem;
   }
   .card:hover {
     box-shadow: 0 0 11px rgba(33,33,33,.2); 
