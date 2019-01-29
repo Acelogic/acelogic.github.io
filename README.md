@@ -1,5 +1,5 @@
-# Acelogic.github.io
-My Website (Currently in development ;)  https://acelogic.github.io/
+# Mcruz.me
+My Website (Currently in development ;)  https://mcruz.me
 
 # Screenshot 
 
