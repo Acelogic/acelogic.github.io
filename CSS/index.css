@@ -5,6 +5,12 @@
   
 } 
 
+.vid-text{
+
+font-size: calc(1vw + 1vh + 2vmin);
+
+}
+
 .vid-overlay {
     background: rgba(0, 0, 0, 0);
     position: absolute;
@@ -19,7 +25,7 @@
 }
 .heroPOS{
 z-index: 1;
-position: relative
+position: relative; 
 }
 
 /*
