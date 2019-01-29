@@ -209,7 +209,7 @@ position: relative;
 
  /*Skills Graph CSS*/ 
   
-  .content {
+.hexGraph {
   margin: auto;
   text-align: center;
 }
@@ -231,4 +231,22 @@ position: relative;
   margin: auto;
   padding: 3px 3px 28px 3px;
   display:inline-block;
+}
+
+/*Skills Fade in */
+.fade-in {
+	opacity: 1;
+	animation-name: fadeInOpacity;
+	animation-iteration-count: 1;
+	animation-timing-function: ease-in;
+	animation-duration: 2s;
+}
+
+@keyframes fadeInOpacity {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
 }
