@@ -1,4 +1,9 @@
 /*Pace Library Loading Bar*/
+body{
+overflow: hidden; 
+}
+
+
 .pace {
   -webkit-pointer-events: none;
   pointer-events: none;
