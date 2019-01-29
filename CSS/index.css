@@ -1,15 +1,9 @@
-/*Css For index.html */
-.roundit{
-border-radius: 12px;
-}
+/*For text overlay*/
 
 .vid-container{
     position: relative;
   
 } 
-
-
-
 
 .vid-overlay {
     background: rgba(0, 0, 0, 0);
@@ -27,3 +21,178 @@ border-radius: 12px;
 z-index: 1;
 position: relative
 }
+
+/*
+*Progress Bar Animation
+*/
+
+.easeOut { 
+  width:35%;  /*These have to be the same*/
+  animation:easeOut 2s ease-out;
+}
+
+@keyframes easeOut {
+  0%  { width:0px;}
+  100%{ width:35%;} /*These have to be the same*/
+}
+
+
+
+/*
+*Console
+*/
+#console {
+    width: 96%;
+    height: 250px;
+    padding: 10px;
+    color: white;
+    font-weight: 120;
+    font-family: 'Lato';
+    overflow-y: scroll;
+    background-color: rgba(0, 0, 0, 0.9);
+  
+  }
+  
+  #console a{
+    color: orange;
+    text-decoration: underline;
+  
+  
+  }
+  
+  #bar {
+    background-color:black;
+    width: 96%;
+    height: 40px;
+    padding: 10px;
+  }
+  
+  #bar > div {
+    float: left;
+    margin-left: 10px;
+  }
+  
+  #window {
+    color: #fff;
+    font-weight: 800;
+    height: 420px;
+    padding: 25px;
+  }
+  
+  #green {
+    background-color: #39d1b4;
+    border-radius: 50%;
+    margin-top: 7px;
+    height: 15px;
+    width: 15px;
+  }
+  
+  #yellow {
+    background-color: #fff799;
+    border-radius: 50%;
+      margin-top: 7px;
+    height: 15px;
+    width: 15px;
+  }
+  
+  #red {
+    background-color: #f65a5b;
+    border-radius: 50%;
+      margin-top: 7px;
+  
+    height: 15px;
+    width: 15px;
+  }
+  
+  #barText{
+      margin-top: 5px;
+    text-align: center;
+    color: white; 
+  
+  }
+  
+  .blue {
+    color: #55acee;
+  }
+  
+  .red {
+    color: red;
+  }
+  
+  .green {
+    color: green;
+  }
+  
+  
+  .consoleLine {
+    overflow: hidden;
+    width: 100%;
+    white-space: normal;
+    font-family: 'Arial';
+    word-wrap: break-word;
+  
+  }
+
+  .greetingText {
+    overflow: hidden;
+    width: 100%;
+    white-space: normal;
+    font-family: 'Arial';
+    word-wrap: break-word;
+  
+  }
+  
+  /*Ensures All Console Text is the Same*/
+  .consoleLineFont {
+    font-family: 'Arial';
+    }
+  
+
+  .consoleOutPutLine {
+    overflow: hidden;
+    width: 100%;
+    white-space: normal;
+    font-family: 'Arial';
+    word-wrap: break-word;
+  
+  }
+
+
+
+/*Blinking Cursor CSS*/
+
+  .blinkplz::after {
+    content: "";
+   
+    /* Remove display: inline-block if not required to be on the same line as text etc */
+    display: inline-block;
+    background-color: green;
+    vertical-align: top;
+    width: 10px;
+    /* Set height to the line height of .text */
+    height: 24px;
+    /* 
+    Animation paramaters:
+    blink = animation-name, 
+    1s = animation-duration, 
+    step-end = animation-timing-function,
+    infinite = animation-iteration-count
+    */
+    /*-webkit-animation: blink 1s step-end infinte;*/
+    animation: blink 1s step-end infinite;
+   
+  }
+  
+  /*@-webkit-keyframes blink {
+    0% { opacity: 1.0; }
+    50% { opacity: 0.0; }
+    100% { opacity: 1.0; }
+  } */
+  
+  @keyframes blink {
+    0% { opacity: 1.0; }
+    50% { opacity: 0.0; }
+    100% { opacity: 1.0; }
+  }
+  
+  

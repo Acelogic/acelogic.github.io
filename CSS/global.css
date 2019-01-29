@@ -1,3 +1,4 @@
+/*Pace Library Loading Bar*/
 .pace {
   -webkit-pointer-events: none;
   pointer-events: none;
@@ -21,7 +22,7 @@
   height: 2px;
 }
 
-
+/*Global Element to Change Border Radius*/
 .roundit{
   border-radius: 12px;
   }
