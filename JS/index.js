@@ -67,6 +67,7 @@ function initConsole() {
 	} 
 
 	// TODO: implement clear command
+	// TODO: Implement blinking cursor correctly
 
 	function enter() {
 		lastLine = getLastLine()
@@ -120,13 +121,16 @@ function initAll() {
 $(document).ready(initAll);
 
 
+
+
+
 //Skills JS
 
 var skills = [
 	{"header" : "INTERESTS",
 	  "captions" : [
-		"Cooking",
 		"Web",
+		"OS",
 		"Mobile",
 		"Design",
 		"AI"
@@ -141,10 +145,10 @@ var skills = [
 	},
 	{"header" : "LANGUAGES",
 	  "captions" : [
-		"nodeJS",
-		"PHP",
+		"C++",
+		"C",
 		"JS",
-		"Ruby",
+		"Python",
 		"Java"
 	  ],
 	  "values" : [
@@ -157,11 +161,11 @@ var skills = [
 	},
 	{"header" : "MISC",
 	  "captions" : [
-		"Eclipse",
+		"Linux",
 		"Git",
-		"Rails",
-		"OpenGL",
-		"Linux"
+		"Robotics",
+		"Drivers",
+		"Shell"
 	  ],
 	  "values" : [
 		0.85,
@@ -187,10 +191,10 @@ var skills = [
   }
   
   var hue = [];
-  var hueOffset = 25;
+  var hueOffset = 134; //Change Color
   
   for (var s in skills) {
-	$(".content").append('<div class="pentagon" id="interests"><div class="header"></div><canvas class="pentCanvas"/></div>');
+	$(".hexGraph").append('<div class="pentagon" id="interests"><div class="header"></div><canvas class="pentCanvas"/></div>');
 	hue[s] = (hueOffset + s * 255/skills.length) % 255;
   }
   
@@ -252,4 +256,20 @@ var skills = [
 	ctx.fill();
 	valueIndex = 0;  
 	pentagonIndex++;
-  });
+	});
+	
+
+// Fade in the Skills Section (Still needs some work)
+$(function() {
+	//caches a jQuery object containing the header element
+	var header = $(".animation-test");
+	$(window).scroll(function() {
+			var scroll = $(window).scrollTop();
+
+			if (scroll >= 500) {
+					header.removeClass('fade-in').addClass("fade-in");
+			} else {
+					header.removeClass("fade-in").addClass('hexGraph');
+			}
+	});
+});
