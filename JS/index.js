@@ -1,5 +1,5 @@
 new TypeIt('.type-it', {
-speed:60
+speed:65
 });
 
 new TypeIt('.console-typeit', {
