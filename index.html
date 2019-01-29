@@ -4,6 +4,7 @@
 <head>
   <title>Welcome</title>
   <meta charset="utf-8">
+  <meta name="theme-color" content="#363636">
   <meta name="viewport" content="width=device-width, initial-scale=1.0,  user-scalable=0, maximum-scale=1.0">
   
   <link rel="stylesheet" type="text/css" href="CSS/font.css"></link>
@@ -38,11 +39,11 @@
     <div class="hero-body ">
       <div class="container">
         <h1 class="title has-text-centered has-text-white">
-          <span class="type-it"> Hello There... Welcome! </span><i class="em em-wave"></i>
+          <span class="type-it"> Hello World... Welcome! </span><i class="em em-wave"></i>
         </h1>
         <h2 class="subtitle has-text-centered has-text-white">
           The website is still under construction
-          <progress class="progress is-link" value="20" max="100">25%</progress> 25%
+          <progress class="progress is-link easeOut" value="100" max="100">35%</progress> 35%
         </h2>
       </div>
     </div>
@@ -69,38 +70,32 @@
     </div>
   </div>
 
-
-  <div class=" hero-body">
-    <div class="container has-text-centered">
-      <div class="columns">
-        <div class="column is-half is-offset-one-quarter">
-          <article class="tile is-child notification is-danger roundit">
-            <p class="title">MaterialatorEMU <i class="em em-video_game"></i></p>
-            <p class="subtitle">Check out my emulator in the project section of the website</p>
-            <figure class="image is-4by3 progressive roundit">
-              <img class="progressive__img progressive--not-loaded" data-progressive="Assets/SMB3.gif" src="Assets/SMB3-lowly.jpg">
-            </figure>
-          </article>
-        </div>
-      </div>
-    </div>
-  </div>
-
+<section class="hero is-white is-fullheight">
   <div class="hero-body">
-    <div class="container has-text-centered">
-      <div class="columns">
-        <div class="column is-half is-offset-one-quarter">
-          <article class="tile is-child notification is-link roundit">
-            <p class="title">The OG CPU</p>
-            <p class="subtitle">While You're Waiting. Enjoy This Picture of Me Holding a Pentium 4</p>
-            <figure class="image is-4by3 progressive roundit">
-              <img class="progressive__img progressive--not-loaded" data-progressive="Assets/CPU.jpg" src="Assets/CPU-lowly.jpg">
-            </figure>
-          </article>
-        </div>
-      </div>
+    <div class="container">
+      <h1 class="title has-text-centered">
+        <span class="console-typeit"> A Wild Console Has Appeared! <i class="em em-keyboard"></i> </span>
+      </h1>
+      <h2 class="subtitle has-text-centered">
+        <span class="console-typeit2"> What should you do ? </span>
+      </h2>
+     
+    <!--Console-->
+<div id="bar">
+  <div id="green"></div>
+  <div id="yellow"></div>
+  <div id="red"></div>
+  <div id="barText"> root@mcruz.me - ssh </div>
+</div>
+<div id="console">
+  <div class="greetingText has-text-success ">Welcome. Type 'help' for list of available commands.</div>
+  <div class="consoleLine has-text-success blinkplz">miguel:~ root$ </div>
+</div>
+</div>
+    
     </div>
   </div>
+</section>
 
   <!--Footer Insertion Code-->
   <div id="footer"></div>
