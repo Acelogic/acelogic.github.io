@@ -1,0 +1,130 @@
+<html>
+<head>
+<title>Invention1.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #808080; font-style: italic;}
+.s1 { color: #000000;}
+.s2 { color: #000080; font-weight: bold;}
+.s3 { color: #0000ff;}
+.s4 { color: #008000; font-weight: bold;}
+.ln { color: #999999; font-weight: normal; font-style: normal; }
+</style>
+</head>
+<body bgcolor="#ffffff">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#c0c0c0" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+Invention1.java</font>
+</center></td></tr></table>
+<pre><a name="l1"><span class="ln">1    </span></a><span class="s0">/* 
+<a name="l2"><span class="ln">2    </span></a> * A program to paint an abstract gradient in the vertical direction. 
+<a name="l3"><span class="ln">3    </span></a> */</span>
+<a name="l4"><span class="ln">4    </span></a>
+<a name="l5"><span class="ln">5    </span></a><span class="s2">package </span>npw;
+<a name="l6"><span class="ln">6    </span></a>
+<a name="l7"><span class="ln">7    </span></a><span class="s2">import </span>painter.SPainter;
+<a name="l8"><span class="ln">8    </span></a><span class="s2">import </span>shapes.SCircle;
+<a name="l9"><span class="ln">9    </span></a><span class="s2">import </span>shapes.SSquare;
+<a name="l10"><span class="ln">10   </span></a>
+<a name="l11"><span class="ln">11   </span></a><span class="s2">import </span>javax.swing.*;
+<a name="l12"><span class="ln">12   </span></a><span class="s2">import </span>java.awt.*;
+<a name="l13"><span class="ln">13   </span></a><span class="s2">import </span>java.awt.geom.Point2D;
+<a name="l14"><span class="ln">14   </span></a><span class="s2">import </span>java.io.File;
+<a name="l15"><span class="ln">15   </span></a><span class="s2">import </span>java.io.IOException;
+<a name="l16"><span class="ln">16   </span></a><span class="s2">import </span>java.util.Random;
+<a name="l17"><span class="ln">17   </span></a><span class="s2">import </span>java.util.Scanner;
+<a name="l18"><span class="ln">18   </span></a><span class="s2">import </span>javax.imageio.ImageIO;
+<a name="l19"><span class="ln">19   </span></a><span class="s2">import </span>javax.swing.filechooser.FileNameExtensionFilter;
+<a name="l20"><span class="ln">20   </span></a><span class="s2">import </span>java.awt.image.BufferedImage;
+<a name="l21"><span class="ln">21   </span></a>
+<a name="l22"><span class="ln">22   </span></a><span class="s2">import static </span>javax.swing.SwingUtilities.*;
+<a name="l23"><span class="ln">23   </span></a>
+<a name="l24"><span class="ln">24   </span></a><span class="s2">public class </span>Invention1 {
+<a name="l25"><span class="ln">25   </span></a>    <span class="s0">//----- Fields / Global Vars and Objects  -----</span>
+<a name="l26"><span class="ln">26   </span></a>    <span class="s2">private </span>BufferedImage image = getImageFromPath();
+<a name="l27"><span class="ln">27   </span></a>    <span class="s2">private double </span>pixelSize = <span class="s3">1</span>;
+<a name="l28"><span class="ln">28   </span></a>    <span class="s2">private int </span>height = image.getHeight();
+<a name="l29"><span class="ln">29   </span></a>    <span class="s2">private int </span>width = image.getWidth();
+<a name="l30"><span class="ln">30   </span></a>    <span class="s2">private </span>SPainter painter = <span class="s2">new </span>SPainter( <span class="s4">&quot;Invention 1&quot;</span>, width, height );
+<a name="l31"><span class="ln">31   </span></a>    <span class="s0">//Changing this stretches picture</span>
+<a name="l32"><span class="ln">32   </span></a>    <span class="s2">private </span>SCircle circlePixel = <span class="s2">new </span>SCircle( pixelSize );
+<a name="l33"><span class="ln">33   </span></a>    <span class="s2">private </span>SSquare squarePixel = <span class="s2">new </span>SSquare( pixelSize );
+<a name="l34"><span class="ln">34   </span></a>
+<a name="l35"><span class="ln">35   </span></a>    <span class="s0">//----- Constructors  -----</span>
+<a name="l36"><span class="ln">36   </span></a>    <span class="s2">private </span>Invention1() <span class="s2">throws </span>IOException {
+<a name="l37"><span class="ln">37   </span></a>        paintTheRows();
+<a name="l38"><span class="ln">38   </span></a>    }
+<a name="l39"><span class="ln">39   </span></a>    <span class="s0">//----- Methods / Functions  -----</span>
+<a name="l40"><span class="ln">40   </span></a>    <span class="s2">public static void </span>main(String[] args) {
+<a name="l41"><span class="ln">41   </span></a>        invokeLater( () -&gt; {
+<a name="l42"><span class="ln">42   </span></a>            <span class="s2">try </span>{
+<a name="l43"><span class="ln">43   </span></a>                <span class="s2">new </span>Invention1();
+<a name="l44"><span class="ln">44   </span></a>            } <span class="s2">catch </span>(IOException e) {
+<a name="l45"><span class="ln">45   </span></a>                e.printStackTrace();
+<a name="l46"><span class="ln">46   </span></a>            }
+<a name="l47"><span class="ln">47   </span></a>        } );
+<a name="l48"><span class="ln">48   </span></a>    }
+<a name="l49"><span class="ln">49   </span></a>
+<a name="l50"><span class="ln">50   </span></a>    <span class="s0">//Make Program Compatible With Windows (I use windows :P )</span>
+<a name="l51"><span class="ln">51   </span></a>    <span class="s2">private </span>BufferedImage getImageFromPath() <span class="s2">throws </span>IOException {
+<a name="l52"><span class="ln">52   </span></a>        JFileChooser chooser = <span class="s2">new </span>JFileChooser();
+<a name="l53"><span class="ln">53   </span></a>        FileNameExtensionFilter filter = <span class="s2">new </span>FileNameExtensionFilter( <span class="s4">&quot;JPG,JPEG,PNG,&quot;</span>, <span class="s4">&quot;jpg&quot;</span>, <span class="s4">&quot;png&quot;</span>, <span class="s4">&quot;jpeg&quot; </span>);
+<a name="l54"><span class="ln">54   </span></a>        chooser.setFileFilter( filter );
+<a name="l55"><span class="ln">55   </span></a>        <span class="s2">int </span>returnVal = chooser.showOpenDialog( chooser );
+<a name="l56"><span class="ln">56   </span></a>        String path = <span class="s2">null</span>;
+<a name="l57"><span class="ln">57   </span></a>        <span class="s2">if </span>(returnVal == JFileChooser.APPROVE_OPTION) {
+<a name="l58"><span class="ln">58   </span></a>            path = chooser.getSelectedFile().getPath();
+<a name="l59"><span class="ln">59   </span></a>        }
+<a name="l60"><span class="ln">60   </span></a>        File file = <span class="s2">new </span>File( path );
+<a name="l61"><span class="ln">61   </span></a>        <span class="s2">return </span>ImageIO.read( file );
+<a name="l62"><span class="ln">62   </span></a>    }
+<a name="l63"><span class="ln">63   </span></a>
+<a name="l64"><span class="ln">64   </span></a>    <span class="s2">private </span>Color getPixelColor(<span class="s2">int </span>x, <span class="s2">int </span>y) {
+<a name="l65"><span class="ln">65   </span></a>        <span class="s2">int </span>rgb = image.getRGB( x, y );
+<a name="l66"><span class="ln">66   </span></a>        <span class="s2">int </span>red = (rgb &amp; <span class="s3">0x00ff0000</span>) &gt;&gt; <span class="s3">16</span>;
+<a name="l67"><span class="ln">67   </span></a>        <span class="s2">int </span>green = (rgb &amp; <span class="s3">0x0000ff00</span>) &gt;&gt; <span class="s3">8</span>;
+<a name="l68"><span class="ln">68   </span></a>        <span class="s2">int </span>blue = (rgb &amp; <span class="s3">0x000000ff</span>);
+<a name="l69"><span class="ln">69   </span></a>        Color PixelColor = <span class="s2">new </span>Color( red, green, blue );
+<a name="l70"><span class="ln">70   </span></a>        <span class="s2">return </span>PixelColor;
+<a name="l71"><span class="ln">71   </span></a>    }
+<a name="l72"><span class="ln">72   </span></a>    <span class="s2">private void </span>paintOnePixel(<span class="s2">int </span>workingPixel, <span class="s2">int </span>workingRow) <span class="s2">throws </span>IOException {
+<a name="l73"><span class="ln">73   </span></a>        Color pixelColor = getPixelColor( workingPixel, workingRow);
+<a name="l74"><span class="ln">74   </span></a>        painter.setColor( pixelColor );
+<a name="l75"><span class="ln">75   </span></a>        <span class="s0">//Changing this may make pictures generate faster</span>
+<a name="l76"><span class="ln">76   </span></a>        painter.mrt( <span class="s3">1 </span>);
+<a name="l77"><span class="ln">77   </span></a>
+<a name="l78"><span class="ln">78   </span></a>        <span class="s0">// Randomly use a square or circle as a pixel</span>
+<a name="l79"><span class="ln">79   </span></a>        Random rgen = <span class="s2">new </span>Random();
+<a name="l80"><span class="ln">80   </span></a>        <span class="s2">int </span>randomNum = rgen.nextInt( <span class="s3">1 </span>);
+<a name="l81"><span class="ln">81   </span></a>        <span class="s2">if </span>(randomNum == <span class="s3">1</span>) {
+<a name="l82"><span class="ln">82   </span></a>            painter.paint( squarePixel );
+<a name="l83"><span class="ln">83   </span></a>        } <span class="s2">else </span>{
+<a name="l84"><span class="ln">84   </span></a>            painter.paint( circlePixel );
+<a name="l85"><span class="ln">85   </span></a>        }
+<a name="l86"><span class="ln">86   </span></a>    }
+<a name="l87"><span class="ln">87   </span></a>    <span class="s2">private void </span>paintOneRow(<span class="s2">int </span>workingRow) <span class="s2">throws </span>IOException {
+<a name="l88"><span class="ln">88   </span></a>        <span class="s2">int </span>pixelIterator = <span class="s3">0</span>;
+<a name="l89"><span class="ln">89   </span></a>        <span class="s2">while </span>(pixelIterator &lt; image.getWidth()) {
+<a name="l90"><span class="ln">90   </span></a>            paintOnePixel( pixelIterator, workingRow);
+<a name="l91"><span class="ln">91   </span></a>            pixelIterator = pixelIterator +<span class="s3">1</span>;
+<a name="l92"><span class="ln">92   </span></a>        }
+<a name="l93"><span class="ln">93   </span></a>    }
+<a name="l94"><span class="ln">94   </span></a>    <span class="s2">private void </span>paintTheRows() <span class="s2">throws </span>IOException {
+<a name="l95"><span class="ln">95   </span></a>        <span class="s2">int </span>rowCount = <span class="s3">0</span>;
+<a name="l96"><span class="ln">96   </span></a>        <span class="s0">// Starts Off From Corner of Canvas</span>
+<a name="l97"><span class="ln">97   </span></a>        painter.moveTo( <span class="s2">new </span>Point2D.Double( <span class="s3">0</span>, <span class="s3">0 </span>) );
+<a name="l98"><span class="ln">98   </span></a>        <span class="s2">for </span>(<span class="s2">int </span>rowIterator = <span class="s3">0</span>; rowIterator &lt; image.getHeight(); rowIterator++) {
+<a name="l99"><span class="ln">99   </span></a>            paintOneRow( rowIterator);
+<a name="l100"><span class="ln">100  </span></a>            rowCount = rowCount + <span class="s3">1</span>;
+<a name="l101"><span class="ln">101  </span></a>            <span class="s0">// Makes a new Row</span>
+<a name="l102"><span class="ln">102  </span></a>            painter.moveTo( <span class="s2">new </span>Point2D.Double( <span class="s3">0</span>, rowIterator ));
+<a name="l103"><span class="ln">103  </span></a>            <span class="s2">if </span>(rowCount == image.getHeight()) {
+<a name="l104"><span class="ln">104  </span></a>                <span class="s2">break</span>;
+<a name="l105"><span class="ln">105  </span></a>            }
+<a name="l106"><span class="ln">106  </span></a>        }
+<a name="l107"><span class="ln">107  </span></a>    }
+<a name="l108"><span class="ln">108  </span></a>}
+<a name="l109"><span class="ln">109  </span></a></pre>
+</body>
+</html>

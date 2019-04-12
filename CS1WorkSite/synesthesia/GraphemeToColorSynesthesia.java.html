@@ -1,0 +1,116 @@
+<html>
+<head>
+<title>GraphemeToColorSynesthesia.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #808080; font-style: italic;}
+.s1 { color: #000000;}
+.s2 { color: #000080; font-weight: bold;}
+.s3 { color: #0000ff;}
+.s4 { color: #008000; font-weight: bold;}
+.ln { color: #999999; font-weight: normal; font-style: normal; }
+</style>
+</head>
+<body bgcolor="#ffffff">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#c0c0c0" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+GraphemeToColorSynesthesia.java</font>
+</center></td></tr></table>
+<pre><a name="l1"><span class="ln">1    </span></a><span class="s0">/* 
+<a name="l2"><span class="ln">2    </span></a> * Program to simulate the phenomenon known as grapheme to color synesthesia. 
+<a name="l3"><span class="ln">3    </span></a> * This program is written as an interpreter that recognizes and responds to: 
+<a name="l4"><span class="ln">4    </span></a> * - exit | terminate the program 
+<a name="l5"><span class="ln">5    </span></a> * - remap | redefine the mapping from letters to colors 
+<a name="l6"><span class="ln">6    </span></a> * - WORD OR PHRASE | simply show the word or phrase in synesthetic color 
+<a name="l7"><span class="ln">7    </span></a> */</span>
+<a name="l8"><span class="ln">8    </span></a><span class="s2">package </span>synesthesia;
+<a name="l9"><span class="ln">9    </span></a><span class="s2">import </span>java.awt.Color;
+<a name="l10"><span class="ln">10   </span></a><span class="s2">import </span>java.awt.Point;
+<a name="l11"><span class="ln">11   </span></a><span class="s2">import </span>javax.swing.JOptionPane;
+<a name="l12"><span class="ln">12   </span></a><span class="s2">import </span>javax.swing.SwingUtilities;
+<a name="l13"><span class="ln">13   </span></a><span class="s2">import </span>painter.SPainter;
+<a name="l14"><span class="ln">14   </span></a><span class="s2">public class </span>GraphemeToColorSynesthesia {
+<a name="l15"><span class="ln">15   </span></a>    <span class="s2">private static final int </span>fontsize = <span class="s3">30</span>;
+<a name="l16"><span class="ln">16   </span></a>    <span class="s0">//private static final String theLetters = &quot;AEIOU&quot;;</span>
+<a name="l17"><span class="ln">17   </span></a>    <span class="s2">private static final </span>String theLetters = <span class="s4">&quot;ABCDEFGHIJKLMNOPQRSTUVWXYZ&quot;</span>;
+<a name="l18"><span class="ln">18   </span></a>    <span class="s2">private static </span>String[] letters;
+<a name="l19"><span class="ln">19   </span></a>    <span class="s2">private static </span>Color[] colors;
+<a name="l20"><span class="ln">20   </span></a>    <span class="s2">private void </span>paintingCode() {
+<a name="l21"><span class="ln">21   </span></a><span class="s0">// INITIALIZATION</span>
+<a name="l22"><span class="ln">22   </span></a>        SPainter miro = <span class="s2">new </span>SPainter(<span class="s3">1200</span>,<span class="s3">220</span>);
+<a name="l23"><span class="ln">23   </span></a>        miro.setScreenLocation(<span class="s3">30</span>, <span class="s3">30</span>);
+<a name="l24"><span class="ln">24   </span></a>        miro.setFontSize(fontsize);
+<a name="l25"><span class="ln">25   </span></a>        initializeColorMap(theLetters);
+<a name="l26"><span class="ln">26   </span></a><span class="s0">// INTERPRETATION</span>
+<a name="l27"><span class="ln">27   </span></a>        <span class="s2">while </span>( <span class="s2">true </span>) {
+<a name="l28"><span class="ln">28   </span></a>            String input = JOptionPane.showInputDialog(<span class="s2">null</span>,
+<a name="l29"><span class="ln">29   </span></a>                    <span class="s4">&quot;Please enter a word, or a few words ...&quot;</span>);
+<a name="l30"><span class="ln">30   </span></a>            <span class="s2">if </span>( input == <span class="s2">null </span>) { input = <span class="s4">&quot;EXIT&quot;</span>; }
+<a name="l31"><span class="ln">31   </span></a>            input = input.toUpperCase();
+<a name="l32"><span class="ln">32   </span></a>            <span class="s2">if </span>( input.equals(<span class="s4">&quot;EXIT&quot;</span>) ) {
+<a name="l33"><span class="ln">33   </span></a>                <span class="s2">break</span>;
+<a name="l34"><span class="ln">34   </span></a>            } <span class="s2">else if </span>( input.equals(<span class="s4">&quot;REMAP&quot;</span>) ) {
+<a name="l35"><span class="ln">35   </span></a>                initializeColorMap(theLetters);
+<a name="l36"><span class="ln">36   </span></a>                showLetters(miro,theLetters);
+<a name="l37"><span class="ln">37   </span></a>            } <span class="s2">else </span>{
+<a name="l38"><span class="ln">38   </span></a>                showLetters(miro,input.toUpperCase());
+<a name="l39"><span class="ln">39   </span></a>            }
+<a name="l40"><span class="ln">40   </span></a>        }
+<a name="l41"><span class="ln">41   </span></a>        miro.end();
+<a name="l42"><span class="ln">42   </span></a>    }
+<a name="l43"><span class="ln">43   </span></a>    <span class="s2">private static void </span>showLetters(SPainter miro, String input) {
+<a name="l44"><span class="ln">44   </span></a><span class="s0">// READY</span>
+<a name="l45"><span class="ln">45   </span></a>        eraseWhiteBoard(miro);
+<a name="l46"><span class="ln">46   </span></a><span class="s0">// SET</span>
+<a name="l47"><span class="ln">47   </span></a>        miro.moveTo(<span class="s2">new </span>Point.Double(<span class="s3">100</span>,<span class="s3">100</span>));
+<a name="l48"><span class="ln">48   </span></a><span class="s0">// GO</span>
+<a name="l49"><span class="ln">49   </span></a>        <span class="s2">for </span>( <span class="s2">int </span>i = <span class="s3">0</span>; i &lt; input.length(); i = i + <span class="s3">1 </span>) {
+<a name="l50"><span class="ln">50   </span></a>            String letter = input.substring(i, i+<span class="s3">1</span>);
+<a name="l51"><span class="ln">51   </span></a>            Color color = getLetterColor(letter);
+<a name="l52"><span class="ln">52   </span></a>            miro.setColor(color);
+<a name="l53"><span class="ln">53   </span></a>            miro.draw(letter);
+<a name="l54"><span class="ln">54   </span></a>            miro.mrt(fontsize);
+<a name="l55"><span class="ln">55   </span></a>        }
+<a name="l56"><span class="ln">56   </span></a>    }
+<a name="l57"><span class="ln">57   </span></a>    <span class="s2">private static void </span>initializeColorMap(String specialLetters) {
+<a name="l58"><span class="ln">58   </span></a>        letters = <span class="s2">new </span>String[specialLetters.length()];
+<a name="l59"><span class="ln">59   </span></a>        colors = <span class="s2">new </span>Color[specialLetters.length()];
+<a name="l60"><span class="ln">60   </span></a>        <span class="s2">for </span>( <span class="s2">int </span>i = <span class="s3">0</span>; i &lt; specialLetters.length(); i = i + <span class="s3">1</span>) {
+<a name="l61"><span class="ln">61   </span></a>            letters[i] = specialLetters.substring(i,i+<span class="s3">1</span>);
+<a name="l62"><span class="ln">62   </span></a>            colors[i] = randomColor();
+<a name="l63"><span class="ln">63   </span></a>        }
+<a name="l64"><span class="ln">64   </span></a>    }
+<a name="l65"><span class="ln">65   </span></a>    <span class="s2">private static </span>Color getLetterColor(String letter) {
+<a name="l66"><span class="ln">66   </span></a>        <span class="s2">for </span>( <span class="s2">int </span>i = <span class="s3">0</span>; i &lt; letters.length; i =i + <span class="s3">1 </span>) {
+<a name="l67"><span class="ln">67   </span></a>            <span class="s2">if </span>( letter.equalsIgnoreCase(letters[i]) ) {
+<a name="l68"><span class="ln">68   </span></a>                <span class="s2">return </span>colors[i];
+<a name="l69"><span class="ln">69   </span></a>            }
+<a name="l70"><span class="ln">70   </span></a>        }
+<a name="l71"><span class="ln">71   </span></a>        <span class="s2">return </span>Color.BLACK;
+<a name="l72"><span class="ln">72   </span></a>    }
+<a name="l73"><span class="ln">73   </span></a>    <span class="s2">private static </span>Color randomColor() {
+<a name="l74"><span class="ln">74   </span></a>        <span class="s2">int </span>rv = (<span class="s2">int</span>)(Math.random()*<span class="s3">256</span>);
+<a name="l75"><span class="ln">75   </span></a>        <span class="s2">int </span>gv = (<span class="s2">int</span>)(Math.random()*<span class="s3">256</span>);
+<a name="l76"><span class="ln">76   </span></a>        <span class="s2">int </span>bv = (<span class="s2">int</span>)(Math.random()*<span class="s3">256</span>);
+<a name="l77"><span class="ln">77   </span></a>        <span class="s2">return new </span>Color(rv,gv,bv);
+<a name="l78"><span class="ln">78   </span></a>    }
+<a name="l79"><span class="ln">79   </span></a>    <span class="s2">private static void </span>eraseWhiteBoard(SPainter miro) {
+<a name="l80"><span class="ln">80   </span></a>        miro.setColor(Color.WHITE);
+<a name="l81"><span class="ln">81   </span></a>        miro.wash();
+<a name="l82"><span class="ln">82   </span></a>        miro.paintFrame(Color.black, <span class="s3">5</span>);
+<a name="l83"><span class="ln">83   </span></a>    }
+<a name="l84"><span class="ln">84   </span></a>    <span class="s0">// INFRASTRUCTURE FOR SOME SIMPLE PAINTING</span>
+<a name="l85"><span class="ln">85   </span></a>    <span class="s2">public </span>GraphemeToColorSynesthesia() {
+<a name="l86"><span class="ln">86   </span></a>        paintingCode();
+<a name="l87"><span class="ln">87   </span></a>    }
+<a name="l88"><span class="ln">88   </span></a>    <span class="s2">public static void </span>main(String[] args) {
+<a name="l89"><span class="ln">89   </span></a>        SwingUtilities.invokeLater(<span class="s2">new </span>Runnable() {
+<a name="l90"><span class="ln">90   </span></a>            <span class="s2">public void </span>run() {
+<a name="l91"><span class="ln">91   </span></a>                <span class="s2">new </span>GraphemeToColorSynesthesia();
+<a name="l92"><span class="ln">92   </span></a>            }
+<a name="l93"><span class="ln">93   </span></a>        });
+<a name="l94"><span class="ln">94   </span></a>    }
+<a name="l95"><span class="ln">95   </span></a>}</pre>
+</body>
+</html>

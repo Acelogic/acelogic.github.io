@@ -37,13 +37,13 @@ position: relative;
 */
 
 .easeOut { 
-  width:35%;  /*These have to be the same*/
+  width:40%;  /*These have to be the same*/
   animation:easeOut 2s ease-out;
 }
 
 @keyframes easeOut {
   0%  { width:0px;}
-  100%{ width:35%;} /*These have to be the same*/
+  100%{ width:40%;} /*These have to be the same*/
 }
 
 

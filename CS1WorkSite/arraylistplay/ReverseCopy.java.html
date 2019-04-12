@@ -1,0 +1,89 @@
+<html>
+<head>
+<title>ReverseCopy.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #000080; font-weight: bold;}
+.s1 { color: #000000;}
+.s2 { color: #008000; font-weight: bold;}
+.s3 { color: #808080; font-style: italic;}
+.s4 { color: #0000ff;}
+.ln { color: #999999; font-weight: normal; font-style: normal; }
+</style>
+</head>
+<body bgcolor="#ffffff">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#c0c0c0" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+ReverseCopy.java</font>
+</center></td></tr></table>
+<pre><a name="l1"><span class="ln">1    </span></a><span class="s0">package </span>arraylistplay;
+<a name="l2"><span class="ln">2    </span></a>
+<a name="l3"><span class="ln">3    </span></a><span class="s0">import </span>java.io.File;
+<a name="l4"><span class="ln">4    </span></a><span class="s0">import </span>java.io.FileNotFoundException;
+<a name="l5"><span class="ln">5    </span></a><span class="s0">import </span>java.io.IOException;
+<a name="l6"><span class="ln">6    </span></a><span class="s0">import </span>java.io.PrintWriter;
+<a name="l7"><span class="ln">7    </span></a><span class="s0">import </span>java.util.ArrayList;
+<a name="l8"><span class="ln">8    </span></a><span class="s0">import </span>java.util.Scanner;
+<a name="l9"><span class="ln">9    </span></a>
+<a name="l10"><span class="ln">10   </span></a><span class="s0">public class </span>ReverseCopy {
+<a name="l11"><span class="ln">11   </span></a>
+<a name="l12"><span class="ln">12   </span></a>    <span class="s0">public static void </span>main(String[] args) <span class="s0">throws </span>FileNotFoundException, IOException {
+<a name="l13"><span class="ln">13   </span></a>        String inputFileName = <span class="s2">&quot;heyjude.txt&quot;</span>;
+<a name="l14"><span class="ln">14   </span></a>        String outputFileName = <span class="s2">&quot;heyjudeReversed.txt&quot;</span>;
+<a name="l15"><span class="ln">15   </span></a>        ArrayList&lt;String&gt; words = readWordsFromFile(inputFileName);
+<a name="l16"><span class="ln">16   </span></a>        writeWordsToFile(words, outputFileName);
+<a name="l17"><span class="ln">17   </span></a>    }
+<a name="l18"><span class="ln">18   </span></a>
+<a name="l19"><span class="ln">19   </span></a>    <span class="s0">private static </span>ArrayList&lt;String&gt; readWordsFromFile(String inputFileName)
+<a name="l20"><span class="ln">20   </span></a>            <span class="s0">throws </span>FileNotFoundException {
+<a name="l21"><span class="ln">21   </span></a>        <span class="s3">// Equate a scanner with the input file</span>
+<a name="l22"><span class="ln">22   </span></a>        Scanner scanner = establishScanner(inputFileName);
+<a name="l23"><span class="ln">23   </span></a>        <span class="s3">// Read the words from the file into a dynamically growing ArrayList</span>
+<a name="l24"><span class="ln">24   </span></a>        ArrayList&lt;String&gt; words = <span class="s0">new </span>ArrayList&lt;&gt;();
+<a name="l25"><span class="ln">25   </span></a>        <span class="s0">while </span>(scanner.hasNext()) {
+<a name="l26"><span class="ln">26   </span></a>            String word = scanner.next();
+<a name="l27"><span class="ln">27   </span></a>            words.add(word);
+<a name="l28"><span class="ln">28   </span></a>        }
+<a name="l29"><span class="ln">29   </span></a>        <span class="s3">// Return the words</span>
+<a name="l30"><span class="ln">30   </span></a>        <span class="s0">return </span>words;
+<a name="l31"><span class="ln">31   </span></a>    }
+<a name="l32"><span class="ln">32   </span></a>
+<a name="l33"><span class="ln">33   </span></a>    <span class="s0">private static void </span>writeWordsToFile(ArrayList&lt;String&gt; words, String outputFileName)
+<a name="l34"><span class="ln">34   </span></a>            <span class="s0">throws </span>IOException {
+<a name="l35"><span class="ln">35   </span></a>        <span class="s3">// Equate a printer with an output file</span>
+<a name="l36"><span class="ln">36   </span></a>        PrintWriter printer = getPrintWriter(outputFileName);
+<a name="l37"><span class="ln">37   </span></a>        <span class="s3">// Print the words to the file</span>
+<a name="l38"><span class="ln">38   </span></a>        <span class="s0">for </span>(<span class="s0">int </span>x = words.size() - <span class="s4">1</span>; x &gt;= <span class="s4">0</span>; x = x - <span class="s4">1</span>) {
+<a name="l39"><span class="ln">39   </span></a>            printer.println(words.get(x));
+<a name="l40"><span class="ln">40   </span></a>        }
+<a name="l41"><span class="ln">41   </span></a>        printer.close();
+<a name="l42"><span class="ln">42   </span></a>    }
+<a name="l43"><span class="ln">43   </span></a>
+<a name="l44"><span class="ln">44   </span></a>    <span class="s0">private static </span>Scanner establishScanner(String inputFileName)
+<a name="l45"><span class="ln">45   </span></a>            <span class="s0">throws </span>FileNotFoundException {
+<a name="l46"><span class="ln">46   </span></a>        String fullFileName = createFullFileName(inputFileName);
+<a name="l47"><span class="ln">47   </span></a>        <span class="s0">return new </span>Scanner(<span class="s0">new </span>File(fullFileName));
+<a name="l48"><span class="ln">48   </span></a>    }
+<a name="l49"><span class="ln">49   </span></a>
+<a name="l50"><span class="ln">50   </span></a>    <span class="s0">private static </span>PrintWriter getPrintWriter(String outputFileName)
+<a name="l51"><span class="ln">51   </span></a>            <span class="s0">throws </span>FileNotFoundException {
+<a name="l52"><span class="ln">52   </span></a>        String fullFileName = createFullFileName(outputFileName);
+<a name="l53"><span class="ln">53   </span></a>        PrintWriter printer = <span class="s0">new </span>PrintWriter(fullFileName);
+<a name="l54"><span class="ln">54   </span></a>        <span class="s0">return </span>printer;
+<a name="l55"><span class="ln">55   </span></a>    }
+<a name="l56"><span class="ln">56   </span></a>
+<a name="l57"><span class="ln">57   </span></a>
+<a name="l58"><span class="ln">58   </span></a>    <span class="s3">// Create the full file name for a simple file name, assuming that it will be</span>
+<a name="l59"><span class="ln">59   </span></a>    // found in the CS1Files/data subdirectory of the user's home directory.
+<a name="l60"><span class="ln">60   </span></a>    <span class="s0">private static </span>String createFullFileName(String fileName) {
+<a name="l61"><span class="ln">61   </span></a>        String separator = System.getProperty(<span class="s2">&quot;file.separator&quot;</span>);
+<a name="l62"><span class="ln">62   </span></a>        String home = System.getProperty(<span class="s2">&quot;user.dir&quot;</span>);<span class="s3">// Changed this from user.home in order to work on windows</span>
+<a name="l63"><span class="ln">63   </span></a>        String path = home + separator + <span class="s2">&quot;CS1Files&quot; </span>+ separator + <span class="s2">&quot;data&quot; </span>+ separator;
+<a name="l64"><span class="ln">64   </span></a>        String fullFileName = path + fileName;
+<a name="l65"><span class="ln">65   </span></a>        <span class="s0">return </span>fullFileName;
+<a name="l66"><span class="ln">66   </span></a>    }
+<a name="l67"><span class="ln">67   </span></a>
+<a name="l68"><span class="ln">68   </span></a>}</pre>
+</body>
+</html>

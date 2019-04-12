@@ -1,0 +1,46 @@
+<html>
+<head>
+<title>BasicsListener.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #808080; font-style: italic;}
+.s1 { color: #000000;}
+.s2 { color: #000080; font-weight: bold;}
+.s3 { color: #008000; font-weight: bold;}
+.s4 { color: #0000ff;}
+.ln { color: #999999; font-weight: normal; font-style: normal; }
+</style>
+</head>
+<body bgcolor="#ffffff">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#c0c0c0" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+BasicsListener.java</font>
+</center></td></tr></table>
+<pre><a name="l1"><span class="ln">1    </span></a><span class="s0">/* 
+<a name="l2"><span class="ln">2    </span></a> * Program to check out (view and possibly listen to) the eight melodic 
+<a name="l3"><span class="ln">3    </span></a> * sequences classified as &quot;Basic&quot; sequences in the Modular Melody World 
+<a name="l4"><span class="ln">4    </span></a> * Modified By Miguel Cruz | Lab 2 
+<a name="l5"><span class="ln">5    </span></a> */</span>
+<a name="l6"><span class="ln">6    </span></a><span class="s2">package </span>mmw;
+<a name="l7"><span class="ln">7    </span></a><span class="s2">import </span>composer.SComposer;
+<a name="l8"><span class="ln">8    </span></a><span class="s2">public class </span>BasicsListener {
+<a name="l9"><span class="ln">9    </span></a>    <span class="s2">public static void </span>main(String[] args) {
+<a name="l10"><span class="ln">10   </span></a>        SComposer c = <span class="s2">new </span>SComposer();
+<a name="l11"><span class="ln">11   </span></a>        c.text();
+<a name="l12"><span class="ln">12   </span></a>        System.out.println(<span class="s3">&quot;c.mms1 ...&quot;</span>); c.mms1(); space(c);
+<a name="l13"><span class="ln">13   </span></a>        System.out.println(<span class="s3">&quot;c.mms2 ...&quot;</span>); c.mms2(); space(c);
+<a name="l14"><span class="ln">14   </span></a>        System.out.println(<span class="s3">&quot;c.mms3 ...&quot;</span>); c.mms3(); space(c);
+<a name="l15"><span class="ln">15   </span></a>        System.out.println(<span class="s3">&quot;c.mms4 ...&quot;</span>); c.mms4(); space(c);
+<a name="l16"><span class="ln">16   </span></a>        System.out.println(<span class="s3">&quot;c.mms5 ...&quot;</span>); c.mms5(); space(c);
+<a name="l17"><span class="ln">17   </span></a>        System.out.println(<span class="s3">&quot;c.mms6 ...&quot;</span>); c.mms6(); space(c);
+<a name="l18"><span class="ln">18   </span></a>        System.out.println(<span class="s3">&quot;c.mms7 ...&quot;</span>); c.mms7(); space(c);
+<a name="l19"><span class="ln">19   </span></a>        System.out.println(<span class="s3">&quot;c.mms8 ...&quot;</span>); c.mms8(); space(c);
+<a name="l20"><span class="ln">20   </span></a>        c.untext();
+<a name="l21"><span class="ln">21   </span></a>    }
+<a name="l22"><span class="ln">22   </span></a>    <span class="s2">private static void </span>space(SComposer c) {
+<a name="l23"><span class="ln">23   </span></a>        c.untext(); c.rest(<span class="s4">2</span>); c.text();
+<a name="l24"><span class="ln">24   </span></a>    }
+<a name="l25"><span class="ln">25   </span></a>}</pre>
+</body>
+</html>

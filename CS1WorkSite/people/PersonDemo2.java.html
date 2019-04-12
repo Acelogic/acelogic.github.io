@@ -1,0 +1,49 @@
+<html>
+<head>
+<title>PersonDemo2.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #000080; font-weight: bold;}
+.s1 { color: #000000;}
+.s2 { color: #0000ff;}
+.s3 { color: #008000; font-weight: bold;}
+.s4 { color: #808080; font-style: italic;}
+.ln { color: #999999; font-weight: normal; font-style: normal; }
+</style>
+</head>
+<body bgcolor="#ffffff">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#c0c0c0" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+PersonDemo2.java</font>
+</center></td></tr></table>
+<pre><a name="l1"><span class="ln">1    </span></a><span class="s0">package </span>people;
+<a name="l2"><span class="ln">2    </span></a>
+<a name="l3"><span class="ln">3    </span></a><span class="s0">public class </span>PersonDemo2 {
+<a name="l4"><span class="ln">4    </span></a>
+<a name="l5"><span class="ln">5    </span></a>    <span class="s0">public static void </span>main(String[] args) {
+<a name="l6"><span class="ln">6    </span></a>        Person[] people = <span class="s0">new </span>Person[<span class="s2">6</span>];
+<a name="l7"><span class="ln">7    </span></a>        people[<span class="s2">0</span>] = <span class="s0">new </span>Person( <span class="s3">&quot;Bob Dylan&quot;</span>, <span class="s2">5</span>, <span class="s2">24</span>, <span class="s2">1941 </span>);
+<a name="l8"><span class="ln">8    </span></a>        people[<span class="s2">1</span>] = <span class="s0">new </span>Person( <span class="s3">&quot;Noomi Rapace&quot;</span>, <span class="s2">12</span>, <span class="s2">28</span>, <span class="s2">1974 </span>);
+<a name="l9"><span class="ln">9    </span></a>        people[<span class="s2">2</span>] = <span class="s0">new </span>Person( <span class="s3">&quot;Pharrell Williams&quot;</span>, <span class="s2">4</span>, <span class="s2">5</span>, <span class="s2">1973 </span>);
+<a name="l10"><span class="ln">10   </span></a>        people[<span class="s2">3</span>] = <span class="s0">new </span>Person( <span class="s3">&quot;Frank Sinatra&quot;</span>, <span class="s2">12</span>, <span class="s2">12</span>, <span class="s2">1915 </span>);
+<a name="l11"><span class="ln">11   </span></a>        people[<span class="s2">4</span>] = <span class="s0">new </span>Person( <span class="s3">&quot;Diana Krall&quot;</span>, <span class="s2">11</span>,<span class="s2">16</span>,<span class="s2">1964 </span>);
+<a name="l12"><span class="ln">12   </span></a>        people[<span class="s2">5</span>] = <span class="s0">new </span>Person( <span class="s3">&quot;Miguel Cruz&quot;</span>, <span class="s2">4</span>,<span class="s2">6</span>,<span class="s2">2000</span>);
+<a name="l13"><span class="ln">13   </span></a>
+<a name="l14"><span class="ln">14   </span></a>        System.out.println(<span class="s3">&quot;</span><span class="s0">\n</span><span class="s3">The people array ...&quot;</span>);
+<a name="l15"><span class="ln">15   </span></a>
+<a name="l16"><span class="ln">16   </span></a>        <span class="s4">//Regular way</span>
+<a name="l17"><span class="ln">17   </span></a>
+<a name="l18"><span class="ln">18   </span></a>        /*for(int i =0; i&lt;people.length; i++) { 
+<a name="l19"><span class="ln">19   </span></a>            System.out.println(people[i]); 
+<a name="l20"><span class="ln">20   </span></a>        }*/
+<a name="l21"><span class="ln">21   </span></a>
+<a name="l22"><span class="ln">22   </span></a>        //Alternative way of using loop
+<a name="l23"><span class="ln">23   </span></a>        <span class="s0">for</span>(Person personElement: people) {   <span class="s4">//For each element in array &quot;people&quot;</span>
+<a name="l24"><span class="ln">24   </span></a>            System.out.println(personElement); <span class="s4">// print out the elements/data (in this case objects) within the array</span>
+<a name="l25"><span class="ln">25   </span></a>        }
+<a name="l26"><span class="ln">26   </span></a>
+<a name="l27"><span class="ln">27   </span></a>    }
+<a name="l28"><span class="ln">28   </span></a>}</pre>
+</body>
+</html>

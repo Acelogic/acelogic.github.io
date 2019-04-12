@@ -1,0 +1,55 @@
+.has-same-height .card {
+    height: 100%;
+    overflow: hidden;
+    
+    
+  }
+  
+  @media (min-width: 0px) and (max-width: 767px)  {
+    .card-content {
+      height: 100%;
+    }
+  }
+  @media (min-width: 768px) {
+    .card-content {
+      height: 475px; 
+    }
+  }
+  .card {
+      margin-bottom: 3rem;
+    }
+    .content-wrapper {
+      margin-top: 3rem;
+    }
+    .card-footer-item {
+      font-size: 12px;
+      font-weight: bold;
+      color: #666;
+    }
+    .card-header-title {
+      display: block;
+    }
+    .card:hover {
+      box-shadow: 0 0 11px rgba(33,33,33,.2); 
+    }
+    .arrow {
+      text-align: center;
+      margin: 3% 0;
+    }
+    .bounce {
+      -moz-animation: bounce 2s infinite;
+      -webkit-animation: bounce 2s infinite;
+      animation: bounce 2s infinite;
+    }
+    
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+      }
+      40% {
+        transform: translateY(-30px);
+      }
+      60% {
+        transform: translateY(-15px);
+      }
+    }
