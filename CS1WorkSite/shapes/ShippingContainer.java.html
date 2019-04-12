@@ -1,0 +1,113 @@
+<html>
+<head>
+<title>ShippingContainer.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #000080; font-weight: bold;}
+.s1 { color: #000000;}
+.s2 { color: #808080; font-style: italic;}
+.s3 { color: #008000; font-weight: bold;}
+.ln { color: #999999; font-weight: normal; font-style: normal; }
+</style>
+</head>
+<body bgcolor="#ffffff">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#c0c0c0" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+ShippingContainer.java</font>
+</center></td></tr></table>
+<pre><a name="l1"><span class="ln">1    </span></a><span class="s0">package </span>shapes;
+<a name="l2"><span class="ln">2    </span></a>
+<a name="l3"><span class="ln">3    </span></a><span class="s0">import </span>java.util.Scanner;
+<a name="l4"><span class="ln">4    </span></a>
+<a name="l5"><span class="ln">5    </span></a><span class="s0">public class </span>ShippingContainer {
+<a name="l6"><span class="ln">6    </span></a>
+<a name="l7"><span class="ln">7    </span></a>
+<a name="l8"><span class="ln">8    </span></a>
+<a name="l9"><span class="ln">9    </span></a>    <span class="s2">//Constants</span>
+<a name="l10"><span class="ln">10   </span></a>    <span class="s0">static double </span>width;
+<a name="l11"><span class="ln">11   </span></a>    <span class="s0">static double </span>length;
+<a name="l12"><span class="ln">12   </span></a>    <span class="s0">static double </span>height;
+<a name="l13"><span class="ln">13   </span></a>
+<a name="l14"><span class="ln">14   </span></a>    <span class="s0">static </span>SRectangle prismFace;
+<a name="l15"><span class="ln">15   </span></a>    <span class="s0">static double </span>distance;
+<a name="l16"><span class="ln">16   </span></a>
+<a name="l17"><span class="ln">17   </span></a>
+<a name="l18"><span class="ln">18   </span></a>    <span class="s0">public static void </span>setDimensions(Scanner scan){
+<a name="l19"><span class="ln">19   </span></a>        <span class="s2">// User input Dimensions</span>
+<a name="l20"><span class="ln">20   </span></a>        System.out.println(<span class="s3">&quot;-------------------------------------------------&quot;</span>);
+<a name="l21"><span class="ln">21   </span></a>        System.out.println(<span class="s3">&quot;Enter Your Width&quot;</span>);
+<a name="l22"><span class="ln">22   </span></a>        width = scan.nextDouble();
+<a name="l23"><span class="ln">23   </span></a>
+<a name="l24"><span class="ln">24   </span></a>        System.out.println(<span class="s3">&quot;-------------------------------------------------&quot;</span>);
+<a name="l25"><span class="ln">25   </span></a>        System.out.println(<span class="s3">&quot;Enter Your Length&quot;</span>);
+<a name="l26"><span class="ln">26   </span></a>        length = scan.nextDouble();
+<a name="l27"><span class="ln">27   </span></a>
+<a name="l28"><span class="ln">28   </span></a>        System.out.println(<span class="s3">&quot;-------------------------------------------------&quot;</span>);
+<a name="l29"><span class="ln">29   </span></a>        System.out.println(<span class="s3">&quot;Enter Your Height&quot;</span>);
+<a name="l30"><span class="ln">30   </span></a>
+<a name="l31"><span class="ln">31   </span></a>        height = scan.nextDouble();
+<a name="l32"><span class="ln">32   </span></a>        System.out.println(<span class="s3">&quot;-------------------------------------------------&quot;</span>);
+<a name="l33"><span class="ln">33   </span></a>        <span class="s2">//Inputs are set as input to a static rectangle object</span>
+<a name="l34"><span class="ln">34   </span></a>        prismFace = <span class="s0">new </span>SRectangle(length, width);
+<a name="l35"><span class="ln">35   </span></a>
+<a name="l36"><span class="ln">36   </span></a>        <span class="s2">//Confirming Dimensions</span>
+<a name="l37"><span class="ln">37   </span></a>        System.out.println(<span class="s3">&quot;Just to Confirm Your Dimensions are &quot;</span>);
+<a name="l38"><span class="ln">38   </span></a>        System.out.println(<span class="s3">&quot;Width : &quot; </span>+ width + <span class="s3">&quot; | Length : &quot; </span>+ length + <span class="s3">&quot; | Height : &quot; </span>+ height);
+<a name="l39"><span class="ln">39   </span></a>        System.out.println(<span class="s3">&quot;-------------------------------------------------&quot;</span>);
+<a name="l40"><span class="ln">40   </span></a>        System.out.println(<span class="s3">&quot;yes/no&quot;</span>);
+<a name="l41"><span class="ln">41   </span></a>        System.out.println(<span class="s3">&quot;-------------------------------------------------&quot;</span>);
+<a name="l42"><span class="ln">42   </span></a>
+<a name="l43"><span class="ln">43   </span></a>        <span class="s2">//Conditional to Fix Dimensions if user enter wrong thing</span>
+<a name="l44"><span class="ln">44   </span></a>        String confirmFlag = scan.next();
+<a name="l45"><span class="ln">45   </span></a>
+<a name="l46"><span class="ln">46   </span></a>        <span class="s0">if </span>(confirmFlag.equals(<span class="s3">&quot;yes&quot;</span>)) {
+<a name="l47"><span class="ln">47   </span></a>            System.out.println(<span class="s3">&quot;Okay :) &quot;</span>);
+<a name="l48"><span class="ln">48   </span></a>
+<a name="l49"><span class="ln">49   </span></a>        }
+<a name="l50"><span class="ln">50   </span></a>        <span class="s0">else if</span>(confirmFlag.equals(<span class="s3">&quot;no&quot;</span>)){
+<a name="l51"><span class="ln">51   </span></a>            System.out.println(<span class="s3">&quot;Feel Free to Enter it again&quot;</span>);
+<a name="l52"><span class="ln">52   </span></a>            setDimensions(scan);
+<a name="l53"><span class="ln">53   </span></a>        }
+<a name="l54"><span class="ln">54   </span></a>        <span class="s0">else</span>{
+<a name="l55"><span class="ln">55   </span></a>            System.out.println(<span class="s3">&quot;Invalid answer try again&quot;</span>);
+<a name="l56"><span class="ln">56   </span></a>            setDimensions(scan);
+<a name="l57"><span class="ln">57   </span></a>        }
+<a name="l58"><span class="ln">58   </span></a>
+<a name="l59"><span class="ln">59   </span></a>
+<a name="l60"><span class="ln">60   </span></a>    }
+<a name="l61"><span class="ln">61   </span></a>
+<a name="l62"><span class="ln">62   </span></a>    <span class="s0">public static void </span>getCalculations(){
+<a name="l63"><span class="ln">63   </span></a>        <span class="s2">//Constants</span>
+<a name="l64"><span class="ln">64   </span></a>        SRectangle key = <span class="s0">new </span>SRectangle(height, prismFace.diagonal());
+<a name="l65"><span class="ln">65   </span></a>        <span class="s0">double </span>keyWidth = prismFace.diagonal();
+<a name="l66"><span class="ln">66   </span></a>        <span class="s0">double </span>keyHeight = height;
+<a name="l67"><span class="ln">67   </span></a>        <span class="s0">double </span>keyArea = key.area();
+<a name="l68"><span class="ln">68   </span></a>        distance = key.diagonal();
+<a name="l69"><span class="ln">69   </span></a>        <span class="s0">double </span>longestObject = distance;
+<a name="l70"><span class="ln">70   </span></a>
+<a name="l71"><span class="ln">71   </span></a>        <span class="s2">//Print Statements</span>
+<a name="l72"><span class="ln">72   </span></a>        System.out.println(<span class="s3">&quot;-------------------------------------------------&quot;</span>);
+<a name="l73"><span class="ln">73   </span></a>        System.out.println(<span class="s3">&quot;Key/Curtain Width: &quot; </span>+ keyWidth);
+<a name="l74"><span class="ln">74   </span></a>        System.out.println(<span class="s3">&quot;Key/Curtain Height: &quot; </span>+ keyHeight);
+<a name="l75"><span class="ln">75   </span></a>        System.out.println(<span class="s3">&quot;Key/Curtain Area: &quot; </span>+ keyArea);
+<a name="l76"><span class="ln">76   </span></a>        System.out.println(<span class="s3">&quot;-------------------------------------------------&quot;</span>);
+<a name="l77"><span class="ln">77   </span></a>        System.out.println(<span class="s3">&quot;Diagonal Rect Prism Distance : &quot; </span>+ longestObject);
+<a name="l78"><span class="ln">78   </span></a>
+<a name="l79"><span class="ln">79   </span></a>
+<a name="l80"><span class="ln">80   </span></a>
+<a name="l81"><span class="ln">81   </span></a>
+<a name="l82"><span class="ln">82   </span></a>    }
+<a name="l83"><span class="ln">83   </span></a>
+<a name="l84"><span class="ln">84   </span></a>    <span class="s0">public static void </span>main(String[] args) {
+<a name="l85"><span class="ln">85   </span></a>        <span class="s2">//Objects</span>
+<a name="l86"><span class="ln">86   </span></a>        Scanner scanner = <span class="s0">new </span>Scanner(System.in);
+<a name="l87"><span class="ln">87   </span></a>        setDimensions(scanner);
+<a name="l88"><span class="ln">88   </span></a>        getCalculations();
+<a name="l89"><span class="ln">89   </span></a>
+<a name="l90"><span class="ln">90   </span></a>
+<a name="l91"><span class="ln">91   </span></a>
+<a name="l92"><span class="ln">92   </span></a>    }
+<a name="l93"><span class="ln">93   </span></a>}</pre>
+</body>
+</html>

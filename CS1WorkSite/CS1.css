@@ -1,0 +1,388 @@
+
+*{ 
+
+    font-family: 'VT323', monospace;
+  }
+
+
+body {
+    background-image: linear-gradient( 60deg, black,darkgreen, black);
+    font-family: serif;
+    font-size: 22;
+    color: white;
+}
+
+a:link {color: yellow;}
+a:visited {color:lightblue;}
+a:hover {color: #6600CC;}
+a:active {color: 6600CC;}
+
+em {
+    font-weight: bold;
+    font-style: normal;
+    color: white;
+}
+
+h1 {
+    color: lightgoldenrodyellow;
+    font-size: 150%;
+}
+
+h2 {
+    color:lightgoldenrodyellow; 
+    font-size: 120%;
+    text-align: center; 
+}
+
+h3 {
+    font-size: 100%;
+}
+
+h4 {
+    font-size: 100%;
+}
+
+h5 {
+    font-size: 100%;
+}
+
+div.block {
+    border-left: 1px solid white;
+    border-top: 1px solid white;
+    padding-left: 20px;
+    padding-bottom: 5px;
+    padding-right: 20px;
+    margin: 20px;
+}
+
+div.zblock {
+    border-left: 0px solid white;
+    border-top: 0px solid white;
+    padding-left: 20px;
+    padding-bottom: 5px;
+    padding-right: 20px;
+    margin: 20px;
+}
+
+div.iblock {
+    border-left: 1px solid white;
+    border-top: 1px solid white;
+    padding-left: 20px;
+    padding-bottom: 5px;
+    padding-right: 20px;
+    margin: 0px;
+    margin-bottom: 20px;
+}
+
+div.hblock {
+    border-left: 0px solid white;
+    border-top: 0px solid white;
+    padding-left: 0px;
+    padding-bottom: 0px;
+    padding-right: 20px;
+    margin: 0px;
+    margin-bottom: 0px;
+}
+
+div.innerblock {
+    border-left: 1px solid white;
+    border-top: 1px solid white;
+    padding-left: 0px;
+    padding-bottom: 5px;
+    padding-right: 0px;
+    margin-left: 0px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+div.codeblock {
+    border-left: 1px solid white;
+    border-top: 1px solid white;
+    padding-left: 20px;
+    padding-bottom: 5px;
+    padding-right: 0px;
+    margin-left: 0px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+div.simpleblock {
+    border-left: 0px solid white;
+    border-top: 0px solid white;
+    padding-left: 20px;
+    padding-bottom: 5px;
+    padding-right: 20px;
+    margin: 20px;
+}
+
+div.container {
+}
+
+span.button {
+    color: white;
+    font-weight: bold;
+    font-family: Monospace;    
+}
+
+span.item {
+    color: white;
+    font-weight: bold;
+    font-family: Monospace;    
+}
+
+span.menuitem {
+    color: white;
+    font-weight: bold;
+    font-family: Monospace;
+}
+
+span.textinput {
+    color: white;
+    font-weight: bold;
+    font-family: Monospace;
+}
+
+span.textoutput {
+    color: white;
+    font-weight: bold;
+    font-family: Monospace;
+}
+
+span.date {
+    color: white;
+    font-weight: bold;
+    font-family: Monospace;
+}
+
+span.metanote {
+    color: goldenrod;
+    font-weight: plain;
+}
+
+/* use this to indicate something you plan do in a course */
+span.do {
+    color: grey;
+    font-weight: bold;
+    font-family: serif;
+}
+
+/* use this to reference a handout that says something about a course */
+span.meta {
+    color: #cc9900;
+    font-weight: bold;
+    font-family: serif;
+}
+
+/* use this to indicate the distribution of a new assignment */
+span.new {
+    color: green;
+    font-weight: bold;
+    font-family: serif;
+}
+
+/* use this to indicate the distribution of a new assignment */
+span.ideal {
+    color: cyan;
+    font-weight: bold;
+    font-family: serif;
+}
+
+/* use this to indicate the due date of an assignment */
+span.due {
+    color: red;
+    font-weight: bold;
+    font-family: serif;
+}
+
+/* use this to reference document that models an assignment */
+span.model { 
+    color: blue;
+    font-weight: bold;
+    font-family: serif;
+}
+
+/* use this to reference document that models an assignment */
+span.module { 
+    color: #9933ff;
+    font-weight: bold;
+    font-family: serif;
+}
+
+/* use this to reference document that models an assignment */
+span.metamodule { 
+    color: orange;
+    font-weight: bold;
+    font-family: serif;
+}
+
+/* use this to reference document that models an assignment */
+span.source { 
+    color: brown;
+    font-weight: bold;
+    font-family: serif;
+}
+
+/* use this to reference document that models an assignment */
+span.handout { 
+    color: #0099cc;
+    font-weight: bold;
+    font-family: serif;
+}
+
+/* use this to reference document that models an assignment */
+span.qod { 
+    color: #13579A;
+    font-weight: bold;
+    font-family: serif;
+}
+
+/* use this to reference document that models an assignment */
+span.quote { 
+    color: #A97531;
+    font-weight: bold;
+    font-family: serif;
+}
+
+/* use this to reference document that models an assignment */
+span.shorttext { 
+    color: #AF2357;
+    font-weight: bold;
+    font-family: serif;
+}
+
+/* use this to reference document that models an assignment */
+span.hilite { 
+    color: blue;
+    font-weight: bold;
+    font-family: serif;
+}
+
+/* use this to reference document that models an assignment */
+span.extraparameter { 
+    color: blue;
+    font-weight: bold;
+    font-family: serif;
+}
+
+/* use this to reference document that models an assignment */
+span.escapetoprolog { 
+    color: red;
+    font-weight: bold;
+    font-family: serif;
+}
+
+/* use this to reference document that models an assignment */
+span.blue { 
+    color: blue;
+    font-weight: bold;
+    font-family: serif;
+}
+
+/* use this to reference document that models an assignment */
+span.plainred { 
+    color: red;
+    font-weight: plain;
+    font-family: serif;
+}
+
+/* use this to reference document that models an assignment */
+span.plainblue { 
+    color: blue;
+    font-weight: plain;
+    font-family: serif;
+}
+
+/* use this to reference document that models an assignment */
+span.plaingreen { 
+    color: green;
+    font-weight: plain;
+    font-family: serif;
+}
+
+/* use this to reference document that models an assignment */
+span.green { 
+    color: green;
+    font-weight: bold;
+    font-family: serif;
+}
+
+/* use this to reference document that models an assignment */
+span.purple { 
+    color: purple;
+    font-weight: bold;
+    font-family: serif;
+}
+
+/* use this to reference document that models an assignment */
+span.lecture { 
+    color: #33EE88;
+    font-weight: bold;
+    font-family: serif;
+}
+
+/* use this to reference document that models an assignment */
+span.slide { 
+    color: #AA3399;
+    font-weight: bold;
+    font-family: serif;
+}
+
+/* use this to reference document that models an assignment */
+span.mono { 
+    color: white;
+    font-weight: plain;
+    font-family: monospace;
+}
+
+/* use this for inline output */
+span.inlineoutput { 
+    color: white;
+    font-weight: plain;
+    font-family: monospace;
+}
+
+code {
+    color: #000000;
+    font-weight: plain;
+    font-family: monospace;
+}
+param {
+    color: #000000;
+    font-weight: plain;
+    font-family: monospace;
+    font-style: italic;
+}
+
+
+
+.tux{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+} 
+
+/* Slides Show*/
+.mySlides {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+.simpleDotsSize{    
+    width: 45%;
+    height: auto;
+  }
+
+.inventionSize{
+    width: 100%;
+    height: auto; 
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.stellaSize{ 
+    width: 45%;
+    height: auto;
+  }
