@@ -32,6 +32,7 @@ position: relative;
 .skills {
   border-top: 1px solid #E6ECF8;
 }
+
 /*
 *Progress Bar Animation
 */
@@ -45,9 +46,6 @@ position: relative;
   0%  { width:0px;}
   100%{ width:40%;} /*These have to be the same*/
 }
-
-
-
 
 /*
 *Console
@@ -171,10 +169,13 @@ position: relative;
 
 
 /*Blinking Cursor CSS*/
-
+@keyframes blink {
+  0% { opacity: 1.0; }
+  50% { opacity: 0.0; }
+  100% { opacity: 1.0; }
+}
   .blinkplz::after {
     content: "";
-   
     /* Remove display: inline-block if not required to be on the same line as text etc */
     display: inline-block;
     background-color: green;
@@ -190,23 +191,10 @@ position: relative;
     infinite = animation-iteration-count
     */
     /*-webkit-animation: blink 1s step-end infinte;*/
-    animation: blink 1s step-end infinite;
+    animation: blink 0.5s step-end infinite;
    
   }
   
-  /*@-webkit-keyframes blink {
-    0% { opacity: 1.0; }
-    50% { opacity: 0.0; }
-    100% { opacity: 1.0; }
-  } */
-  
-  @keyframes blink {
-    0% { opacity: 1.0; }
-    50% { opacity: 0.0; }
-    100% { opacity: 1.0; }
-  }
-  
-
  /*Skills Graph CSS*/ 
   
 .hexGraph {
