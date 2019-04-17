@@ -11,7 +11,6 @@ new TypeIt('.console-typeit2', {
 
 });
 
-
 //Image Blur Code
 
 progressively.init({
@@ -26,12 +25,11 @@ progressively.init({
     }
   });
 
-//Console Code
-
+///////////////////////////////////////Console Code////////////////////////////////////////////////////
   INPUT_HEAD = 'miguel:~ root$ ';
 
 
-function initConsole() {
+function initConsole(){
 	// handle special keys:
 	$(document).keydown(function(e) {
 		key = e.which || e.keyCode;
@@ -77,9 +75,8 @@ function initConsole() {
 	}
 	function processInput(input) {
 		commands = {
-
 			'help': 'Welcome to my site! You can type: <br>&nbsp;<span class="blue consoleLineFont">bio</span>: Short bio about myself.<br>&nbsp;<span class="blue consoleLineFont">social</span>: Get in touch <br>&nbsp;<span class="blue consoleLineFont">hobbies</span>: Fun stuff<br>',
-			'bio': '18 | Computer Science Major. Interested in IC design, Low Level Firmware, Reverse Engineering & Operating Systems',
+			'bio': '19 | Computer Science Major. Interested in IC design, Low Level Firmware, Reverse Engineering & Operating Systems',
 			'social': '<span class="blue consoleLineFont">&nbsp;Twitter: <a class="consoleLineFont" href="http://www.twitter.com/Acelogic_" target="_blank">@Acelogic_</a></span> <br><span class="green consoleLineFont">&nbsp;Github: &nbsp;&nbsp;<a class="consoleLineFont "href="http://www.github.com/Acelogic" target="_blank">@Acelogic</a></span> <br>',
 			'hobbies': 'Programming, Reading, and Guitar.',
 			'ls':'really?...',
@@ -90,7 +87,11 @@ function initConsole() {
 			'test': 'did I pass?',
 			'sudo': 'Invaid Sudoer, Admins are going to be notified!!!!!',
 			'pacman': 'I use arch too btw',
-			'clear': '\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n',
+			'pacman -Syu': 'I use arch too btw :)',
+			'clear': 'Not Going to Work Buddy :(',
+			'apt': 'We don\'t do that here', 
+			'apt-get update': 'We don\'t do that here',
+			'apt-get upgrade': 'We don\'t do that here', 
 		}
 
 		if (input in commands) {
@@ -98,13 +99,14 @@ function initConsole() {
 			else newLine(commands[input]);
 		}
 		else if (input.length > 0) {
-			newLine('-zsh: ' + input + ': command not found');
+			newLine('zsh: ' + input + ': command not found');
 		}
 	}
 
 	function newLine(output) {
 		k = getLastLine().clone();
 		k.html(output);
+		$("#console").find('.consoleLine').removeClass('blinkplz') //Remove Blinking Before Appending
 		$("#console").append(k);
 		// auto scroll down
 		$("#console").scrollTop($("#console")[0].scrollHeight)
@@ -117,14 +119,12 @@ function initConsole() {
 function initAll() {
 	initConsole();
 }
-
 $(document).ready(initAll);
+///////////////////////////////////////Console Code End ////////////////////////////////////////////////////
 
 
 
-
-
-//Skills JS
+///////////////////////////////////////   Skills Code   ////////////////////////////////////////////////////
 
 var skills = [
 	{"header" : "INTERESTS",
@@ -162,7 +162,7 @@ var skills = [
 	{"header" : "MISC",
 	  "captions" : [
 		"Linux",
-		"Git",
+		"git",
 		"Robotics",
 		"Drivers",
 		"Shell"
@@ -273,3 +273,4 @@ $(function() {
 			}
 	});
 });
+///////////////////////////////////////   Skills Code End  ////////////////////////////////////////////////////
