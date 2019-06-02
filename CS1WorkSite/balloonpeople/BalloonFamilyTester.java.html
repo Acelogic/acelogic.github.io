@@ -1,0 +1,46 @@
+<html>
+<head>
+<title>BalloonFamilyTester.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #000080; font-weight: bold;}
+.s1 { color: #000000;}
+.s2 { color: #808080; font-style: italic;}
+.s3 { color: #008000; font-weight: bold;}
+.s4 { color: #0000ff;}
+.ln { color: #999999; font-weight: normal; font-style: normal; }
+</style>
+</head>
+<body bgcolor="#ffffff">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#c0c0c0" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+BalloonFamilyTester.java</font>
+</center></td></tr></table>
+<pre><a name="l1"><span class="ln">1    </span></a><span class="s0">package </span>balloonpeople;
+<a name="l2"><span class="ln">2    </span></a>
+<a name="l3"><span class="ln">3    </span></a><span class="s0">import </span>painter.SPainter;
+<a name="l4"><span class="ln">4    </span></a>
+<a name="l5"><span class="ln">5    </span></a><span class="s0">import </span>javax.swing.SwingUtilities;
+<a name="l6"><span class="ln">6    </span></a>
+<a name="l7"><span class="ln">7    </span></a><span class="s0">public class </span>BalloonFamilyTester {
+<a name="l8"><span class="ln">8    </span></a>
+<a name="l9"><span class="ln">9    </span></a>
+<a name="l10"><span class="ln">10   </span></a>    <span class="s0">public </span>BalloonFamilyTester() {
+<a name="l11"><span class="ln">11   </span></a>        <span class="s2">// Create some BalloonPerson instances to test with!</span>
+<a name="l12"><span class="ln">12   </span></a>        SPainter paintBrush = <span class="s0">new </span>SPainter(<span class="s3">&quot;Balloon People&quot;</span>, <span class="s4">1920</span>, <span class="s4">1080</span>);
+<a name="l13"><span class="ln">13   </span></a>
+<a name="l14"><span class="ln">14   </span></a>        BalloonFamily family = <span class="s0">new </span>BalloonFamily(<span class="s4">3</span>);
+<a name="l15"><span class="ln">15   </span></a>        family.paint(paintBrush);
+<a name="l16"><span class="ln">16   </span></a>        System.out.println(family);
+<a name="l17"><span class="ln">17   </span></a>
+<a name="l18"><span class="ln">18   </span></a>    }
+<a name="l19"><span class="ln">19   </span></a>
+<a name="l20"><span class="ln">20   </span></a>    <span class="s0">public static void </span>main(String[] args) {
+<a name="l21"><span class="ln">21   </span></a>        SwingUtilities.invokeLater(() -&gt; {
+<a name="l22"><span class="ln">22   </span></a>            <span class="s0">new </span>BalloonFamilyTester();
+<a name="l23"><span class="ln">23   </span></a>        });
+<a name="l24"><span class="ln">24   </span></a>    }
+<a name="l25"><span class="ln">25   </span></a>}</pre>
+</body>
+</html>
