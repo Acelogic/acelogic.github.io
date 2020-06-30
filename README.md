@@ -3,4 +3,4 @@ My Website (Currently in development )  https://mcruz.me
 
 # Screenshot 
 
-![alt tag](https://i.imgur.com/W3FTrKy.png)
+![alt tag](https://i.imgur.com/0HV6EdU.png)
