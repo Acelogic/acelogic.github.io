@@ -148,7 +148,7 @@ var skills = [
 		"C++",
 		"C",
 		"JS",
-		"Python",
+		"Scala",
 		"Java"
 	  ],
 	  "values" : [
