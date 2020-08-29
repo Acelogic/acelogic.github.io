@@ -1,0 +1,6 @@
+[submodule "CSC-212"]
+	path = CSC-212
+	url = https://github.com/Acelogic/CSC-212
+[submodule "CSC-366"]
+	path = CSC-366
+	url = https://github.com/Acelogic/CSC-366
