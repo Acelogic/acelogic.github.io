@@ -2,16 +2,16 @@
 <html lang="en">
 
 <head>
-  <title>Web Info</title>
+  <title>Projects</title>
   <meta charset="utf-8">
   <meta name="theme-color" content="#000000">
   <meta name="viewport" content="width=device-width, initial-scale=1.0,  user-scalable=0, maximum-scale=1.0">
- 
+  
   <link rel="stylesheet" type="text/css" href="CSS/font.css"></link>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/progressively/dist/progressively.min.css"></link>
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css"></link>
   <link rel="stylesheet" type="text/css" href="CSS/global.css"></link>
-  <link rel="stylesheet" type="text/css" href="CSS/webinfo.css"></link>
+  <link rel="stylesheet" type="text/css" href="CSS/projects.css"></link>
   <link rel="stylesheet" href="https://afeld.github.io/emoji-css/emoji.css" ></link>  
   
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -19,10 +19,9 @@
   <script defer src="https://use.fontawesome.com/releases/v5.5.0/js/fontawesome.js"></script>
   <script defer src="https://use.fontawesome.com/releases/v5.5.0/js/brands.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/typeit@5.10.7/dist/typeit.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/progressively/dist/progressively.min.js"></script>
-  <script async src="JS/webinfo.js"></script>
-
+  <script src="https://cdn.jsdelivr.net/npm/typeit@5.10.7/dist/typeit.min.js"></script>
+  <script async src="JS/projects.js"></script>
 </head>
 
 <body>
@@ -35,7 +34,7 @@
     <div class="hero-body">
       <div class="container">
         <h1 class="title">
-          <span class="About-Title">Projects</span> <i class="em em-mag"></i>
+          <span class="Proj-Title">Projects</span> <i class="em em-art"></i>
         </h1>
         <h2 class="subtitle">
           <span class="Proj-Subtitle"> Checkout Some Of The Projects I Put My <i class="em em-heart"></i> Into</span>
@@ -44,17 +43,144 @@
     </div>
   </section>
 
-  <section class="hero is-fullheight is-warning has-text-centered">
-    <div class="hero-body">
-      <div class="container">
-        <h1 class="title">
-          <span>Under Construction</span> <i class="em em-building_construction"></i>
-        </h1>
-  </section>
+  <div class="columns has-same-height is-centered level roundit">
+
+    <div class="column">
+      <!-- Chip-8 C -->
+      <div class="card">
+        <header class="card-header">
+          <p class="card-header-title">
+            <span>Chip-8 C</span>
+            <span class="is-pulled-right">
+              <span class="tag is-warning">C</span>
+            </span>
+          </p>
+        </header>
+        <div class="card-content">
+          <figure class="image progressive roundit">
+            <img class="progressive__img progressive--not-loaded" data-progressive="Assets/emu.png" src="Assets/emu-lowly.jpg"
+              alt="Chip-8 C">
+          </figure>
+          <div style="margin-top:1em" class="content">
+            A Chip 8 for made in C
+          </div>
+          <div class="field is-grouped-multiline">
+            <div class="control">
+              <div class="tags">
+                <a class="tag is-primary">Side Project</a>
+                <a class="tag is-success">Personal Project</a>
+                <a class="tag is-danger">2019</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <footer class="card-footer">
+          </a>
+          <a href="https://github.com/Acelogic/CHIP-8-C" class="card-footer-item">
+            <span class="icon">
+              <i class="fab fa-github"> </i>
+            </span>
+            Source Code
+          </a>
+        </footer>
+      </div>
+    </div>
+
+    <div class="column">
+      <!-- Nix-Opus-->
+      <div class="card">
+        <header class="card-header">
+          <p class="card-header-title">
+            <span>Nix-Opus</span>
+            <span class="is-pulled-right">
+              <span class="tag is-dark">Asm</span>
+              <span class="tag is-warning">C</span>
+              <span class="tag is-success">C++</span>
+            </span>
+          </p>
+        </header>
+        <div class="card-content">
+          <figure class="image progressive roundit">
+            <img class="progressive__img progressive--not-loaded" data-progressive="Assets/OS.jpg" src="Assets/OS-lowly.jpg">
+          </figure>
+          <div style="margin-top:1em" class="content">
+            A Homebrew OS made for fun and learning (Archs Planned to Support : x86, x86-64)
+          </div>
+          <div class="field is-grouped-multiline">
+            <div class="control">
+              <div class="tags">
+                <a class="tag is-primary">Side Project</a>
+                <a class="tag is-success">Personal Project</a>
+                <a class="tag is-danger">2018</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <footer class="card-footer">
+          <a href="https://github.com/nix-opus" class="card-footer-item">
+            <span class="icon">
+              <i class="fab fa-github"> </i>
+            </span>
+            Source Code
+          </a>
+        </footer>
+      </div>
+    </div>
+
+    <div class="column">
+      <!--This Webiste -->
+      <div class="card">
+        <header class="card-header">
+          <p class="card-header-title">
+            <span>This Website</span>
+            <span class="is-pulled-right">
+              <span class="tag is-danger">HTML</span>
+              <span class="tag is-warning">JS</span>
+              <span class="tag is-link"> CSS</span>
+            </span>
+          </p>
+        </header>
+        <div class="card-content">
+          <figure class="image progressive roundit">
+            <img class="progressive__img progressive--not-loaded" data-progressive="Assets/Website.png" src="Assets/Website-lowly.png"
+              alt="This Website">
+          </figure>
+          <div style="margin-top:1em" class="content">
+            First website of mines made from scratch
+          </div>
+          <div class="field is-grouped-multiline">
+            <div class="control">
+              <div class="tags">
+                <a class="tag is-success">Personal Project</a>
+                <a class="tag is-danger">2018</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <footer class="card-footer">
+          <a href="https://acelogic.github.io" class="card-footer-item">
+            <span class="icon">
+              <i class="fa fa-eye"> </i>
+            </span>
+            Preview
+          </a>
+          <a href="https://github.com/Acelogic/acelogic.github.io" class="card-footer-item">
+            <span class="icon">
+              <i class="fab fa-github"> </i>
+            </span>
+            Source Code
+          </a>
+        </footer>
+      </div>
+    </div>
+
+    
+  </div>
+<!-- First Row-->
+  
+  
   <!--Footer Insertion Code-->
   <div id="footer"></div>
-
 </body>
-
 
 </html>
