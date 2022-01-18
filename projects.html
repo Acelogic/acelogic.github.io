@@ -6,21 +6,26 @@
   <meta charset="utf-8">
   <meta name="theme-color" content="#000000">
   <meta name="viewport" content="width=device-width, initial-scale=1.0,  user-scalable=0, maximum-scale=1.0">
-  
-  <link rel="stylesheet" type="text/css" href="CSS/font.css"></link>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/progressively/dist/progressively.min.css"></link>
-  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css"></link>
-  <link rel="stylesheet" type="text/css" href="CSS/global.css"></link>
-  <link rel="stylesheet" type="text/css" href="CSS/projects.css"></link>
-  <link rel="stylesheet" href="https://afeld.github.io/emoji-css/emoji.css" ></link>  
-  
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="CSS/font.css">
+  </link>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/progressively/dist/progressively.min.css">
+  </link>
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css">
+  </link>
+  <link rel="stylesheet" type="text/css" href="CSS/global.css">
+  </link>
+  <link rel="stylesheet" type="text/css" href="CSS/projects.css">
+  </link>
+  <link rel="stylesheet" href="https://afeld.github.io/emoji-css/emoji.css">
+  </link>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="JS/compLoader.js"></script>
-  <script defer src="https://use.fontawesome.com/releases/v5.5.0/js/fontawesome.js"></script>
-  <script defer src="https://use.fontawesome.com/releases/v5.5.0/js/brands.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/progressively/dist/progressively.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/typeit@5.10.7/dist/typeit.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/progressively/1.2.5/progressively.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/typeit/5.10.7/typeit.min.js"></script>
   <script async src="JS/projects.js"></script>
 </head>
 
@@ -43,145 +48,401 @@
     </div>
   </section>
 
-  <div class="columns has-same-height is-centered level roundit">
-
-    <div class="column">
-      <!-- Chip-8 C -->
-      <div class="card">
-        <header class="card-header">
-          <p class="card-header-title">
-            <span>Chip-8 C</span>
-            <span class="is-pulled-right">
-              <span class="tag is-warning">C</span>
-            </span>
-          </p>
-        </header>
-        <div class="card-content">
-          <figure class="image progressive roundit">
-            <img class="progressive__img progressive--not-loaded" data-progressive="Assets/emu.png" src="Assets/emu-lowly.jpg"
-              alt="Chip-8 C">
-          </figure>
-          <div style="margin-top:1em" class="content">
-            A Chip 8 for made in C
-          </div>
-          <div class="field is-grouped-multiline">
-            <div class="control">
-              <div class="tags">
-                <a class="tag is-primary">Side Project</a>
-                <a class="tag is-success">Personal Project</a>
-                <a class="tag is-danger">2019</a>
+  <!-- First Row-->
+  <div class="container">
+    <div class="columns has-same-height is-centered level roundit">
+      <div class="column">
+        <!-- Chip-8 C -->
+        <div class="card">
+          <header class="card-header">
+            <p class="card-header-title">
+              <span>Chip-8 C</span>
+              <span class="is-pulled-right">
+                <span class="tag is-dark">C</span>
+              </span>
+            </p>
+          </header>
+          <div class="card-content">
+            <figure class="image progressive roundit">
+              <img class="progressive__img progressive--not-loaded" data-progressive="Assets/chip8.jpg"
+                src="Assets/chip8-lowly.jpg" alt="Chip-8 C">
+            </figure>
+            <div style="margin-top:1em" class="content">
+              A CHIP-8 emulator made for learning purposes that implements most of the functionality from the original
+              CHIP-8 interpreter
+            </div>
+            <div class="field is-grouped-multiline">
+              <div class="control">
+                <div class="tags">
+                  <a class="tag is-primary">Side Project</a>
+                  <a class="tag is-success">Personal Project</a>
+                  <a class="tag is-danger">2019</a>
+                </div>
               </div>
             </div>
           </div>
+          <footer class="card-footer">
+            </a>
+            <a href="https://github.com/Acelogic/CHIP-8-C" class="card-footer-item">
+              <span class="icon">
+                <i class="fab fa-github"> </i>
+              </span>
+              Source Code
+            </a>
+          </footer>
         </div>
-        <footer class="card-footer">
-          </a>
-          <a href="https://github.com/Acelogic/CHIP-8-C" class="card-footer-item">
-            <span class="icon">
-              <i class="fab fa-github"> </i>
-            </span>
-            Source Code
-          </a>
-        </footer>
       </div>
-    </div>
 
-    <div class="column">
-      <!-- Nix-Opus-->
-      <div class="card">
-        <header class="card-header">
-          <p class="card-header-title">
-            <span>Nix-Opus</span>
-            <span class="is-pulled-right">
-              <span class="tag is-dark">Asm</span>
-              <span class="tag is-warning">C</span>
-              <span class="tag is-success">C++</span>
-            </span>
-          </p>
-        </header>
-        <div class="card-content">
-          <figure class="image progressive roundit">
-            <img class="progressive__img progressive--not-loaded" data-progressive="Assets/OS.jpg" src="Assets/OS-lowly.jpg">
-          </figure>
-          <div style="margin-top:1em" class="content">
-            A Homebrew OS made for fun and learning (Archs Planned to Support : x86, x86-64)
-          </div>
-          <div class="field is-grouped-multiline">
-            <div class="control">
-              <div class="tags">
-                <a class="tag is-primary">Side Project</a>
-                <a class="tag is-success">Personal Project</a>
-                <a class="tag is-danger">2018</a>
+
+      <div class="column">
+        <!-- Image Segmentation-->
+        <div class="card">
+          <header class="card-header">
+            <p class="card-header-title">
+              <span>Image Segmentation</span>
+              <span class="is-pulled-right">
+                <span class="tag is-warning">Java</span>
+              </span>
+            </p>
+          </header>
+          <div class="card-content">
+            <figure class="image progressive roundit">
+              <img class="progressive__img progressive--not-loaded" data-progressive="Assets/seg.jpg"
+                src="Assets/seg-lowly.jpg.jpg">
+            </figure>
+            <div style="margin-top:1em" class="content">
+              Implementation of Felzenszwalb’s Image Segmentation Algorithm using an efficient graph based approach as
+              described in the original academic literature
+            </div>
+            <div class="field is-grouped-multiline">
+              <div class="control">
+                <div class="tags">
+                  <a class="tag is-success">School Project</a>
+                  <a class="tag is-danger">2020</a>
+                </div>
               </div>
             </div>
           </div>
+          <footer class="card-footer">
+            <a href="https://github.com/Acelogic/ImageSegmentation" class="card-footer-item">
+              <span class="icon">
+                <i class="fab fa-github"> </i>
+              </span>
+              Source Code
+            </a>
+          </footer>
         </div>
-        <footer class="card-footer">
-          <a href="https://github.com/nix-opus" class="card-footer-item">
-            <span class="icon">
-              <i class="fab fa-github"> </i>
-            </span>
-            Source Code
-          </a>
-        </footer>
       </div>
-    </div>
 
-    <div class="column">
-      <!--This Webiste -->
-      <div class="card">
-        <header class="card-header">
-          <p class="card-header-title">
-            <span>This Website</span>
-            <span class="is-pulled-right">
-              <span class="tag is-danger">HTML</span>
-              <span class="tag is-warning">JS</span>
-              <span class="tag is-link"> CSS</span>
-            </span>
-          </p>
-        </header>
-        <div class="card-content">
-          <figure class="image progressive roundit">
-            <img class="progressive__img progressive--not-loaded" data-progressive="Assets/Website.png" src="Assets/Website-lowly.png"
-              alt="This Website">
-          </figure>
-          <div style="margin-top:1em" class="content">
-            First website of mines made from scratch
-          </div>
-          <div class="field is-grouped-multiline">
-            <div class="control">
-              <div class="tags">
-                <a class="tag is-success">Personal Project</a>
-                <a class="tag is-danger">2018</a>
+      <div class="column">
+        <!--Tiny Shell -->
+        <div class="card">
+          <header class="card-header">
+            <p class="card-header-title">
+              <span>Tiny Shell Implementation</span>
+              <span class="is-pulled-right">
+                <span class="tag is-dark">C</span>
+              </span>
+            </p>
+          </header>
+          <div class="card-content">
+            <figure class="image progressive roundit">
+              <img class="progressive__img progressive--not-loaded" data-progressive="Assets/terminal.png"
+                src="Assets/terminal-lowly.png" alt="This Website">
+            </figure>
+            <div style="margin-top:1em" class="content">
+              Implementation of the Tiny shell in C.
+
+              The purpose of this project was to become more familiar with the concepts of process control and unix
+              signalling by implementating a simple Unix shell program that supports job control.
+            </div>
+            <div class="field is-grouped-multiline">
+              <div class="control">
+                <div class="tags">
+                  <a class="tag is-primary">Side Project</a>
+                  <a class="tag is-danger">2020</a>
+                </div>
               </div>
             </div>
           </div>
+          <footer class="card-footer">
+            <a href="https://github.com/Acelogic/TSHImplementation" class="card-footer-item">
+              <span class="icon">
+                <i class="fab fa-github"> </i>
+              </span>
+              Source Code
+            </a>
+          </footer>
         </div>
-        <footer class="card-footer">
-          <a href="https://acelogic.github.io" class="card-footer-item">
-            <span class="icon">
-              <i class="fa fa-eye"> </i>
-            </span>
-            Preview
-          </a>
-          <a href="https://github.com/Acelogic/acelogic.github.io" class="card-footer-item">
-            <span class="icon">
-              <i class="fab fa-github"> </i>
-            </span>
-            Source Code
-          </a>
-        </footer>
       </div>
     </div>
-
-    
   </div>
-<!-- First Row-->
 
-<
+  <!-- Second Row-->
+  <div class="container">
+    <div class="columns has-same-height is-centered level roundit">
+      <div class="column">
+        <!-- FP Growth -->
+        <div class="card">
+          <header class="card-header">
+            <p class="card-header-title">
+              <span>FP Growth Trie</span>
+              <span class="is-pulled-right">
+                <span class="tag is-warning">Java</span>
+              </span>
+            </p>
+          </header>
+          <div class="card-content">
+            <figure class="image progressive roundit">
+              <img class="progressive__img progressive--not-loaded" data-progressive="Assets/fpgrowth.jpg"
+                src="Assets/fpgrowth-lowly.jpg" alt="Chip-8 C">
+            </figure>
+            <div style="margin-top:1em" class="content">
+              Market Basket Analysis type algorithm implemented using the FP Growth (Frequent Pattern) Algorithm to
+              determine associations rules between items purchased in a grocery store.
+            </div>
+            <div class="field is-grouped-multiline">
+              <div class="control">
+                <div class="tags">
+                  <a class="tag is-primary">Side Project</a>
+                  <a class="tag is-danger">2020</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <footer class="card-footer">
+            </a>
+            <a href="https://github.com/Acelogic/FPGrowth" class="card-footer-item">
+              <span class="icon">
+                <i class="fab fa-github"> </i>
+              </span>
+              Source Code
+            </a>
+          </footer>
+        </div>
+      </div>
 
-  
-  
+
+      <div class="column">
+        <!-- CoinMarket Cap Go API-->
+        <div class="card">
+          <header class="card-header">
+            <p class="card-header-title">
+              <span>CoinMarketCap Go API</span>
+              <span class="is-pulled-right">
+                <span class="tag is-dark">Go</span>
+              </span>
+            </p>
+          </header>
+          <div class="card-content">
+            <figure class="image progressive roundit">
+              <img class="progressive__img progressive--not-loaded" data-progressive="Assets/cmc.jpg"
+                src="Assets/cmc-lowly.jpg">
+            </figure>
+            <div style="margin-top:1em" class="content">
+              A RESTFUL API created to allow access to coinmarket cap's top 100 coins.
+            </div>
+            <div class="field is-grouped-multiline">
+              <div class="control">
+                <div class="tags">
+                  <a class="tag is-primary">Side Project</a>
+                  <a class="tag is-success">Personal Project</a>
+                  <a class="tag is-danger">2021</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <footer class="card-footer">
+            <a href="https://github.com/nix-opus" class="card-footer-item">
+              <span class="icon">
+                <i class="fab fa-github"> </i>
+              </span>
+              Source Code
+            </a>
+          </footer>
+        </div>
+      </div>
+
+      <div class="column">
+        <!--PlexiBot -->
+        <div class="card">
+          <header class="card-header">
+            <p class="card-header-title">
+              <span>PlexiBot</span>
+              <span class="is-pulled-right">
+                <span class="tag is-warning">Java</span>
+              </span>
+            </p>
+          </header>
+          <div class="card-content">
+            <figure class="image progressive roundit">
+              <img class="progressive__img progressive--not-loaded" data-progressive="Assets/bot.jpg"
+                src="Assets/bot-lowly.jpg">
+            </figure>
+            <div style="margin-top:1em" class="content">
+              2017 FRC Competition Robot
+            </div>
+            <div class="field is-grouped-multiline">
+              <div class="control">
+                <div class="tags">
+                  <a class="tag is-success">Personal Project</a>
+                  <a class="tag is-danger">2017</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <footer class="card-footer">
+            <a href="https://github.com/Acelogic/PlexiBot2017" class="card-footer-item">
+              <span class="icon">
+                <i class="fab fa-github"> </i>
+              </span>
+              Source Code
+            </a>
+          </footer>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Third Row-->
+  <div class="container">
+    <div class="columns has-same-height is-centered level roundit">
+      <div class="column">
+        <!-- Sorting Algos -->
+        <div class="card">
+          <header class="card-header">
+            <p class="card-header-title">
+              <span>Sorting Algos</span>
+              <span class="is-pulled-right">
+                <span class="tag is-warning">Java</span>
+              </span>
+            </p>
+          </header>
+          <div class="card-content">
+            <figure class="image progressive roundit">
+              <img class="progressive__img progressive--not-loaded" data-progressive="Assets/sorting.png"
+                src="Assets/sorting-lowly.png">
+            </figure>
+            <div style="margin-top:1em" class="content">
+              Pure Java Implementations of popular sorting algortihms exercises including Quicksort, Raixsort, &
+              HeapSort
+            </div>
+            <div class="field is-grouped-multiline">
+              <div class="control">
+                <div class="tags">
+                  <a class="tag is-primary">Side Project</a>
+                  <a class="tag is-danger">2020</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <footer class="card-footer">
+            </a>
+            <a href="https://github.com/Acelogic/SortingAlgos" class="card-footer-item">
+              <span class="icon">
+                <i class="fab fa-github"> </i>
+              </span>
+              Source Code
+            </a>
+          </footer>
+        </div>
+      </div>
+
+
+      <div class="column">
+        <!-- Nix-Opus-->
+        <div class="card">
+          <header class="card-header">
+            <p class="card-header-title">
+              <span>Nix-Opus</span>
+              <span class="is-pulled-right">
+                <span class="tag is-dark">Asm</span>
+                <span class="tag is-warning">C</span>
+                <span class="tag is-success">C++</span>
+              </span>
+            </p>
+          </header>
+          <div class="card-content">
+            <figure class="image progressive roundit">
+              <img class="progressive__img progressive--not-loaded" data-progressive="Assets/OS.jpg"
+                src="Assets/OS-lowly.jpg">
+            </figure>
+            <div style="margin-top:1em" class="content">
+              A Homebrew OS made for fun and learning (Archs Planned to Support : x86, x86-64)
+            </div>
+            <div class="field is-grouped-multiline">
+              <div class="control">
+                <div class="tags">
+                  <a class="tag is-primary">Side Project</a>
+                  <a class="tag is-success">Personal Project</a>
+                  <a class="tag is-danger">2018</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <footer class="card-footer">
+            <a href="https://github.com/nix-opus" class="card-footer-item">
+              <span class="icon">
+                <i class="fab fa-github"> </i>
+              </span>
+              Source Code
+            </a>
+          </footer>
+        </div>
+      </div>
+
+      <div class="column">
+        <!--This Webiste -->
+        <div class="card">
+          <header class="card-header">
+            <p class="card-header-title">
+              <span>This Website</span>
+              <span class="is-pulled-right">
+                <span class="tag is-danger">HTML</span>
+                <span class="tag is-warning">JS</span>
+                <span class="tag is-link"> CSS</span>
+              </span>
+            </p>
+          </header>
+          <div class="card-content">
+            <figure class="image progressive roundit">
+              <img class="progressive__img progressive--not-loaded" data-progressive="Assets/Website.png"
+                src="Assets/Website-lowly.png" alt="This Website">
+            </figure>
+            <div style="margin-top:1em" class="content">
+              First website of mines made from scratch
+            </div>
+            <div class="field is-grouped-multiline">
+              <div class="control">
+                <div class="tags">
+                  <a class="tag is-success">Personal Project</a>
+                  <a class="tag is-danger">2018</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <footer class="card-footer">
+            <a href="https://acelogic.github.io" class="card-footer-item">
+              <span class="icon">
+                <i class="fa fa-eye"> </i>
+              </span>
+              Preview
+            </a>
+            <a href="https://github.com/Acelogic/acelogic.github.io" class="card-footer-item">
+              <span class="icon">
+                <i class="fab fa-github"> </i>
+              </span>
+              Source Code
+            </a>
+          </footer>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
   <!--Footer Insertion Code-->
   <div id="footer"></div>
 </body>
