@@ -76,9 +76,9 @@ function initConsole(){
 	function processInput(input) {
 		commands = {
 			'help': 'Welcome to my site! You can type: <br>&nbsp;<span class="blue consoleLineFont">bio</span>: Short bio about myself.<br>&nbsp;<span class="blue consoleLineFont">social</span>: Get in touch <br>&nbsp;<span class="blue consoleLineFont">hobbies</span>: Fun stuff<br>',
-			'bio': '19 | Computer Science Major. Interested in IC design, Low Level Firmware, Reverse Engineering & Operating Systems',
+			'bio': '22 | Computer Science Major. Interested in Web3, Low Level Firmware, Reverse Engineering & Operating Systems',
 			'social': '<span class="blue consoleLineFont">&nbsp;Twitter: <a class="consoleLineFont" href="http://www.twitter.com/Acelogic_" target="_blank">@Acelogic_</a></span> <br><span class="green consoleLineFont">&nbsp;Github: &nbsp;&nbsp;<a class="consoleLineFont "href="http://www.github.com/Acelogic" target="_blank">@Acelogic</a></span> <br>',
-			'hobbies': 'Programming, Reading, and Guitar.',
+			'hobbies': 'Programming, Reading, Guitar, and touching grass',
 			'ls':'really?...',
 			'man': 'you won\'t find that here.',
 			'cd' : 'Where ? Oh yeah that\'s right this is not a real console',
