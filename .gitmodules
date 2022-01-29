@@ -4,3 +4,6 @@
 [submodule "CSC-366"]
 	path = CSC-366
 	url = https://github.com/Acelogic/CSC-366
+[submodule "CSC-344"]
+	path = CSC-344
+	url = https://github.com/Acelogic/CSC-344.git
