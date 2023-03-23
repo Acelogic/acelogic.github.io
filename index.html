@@ -28,6 +28,14 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/typeit/5.10.7/typeit.min.js"></script>
   <script async src="JS/index.js"></script>
 
+<script>
+  document.addEventListener('keydown', function (event) {
+    if (event.code === 'Space' && !event.target.classList.contains('consoleLine')) {
+      event.preventDefault();
+    }
+  });
+</script>
+
 
 
 </head>
@@ -90,30 +98,40 @@
           <div id="red"></div>
           <div id="barText"> root@mcruz.me - ssh </div>
         </div>
-        <div id="console">
-          <div class="greetingText has-text-success ">Welcome. Type 'help' for list of available commands.</div>
-          <div class="consoleLine blinkplz has-text-success">miguel:~ root$ </div>
-        </div>
+      <div id="console">
+        <div class="greetingText has-text-success ">Welcome. Type 'help' for list of available commands.</div>
+        <div class="consoleLine blinkplz has-text-success">miguel:~ root$ </div>
+        <input id="console-input" type="text" class="hidden-input">
+      </div>
+
       </div>
 
     </div>
     </div>
   </section>
 
-  <!----Skills Section-->
-  <section class="hero is-white is-fullheight skills">
-    <div class="hero-body">
-      <div class="container">
-        <h1 class="title has-text-centered">
-          <span class="type-it"> Skills </span>
-        </h1>
-        <h2 class="subtitle has-text-centered">
-          <span class="type-it"> Jack of All Trades | Master of Some </span>
-        </h2>
-        <div class="hexGraph fade-in animation-test"></div>
+<!--Resume Section-->
+<section class="hero is-medium is-primary">
+  <div class="hero-body">
+    <div class="container has-text-centered">
+      <h1 class="title">
+        My Resume
+      </h1>
+      <h2 class="subtitle">
+        Download my resume in PDF format to learn more about my skills and experience.
+      </h2>
+      <div class="buttons is-centered">
+        <a href="/path/to/resume.pdf" download class="button is-info is-medium">
+          <span class="icon">
+            <i class="fas fa-download"></i>
+          </span>
+          <span>Download</span>
+        </a>
       </div>
     </div>
-  </section>
+  </div>
+</section>
+
 
   <!--Footer Insertion Code-->
   <div id="footer"></div>

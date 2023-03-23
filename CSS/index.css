@@ -166,8 +166,6 @@ position: relative;
   
   }
 
-
-
 /*Blinking Cursor CSS*/
 @keyframes blink {
   0% { opacity: 1.0; }
@@ -194,47 +192,33 @@ position: relative;
     animation: blink 0.5s step-end infinite;
    
   }
-  
- /*Skills Graph CSS*/ 
-  
-.hexGraph {
-  margin: auto;
-  text-align: center;
-}
 
-#c {
-  margin: auto;
-}
+.hero.is-primary {
+    background-color: #1e88e5;
+  }
 
-.header {
-  text-align: center;
-  width: 100%;
-  margin: auto;
-  height: 25px;
-}
+  .title, .subtitle {
+    color: #fff;
+  }
 
-.pentagon {
-  width: 300px;
-  height: 300px;
-  margin: auto;
-  padding: 3px 3px 28px 3px;
-  display:inline-block;
-}
+  .button.is-info {
+    background-color: #1e88e5;
+    border-color: #1e88e5;
+  }
 
-/*Skills Fade in */
-.fade-in {
-	opacity: 1;
-	animation-name: fadeInOpacity;
-	animation-iteration-count: 1;
-	animation-timing-function: ease-in;
-	animation-duration: 2s;
-}
+  .button.is-info:hover {
+    background-color: #1565c0;
+    border-color: #1565c0;
+  }
 
-@keyframes fadeInOpacity {
-	0% {
-		opacity: 0;
-	}
-	100% {
-		opacity: 1;
-	}
-}
+  .button.is-info.is-outlined {
+    background-color: transparent;
+    border-color: #1e88e5;
+    color: #1e88e5;
+  }
+
+  .button.is-info.is-outlined:hover {
+    background-color: #1e88e5;
+    color: #fff;
+  }
+ 
