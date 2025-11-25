@@ -41,11 +41,11 @@ for (let i = 0; i < numberOfEls; i++) createEl(i);
 
 new TypeIt('.Gal-Title', {
 
-});
+}).go();
 
 new TypeIt('.Gal-Subtitle', {
 
-});
+}).go();
 
 
 
