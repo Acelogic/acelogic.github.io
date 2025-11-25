@@ -59,7 +59,15 @@ position: relative;
     font-family: 'Lato';
     overflow-y: scroll;
     background-color: rgba(0, 0, 0, 0.9);
-  
+
+  }
+
+  .hidden-input {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
   }
   
   #console a{

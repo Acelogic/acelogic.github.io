@@ -36,8 +36,11 @@
     
 
     <p>
-    © Miguel Cruz 2023. All rights reserved
+    © Miguel Cruz <span id="current-year"></span>. All rights reserved
     </p>
+    <script>
+      document.getElementById('current-year').textContent = new Date().getFullYear();
+    </script>
     </div>
 
 

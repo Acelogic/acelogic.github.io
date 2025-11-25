@@ -1,0 +1,65 @@
+{
+  "_comment": "How to add new blog posts: Just add a new entry to the 'posts' array below. Each post needs: id (increment from last), title, category, date, excerpt (short preview), content (full HTML), githubUrl (or null), and image path. The blog will automatically show the 3 most recent posts. Example: {\"id\": 7, \"title\": \"Your Post Title\", \"category\": \"Category\", \"date\": \"January 15, 2025\", \"excerpt\": \"Short preview...\", \"content\": \"<h2>Heading</h2><p>Full content...</p>\", \"githubUrl\": \"https://github.com/Acelogic/YourRepo\", \"image\": \"path/to/image.jpg\"}",
+  "posts": [
+    {
+      "id": 1,
+      "title": "Building a CHIP-8 Emulator in C",
+      "category": "Systems Programming",
+      "date": "November 15, 2019",
+      "excerpt": "Emulation is one of the best ways to understand low-level system architecture. I built a CHIP-8 emulator from scratch in C to learn about instruction sets, memory management, and display rendering. The project taught me valuable lessons about CPU cycles, opcodes, and how to properly implement timers and input handling at a fundamental level.",
+      "content": "<h2>Why Build an Emulator?</h2><p>Building an emulator forces you to understand how a computer works at the most fundamental level. You need to implement the CPU, memory, display, and input systems from scratch.</p><h2>Key Challenges</h2><ul><li>Implementing the instruction set decoder</li><li>Managing memory layout (4KB of RAM)</li><li>Handling display rendering (64x32 monochrome)</li><li>Implementing delay and sound timers</li><li>Processing keyboard input</li></ul><h2>What I Learned</h2><p>This project taught me about opcode decoding, bitwise operations, memory-mapped I/O, and the importance of timing in emulation. Understanding how CHIP-8 works made it easier to understand more complex systems like the Game Boy or NES.</p>",
+      "githubUrl": "https://github.com/Acelogic/CHIP-8-C",
+      "image": "https://picsum.photos/400/300?random=1"
+    },
+    {
+      "id": 2,
+      "title": "Implementing a Unix Shell in C",
+      "category": "Operating Systems",
+      "date": "April 8, 2020",
+      "excerpt": "For my Operating Systems coursework, I implemented a Unix shell (TSH) that handles job control, signal handling, and process management. This project deepened my understanding of fork(), exec(), waitpid(), and signal handlers. Building a shell from scratch reveals how operating systems manage processes and why proper signal handling is crucial for robust system software.",
+      "content": "<h2>The Tiny Shell Project</h2><p>The Tiny Shell (TSH) project required implementing a fully functional Unix shell with job control support.</p><h2>Core Features Implemented</h2><ul><li>Process creation with fork() and exec()</li><li>Foreground and background job execution</li><li>Signal handling (SIGCHLD, SIGINT, SIGTSTP)</li><li>Job control commands (fg, bg, jobs)</li><li>Built-in commands (quit, jobs, fg, bg)</li></ul><h2>Technical Deep Dive</h2><p>The most challenging part was getting signal handling right. Race conditions between parent and child processes required careful use of sigprocmask() and sigsuspend(). Understanding signal semantics and async-signal-safe functions was crucial.</p><h2>Key Takeaways</h2><p>This project gave me a deep appreciation for how shells work and why seemingly simple operations like Ctrl+C are actually complex orchestrations of signals and process groups.</p>",
+      "githubUrl": "https://github.com/Acelogic/TSHImplementation",
+      "image": "https://picsum.photos/400/300?random=2"
+    },
+    {
+      "id": 3,
+      "title": "FP-Growth Algorithm for Market Basket Analysis",
+      "category": "Algorithms",
+      "date": "September 12, 2020",
+      "excerpt": "Implemented the FP-Growth algorithm using a trie data structure to efficiently mine frequent itemsets from transaction databases. This data mining technique is commonly used in retail to discover product associations. The project explores how proper data structures can dramatically improve algorithm performance compared to naive approaches like Apriori.",
+      "content": "<h2>Frequent Pattern Mining</h2><p>Market basket analysis tries to find items that are frequently purchased together. The FP-Growth algorithm does this efficiently without generating candidate itemsets.</p><h2>Algorithm Overview</h2><ol><li>Scan database to find frequent 1-itemsets</li><li>Build FP-tree (compressed representation)</li><li>Mine the tree recursively to find patterns</li></ol><h2>Why FP-Growth vs Apriori?</h2><p>The Apriori algorithm generates candidate itemsets explicitly, which can be very expensive. FP-Growth uses a compact tree structure that only needs 2 database scans and avoids candidate generation entirely.</p><h2>Implementation Details</h2><p>I used a trie data structure to build the FP-tree, which made it easy to share common prefixes between transactions. The recursive mining process builds conditional pattern bases for each item.</p>",
+      "githubUrl": "https://github.com/Acelogic/FPGrowth",
+      "image": "https://picsum.photos/400/300?random=3"
+    },
+    {
+      "id": 4,
+      "title": "Building RESTful APIs with Go",
+      "category": "Web Development",
+      "date": "February 10, 2021",
+      "excerpt": "Created a CoinMarketCap API wrapper in Go to explore concurrent programming and RESTful API design. Go's simplicity and performance make it ideal for building scalable backend services. This project explores proper error handling, JSON marshaling, and HTTP client best practices.",
+      "content": "<h2>Why Go for APIs?</h2><p>Go's standard library has excellent HTTP support, and its concurrency primitives (goroutines and channels) make it perfect for I/O-bound operations like API calls.</p><h2>Project Structure</h2><ul><li>HTTP client with proper timeouts and retries</li><li>JSON marshaling/unmarshaling for API responses</li><li>Error handling with custom error types</li><li>Rate limiting to respect API quotas</li><li>Concurrent requests with goroutines</li></ul><h2>Lessons Learned</h2><p>Proper error handling in Go requires discipline. Using custom error types and wrapping errors with context makes debugging much easier. Also learned about the importance of setting timeouts on HTTP clients to prevent hanging connections.</p>",
+      "githubUrl": "https://github.com/nix-opus",
+      "image": "https://picsum.photos/400/300?random=4"
+    },
+    {
+      "id": 5,
+      "title": "Image Segmentation: Felzenszwalb Algorithm",
+      "category": "Computer Vision",
+      "date": "May 22, 2020",
+      "excerpt": "Implemented Felzenszwalb's graph-based image segmentation algorithm in Java for computer vision coursework. This project explores how to efficiently partition images into meaningful regions using minimum spanning trees and demonstrates practical applications of graph algorithms.",
+      "content": "<h2>Graph-Based Segmentation</h2><p>The Felzenszwalb algorithm treats image segmentation as a graph partitioning problem. Each pixel is a node, and edges connect neighboring pixels with weights based on color differences.</p><h2>Algorithm Steps</h2><ol><li>Build graph where pixels are vertices</li><li>Edge weights = color difference between pixels</li><li>Sort edges by weight</li><li>Use disjoint-set (union-find) to merge regions</li><li>Merge if difference is small relative to internal variation</li></ol><h2>Why It Works</h2><p>The key insight is that regions should be merged based on their internal variation, not just absolute differences. This allows the algorithm to handle varying contrast across the image.</p><h2>Implementation Challenges</h2><p>Efficiently implementing the disjoint-set data structure with path compression and union-by-rank was crucial for performance. Also had to handle RGB color space distances properly.</p>",
+      "githubUrl": "https://github.com/Acelogic/ImageSegmentation",
+      "image": "https://picsum.photos/400/300?random=5"
+    },
+    {
+      "id": 6,
+      "title": "My Journey into Computer Architecture",
+      "category": "Hardware",
+      "date": "June 18, 2018",
+      "excerpt": "My journey into computer architecture started with this Pentium 4. Understanding how CPUs execute instructions, manage pipelines, and handle memory hierarchies is fundamental to writing efficient code. From x86 assembly to modern multi-core architectures, the evolution of processor design continues to fascinate me.",
+      "content": "<h2>The Pentium 4 Era</h2><p>This Pentium 4 was my first deep dive into understanding how CPUs actually work. It features the NetBurst microarchitecture with a very deep pipeline (20+ stages).</p><h2>What Makes CPUs Fascinating</h2><ul><li>Instruction pipelining and superscalar execution</li><li>Branch prediction and speculative execution</li><li>Cache hierarchies (L1, L2, L3)</li><li>Out-of-order execution</li><li>SIMD instructions (SSE, AVX)</li></ul><h2>From Assembly to Hardware</h2><p>Learning x86 assembly helped me understand the instruction set architecture (ISA). But the real magic happens in the microarchitecture - how the CPU actually executes those instructions using pipelining, out-of-order execution, and branch prediction.</p><h2>Modern Developments</h2><p>Today's processors are incredibly complex, with dozens of cores, huge caches, and advanced features like hyperthreading. Understanding these fundamentals helps me write better code that takes advantage of CPU features.</p>",
+      "githubUrl": null,
+      "image": "Assets/CPU.jpg"
+    }
+  ]
+}
