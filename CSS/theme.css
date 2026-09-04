@@ -1,0 +1,111 @@
+:root {
+  --page-base: #edf0f1;
+  --page-center: #fff;
+  --page-middle: #f2f4f5;
+  --page-edge: #e2e7e9;
+  --page-text: #29323b;
+  --page-muted: #647583;
+  --control-bg: #ffffffb8;
+  --control-hover: #fff;
+  --control-border: #c3cbd0;
+  --control-selected: #526779;
+  --focus-color: #087ee6;
+  --lcd-bg: #fff;
+  --lcd-text: #171b20;
+  --lcd-muted: #697887;
+  --lcd-raised: #edf1f4;
+  --lcd-border: #ccd4dc;
+  --lcd-link: #096ab3;
+  --lcd-header-top: #fcfcfc;
+  --lcd-header-bottom: #d9dde1;
+  --lcd-selected-top: #43a9f9;
+  --lcd-selected-bottom: #087ae3;
+  --art-start: #d4e2ec;
+  --art-middle: #f7f9fb;
+  --art-end: #e7eef3;
+  --frame-bg: #fff;
+  --pixel-lab-bg: #eef4f8;
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --page-base: #10151d;
+  --page-center: #293342;
+  --page-middle: #171e29;
+  --page-edge: #0c1119;
+  --page-text: #e1e8f0;
+  --page-muted: #a5b4c4;
+  --control-bg: #263342b8;
+  --control-hover: #344457;
+  --control-border: #4a5d71;
+  --control-selected: #bacce0;
+  --focus-color: #77bcff;
+  --lcd-bg: #121923;
+  --lcd-text: #ecf1f7;
+  --lcd-muted: #a1b2c4;
+  --lcd-raised: #263241;
+  --lcd-border: #3f5064;
+  --lcd-link: #80c7ff;
+  --lcd-header-top: #344457;
+  --lcd-header-bottom: #202c3c;
+  --lcd-selected-top: #247fc8;
+  --lcd-selected-bottom: #165b9e;
+  --art-start: #263e52;
+  --art-middle: #1b2a3a;
+  --art-end: #142333;
+  --frame-bg: #dbe3eb;
+  --pixel-lab-bg: #1c2938;
+}
+html { background: var(--page-base); }
+body { color: var(--page-text); background: radial-gradient(ellipse at 50% 33%,var(--page-center) 0,var(--page-middle) 43%,var(--page-edge) 100%); }
+:focus-visible { outline-color: var(--focus-color); }
+.stage-heading > span, .outside-help, .outside-links, .view-controls span,
+.finish-picker legend, #ipod-finish-name, .custom-finish { color: var(--page-muted); }
+.view-controls button, .theme-auto { color: var(--page-text); background: var(--control-bg); border-color: var(--control-border); }
+.view-controls button:hover, .theme-auto:hover { background: var(--control-hover); }
+.finish-option input:checked + .finish-dot { outline-color: var(--control-selected); }
+.finish-option input:focus-visible + .finish-dot { outline-color: var(--focus-color); }
+.custom-finish.is-selected { background: var(--control-bg); box-shadow: inset 0 0 0 1px var(--control-selected); }
+.ipod-screen, .ipod-screen main,
+.ipod-screen .game-menu a, .ipod-screen .game-menu button,
+.ipod-screen .project-card, .ipod-screen .featured-project, .ipod-screen .project-row {
+  color: var(--lcd-text); background: var(--lcd-bg); border-color: var(--lcd-border);
+}
+.ipod-screen { scrollbar-color: var(--lcd-muted) var(--lcd-raised); }
+.ipod-screen h1, .ipod-screen h2, .ipod-screen h3,
+.project-artwork > strong, .album-preview strong { color: var(--lcd-text); }
+.ipod-screen a, .ipod-screen .game-status button { color: var(--lcd-link); }
+.screen-header { color: var(--lcd-text); background: linear-gradient(var(--lcd-header-top),var(--lcd-header-bottom)); border-color: var(--lcd-border); }
+.ipod-screen .game-status, .ipod-screen .project-meta li { background: var(--lcd-raised); color: var(--lcd-muted); border-color: var(--lcd-border); }
+.ipod-screen .screen-hint, .ipod-screen .project-kind, .ipod-screen .eyebrow,
+.ipod-screen .field-date, .ipod-screen .terminal-prompt,
+.ipod-screen .project-photo figcaption, .ipod-screen .project-figure figcaption,
+.project-artwork > span, .album-preview span { color: var(--lcd-muted); border-color: var(--lcd-border); }
+.ipod-screen .game-menu .game-selected, .ipod-screen .game-menu a:hover, .ipod-screen .game-menu button:hover {
+  background: linear-gradient(var(--lcd-selected-top),var(--lcd-selected-bottom)); color: #fff;
+}
+.ipod-screen .game-selected:not(.game-menu *), .ipod-screen :focus-visible { outline-color: var(--focus-color); }
+.ipod-screen .game-detail .game-menu a, .ipod-screen #console-form,
+.home-ipod-menu .game-menu, .ipod-screen .browser-menu { border-color: var(--lcd-border); }
+.ipod-screen #console-input { background: var(--lcd-bg); color: var(--lcd-text); }
+.ipod-screen #console-input::placeholder { color: var(--lcd-muted); }
+.project-artwork, .album-preview { background: linear-gradient(135deg,var(--art-start),var(--art-middle) 55%,var(--art-end)); }
+.ipod-screen .project-photo img, .ipod-screen .project-figure img { background: var(--lcd-raised); border-color: var(--lcd-border); }
+.cover-art > img:first-child, .album-preview img { border-color: var(--frame-bg); }
+.skip-link { background: var(--lcd-bg); color: var(--lcd-link); }
+.stage-actions { display: flex; align-items: center; justify-content: flex-end; gap: 12px; }
+.stage-actions > a { display: inline-flex; align-items: center; min-height: 44px; text-decoration: none; white-space: nowrap; }
+.theme-toggle { display: inline-flex; position: relative; align-items: center; gap: 8px; min-height: 44px; color: var(--page-text); font-size: 14px; cursor: pointer; touch-action: manipulation; }
+.theme-toggle input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: pointer; }
+.theme-track { position: relative; width: 38px; height: 23px; border: 1px solid var(--control-border); border-radius: 14px; background: #9baaba; box-shadow: inset 0 1px 2px #0002; pointer-events: none; }
+.theme-track::after { content: ''; position: absolute; width: 17px; height: 17px; top: 2px; left: 2px; border-radius: 50%; background: #fff; box-shadow: 0 1px 3px #0004; transition: transform 180ms ease; }
+.theme-toggle input:checked + .theme-track { background: #357dd2; border-color: #75a9e7; }
+.theme-toggle input:checked + .theme-track::after { transform: translateX(15px); }
+.theme-toggle input:focus-visible + .theme-track { outline: 2px solid var(--focus-color); outline-offset: 3px; }
+.theme-auto { min-height: 44px; min-width: 44px; padding: 4px 8px; border: 1px solid var(--control-border); border-radius: 7px; font: 13px var(--font-body); touch-action: manipulation; }
+.theme-auto[aria-pressed="true"] { color: var(--lcd-link); border-color: var(--focus-color); }
+.theme-toggle, .theme-auto, .view-controls button, .ipod-screen, .ipod-screen main { transition: background-color 180ms ease,color 180ms ease,border-color 180ms ease; }
+@media (max-width: 600px) { .stage-heading { gap: 6px; } .stage-actions { gap: 8px; } .theme-toggle { gap: 6px; font-size: 13px; } }
+@media (max-width: 350px) { .stage-actions { gap: 5px; } .stage-heading > a { font-size: 12px; } }
+@media (hover: none) and (pointer: coarse) {
+  .ipod-screen .game-menu a:hover:not(.game-selected), .ipod-screen .game-menu button:hover:not(.game-selected) { background: var(--lcd-bg); color: var(--lcd-text); }
+}

@@ -1,0 +1,562 @@
+[
+  {
+    "title": "Aurora Silicon",
+    "file": "Assets/projects/aurora-silicon.webp",
+    "thumbnail": "Assets/projects/aurora-silicon-thumb.webp",
+    "width": 750,
+    "height": 750,
+    "source": "https://raw.githubusercontent.com/aurora-silicon/aurora-silicon.github.io/main/docs/assets/brand/aurora-mark-1024.png",
+    "caption": "Aurora Silicon project artwork",
+    "repo": "aurora-silicon/aurora-silicon.github.io"
+  },
+  {
+    "title": "VibeStation5",
+    "file": "Assets/projects/vibestation5.webp",
+    "thumbnail": "Assets/projects/vibestation5-thumb.webp",
+    "width": 1000,
+    "height": 689,
+    "source": "https://raw.githubusercontent.com/Acelogic/VibeStation5/main/docs/screenshots/dreaming-sarah-menu-ipad.png",
+    "caption": "VibeStation5 image from the project repository",
+    "repo": "Acelogic/VibeStation5"
+  },
+  {
+    "title": "Omarchy",
+    "file": "Assets/projects/omarchy.webp",
+    "thumbnail": "Assets/projects/omarchy-thumb.webp",
+    "width": 1000,
+    "height": 525,
+    "source": "https://raw.githubusercontent.com/omacom/omarchy-site/master/assets/images/opengraph.png",
+    "caption": "Omarchy project artwork",
+    "repo": "omacom/omarchy"
+  },
+  {
+    "title": "LTX-2 MLX",
+    "file": "Assets/projects/ltx-2-mlx.webp",
+    "thumbnail": "Assets/projects/ltx-2-mlx-thumb.webp",
+    "width": 1000,
+    "height": 133,
+    "source": "https://raw.githubusercontent.com/Acelogic/LTX-2-MLX/main/examples/cyberpunk_city_preview.png",
+    "caption": "Video generation example from LTX-2 MLX",
+    "repo": "Acelogic/LTX-2-MLX"
+  },
+  {
+    "title": "RVC MLX",
+    "file": "Assets/projects/rvc-mlx.webp",
+    "thumbnail": "Assets/projects/rvc-mlx-thumb.webp",
+    "width": 1000,
+    "height": 500,
+    "source": "https://opengraph.githubassets.com/3da8f2f2fa7e0ebcaaf305c0bd1b1ef108e3443dc409cd290a9a1dac809bf99d/Acelogic/Retrieval-based-Voice-Conversion-MLX",
+    "caption": "RVC MLX repository preview",
+    "repo": "Acelogic/Retrieval-based-Voice-Conversion-MLX"
+  },
+  {
+    "title": "PersonaPlex MLX",
+    "file": "Assets/projects/personaplex-mlx.webp",
+    "thumbnail": "Assets/projects/personaplex-mlx-thumb.webp",
+    "width": 1000,
+    "height": 500,
+    "source": "https://opengraph.githubassets.com/ec9e72bdb830e76088b8109daf7f41f9e04fbd9dbd207684d29f0d85abf22814/Acelogic/personaplex-mlx",
+    "caption": "PersonaPlex MLX repository preview",
+    "repo": "Acelogic/personaplex-mlx"
+  },
+  {
+    "title": "HeartLib MLX",
+    "file": "Assets/projects/heartlib-mlx.webp",
+    "thumbnail": "Assets/projects/heartlib-mlx-thumb.webp",
+    "width": 1000,
+    "height": 500,
+    "source": "https://raw.githubusercontent.com/Acelogic/heartlib-mlx/main/docs/screenshots/hero.png",
+    "caption": "HeartLib MLX image from the project repository",
+    "repo": "Acelogic/heartlib-mlx"
+  },
+  {
+    "title": "daVinci-MagiHuman MLX",
+    "file": "Assets/projects/davinci-magihuman-mlx.webp",
+    "thumbnail": "Assets/projects/davinci-magihuman-mlx-thumb.webp",
+    "width": 1000,
+    "height": 500,
+    "source": "https://opengraph.githubassets.com/e786e1840bd63c1e3a8e8c88607f604c7bcf3c2c70dffb98343c3e54cd553c95/Acelogic/daVinci-MagiHuman-mlx",
+    "caption": "daVinci-MagiHuman MLX repository preview",
+    "repo": "Acelogic/daVinci-MagiHuman-mlx"
+  },
+  {
+    "title": "UxPlay for macOS",
+    "file": "Assets/projects/uxplay-for-macos.webp",
+    "thumbnail": "Assets/projects/uxplay-for-macos-thumb.webp",
+    "width": 1000,
+    "height": 500,
+    "source": "https://opengraph.githubassets.com/31effc50ecd11e308e8d0c3da85490d4cd3bd0b5ba6de4b6e81489f0dc7ae011/FDH2/UxPlay",
+    "caption": "UxPlay for macOS repository preview",
+    "repo": "FDH2/UxPlay"
+  },
+  {
+    "title": "MacGTop",
+    "file": "Assets/projects/macgtop.webp",
+    "thumbnail": "Assets/projects/macgtop-thumb.webp",
+    "width": 1000,
+    "height": 500,
+    "source": "https://opengraph.githubassets.com/127190b9d62986824b0e3c849429d45e9ce93872fe10455de1693d83171caf16/Acelogic/macgtop",
+    "caption": "MacGTop repository preview",
+    "repo": "Acelogic/macgtop"
+  },
+  {
+    "title": "Ignition",
+    "file": "Assets/projects/ignition.webp",
+    "thumbnail": "Assets/projects/ignition-thumb.webp",
+    "width": 1000,
+    "height": 566,
+    "source": "https://raw.githubusercontent.com/Acelogic/Ignition/main/docs/screenshots/agent-list.png",
+    "caption": "Ignition image from the project repository",
+    "repo": "Acelogic/Ignition"
+  },
+  {
+    "title": "Kawaiidra MCP",
+    "file": "Assets/projects/kawaiidra-mcp.webp",
+    "thumbnail": "Assets/projects/kawaiidra-mcp-thumb.webp",
+    "width": 1000,
+    "height": 500,
+    "source": "https://opengraph.githubassets.com/fd0869943cc97a018d3a2209e5684f61c5aee13452ac168665e95d1e2ea1c2cd/wagonbomb/kawaiidra-mcp",
+    "caption": "Kawaiidra MCP repository preview",
+    "repo": "wagonbomb/kawaiidra-mcp"
+  },
+  {
+    "title": "SharpEmu agentic toolkit",
+    "file": "Assets/projects/sharpemu-agentic-toolkit.webp",
+    "thumbnail": "Assets/projects/sharpemu-agentic-toolkit-thumb.webp",
+    "width": 1000,
+    "height": 400,
+    "source": "https://raw.githubusercontent.com/Acelogic/sharpemu-agentic-toolkit/main/assets/readme/sharpemu-agentic-toolkit-hero.png",
+    "caption": "SharpEmu agentic toolkit image from the project repository",
+    "repo": "Acelogic/sharpemu-agentic-toolkit"
+  },
+  {
+    "title": "Testfol Margin Stresser",
+    "file": "Assets/projects/testfol-margin-stresser.webp",
+    "thumbnail": "Assets/projects/testfol-margin-stresser-thumb.webp",
+    "width": 1000,
+    "height": 618,
+    "source": "https://raw.githubusercontent.com/Acelogic/Testfol-MarginStresser/master/data/ndx_simulation/data/results/charts/ndx_mega_comparison.png",
+    "caption": "Nasdaq comparison chart from Testfol",
+    "repo": "Acelogic/Testfol-MarginStresser"
+  },
+  {
+    "title": "Earnings Volatility Calculator",
+    "file": "Assets/projects/earnings-volatility-calculator.webp",
+    "thumbnail": "Assets/projects/earnings-volatility-calculator-thumb.webp",
+    "width": 256,
+    "height": 256,
+    "source": "https://raw.githubusercontent.com/Acelogic/Earnings-Volatility-Calculator/main/src/earnings_calculator/assets/icon.png",
+    "caption": "Earnings Volatility Calculator icon",
+    "repo": "Acelogic/Earnings-Volatility-Calculator"
+  },
+  {
+    "title": "Market Drawdown Dashboard",
+    "file": "Assets/projects/market-drawdown-dashboard.webp",
+    "thumbnail": "Assets/projects/market-drawdown-dashboard-thumb.webp",
+    "width": 1000,
+    "height": 525,
+    "source": "https://raw.githubusercontent.com/Acelogic/market-drawdown-dashboard/main/og-image.png",
+    "caption": "Market Drawdown Dashboard image from the project repository",
+    "repo": "Acelogic/market-drawdown-dashboard"
+  },
+  {
+    "title": "Maginator",
+    "file": "Assets/projects/maginator.webp",
+    "thumbnail": "Assets/projects/maginator-thumb.webp",
+    "width": 1000,
+    "height": 500,
+    "source": "https://opengraph.githubassets.com/0bf637b0aec258e88dd5019a55bdb2369163675f2cc46e80fa0d6462d376d67f/Acelogic/Maginator",
+    "caption": "Maginator repository preview",
+    "repo": "Acelogic/Maginator"
+  },
+  {
+    "title": "Wayback Stock Scraper",
+    "file": "Assets/projects/wayback-stock-scraper.webp",
+    "thumbnail": "Assets/projects/wayback-stock-scraper-thumb.webp",
+    "width": 1000,
+    "height": 500,
+    "source": "https://opengraph.githubassets.com/7a985613cfbc513376f27310b2658930f7b246635178cf5c78b3b9814bde9343/Acelogic/WayBackMachineStockScraper",
+    "caption": "Wayback Stock Scraper repository preview",
+    "repo": "Acelogic/WayBackMachineStockScraper"
+  },
+  {
+    "title": "Pi + LM Studio",
+    "file": "Assets/projects/pi-lm-studio.webp",
+    "thumbnail": "Assets/projects/pi-lm-studio-thumb.webp",
+    "width": 1000,
+    "height": 500,
+    "source": "https://opengraph.githubassets.com/fed24a338bbda7ee44ab3ad3e49b17b5e4d30766b9271811c2802bc658d063ad/Acelogic/pi-lm-studio",
+    "caption": "Pi + LM Studio repository preview",
+    "repo": "Acelogic/pi-lm-studio"
+  },
+  {
+    "title": "Pi memories",
+    "file": "Assets/projects/pi-memories.webp",
+    "thumbnail": "Assets/projects/pi-memories-thumb.webp",
+    "width": 1000,
+    "height": 500,
+    "source": "https://opengraph.githubassets.com/7c27fcad2a78e6fd955dd9909dc09b21a85b1f659f81219a8626965cd5e5ac82/Acelogic/pi-memories",
+    "caption": "Pi memories repository preview",
+    "repo": "Acelogic/pi-memories"
+  },
+  {
+    "title": "Pi Claude memories",
+    "file": "Assets/projects/pi-claude-memories.webp",
+    "thumbnail": "Assets/projects/pi-claude-memories-thumb.webp",
+    "width": 1000,
+    "height": 500,
+    "source": "https://opengraph.githubassets.com/244849e788dfdd904240843679a5027cf5863ad275566f5aeab2be8139441714/Acelogic/pi-claude-memories",
+    "caption": "Pi Claude memories repository preview",
+    "repo": "Acelogic/pi-claude-memories"
+  },
+  {
+    "title": "Hermes Claude memories",
+    "file": "Assets/projects/hermes-claude-memories.webp",
+    "thumbnail": "Assets/projects/hermes-claude-memories-thumb.webp",
+    "width": 1000,
+    "height": 500,
+    "source": "https://opengraph.githubassets.com/81c29f958c32a5c3743e0e4961dd21f836c46f744cd444d36fe44bc9e2eb5304/Acelogic/hermes-claude-memories",
+    "caption": "Hermes Claude memories repository preview",
+    "repo": "Acelogic/hermes-claude-memories"
+  },
+  {
+    "title": "Pi statusline",
+    "file": "Assets/projects/pi-statusline.webp",
+    "thumbnail": "Assets/projects/pi-statusline-thumb.webp",
+    "width": 1000,
+    "height": 500,
+    "source": "https://opengraph.githubassets.com/06c0e73ad66cca2de0118ed3208d1078ce6a9368b735bf13e4dfba97d4695156/Acelogic/pi-statusline",
+    "caption": "Pi statusline repository preview",
+    "repo": "Acelogic/pi-statusline"
+  },
+  {
+    "title": "Pi cd",
+    "file": "Assets/projects/pi-cd.webp",
+    "thumbnail": "Assets/projects/pi-cd-thumb.webp",
+    "width": 1000,
+    "height": 500,
+    "source": "https://opengraph.githubassets.com/1fef1160038ffa553423fde3282b20827f33352392c0e5877e7ddc759f287cda/Acelogic/pi-cd",
+    "caption": "Pi cd repository preview",
+    "repo": "Acelogic/pi-cd"
+  },
+  {
+    "title": "Pi numbered extensions",
+    "file": "Assets/projects/pi-numbered-extensions.webp",
+    "thumbnail": "Assets/projects/pi-numbered-extensions-thumb.webp",
+    "width": 1000,
+    "height": 500,
+    "source": "https://opengraph.githubassets.com/a2046673f68ee058db6a0cea105850985442b7a3c65a71bece92a787f1423396/Acelogic/pi-numbered-extensions",
+    "caption": "Pi numbered extensions repository preview",
+    "repo": "Acelogic/pi-numbered-extensions"
+  },
+  {
+    "title": "Pi buddy",
+    "file": "Assets/projects/pi-buddy.webp",
+    "thumbnail": "Assets/projects/pi-buddy-thumb.webp",
+    "width": 1000,
+    "height": 500,
+    "source": "https://opengraph.githubassets.com/dff3101cbbcbf358435f8538183d49246ed05049a67cd67400207507ef70346c/Acelogic/pi-buddy",
+    "caption": "Pi buddy repository preview",
+    "repo": "Acelogic/pi-buddy"
+  },
+  {
+    "title": "Agentic Coding Flywheel setup",
+    "file": "Assets/projects/agentic-coding-flywheel-setup.webp",
+    "thumbnail": "Assets/projects/agentic-coding-flywheel-setup-thumb.webp",
+    "width": 1000,
+    "height": 500,
+    "source": "https://opengraph.githubassets.com/1296707d9b2e5d825dc3d202ca810bdae05733737f796591f8a8ba0952597e20/Acelogic/agentic-coding-flywheel-setup-simplified",
+    "caption": "Agentic Coding Flywheel setup repository preview",
+    "repo": "Acelogic/agentic-coding-flywheel-setup-simplified"
+  },
+  {
+    "title": "Moltiverse",
+    "file": "Assets/projects/moltiverse.webp",
+    "thumbnail": "Assets/projects/moltiverse-thumb.webp",
+    "width": 1000,
+    "height": 500,
+    "source": "https://opengraph.githubassets.com/9e733e0067b2d60ac3027d15ad8e041966ef27aa4c123169d311928b3d23df7c/Acelogic/moltiverse",
+    "caption": "Moltiverse repository preview",
+    "repo": "Acelogic/moltiverse"
+  },
+  {
+    "title": "Reddit YouTube Comments",
+    "file": "Assets/projects/reddit-youtube-comments.webp",
+    "thumbnail": "Assets/projects/reddit-youtube-comments-thumb.webp",
+    "width": 1000,
+    "height": 625,
+    "source": "https://raw.githubusercontent.com/Acelogic/reddit-youtube-comments/main/screenshots/promo-hero.png",
+    "caption": "Reddit YouTube Comments image from the project repository",
+    "repo": "Acelogic/reddit-youtube-comments"
+  },
+  {
+    "title": "Spicetify Plays Sort",
+    "file": "Assets/projects/spicetify-plays-sort.webp",
+    "thumbnail": "Assets/projects/spicetify-plays-sort-thumb.webp",
+    "width": 1000,
+    "height": 500,
+    "source": "https://opengraph.githubassets.com/4f1508192591d069b19dec583081db1ec1195a4c4deaf5af4117eede6071085e/Acelogic/spicetify-plays-sort",
+    "caption": "Spicetify Plays Sort repository preview",
+    "repo": "Acelogic/spicetify-plays-sort"
+  },
+  {
+    "title": "VoiceChatFinder",
+    "file": "Assets/projects/voicechatfinder.webp",
+    "thumbnail": "Assets/projects/voicechatfinder-thumb.webp",
+    "width": 452,
+    "height": 750,
+    "source": "https://raw.githubusercontent.com/Acelogic/VoiceChatFinder/main/screenshots/server-list.png",
+    "caption": "VoiceChatFinder image from the project repository",
+    "repo": "Acelogic/VoiceChatFinder"
+  },
+  {
+    "title": "Reddit-chan",
+    "file": "Assets/projects/reddit-chan.webp",
+    "thumbnail": "Assets/projects/reddit-chan-thumb.webp",
+    "width": 1000,
+    "height": 500,
+    "source": "https://opengraph.githubassets.com/4a9f7fa690d661e3778f51a748509be430c1f342a07effedefcac6cfcf2c42d0/Acelogic/reddit-chan",
+    "caption": "Reddit-chan repository preview",
+    "repo": "Acelogic/reddit-chan"
+  },
+  {
+    "title": "Credit Rebels Archive",
+    "file": "Assets/projects/credit-rebels-archive.webp",
+    "thumbnail": "Assets/projects/credit-rebels-archive-thumb.webp",
+    "width": 1000,
+    "height": 500,
+    "source": "https://opengraph.githubassets.com/172e1a6ebbd6123b650d87501d38310839b0b204c894f17cb8e32d7be852cc15/Acelogic/CreditRebelsArchive",
+    "caption": "Credit Rebels Archive repository preview",
+    "repo": "Acelogic/CreditRebelsArchive"
+  },
+  {
+    "title": "Acelogic Cyber Consulting",
+    "file": "Assets/projects/acelogic-cyber-consulting.webp",
+    "thumbnail": "Assets/projects/acelogic-cyber-consulting-thumb.webp",
+    "width": 1000,
+    "height": 525,
+    "source": "https://raw.githubusercontent.com/Acelogic/acecyberconsult.com/main/assets/social-card.png",
+    "caption": "Acelogic Cyber Consulting artwork",
+    "repo": "Acelogic/acecyberconsult.com"
+  },
+  {
+    "title": "SharpEmu",
+    "file": "Assets/projects/sharpemu.webp",
+    "thumbnail": "Assets/projects/sharpemu-thumb.webp",
+    "width": 750,
+    "height": 750,
+    "source": "https://raw.githubusercontent.com/sharpemu/sharpemu/main/assets/images/logo.png",
+    "caption": "SharpEmu image from the project repository",
+    "repo": "sharpemu/sharpemu"
+  },
+  {
+    "title": "Ruff",
+    "file": "Assets/projects/ruff.webp",
+    "thumbnail": "Assets/projects/ruff-thumb.webp",
+    "width": 1000,
+    "height": 500,
+    "source": "https://opengraph.githubassets.com/c350e7e16e9dcd86d02033c537909d309905ea6ff0e08d42c024a01caf1d8a57/astral-sh/ruff",
+    "caption": "Ruff repository preview",
+    "repo": "astral-sh/ruff"
+  },
+  {
+    "title": "Exo",
+    "file": "Assets/projects/exo.webp",
+    "thumbnail": "Assets/projects/exo-thumb.webp",
+    "width": 1000,
+    "height": 549,
+    "source": "https://raw.githubusercontent.com/exo-explore/exo/main/docs/imgs/dashboard-cluster-view.png",
+    "caption": "Exo cluster dashboard",
+    "repo": "exo-explore/exo"
+  },
+  {
+    "title": "Miden VM",
+    "file": "Assets/projects/miden-vm.webp",
+    "thumbnail": "Assets/projects/miden-vm-thumb.webp",
+    "width": 1000,
+    "height": 500,
+    "source": "https://opengraph.githubassets.com/c6893bfd894ceb6df3ce21707cea3fb2a2542e54292e1dc3b41473bf27ee2d4f/0xMiden/miden-vm",
+    "caption": "Miden VM repository preview",
+    "repo": "0xMiden/miden-vm"
+  },
+  {
+    "title": "Homebrew / ipatool",
+    "file": "Assets/projects/homebrew-ipatool.webp",
+    "thumbnail": "Assets/projects/homebrew-ipatool-thumb.webp",
+    "width": 1000,
+    "height": 500,
+    "source": "https://opengraph.githubassets.com/d4bad058e0ab06a159a1d75f517fec61be2b8173feba0610c62dc27b88dd7194/majd/homebrew-repo",
+    "caption": "Homebrew / ipatool repository preview",
+    "repo": "majd/homebrew-repo"
+  },
+  {
+    "title": "whisper.cpp",
+    "file": "Assets/projects/whisper-cpp.webp",
+    "thumbnail": "Assets/projects/whisper-cpp-thumb.webp",
+    "width": 932,
+    "height": 287,
+    "source": "https://user-images.githubusercontent.com/1991296/235238348-05d0f6a4-da44-4900-a1de-d0707e75b763.jpeg",
+    "caption": "whisper.cpp image from the project repository",
+    "repo": "ggml-org/whisper.cpp"
+  },
+  {
+    "title": "Notchi",
+    "file": "Assets/projects/notchi.webp",
+    "thumbnail": "Assets/projects/notchi-thumb.webp",
+    "width": 790,
+    "height": 540,
+    "source": "https://raw.githubusercontent.com/sk-ruban/notchi/main/assets/usage-dashboard.png",
+    "caption": "Notchi usage dashboard",
+    "repo": "sk-ruban/notchi"
+  },
+  {
+    "title": "Homebrew / PureMac",
+    "file": "Assets/projects/homebrew-puremac.webp",
+    "thumbnail": "Assets/projects/homebrew-puremac-thumb.webp",
+    "width": 1000,
+    "height": 500,
+    "source": "https://opengraph.githubassets.com/236309e728488abd92e796c816f7d413dad31dfaf8696226232b8f31d3f3d3dd/momenbasel/homebrew-tap",
+    "caption": "Homebrew / PureMac repository preview",
+    "repo": "momenbasel/homebrew-tap"
+  },
+  {
+    "title": "Nix-Opus",
+    "file": "Assets/projects/nix-opus.webp",
+    "thumbnail": "Assets/projects/nix-opus-thumb.webp",
+    "width": 1000,
+    "height": 750,
+    "source": "Assets/OS.jpg",
+    "caption": "Nix-Opus image from the original portfolio",
+    "repo": null
+  },
+  {
+    "title": "CHIP-8 C",
+    "file": "Assets/projects/chip-8-c.webp",
+    "thumbnail": "Assets/projects/chip-8-c-thumb.webp",
+    "width": 816,
+    "height": 750,
+    "source": "https://raw.githubusercontent.com/Acelogic/CHIP-8-C/master/docs/images/Disassembly.png",
+    "caption": "CHIP-8 C image from the project repository",
+    "repo": "Acelogic/CHIP-8-C"
+  },
+  {
+    "title": "Tiny Shell",
+    "file": "Assets/projects/tiny-shell.webp",
+    "thumbnail": "Assets/projects/tiny-shell-thumb.webp",
+    "width": 750,
+    "height": 750,
+    "source": "Assets/terminal.png",
+    "caption": "Tiny Shell image from the original portfolio",
+    "repo": "Acelogic/TSHImplementation"
+  },
+  {
+    "title": "Image Segmentation",
+    "file": "Assets/projects/image-segmentation.webp",
+    "thumbnail": "Assets/projects/image-segmentation-thumb.webp",
+    "width": 1000,
+    "height": 511,
+    "source": "https://raw.githubusercontent.com/Acelogic/ImageSegmentation/master/docs/images/Seg1.png",
+    "caption": "Image Segmentation image from the project repository",
+    "repo": "Acelogic/ImageSegmentation"
+  },
+  {
+    "title": "FP Growth",
+    "file": "Assets/projects/fp-growth.webp",
+    "thumbnail": "Assets/projects/fp-growth-thumb.webp",
+    "width": 477,
+    "height": 303,
+    "source": "Assets/fpgrowth.jpg",
+    "caption": "FP Growth image from the original portfolio",
+    "repo": "Acelogic/FPGrowth"
+  },
+  {
+    "title": "Sorting Algorithms",
+    "file": "Assets/projects/sorting-algorithms.webp",
+    "thumbnail": "Assets/projects/sorting-algorithms-thumb.webp",
+    "width": 1000,
+    "height": 644,
+    "source": "Assets/sorting.png",
+    "caption": "Sorting Algorithms image from the original portfolio",
+    "repo": "Acelogic/SortingAlgos"
+  },
+  {
+    "title": "CoinMarketCap Go API",
+    "file": "Assets/projects/coinmarketcap-go-api.webp",
+    "thumbnail": "Assets/projects/coinmarketcap-go-api-thumb.webp",
+    "width": 750,
+    "height": 750,
+    "source": "Assets/cmc.jpg",
+    "caption": "CoinMarketCap Go API image from the original portfolio",
+    "repo": "Acelogic/coinmarketcap-go-api"
+  },
+  {
+    "title": "CoinMarketCap Go Server",
+    "file": "Assets/projects/coinmarketcap-go-server.webp",
+    "thumbnail": "Assets/projects/coinmarketcap-go-server-thumb.webp",
+    "width": 750,
+    "height": 750,
+    "source": "Assets/cmc.jpg",
+    "caption": "CoinMarketCap Go Server image from the original portfolio",
+    "repo": "Acelogic/coinmarketcap-go-server"
+  },
+  {
+    "title": "PlexiBot 2017",
+    "file": "Assets/projects/plexibot-2017.webp",
+    "thumbnail": "Assets/projects/plexibot-2017-thumb.webp",
+    "width": 562,
+    "height": 750,
+    "source": "Assets/bot.jpg",
+    "caption": "PlexiBot 2017 image from the original portfolio",
+    "repo": "Acelogic/PlexiBot2017"
+  },
+  {
+    "title": "ML: Dogs vs. Cats",
+    "file": "Assets/projects/ml-dogs-vs-cats.webp",
+    "thumbnail": "Assets/projects/ml-dogs-vs-cats-thumb.webp",
+    "width": 1000,
+    "height": 609,
+    "source": "https://user-images.githubusercontent.com/7362641/168686965-a437043b-0164-465e-9f37-a492c7f686eb.png",
+    "caption": "ML: Dogs vs. Cats image from the project repository",
+    "repo": "Acelogic/ML-DogVsCat-Detector"
+  },
+  {
+    "title": "ML: Linear Regression",
+    "file": "Assets/projects/ml-linear-regression.webp",
+    "thumbnail": "Assets/projects/ml-linear-regression-thumb.webp",
+    "width": 1000,
+    "height": 500,
+    "source": "https://opengraph.githubassets.com/a7f27e277fc425b63b778b98bfac364ab76fa6924957d048e3cb3867111ad4bc/Acelogic/ML-Multiple-Linear-Regression",
+    "caption": "ML: Linear Regression repository preview",
+    "repo": "Acelogic/ML-Multiple-Linear-Regression"
+  },
+  {
+    "title": "ML: VAERS Data",
+    "file": "Assets/projects/ml-vaers-data.webp",
+    "thumbnail": "Assets/projects/ml-vaers-data-thumb.webp",
+    "width": 1000,
+    "height": 500,
+    "source": "https://opengraph.githubassets.com/4042fd2dd72c28935d01317ed5539e2295158c1483511f89ea9fb19b43b7a9df/Acelogic/ML-VAERS-Dataprocessing",
+    "caption": "ML: VAERS Data repository preview",
+    "repo": "Acelogic/ML-VAERS-Dataprocessing"
+  },
+  {
+    "title": "Dotfiles & Scripts",
+    "file": "Assets/projects/dotfiles-scripts.webp",
+    "thumbnail": "Assets/projects/dotfiles-scripts-thumb.webp",
+    "width": 1000,
+    "height": 500,
+    "source": "https://opengraph.githubassets.com/6c13eb5d36e7c0fce87b8744f3f1cd86b8c552260bfaf7f044bb3db742613b5b/Acelogic/DotFiles-And-Scripts",
+    "caption": "Dotfiles & Scripts repository preview",
+    "repo": "Acelogic/DotFiles-And-Scripts"
+  },
+  {
+    "title": "This website",
+    "file": "Assets/projects/this-website.webp",
+    "thumbnail": "Assets/projects/this-website-thumb.webp",
+    "width": 992,
+    "height": 750,
+    "source": "Assets/Website.png",
+    "caption": "This website image from the original portfolio",
+    "repo": "Acelogic/acelogic.github.io"
+  }
+]

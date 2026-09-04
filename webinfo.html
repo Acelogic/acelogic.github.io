@@ -1,120 +1,60 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-  <title>Web Info</title>
   <meta charset="utf-8">
-  <meta name="theme-color" content="#000000">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0,  user-scalable=0, maximum-scale=1.0">
-  
-  <link rel="stylesheet" type="text/css" href="CSS/font.css">
-  </link>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/progressively/dist/progressively.min.css">
-  </link>
-  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.4/css/bulma.min.css">
-  </link>
-  <link rel="stylesheet" type="text/css" href="CSS/global.css">
-  </link>
-  <link rel="stylesheet" type="text/css" href="CSS/webinfo.css">
-  </link>
-  <link rel="stylesheet" href="https://afeld.github.io/emoji-css/emoji.css">
-  </link>
-  
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-  <script src="JS/compLoader.js"></script>
-  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/js/all.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/progressively/1.2.5/progressively.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/typeit/8.8.7/index.umd.min.js"></script>
-  <script defer src="JS/webinfo.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#edf0f1">
+  <script src="/JS/theme.js"></script>
+  <title>About this site — Miguel Cruz</title>
+  <meta name="description" content="A personal portfolio inside a 3D iPod Classic modeled in Blender, with a working click wheel.">
+  <link rel="canonical" href="https://mcruz.me/webinfo.html">
+  <link rel="stylesheet" href="CSS/font.css">
+  <link rel="stylesheet" href="CSS/global.css">
+  <link rel="stylesheet" href="CSS/ipod.css">
+  <script defer src="/JS/ipod-transitions.js"></script>
+  <script defer src="JS/compLoader.js"></script>
+  <script type="importmap">{"imports":{"three":"/JS/vendor/three/build/three.module.js"}}</script>
+  <script type="module" src="/JS/ipod-scene.js"></script>
+  <link rel="stylesheet" href="/CSS/theme.css">
 </head>
-
 <body>
-
-  <!-- Navigation bar insertion code -->
-  <div id="navBar"></div>
-
-  <!-- Hero section -->
-  <section class="hero is-primary has-background-black">
-    <div class="hero-body">
-      <div class="container">
-        <h1 class="title">
-          <span class="About-Title">About this website</span> <i class="em em-mag"></i>
-        </h1>
-        <h2 class="subtitle">
-          <span class="About-Subtitle">We aim to provide you with the latest and most useful information on web
-            development, design, and related technologies.</span>
-        </h2>
-      </div>
+  <!-- shared:navBar:start -->
+<a class="skip-link" href="#main">Skip to portfolio</a>
+<div class="stage-heading"><a href="/index.html">Miguel Cruz</a><span>Software, on shuffle.</span><div class="stage-actions"><label class="theme-toggle" hidden><input id="dark-mode-switch" type="checkbox" role="switch" aria-label="Dark mode"><span class="theme-track" aria-hidden="true"></span><span>Dark</span></label><button id="theme-auto" class="theme-auto" type="button" aria-pressed="true" title="Follow device appearance" hidden>Auto</button><a href="https://github.com/Acelogic">GitHub ↗</a></div></div>
+<div class="ipod-stage" id="ipod-stage">
+  <div class="ipod-fallback" aria-hidden="true"></div>
+  <div class="ipod-front-ui" id="ipod-ui">
+    <div class="ipod-screen" id="game-screen" tabindex="-1" aria-label="iPod portfolio screen">
+      <header class="screen-header"><a href="/index.html" aria-label="Portfolio home">◀</a><span id="screen-location">Miguel’s iPod</span><span class="ipod-battery" aria-label="Full battery"></span></header>
+<!-- shared:navBar:end -->
+  <main id="main" class="wrap"><article class="game-detail"><h1>About this iPod</h1><p>I'm Miguel Cruz, also known as Acelogic. This is my personal portfolio, first started in 2018 and now housed in a 3D iPod Classic.</p><h2>Controls</h2><p>Trace a circle around the click wheel to browse. The center button opens the highlighted item; MENU goes back. Previous and next move one item at a time.</p><p>On a keyboard, use the arrow keys, Enter, and Escape. You can also tap screen items and scroll longer project descriptions. Touch gestures on the wheel stay on the wheel.</p><h2>Made in Blender</h2><p>The aluminum enclosure, polished back, display, click wheel, hold switch, and connectors were modeled in Blender. The website uses the exported 3D model with a live HTML screen.</p><p>A render of the same model keeps the portfolio available when WebGL is unavailable. The static content also works without JavaScript.</p><div class="game-menu"><a href="https://github.com/Acelogic/acelogic.github.io">Website source ↗</a><a href="/Assets/models/ipod-classic.blend" download>Download Blender model</a><a href="mailto:mcruz@mcruz.me">Report an issue</a><a href="index.html">Main menu</a></div></article></main>
+  <!-- shared:footer:start -->
+</div>
+    <div class="click-wheel" id="click-wheel" role="group" aria-label="Click wheel. Drag around the ring to move selection; center to open; Menu to go back.">
+      <button class="wheel-menu" data-control="back" type="button" aria-label="Menu: Go back"><span>MENU</span></button>
+      <button class="wheel-previous" data-control="up" type="button" aria-label="Previous item"><span>◀◀</span></button>
+      <button class="wheel-next" data-control="down" type="button" aria-label="Next item"><span>▶▶</span></button>
+      <button class="wheel-play" data-control="accept" type="button" aria-label="Open selected item"><span>▶Ⅱ</span></button>
+      <button class="wheel-center" data-control="accept" type="button" aria-label="Select: Open highlighted item"></button>
     </div>
-  </section>
-
-  <!-- Libraries section -->
-  <section class="section">
-    <div class="container">
-      <h2 class="title has-text-centered">Libraries and Frameworks Used</h2>
-      <div class="columns is-multiline is-centered">
-        <div class="column is-4">
-          <div class="card">
-            <div class="card-content has-text-centered">
-              <figure class="image is-128x128">
-                <img src="img/bulma.png" alt="Bulma logo">
-              </figure>
-              <h4 class="title is-4">Bulma</h4>
-              <p class="subtitle is-6 has-text-grey">A modern CSS framework based on Flexbox</p>
-            </div>
-          </div>
-        </div>
-        <div class="column is-4">
-          <div class="card">
-            <div class="card-content has-text-centered">
-              <figure class="image is-128x128">
-                <img src="img/jquery.png" alt="jQuery logo">
-              </figure>
-              <h4 class="title is-4">jQuery</h4>
-              <p class="subtitle is-6 has-text-grey">A fast, small, and feature-rich JavaScript library</p>
-            </div>
-          </div>
-        </div>
-        <div class="column is-4">
-          <div class="card">
-            <div class="card-content has-text-centered">
-              <figure class="image is-128x128">
-                <img src="img/typeit.png" alt="TypeIt logo">
-              </figure>
-              <h4 class="title is-4">TypeIt</h4>
-              <p class="subtitle is-6 has-text-grey">A jQuery-free, lightweight, and flexible JavaScript typing
-                animation library</p>
-            </div>
-          </div>
-        </div>
-        <div class="column is-4">
-        <div class="card">
-          <div class="card-content has-text-centered">
-            <figure class="image is-128x128">
-              <i class="fab fa-font-awesome-alt"></i>
-            </figure>
-            <h4 class="title is-4">Font Awesome</h4>
-            <p class="subtitle is-6 has-text-grey">A popular icon set and toolkit</p>
-          </div>
-        </div>
-        </div>
-        <div class="column is-4">
-          <div class="card">
-            <div class="card-content has-text-centered">
-              <figure class="image is-128x128">
-                <img src="img/progressively.png" alt="Progressively logo">
-              </figure>
-              <h4 class="title is-4">Progressively</h4>
-              <p class="subtitle is-6 has-text-grey">A JavaScript library for progressive image loading</p>
-            </div>
-          </div>
-        </div>
-        </div>
-        </div>
-        </section>
-        <!-- Footer insertion code -->
-        <div id="footer"></div>
-        </body>
-        
-        </html>
+  </div>
+</div>
+<fieldset class="finish-picker" id="ipod-finish-picker" hidden disabled>
+  <legend>iPod finish</legend>
+  <div class="finish-options">
+    <label class="finish-option" title="Silver"><input type="radio" name="ipod-finish" value="silver" checked><span class="finish-dot" style="--finish-color:#d1d7dd"></span><span class="sr-only">Silver</span></label>
+    <label class="finish-option" title="Black"><input type="radio" name="ipod-finish" value="black"><span class="finish-dot" style="--finish-color:#242930"></span><span class="sr-only">Black</span></label>
+    <label class="finish-option" title="Blue"><input type="radio" name="ipod-finish" value="blue"><span class="finish-dot" style="--finish-color:#387fba"></span><span class="sr-only">Blue</span></label>
+    <label class="finish-option" title="Purple"><input type="radio" name="ipod-finish" value="purple"><span class="finish-dot" style="--finish-color:#9770b7"></span><span class="sr-only">Purple</span></label>
+    <label class="finish-option" title="Green"><input type="radio" name="ipod-finish" value="green"><span class="finish-dot" style="--finish-color:#549578"></span><span class="sr-only">Green</span></label>
+    <label class="finish-option" title="Red"><input type="radio" name="ipod-finish" value="red"><span class="finish-dot" style="--finish-color:#c43d51"></span><span class="sr-only">Red</span></label>
+    <label class="custom-finish">Custom<input type="color" id="ipod-custom-color" value="#387fba" aria-label="Custom iPod finish"></label>
+    <output id="ipod-finish-name" aria-live="polite">Silver</output>
+  </div>
+</fieldset>
+<div class="view-controls" aria-label="Device view"><button id="rotate-device" type="button">Rotate iPod</button><button id="reset-device" type="button">Front view</button><span id="model-state" role="status">Interactive portfolio</span></div>
+<p class="outside-help">Circle the wheel to browse. Click the center to open. MENU goes back.<br>Keyboard: ↑ ↓ to browse · Enter to open · Esc to go back</p>
+<p class="outside-links"><a href="mailto:mcruz@mcruz.me">Contact</a><span>·</span><a href="/webinfo.html">About this site</a><span>·</span><a href="/Assets/models/ipod-classic.blend" download>Blender model</a></p>
+<!-- shared:footer:end -->
+</body>
+</html>

@@ -1,55 +1,26 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
-<html lang="en">
-
-<head>
-  <meta charset="utf-8">
-
-</head>
-
-
-<body>
-
-  <!--Footer-->
-  <footer class="footer has-background-black has-text-white has-text-centered">
-    <p class="buttons is-centered">
-      <a class="button is-info" href="https://www.linkedin.com/in/mcruz4600/">
-        <span class="icon">
-          <i class="fab fa-linkedin"></i>
-        </span>
-        <span>Linkedin</span>
-      </a>
-      <a class="button" href="http://github.com/Acelogic">
-        <span class="icon">
-          <i class="fab fa-github"></i>
-        </span>
-        <span>GitHub</span>
-      </a>
-      <a class="button is-info" href="http://twitter.com/Acelogic_">
-        <span class="icon">
-          <i class="fab fa-twitter"></i>
-        </span>
-        <span>Twitter</span>
-      </a>
-
-    </p>
-    
-    
-
-    <p>
-    © Miguel Cruz <span id="current-year"></span>. All rights reserved
-    </p>
-    <script>
-      document.getElementById('current-year').textContent = new Date().getFullYear();
-    </script>
     </div>
-
-
-    <div class="made-by-bulma"></div>
-    <a href="https://bulma.io"><img src="https://bulma.io/images/made-with-bulma--white.png" alt="Made with Bulma" width="163" height="31"></a>
+    <div class="click-wheel" id="click-wheel" role="group" aria-label="Click wheel. Drag around the ring to move selection; center to open; Menu to go back.">
+      <button class="wheel-menu" data-control="back" type="button" aria-label="Menu: Go back"><span>MENU</span></button>
+      <button class="wheel-previous" data-control="up" type="button" aria-label="Previous item"><span>◀◀</span></button>
+      <button class="wheel-next" data-control="down" type="button" aria-label="Next item"><span>▶▶</span></button>
+      <button class="wheel-play" data-control="accept" type="button" aria-label="Open selected item"><span>▶Ⅱ</span></button>
+      <button class="wheel-center" data-control="accept" type="button" aria-label="Select: Open highlighted item"></button>
     </div>
-  
-  </footer>
-
-</body>
-
-</html>
+  </div>
+</div>
+<fieldset class="finish-picker" id="ipod-finish-picker" hidden disabled>
+  <legend>iPod finish</legend>
+  <div class="finish-options">
+    <label class="finish-option" title="Silver"><input type="radio" name="ipod-finish" value="silver" checked><span class="finish-dot" style="--finish-color:#d1d7dd"></span><span class="sr-only">Silver</span></label>
+    <label class="finish-option" title="Black"><input type="radio" name="ipod-finish" value="black"><span class="finish-dot" style="--finish-color:#242930"></span><span class="sr-only">Black</span></label>
+    <label class="finish-option" title="Blue"><input type="radio" name="ipod-finish" value="blue"><span class="finish-dot" style="--finish-color:#387fba"></span><span class="sr-only">Blue</span></label>
+    <label class="finish-option" title="Purple"><input type="radio" name="ipod-finish" value="purple"><span class="finish-dot" style="--finish-color:#9770b7"></span><span class="sr-only">Purple</span></label>
+    <label class="finish-option" title="Green"><input type="radio" name="ipod-finish" value="green"><span class="finish-dot" style="--finish-color:#549578"></span><span class="sr-only">Green</span></label>
+    <label class="finish-option" title="Red"><input type="radio" name="ipod-finish" value="red"><span class="finish-dot" style="--finish-color:#c43d51"></span><span class="sr-only">Red</span></label>
+    <label class="custom-finish">Custom<input type="color" id="ipod-custom-color" value="#387fba" aria-label="Custom iPod finish"></label>
+    <output id="ipod-finish-name" aria-live="polite">Silver</output>
+  </div>
+</fieldset>
+<div class="view-controls" aria-label="Device view"><button id="rotate-device" type="button">Rotate iPod</button><button id="reset-device" type="button">Front view</button><span id="model-state" role="status">Interactive portfolio</span></div>
+<p class="outside-help">Circle the wheel to browse. Click the center to open. MENU goes back.<br>Keyboard: ↑ ↓ to browse · Enter to open · Esc to go back</p>
+<p class="outside-links"><a href="mailto:mcruz@mcruz.me">Contact</a><span>·</span><a href="/webinfo.html">About this site</a><span>·</span><a href="/Assets/models/ipod-classic.blend" download>Blender model</a></p>
