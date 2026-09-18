@@ -1,63 +1,137 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#edf0f1">
-  <script src="/JS/theme.js"></script>
-  <title>Page not found — Miguel Cruz</title>
-  <link rel="stylesheet" href="/CSS/font.css">
-  <link rel="stylesheet" href="/CSS/global.css">
-  <script defer src="/JS/ipod-transitions.js"></script>
-  <script defer src="/JS/compLoader.js"></script>
-  <link rel="stylesheet" href="/CSS/ipod.css">
-  <script type="importmap">{"imports":{"three":"/JS/vendor/three/build/three.module.js"}}</script>
-  <script type="module" src="/JS/ipod-scene.js"></script>
-  <link rel="stylesheet" href="/CSS/theme.css">
+  <meta name="theme-color" content="#000000">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0,  user-scalable=0, maximum-scale=1.0">
+  <title>Oh no :(</title>
+
+  <link href='https://fonts.googleapis.com/css?family=Roboto:700' rel='stylesheet' type='text/css'>
+
+
+  <style>
+    body {
+      background: #f5f5f5;
+      font-family: 'Roboto', sans-serif;
+    }
+
+    .mini {
+      font-size: 1em;
+      color: #000;
+      line-height: 9em;
+      text-indent: 2.5em;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+    }
+
+    .mega,
+    .bola {
+      line-height: 1.65em;
+      font-weight: bold;
+      font-size: 11em;
+      color: black;
+      font-family: 'Roboto', sans-serif;
+      width: 300px;
+      height: 300px;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      margin-left: -150px;
+      margin-top: -150px;
+    }
+
+    .boom {
+      color: #f5f5f5;
+    }
+  </style>
+
 </head>
+
 <body>
-  <!-- shared:navBar:start -->
-<a class="skip-link" href="#main">Skip to portfolio</a>
-<div class="stage-heading"><a href="/index.html">Miguel Cruz</a><span>Software, on shuffle.</span><div class="stage-actions"><label class="theme-toggle" hidden><input id="dark-mode-switch" type="checkbox" role="switch" aria-label="Dark mode"><span class="theme-track" aria-hidden="true"></span><span>Dark</span></label><button id="theme-auto" class="theme-auto" type="button" aria-pressed="true" title="Follow device appearance" hidden>Auto</button><a href="https://github.com/Acelogic">GitHub ↗</a></div></div>
-<div class="ipod-stage" id="ipod-stage">
-  <div class="ipod-fallback" aria-hidden="true"></div>
-  <div class="ipod-front-ui" id="ipod-ui">
-    <div class="ipod-screen" id="game-screen" tabindex="-1" aria-label="iPod portfolio screen">
-      <header class="screen-header"><a href="/index.html" aria-label="Portfolio home">◀</a><span id="screen-location">Miguel’s iPod</span><span class="ipod-battery" aria-label="Full battery"></span></header>
-<!-- shared:navBar:end -->
-  <main id="main" class="wrap page-heading">
-    <p class="eyebrow">404 / Page not found</p>
-    <h1>A wrong turn.</h1>
-    <p class="intro">This page may have moved, or the address may be incomplete. You can find my current work on the projects page.</p>
-    <div class="actions"><a class="action action-primary" href="/projects.html">Explore projects ↗</a><a class="action" href="/index.html">Back home</a></div>
-  </main>
-  <!-- shared:footer:start -->
-</div>
-    <div class="click-wheel" id="click-wheel" role="group" aria-label="Click wheel. Drag around the ring to move selection; center to open; Menu to go back.">
-      <button class="wheel-menu" data-control="back" type="button" aria-label="Menu: Go back"><span>MENU</span></button>
-      <button class="wheel-previous" data-control="up" type="button" aria-label="Previous item"><span>◀◀</span></button>
-      <button class="wheel-next" data-control="down" type="button" aria-label="Next item"><span>▶▶</span></button>
-      <button class="wheel-play" data-control="accept" type="button" aria-label="Open selected item"><span>▶Ⅱ</span></button>
-      <button class="wheel-center" data-control="accept" type="button" aria-label="Select: Open highlighted item"></button>
+
+  <p class="mega">4<span class="boom">0</span>4<div class="bola">
     </div>
-  </div>
-</div>
-<fieldset class="finish-picker" id="ipod-finish-picker" hidden disabled>
-  <legend>iPod finish</legend>
-  <div class="finish-options">
-    <label class="finish-option" title="Silver"><input type="radio" name="ipod-finish" value="silver" checked><span class="finish-dot" style="--finish-color:#d1d7dd"></span><span class="sr-only">Silver</span></label>
-    <label class="finish-option" title="Black"><input type="radio" name="ipod-finish" value="black"><span class="finish-dot" style="--finish-color:#242930"></span><span class="sr-only">Black</span></label>
-    <label class="finish-option" title="Blue"><input type="radio" name="ipod-finish" value="blue"><span class="finish-dot" style="--finish-color:#387fba"></span><span class="sr-only">Blue</span></label>
-    <label class="finish-option" title="Purple"><input type="radio" name="ipod-finish" value="purple"><span class="finish-dot" style="--finish-color:#9770b7"></span><span class="sr-only">Purple</span></label>
-    <label class="finish-option" title="Green"><input type="radio" name="ipod-finish" value="green"><span class="finish-dot" style="--finish-color:#549578"></span><span class="sr-only">Green</span></label>
-    <label class="finish-option" title="Red"><input type="radio" name="ipod-finish" value="red"><span class="finish-dot" style="--finish-color:#c43d51"></span><span class="sr-only">Red</span></label>
-    <label class="custom-finish">Custom<input type="color" id="ipod-custom-color" value="#387fba" aria-label="Custom iPod finish"></label>
-    <output id="ipod-finish-name" aria-live="polite">Silver</output>
-  </div>
-</fieldset>
-<div class="view-controls" aria-label="Device view"><button id="rotate-device" type="button">Rotate iPod</button><button id="reset-device" type="button">Front view</button><span id="model-state" role="status">Interactive portfolio</span></div>
-<p class="outside-help">Circle the wheel to browse. Click the center to open. MENU goes back.<br>Keyboard: ↑ ↓ to browse · Enter to open · Esc to go back</p>
-<p class="outside-links"><a href="mailto:mcruz@mcruz.me">Contact</a><span>·</span><a href="/webinfo.html">About this site</a><span>·</span><a href="/Assets/models/ipod-classic.blend" download>Blender model</a></p>
-<!-- shared:footer:end -->
+  </p>
+  <p class="mini"><span class="type-it">Well That's an error.</span></p>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/typeit/8.8.7/index.umd.min.js"></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/three.js/0.180.0/three.min.js'></script>
+
+
+
+  <script>
+    var $container = $('.bola');
+    var renderer = new THREE.WebGLRenderer({
+      antialias: true
+    });
+    var camera = new THREE.PerspectiveCamera(80, 1, 0.1, 10000);
+    var scene = new THREE.Scene();
+
+    scene.add(camera);
+    renderer.setSize(300, 300);
+    $container.append(renderer.domElement);
+
+    ///////////////////////////////////////////////
+
+    // Camera
+    camera.position.z = 200;
+
+    // Material
+    var pinkMat = new THREE.MeshPhongMaterial({
+      color: new THREE.Color("rgb(255,0,0)"),
+      emissive: new THREE.Color("rgb(0,0,0)"),
+      specular: new THREE.Color("rgb(255,155,255)"),
+      shininess: 150,
+      shading: THREE.FlatShading,
+      transparent: 1,
+      opacity: 1
+    });
+
+    var L1 = new THREE.PointLight(0xffffff, 1);
+    L1.position.z = 100;
+    L1.position.y = 100;
+    L1.position.x = 100;
+    scene.add(L1);
+
+    var L2 = new THREE.PointLight(0xffffff, 0.8);
+    L2.position.z = 200;
+    L2.position.y = 400;
+    L2.position.x = -100;
+    scene.add(L2);
+
+    // IcoSphere -> THREE.IcosahedronGeometry(80, 1) 1-4
+    var Ico = new THREE.Mesh(new THREE.IcosahedronGeometry(75, 1), pinkMat);
+    Ico.rotation.z = 0.5;
+    scene.add(Ico);
+
+    function update() {
+      Ico.rotation.x += 2 / 100;
+      Ico.rotation.y += 2 / 100;
+    }
+
+    // Render
+    function render() {
+      requestAnimationFrame(render);
+      renderer.render(scene, camera);
+      update();
+    }
+
+    render();
+
+
+    //Type it Text Code
+    new TypeIt('.type-it', {
+      speed: 67
+
+    }).go();
+  </script>
+
+
+
+
 </body>
+
 </html>

@@ -1,139 +1,2494 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
 <html lang="en">
+
 <head>
+  <title>Projects</title>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#edf0f1">
-  <script src="/JS/theme.js"></script>
-  <title>Projects &amp; ports — Miguel Cruz</title>
-  <meta name="description" content="Miguel Cruz’s portfolio: Aurora Silicon, Omarchy, Apple MLX ports, native macOS tools, emulation, finance projects, and open-source contributions.">
-  <link rel="canonical" href="https://mcruz.me/projects.html">
-  <link rel="stylesheet" href="CSS/font.css">
-  <link rel="stylesheet" href="CSS/global.css">
-  <script defer src="/JS/ipod-transitions.js"></script>
-  <script defer src="JS/compLoader.js"></script>
-  <link rel="stylesheet" href="/CSS/ipod.css">
+  <meta name="theme-color" content="#000000">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0,  user-scalable=0, maximum-scale=1.0">
+
+  <link rel="stylesheet" type="text/css" href="CSS/font.css">
+  </link>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/progressively/dist/progressively.min.css">
+  </link>
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.4/css/bulma.min.css">
+  </link>
+  <link rel="stylesheet" type="text/css" href="CSS/global.css">
+  </link>
+  <link rel="stylesheet" type="text/css" href="CSS/projects.css">
+  </link>
+  <link rel="stylesheet" href="https://afeld.github.io/emoji-css/emoji.css">
+  </link>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="JS/compLoader.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/js/all.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/progressively/1.2.5/progressively.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/typeit/8.8.7/index.umd.min.js"></script>
   <script defer src="JS/projects.js"></script>
-  <script type="importmap">{"imports":{"three":"/JS/vendor/three/build/three.module.js"}}</script>
-  <script type="module" src="/JS/ipod-scene.js"></script>
-  <link rel="stylesheet" href="/CSS/theme.css">
 </head>
+
 <body>
-  <!-- shared:navBar:start -->
-<a class="skip-link" href="#main">Skip to portfolio</a>
-<div class="stage-heading"><a href="/index.html">Miguel Cruz</a><span>Software, on shuffle.</span><div class="stage-actions"><label class="theme-toggle" hidden><input id="dark-mode-switch" type="checkbox" role="switch" aria-label="Dark mode"><span class="theme-track" aria-hidden="true"></span><span>Dark</span></label><button id="theme-auto" class="theme-auto" type="button" aria-pressed="true" title="Follow device appearance" hidden>Auto</button><a href="https://github.com/Acelogic">GitHub ↗</a></div></div>
-<div class="ipod-stage" id="ipod-stage">
-  <div class="ipod-fallback" aria-hidden="true"></div>
-  <div class="ipod-front-ui" id="ipod-ui">
-    <div class="ipod-screen" id="game-screen" tabindex="-1" aria-label="iPod portfolio screen">
-      <header class="screen-header"><a href="/index.html" aria-label="Portfolio home">◀</a><span id="screen-location">Miguel’s iPod</span><span class="ipod-battery" aria-label="Full battery"></span></header>
-<!-- shared:navBar:end -->
-  <main id="main" class="wrap">
-    <header class="page-heading"><p class="eyebrow">Acelogic / Project library</p><h1>Projects &amp; ports.</h1><p class="intro">Hardware exploration, native AI, and the tools in between. Personal projects, experimental ports, and contributions to the software I use.</p></header>
-    <nav class="project-index" aria-label="Project categories"><a href="#systems">Systems</a><a href="#mlx">MLX ports</a><a href="#native">Native tools</a><a href="#finance">Finance</a><a href="#extensions">Extensions</a><a href="#contributions">Contributions</a><a href="#archive">Archive</a></nav>
-<section class="project-section" id="systems" aria-labelledby="systems-title"><div class="project-section-heading"><span class="section-number">01</span><h2 id="systems-title">Systems &amp; hardware</h2></div><article class="featured-project" id="aurora-silicon"><div><span class="eyebrow">Current work / Experimental</span><h3>Aurora Silicon</h3><figure class="project-figure"><img src="Assets/projects/aurora-silicon.webp" alt="Aurora Silicon project artwork" width="750" height="750" loading="lazy" decoding="async" data-thumbnail="Assets/projects/aurora-silicon-thumb.webp"><figcaption>From the project repository</figcaption></figure><p>My work with Aurora Silicon explores bringing Windows on ARM to Apple Silicon Macs: understanding the hardware, building the boot path, and developing the platform support and drivers Windows needs.</p><p>The project is experimental. Its public documentation and firmware repositories provide a starting point for following development.</p><ul class="project-meta" aria-label="Technologies and status"><li>C / ARM64</li><li>Firmware &amp; drivers</li><li>Experimental</li></ul></div><div class="featured-links"><a href="https://github.com/aurora-silicon/aurora-silicon.github.io">Documentation ↗</a><a href="https://github.com/aurora-silicon/mu">Project Mu / UEFI ↗</a><a href="https://github.com/aurora-silicon/aurora-installer">Installer ↗</a><a href="https://github.com/aurora-silicon/u-boot">U-Boot ↗</a></div></article><div class="project-grid"><article class="project-card">
-  <span class="project-kind">Port / Emulation</span><h3>VibeStation5</h3><figure class="project-figure"><img src="Assets/projects/vibestation5.webp" alt="VibeStation5 image from the project repository" width="1000" height="689" loading="lazy" decoding="async" data-thumbnail="Assets/projects/vibestation5-thumb.webp"><figcaption>From the project repository</figcaption></figure><p>An experimental PS4/PS5 runtime derived from SharpEmu, with native macOS, iPadOS, and Android targets. Work spans ARM64 interpretation, guest loading, graphics, audio, and input. Early compatibility research, not a general-purpose playable emulator.</p>
-  <ul class="project-meta" aria-label="Technologies and status"><li>Swift</li><li>Kotlin / C++</li><li>Experimental</li></ul>
-  <div class="project-links"><a href="https://github.com/Acelogic/VibeStation5">Source <span aria-hidden="true">↗</span></a></div>
-</article><article class="project-card">
-  <span class="project-kind">Linux / Community</span><h3>Omarchy</h3><figure class="project-figure"><img src="Assets/projects/omarchy.webp" alt="Omarchy project artwork" width="1000" height="525" loading="lazy" decoding="async" data-thumbnail="Assets/projects/omarchy-thumb.webp"><figcaption>From the project repository</figcaption></figure><p>My involvement in the Omarchy community: an opinionated Linux desktop built around Arch and Hyprland.</p>
-  <ul class="project-meta" aria-label="Technologies and status"><li>Linux</li><li>Hyprland</li><li>Community</li></ul>
-  <div class="project-links"><a href="https://github.com/omacom/omarchy">Omarchy <span aria-hidden="true">↗</span></a></div>
-</article></div></section>
-<section class="project-section" id="mlx" aria-labelledby="mlx-title"><div class="project-section-heading"><span class="section-number">02</span><h2 id="mlx-title">AI &amp; MLX ports</h2></div><div class="project-grid"><article class="project-card">
-  <span class="project-kind">Video generation</span><h3>LTX-2 MLX</h3><figure class="project-figure"><img src="Assets/projects/ltx-2-mlx.webp" alt="Video generation example from LTX-2 MLX" width="1000" height="133" loading="lazy" decoding="async" data-thumbnail="Assets/projects/ltx-2-mlx-thumb.webp"><figcaption>From the project repository</figcaption></figure><p>Native MLX implementation of Lightricks’ LTX-2 video models, supporting LTX-2.0 and LTX-2.3 with automatic version detection.</p>
-  <ul class="project-meta" aria-label="Technologies and status"><li>Python</li><li>MLX</li><li>Video</li></ul>
-  <div class="project-links"><a href="https://github.com/Acelogic/LTX-2-MLX">Source <span aria-hidden="true">↗</span></a></div>
-</article><article class="project-card">
-  <span class="project-kind">Voice conversion</span><h3>RVC MLX</h3><figure class="project-figure"><img src="Assets/projects/rvc-mlx.webp" alt="RVC MLX repository preview" width="1000" height="500" loading="lazy" decoding="async" data-thumbnail="Assets/projects/rvc-mlx-thumb.webp"><figcaption>Repository preview</figcaption></figure><p>An MLX implementation of retrieval-based voice conversion, based on Applio. Ports the inference pipeline and RMVPE pitch detection to Apple Silicon.</p>
-  <ul class="project-meta" aria-label="Technologies and status"><li>Python</li><li>MLX</li><li>Audio</li></ul>
-  <div class="project-links"><a href="https://github.com/Acelogic/Retrieval-based-Voice-Conversion-MLX">Source <span aria-hidden="true">↗</span></a></div>
-</article><article class="project-card">
-  <span class="project-kind">Conversational audio</span><h3>PersonaPlex MLX</h3><figure class="project-figure"><img src="Assets/projects/personaplex-mlx.webp" alt="PersonaPlex MLX repository preview" width="1000" height="500" loading="lazy" decoding="async" data-thumbnail="Assets/projects/personaplex-mlx-thumb.webp"><figcaption>Repository preview</figcaption></figure><p>NVIDIA’s PersonaPlex 7B ported to MLX for full-duplex voice conversation, with voice conditioning, configurable personas, quantization, and a browser interface.</p>
-  <ul class="project-meta" aria-label="Technologies and status"><li>Python</li><li>MLX</li><li>Voice</li></ul>
-  <div class="project-links"><a href="https://github.com/Acelogic/personaplex-mlx">Source <span aria-hidden="true">↗</span></a></div>
-</article><article class="project-card">
-  <span class="project-kind">Music generation</span><h3>HeartLib MLX</h3><figure class="project-figure"><img src="Assets/projects/heartlib-mlx.webp" alt="HeartLib MLX image from the project repository" width="1000" height="500" loading="lazy" decoding="async" data-thumbnail="Assets/projects/heartlib-mlx-thumb.webp"><figcaption>From the project repository</figcaption></figure><p>Apple Silicon port of the HeartMuLa music models, with a web interface for generating songs, following progress, and managing a local music library.</p>
-  <ul class="project-meta" aria-label="Technologies and status"><li>Python</li><li>MLX</li><li>Music</li></ul>
-  <div class="project-links"><a href="https://github.com/Acelogic/heartlib-mlx">Source <span aria-hidden="true">↗</span></a></div>
-</article><article class="project-card">
-  <span class="project-kind">Video generation / Work in progress</span><h3>daVinci-MagiHuman MLX</h3><figure class="project-figure"><img src="Assets/projects/davinci-magihuman-mlx.webp" alt="daVinci-MagiHuman MLX repository preview" width="1000" height="500" loading="lazy" decoding="async" data-thumbnail="Assets/projects/davinci-magihuman-mlx-thumb.webp"><figcaption>Repository preview</figcaption></figure><p>Porting a 15B video model to MLX with sequential model loading, INT4 quantization, and a custom Metal kernel. The pipeline runs end to end; usable video output is still a work in progress.</p>
-  <ul class="project-meta" aria-label="Technologies and status"><li>Python</li><li>MLX / Metal</li><li>Work in progress</li></ul>
-  <div class="project-links"><a href="https://github.com/Acelogic/daVinci-MagiHuman-mlx">Source <span aria-hidden="true">↗</span></a></div>
-</article></div></section>
-<section class="project-section" id="native" aria-labelledby="native-title"><div class="project-section-heading"><span class="section-number">03</span><h2 id="native-title">Native apps &amp; developer tools</h2></div><div class="project-grid"><article class="project-card">
-  <span class="project-kind">Upstream contribution</span><h3>UxPlay for macOS</h3><figure class="project-figure"><img src="Assets/projects/uxplay-for-macos.webp" alt="UxPlay for macOS repository preview" width="1000" height="500" loading="lazy" decoding="async" data-thumbnail="Assets/projects/uxplay-for-macos-thumb.webp"><figcaption>Repository preview</figcaption></figure><p>Contributed a native macOS AirPlay renderer using VideoToolbox and Metal, followed by improvements to window layout, rotation, cover art, and audio stability.</p>
-  <ul class="project-meta" aria-label="Technologies and status"><li>C / Objective-C</li><li>Metal</li><li>Merged</li></ul>
-  <div class="project-links"><a href="https://github.com/FDH2/UxPlay/pull/490">Renderer PR <span aria-hidden="true">↗</span></a><a href="https://github.com/FDH2/UxPlay/pull/505">Follow-up improvements <span aria-hidden="true">↗</span></a></div>
-</article><article class="project-card">
-  <span class="project-kind">Hardware monitoring</span><h3>MacGTop</h3><figure class="project-figure"><img src="Assets/projects/macgtop.webp" alt="MacGTop repository preview" width="1000" height="500" loading="lazy" decoding="async" data-thumbnail="Assets/projects/macgtop-thumb.webp"><figcaption>Repository preview</figcaption></figure><p>A terminal GPU monitor for Apple Silicon, exposing utilization and hardware metrics through IOKit and IOReport. An htop-style view into the Mac’s GPU.</p>
-  <ul class="project-meta" aria-label="Technologies and status"><li>Python</li><li>IOKit</li><li>macOS</li></ul>
-  <div class="project-links"><a href="https://github.com/Acelogic/macgtop">Source <span aria-hidden="true">↗</span></a></div>
-</article><article class="project-card">
-  <span class="project-kind">Native macOS app</span><h3>Ignition</h3><figure class="project-figure"><img src="Assets/projects/ignition.webp" alt="Ignition image from the project repository" width="1000" height="566" loading="lazy" decoding="async" data-thumbnail="Assets/projects/ignition-thumb.webp"><figcaption>From the project repository</figcaption></figure><p>A SwiftUI manager for macOS launch agents and daemons, with lifecycle controls, live logs, a plist editor, and health monitoring.</p>
-  <ul class="project-meta" aria-label="Technologies and status"><li>SwiftUI</li><li>launchd</li><li>macOS</li></ul>
-  <div class="project-links"><a href="https://github.com/Acelogic/Ignition">Source <span aria-hidden="true">↗</span></a></div>
-</article><article class="project-card">
-  <span class="project-kind">Reverse engineering / Upstream contribution</span><h3>Kawaiidra MCP</h3><figure class="project-figure"><img src="Assets/projects/kawaiidra-mcp.webp" alt="Kawaiidra MCP repository preview" width="1000" height="500" loading="lazy" decoding="async" data-thumbnail="Assets/projects/kawaiidra-mcp-thumb.webp"><figcaption>Repository preview</figcaption></figure><p>Contributions to a Ghidra MCP server: cross-platform Ghidra discovery, iOS research tools, a persistent JPype bridge, and Ghidra 12 compatibility.</p>
-  <ul class="project-meta" aria-label="Technologies and status"><li>Python</li><li>Ghidra / JPype</li><li>Merged</li></ul>
-  <div class="project-links"><a href="https://github.com/wagonbomb/kawaiidra-mcp/pull/5">Bridge PR <span aria-hidden="true">↗</span></a><a href="https://github.com/wagonbomb/kawaiidra-mcp/pull/7">Ghidra 12 fixes <span aria-hidden="true">↗</span></a></div>
-</article><article class="project-card">
-  <span class="project-kind">Emulation / Research tools</span><h3>SharpEmu agentic toolkit</h3><figure class="project-figure"><img src="Assets/projects/sharpemu-agentic-toolkit.webp" alt="SharpEmu agentic toolkit image from the project repository" width="1000" height="400" loading="lazy" decoding="async" data-thumbnail="Assets/projects/sharpemu-agentic-toolkit-thumb.webp"><figcaption>From the project repository</figcaption></figure><p>Tools for SharpEmu NID research, Ghidra-assisted analysis, and timestamped visual regression evidence.</p>
-  <ul class="project-meta" aria-label="Technologies and status"><li>Python</li><li>Reverse engineering</li></ul>
-  <div class="project-links"><a href="https://github.com/Acelogic/sharpemu-agentic-toolkit">Source <span aria-hidden="true">↗</span></a></div>
-</article></div></section>
-<section class="project-section" id="finance" aria-labelledby="finance-title"><div class="project-section-heading"><span class="section-number">04</span><h2 id="finance-title">Finance &amp; data</h2></div><div class="project-grid"><article class="project-card">
-  <span class="project-kind">Portfolio research</span><h3>Testfol Margin Stresser</h3><figure class="project-figure"><img src="Assets/projects/testfol-margin-stresser.webp" alt="Nasdaq comparison chart from Testfol" width="1000" height="618" loading="lazy" decoding="async" data-thumbnail="Assets/projects/testfol-margin-stresser-thumb.webp"><figcaption>From the project repository</figcaption></figure><p>A research workbench for leveraged backtests, margin stress testing, tax-aware rebalancing, Nasdaq index reconstruction, and long-horizon risk analysis.</p>
-  <ul class="project-meta" aria-label="Technologies and status"><li>Python</li><li>Streamlit</li></ul>
-  <div class="project-links"><a href="https://github.com/Acelogic/Testfol-MarginStresser">Source <span aria-hidden="true">↗</span></a><a href="https://testfol-marginstresser.streamlit.app/">Open app <span aria-hidden="true">↗</span></a></div>
-</article><article class="project-card">
-  <span class="project-kind">Options research</span><h3>Earnings Volatility Calculator</h3><figure class="project-figure"><img src="Assets/projects/earnings-volatility-calculator.webp" alt="Earnings Volatility Calculator icon" width="256" height="256" loading="lazy" decoding="async" data-thumbnail="Assets/projects/earnings-volatility-calculator-thumb.webp"><figcaption>From the project repository</figcaption></figure><p>Analyzes options around earnings using implied and realized volatility, ATR, and Yang–Zhang estimates, with configurable screening criteria.</p>
-  <ul class="project-meta" aria-label="Technologies and status"><li>Python</li><li>Options</li></ul>
-  <div class="project-links"><a href="https://github.com/Acelogic/Earnings-Volatility-Calculator">Source <span aria-hidden="true">↗</span></a></div>
-</article><article class="project-card">
-  <span class="project-kind">Market data</span><h3>Market Drawdown Dashboard</h3><figure class="project-figure"><img src="Assets/projects/market-drawdown-dashboard.webp" alt="Market Drawdown Dashboard image from the project repository" width="1000" height="525" loading="lazy" decoding="async" data-thumbnail="Assets/projects/market-drawdown-dashboard-thumb.webp"><figcaption>From the project repository</figcaption></figure><p>Tracks drawdowns from all-time highs for the S&amp;P 500, Nasdaq 100, and Nasdaq Composite, alongside historical intra-year comparisons.</p>
-  <ul class="project-meta" aria-label="Technologies and status"><li>HTML / JavaScript</li><li>Market history</li></ul>
-  <div class="project-links"><a href="https://github.com/Acelogic/market-drawdown-dashboard">Source <span aria-hidden="true">↗</span></a><a href="https://mcruz.me/market-drawdown-dashboard/">Open dashboard <span aria-hidden="true">↗</span></a></div>
-</article><article class="project-card">
-  <span class="project-kind">Financial modeling</span><h3>Maginator</h3><figure class="project-figure"><img src="Assets/projects/maginator.webp" alt="Maginator repository preview" width="1000" height="500" loading="lazy" decoding="async" data-thumbnail="Assets/projects/maginator-thumb.webp"><figcaption>Repository preview</figcaption></figure><p>A price projection tool for Roundhill’s MAGS ETF.</p>
-  <ul class="project-meta" aria-label="Technologies and status"><li>Python</li><li>ETF research</li></ul>
-  <div class="project-links"><a href="https://github.com/Acelogic/Maginator">Source <span aria-hidden="true">↗</span></a></div>
-</article><article class="project-card">
-  <span class="project-kind">Historical data</span><h3>Wayback Stock Scraper</h3><figure class="project-figure"><img src="Assets/projects/wayback-stock-scraper.webp" alt="Wayback Stock Scraper repository preview" width="1000" height="500" loading="lazy" decoding="async" data-thumbnail="Assets/projects/wayback-stock-scraper-thumb.webp"><figcaption>Repository preview</figcaption></figure><p>Recovers historical prices for delisted tickers from Yahoo Finance CSVs archived by the Internet Archive.</p>
-  <ul class="project-meta" aria-label="Technologies and status"><li>Python</li><li>Data recovery</li></ul>
-  <div class="project-links"><a href="https://github.com/Acelogic/WayBackMachineStockScraper">Source <span aria-hidden="true">↗</span></a></div>
-</article></div></section>
-<section class="project-section" id="extensions" aria-labelledby="extensions-title"><div class="project-section-heading"><span class="section-number">05</span><h2 id="extensions-title">Extensions &amp; smaller builds</h2></div><article class="project-row"><div><h3>Pi + LM Studio</h3><figure class="project-figure"><img src="Assets/projects/pi-lm-studio.webp" alt="Pi + LM Studio repository preview" width="1000" height="500" loading="lazy" decoding="async" data-thumbnail="Assets/projects/pi-lm-studio-thumb.webp"><figcaption>Repository preview</figcaption></figure></div><p>Model discovery and provider registration for running Pi with local models in LM Studio.</p><a href="https://github.com/Acelogic/pi-lm-studio">Source <span aria-hidden="true">↗</span></a></article><article class="project-row"><div><h3>Pi memories</h3><figure class="project-figure"><img src="Assets/projects/pi-memories.webp" alt="Pi memories repository preview" width="1000" height="500" loading="lazy" decoding="async" data-thumbnail="Assets/projects/pi-memories-thumb.webp"><figcaption>Repository preview</figcaption></figure></div><p>Persistent file-based memory for Pi sessions.</p><a href="https://github.com/Acelogic/pi-memories">Source <span aria-hidden="true">↗</span></a></article><article class="project-row"><div><h3>Pi Claude memories</h3><figure class="project-figure"><img src="Assets/projects/pi-claude-memories.webp" alt="Pi Claude memories repository preview" width="1000" height="500" loading="lazy" decoding="async" data-thumbnail="Assets/projects/pi-claude-memories-thumb.webp"><figcaption>Repository preview</figcaption></figure></div><p>Brings existing Claude Code memory files into Pi sessions on demand.</p><a href="https://github.com/Acelogic/pi-claude-memories">Source <span aria-hidden="true">↗</span></a></article><article class="project-row"><div><h3>Hermes Claude memories</h3><figure class="project-figure"><img src="Assets/projects/hermes-claude-memories.webp" alt="Hermes Claude memories repository preview" width="1000" height="500" loading="lazy" decoding="async" data-thumbnail="Assets/projects/hermes-claude-memories-thumb.webp"><figcaption>Repository preview</figcaption></figure></div><p>A read-only Hermes plugin for discovering and loading Claude Code memories.</p><a href="https://github.com/Acelogic/hermes-claude-memories">Source <span aria-hidden="true">↗</span></a></article><article class="project-row"><div><h3>Pi statusline</h3><figure class="project-figure"><img src="Assets/projects/pi-statusline.webp" alt="Pi statusline repository preview" width="1000" height="500" loading="lazy" decoding="async" data-thumbnail="Assets/projects/pi-statusline-thumb.webp"><figcaption>Repository preview</figcaption></figure></div><p>A compact statusline showing model, working directory, Git state, and context usage.</p><a href="https://github.com/Acelogic/pi-statusline">Source <span aria-hidden="true">↗</span></a></article><article class="project-row"><div><h3>Pi cd</h3><figure class="project-figure"><img src="Assets/projects/pi-cd.webp" alt="Pi cd repository preview" width="1000" height="500" loading="lazy" decoding="async" data-thumbnail="Assets/projects/pi-cd-thumb.webp"><figcaption>Repository preview</figcaption></figure></div><p>Changes a Pi session’s working directory without restarting the conversation.</p><a href="https://github.com/Acelogic/pi-cd">Source <span aria-hidden="true">↗</span></a></article><article class="project-row"><div><h3>Pi numbered extensions</h3><figure class="project-figure"><img src="Assets/projects/pi-numbered-extensions.webp" alt="Pi numbered extensions repository preview" width="1000" height="500" loading="lazy" decoding="async" data-thumbnail="Assets/projects/pi-numbered-extensions-thumb.webp"><figcaption>Repository preview</figcaption></figure></div><p>Makes the startup extension list easier to scan.</p><a href="https://github.com/Acelogic/pi-numbered-extensions">Source <span aria-hidden="true">↗</span></a></article><article class="project-row"><div><h3>Pi buddy</h3><figure class="project-figure"><img src="Assets/projects/pi-buddy.webp" alt="Pi buddy repository preview" width="1000" height="500" loading="lazy" decoding="async" data-thumbnail="Assets/projects/pi-buddy-thumb.webp"><figcaption>Repository preview</figcaption></figure></div><p>A virtual pet for the terminal, with species, stats, and speech bubbles.</p><a href="https://github.com/Acelogic/pi-buddy">Source <span aria-hidden="true">↗</span></a></article><article class="project-row"><div><h3>Agentic Coding Flywheel setup</h3><figure class="project-figure"><img src="Assets/projects/agentic-coding-flywheel-setup.webp" alt="Agentic Coding Flywheel setup repository preview" width="1000" height="500" loading="lazy" decoding="async" data-thumbnail="Assets/projects/agentic-coding-flywheel-setup-thumb.webp"><figcaption>Repository preview</figcaption></figure></div><p>A simplified cross-platform installer for the Agentic Coding Flywheel tool collection.</p><a href="https://github.com/Acelogic/agentic-coding-flywheel-setup-simplified">Source <span aria-hidden="true">↗</span></a></article><article class="project-row"><div><h3>Moltiverse</h3><figure class="project-figure"><img src="Assets/projects/moltiverse.webp" alt="Moltiverse repository preview" width="1000" height="500" loading="lazy" decoding="async" data-thumbnail="Assets/projects/moltiverse-thumb.webp"><figcaption>Repository preview</figcaption></figure></div><p>A central hub for the Molt Agent ecosystem.</p><a href="https://github.com/Acelogic/moltiverse">Source <span aria-hidden="true">↗</span></a></article><article class="project-row"><div><h3>Reddit YouTube Comments</h3><figure class="project-figure"><img src="Assets/projects/reddit-youtube-comments.webp" alt="Reddit YouTube Comments image from the project repository" width="1000" height="625" loading="lazy" decoding="async" data-thumbnail="Assets/projects/reddit-youtube-comments-thumb.webp"><figcaption>From the project repository</figcaption></figure></div><p>A browser extension that brings Reddit discussions onto YouTube video pages.</p><a href="https://github.com/Acelogic/reddit-youtube-comments">Source <span aria-hidden="true">↗</span></a></article><article class="project-row"><div><h3>Spicetify Plays Sort</h3><figure class="project-figure"><img src="Assets/projects/spicetify-plays-sort.webp" alt="Spicetify Plays Sort repository preview" width="1000" height="500" loading="lazy" decoding="async" data-thumbnail="Assets/projects/spicetify-plays-sort-thumb.webp"><figcaption>Repository preview</figcaption></figure></div><p>Sorts Spotify album tracks by play count.</p><a href="https://github.com/Acelogic/spicetify-plays-sort">Source <span aria-hidden="true">↗</span></a></article><article class="project-row"><div><h3>VoiceChatFinder</h3><figure class="project-figure"><img src="Assets/projects/voicechatfinder.webp" alt="VoiceChatFinder image from the project repository" width="452" height="750" loading="lazy" decoding="async" data-thumbnail="Assets/projects/voicechatfinder-thumb.webp"><figcaption>From the project repository</figcaption></figure></div><p>A BetterDiscord plugin for finding servers with active voice chats.</p><a href="https://github.com/Acelogic/VoiceChatFinder">Source <span aria-hidden="true">↗</span></a></article><article class="project-row"><div><h3>Reddit-chan</h3><figure class="project-figure"><img src="Assets/projects/reddit-chan.webp" alt="Reddit-chan repository preview" width="1000" height="500" loading="lazy" decoding="async" data-thumbnail="Assets/projects/reddit-chan-thumb.webp"><figcaption>Repository preview</figcaption></figure></div><p>A userscript that gives 4chan an old Reddit-style interface.</p><a href="https://github.com/Acelogic/reddit-chan">Source <span aria-hidden="true">↗</span></a></article><article class="project-row"><div><h3>Credit Rebels Archive</h3><figure class="project-figure"><img src="Assets/projects/credit-rebels-archive.webp" alt="Credit Rebels Archive repository preview" width="1000" height="500" loading="lazy" decoding="async" data-thumbnail="Assets/projects/credit-rebels-archive-thumb.webp"><figcaption>Repository preview</figcaption></figure></div><p>Preserves the Credit Rebels educational content on FICO scoring.</p><a href="https://github.com/Acelogic/CreditRebelsArchive">Source <span aria-hidden="true">↗</span></a></article><article class="project-row"><div><h3>Acelogic Cyber Consulting</h3><figure class="project-figure"><img src="Assets/projects/acelogic-cyber-consulting.webp" alt="Acelogic Cyber Consulting artwork" width="1000" height="525" loading="lazy" decoding="async" data-thumbnail="Assets/projects/acelogic-cyber-consulting-thumb.webp"><figcaption>From the project repository</figcaption></figure></div><p>The website for my cybersecurity consulting work.</p><a href="https://github.com/Acelogic/acecyberconsult.com">Source <span aria-hidden="true">↗</span></a></article></section>
-<section class="project-section" id="contributions" aria-labelledby="contributions-title"><div class="project-section-heading"><span class="section-number">06</span><h2 id="contributions-title">Upstream contributions</h2></div><article class="project-row"><div><h3>SharpEmu</h3><figure class="project-figure"><img src="Assets/projects/sharpemu.webp" alt="SharpEmu image from the project repository" width="750" height="750" loading="lazy" decoding="async" data-thumbnail="Assets/projects/sharpemu-thumb.webp"><figcaption>From the project repository</figcaption></figure><span class="row-status">Merged</span></div><p>Extended PS5 runtime and rendering compatibility in the AGC/Vulkan stack.</p><a href="https://github.com/sharpemu/sharpemu/pull/216">View PR <span aria-hidden="true">↗</span></a></article><article class="project-row"><div><h3>Ruff</h3><figure class="project-figure"><img src="Assets/projects/ruff.webp" alt="Ruff repository preview" width="1000" height="500" loading="lazy" decoding="async" data-thumbnail="Assets/projects/ruff-thumb.webp"><figcaption>Repository preview</figcaption></figure><span class="row-status">Merged</span></div><p>Added naming convention checks for bindings in Python match patterns.</p><a href="https://github.com/astral-sh/ruff/pull/23899">View PR <span aria-hidden="true">↗</span></a></article><article class="project-row"><div><h3>Exo</h3><figure class="project-figure"><img src="Assets/projects/exo.webp" alt="Exo cluster dashboard" width="1000" height="549" loading="lazy" decoding="async" data-thumbnail="Assets/projects/exo-thumb.webp"><figcaption>From the project repository</figcaption></figure><span class="row-status">Merged</span></div><p>Fixed partial model download progress on initial dashboard load.</p><a href="https://github.com/exo-explore/exo/pull/1706">View PR <span aria-hidden="true">↗</span></a></article><article class="project-row"><div><h3>Miden VM</h3><figure class="project-figure"><img src="Assets/projects/miden-vm.webp" alt="Miden VM repository preview" width="1000" height="500" loading="lazy" decoding="async" data-thumbnail="Assets/projects/miden-vm-thumb.webp"><figcaption>Repository preview</figcaption></figure><span class="row-status">Merged</span></div><p>Fixed overflowing local counts in word-alignment handling.</p><a href="https://github.com/0xMiden/miden-vm/pull/2838">View PR <span aria-hidden="true">↗</span></a></article><article class="project-row"><div><h3>Homebrew / ipatool</h3><figure class="project-figure"><img src="Assets/projects/homebrew-ipatool.webp" alt="Homebrew / ipatool repository preview" width="1000" height="500" loading="lazy" decoding="async" data-thumbnail="Assets/projects/homebrew-ipatool-thumb.webp"><figcaption>Repository preview</figcaption></figure><span class="row-status">Merged</span></div><p>Corrected the macOS dependency syntax in the ipatool formula.</p><a href="https://github.com/majd/homebrew-repo/pull/5">View PR <span aria-hidden="true">↗</span></a></article><article class="project-row"><div><h3>whisper.cpp</h3><figure class="project-figure"><img src="Assets/projects/whisper-cpp.webp" alt="whisper.cpp image from the project repository" width="932" height="287" loading="lazy" decoding="async" data-thumbnail="Assets/projects/whisper-cpp-thumb.webp"><figcaption>From the project repository</figcaption></figure><span class="row-status">Open proposal</span></div><p>Proposed enabling encoder flash attention when DTW is enabled.</p><a href="https://github.com/ggml-org/whisper.cpp/pull/3704">View PR <span aria-hidden="true">↗</span></a></article><article class="project-row"><div><h3>Notchi</h3><figure class="project-figure"><img src="Assets/projects/notchi.webp" alt="Notchi usage dashboard" width="790" height="540" loading="lazy" decoding="async" data-thumbnail="Assets/projects/notchi-thumb.webp"><figcaption>From the project repository</figcaption></figure><span class="row-status">Open proposal</span></div><p>Proposed Codex integration and custom sprite support.</p><a href="https://github.com/sk-ruban/notchi/pull/40">View PR <span aria-hidden="true">↗</span></a></article><article class="project-row"><div><h3>Homebrew / PureMac</h3><figure class="project-figure"><img src="Assets/projects/homebrew-puremac.webp" alt="Homebrew / PureMac repository preview" width="1000" height="500" loading="lazy" decoding="async" data-thumbnail="Assets/projects/homebrew-puremac-thumb.webp"><figcaption>Repository preview</figcaption></figure><span class="row-status">Open proposal</span></div><p>Proposed a correction to the macOS dependency syntax.</p><a href="https://github.com/momenbasel/homebrew-tap/pull/1">View PR <span aria-hidden="true">↗</span></a></article><p class="project-note">Statuses checked September 2026. UxPlay and Kawaiidra contributions are featured above; linked pull requests show the latest discussion.</p></section>
-<section class="project-section" id="archive" aria-labelledby="archive-title"><div class="project-section-heading"><span class="section-number">07</span><h2 id="archive-title">From the archive</h2></div><p class="archive-intro">Earlier experiments in systems, robotics, algorithms, and machine learning.</p><article class="project-row"><div><h3>Nix-Opus</h3><figure class="project-figure"><img src="Assets/projects/nix-opus.webp" alt="Nix-Opus image from the original portfolio" width="1000" height="750" loading="lazy" decoding="async" data-thumbnail="Assets/projects/nix-opus-thumb.webp"><figcaption>From the original portfolio</figcaption></figure></div><p>An experimental homebrew operating system for learning about x86 and x86-64.</p><a href="https://github.com/nix-opus">Source <span aria-hidden="true">↗</span></a></article><article class="project-row"><div><h3>CHIP-8 C</h3><figure class="project-figure"><img src="Assets/projects/chip-8-c.webp" alt="CHIP-8 C image from the project repository" width="816" height="750" loading="lazy" decoding="async" data-thumbnail="Assets/projects/chip-8-c-thumb.webp"><figcaption>From the project repository</figcaption></figure></div><p>A CHIP-8 interpreter built to explore emulator fundamentals.</p><a href="https://github.com/Acelogic/CHIP-8-C">Source <span aria-hidden="true">↗</span></a></article><article class="project-row"><div><h3>Tiny Shell</h3><figure class="project-figure"><img src="Assets/projects/tiny-shell.webp" alt="Tiny Shell image from the original portfolio" width="750" height="750" loading="lazy" decoding="async" data-thumbnail="Assets/projects/tiny-shell-thumb.webp"><figcaption>From the original portfolio</figcaption></figure></div><p>A Unix shell in C, with process control, signals, and job control.</p><a href="https://github.com/Acelogic/TSHImplementation">Source <span aria-hidden="true">↗</span></a></article><article class="project-row"><div><h3>Image Segmentation</h3><figure class="project-figure"><img src="Assets/projects/image-segmentation.webp" alt="Image Segmentation image from the project repository" width="1000" height="511" loading="lazy" decoding="async" data-thumbnail="Assets/projects/image-segmentation-thumb.webp"><figcaption>From the project repository</figcaption></figure></div><p>A graph-based implementation of Felzenszwalb’s image segmentation algorithm.</p><a href="https://github.com/Acelogic/ImageSegmentation">Source <span aria-hidden="true">↗</span></a></article><article class="project-row"><div><h3>FP Growth</h3><figure class="project-figure"><img src="Assets/projects/fp-growth.webp" alt="FP Growth image from the original portfolio" width="477" height="303" loading="lazy" decoding="async" data-thumbnail="Assets/projects/fp-growth-thumb.webp"><figcaption>From the original portfolio</figcaption></figure></div><p>Frequent-pattern mining and association rules for market basket analysis.</p><a href="https://github.com/Acelogic/FPGrowth">Source <span aria-hidden="true">↗</span></a></article><article class="project-row"><div><h3>Sorting Algorithms</h3><figure class="project-figure"><img src="Assets/projects/sorting-algorithms.webp" alt="Sorting Algorithms image from the original portfolio" width="1000" height="644" loading="lazy" decoding="async" data-thumbnail="Assets/projects/sorting-algorithms-thumb.webp"><figcaption>From the original portfolio</figcaption></figure></div><p>Java implementations of quicksort, radix sort, and heapsort.</p><a href="https://github.com/Acelogic/SortingAlgos">Source <span aria-hidden="true">↗</span></a></article><article class="project-row"><div><h3>CoinMarketCap Go API</h3><figure class="project-figure"><img src="Assets/projects/coinmarketcap-go-api.webp" alt="CoinMarketCap Go API image from the original portfolio" width="750" height="750" loading="lazy" decoding="async" data-thumbnail="Assets/projects/coinmarketcap-go-api-thumb.webp"><figcaption>From the original portfolio</figcaption></figure></div><p>A REST API for CoinMarketCap’s top 100 coins.</p><a href="https://github.com/Acelogic/coinmarketcap-go-api">Source <span aria-hidden="true">↗</span></a></article><article class="project-row"><div><h3>CoinMarketCap Go Server</h3><figure class="project-figure"><img src="Assets/projects/coinmarketcap-go-server.webp" alt="CoinMarketCap Go Server image from the original portfolio" width="750" height="750" loading="lazy" decoding="async" data-thumbnail="Assets/projects/coinmarketcap-go-server-thumb.webp"><figcaption>From the original portfolio</figcaption></figure></div><p>Collects coin data with DynamoDB storage, polling, and logging.</p><a href="https://github.com/Acelogic/coinmarketcap-go-server">Source <span aria-hidden="true">↗</span></a></article><article class="project-row"><div><h3>PlexiBot 2017</h3><figure class="project-figure"><img src="Assets/projects/plexibot-2017.webp" alt="PlexiBot 2017 image from the original portfolio" width="562" height="750" loading="lazy" decoding="async" data-thumbnail="Assets/projects/plexibot-2017-thumb.webp"><figcaption>From the original portfolio</figcaption></figure></div><p>Code for a FIRST Robotics Competition robot.</p><a href="https://github.com/Acelogic/PlexiBot2017">Source <span aria-hidden="true">↗</span></a></article><article class="project-row"><div><h3>ML: Dogs vs. Cats</h3><figure class="project-figure"><img src="Assets/projects/ml-dogs-vs-cats.webp" alt="ML: Dogs vs. Cats image from the project repository" width="1000" height="609" loading="lazy" decoding="async" data-thumbnail="Assets/projects/ml-dogs-vs-cats-thumb.webp"><figcaption>From the project repository</figcaption></figure></div><p>Image classification with TensorFlow, Keras, and OpenCV.</p><a href="https://github.com/Acelogic/ML-DogVsCat-Detector">Source <span aria-hidden="true">↗</span></a></article><article class="project-row"><div><h3>ML: Linear Regression</h3><figure class="project-figure"><img src="Assets/projects/ml-linear-regression.webp" alt="ML: Linear Regression repository preview" width="1000" height="500" loading="lazy" decoding="async" data-thumbnail="Assets/projects/ml-linear-regression-thumb.webp"><figcaption>Repository preview</figcaption></figure></div><p>Multiple linear regression and gradient descent implemented in Python.</p><a href="https://github.com/Acelogic/ML-Multiple-Linear-Regression">Source <span aria-hidden="true">↗</span></a></article><article class="project-row"><div><h3>ML: VAERS Data</h3><figure class="project-figure"><img src="Assets/projects/ml-vaers-data.webp" alt="ML: VAERS Data repository preview" width="1000" height="500" loading="lazy" decoding="async" data-thumbnail="Assets/projects/ml-vaers-data-thumb.webp"><figcaption>Repository preview</figcaption></figure></div><p>An academic project exploring association rules in vaccination data.</p><a href="https://github.com/Acelogic/ML-VAERS-Dataprocessing">Source <span aria-hidden="true">↗</span></a></article><article class="project-row"><div><h3>Dotfiles &amp; Scripts</h3><figure class="project-figure"><img src="Assets/projects/dotfiles-scripts.webp" alt="Dotfiles &amp; Scripts repository preview" width="1000" height="500" loading="lazy" decoding="async" data-thumbnail="Assets/projects/dotfiles-scripts-thumb.webp"><figcaption>Repository preview</figcaption></figure></div><p>A collection of runtime configuration files and personal scripts.</p><a href="https://github.com/Acelogic/DotFiles-And-Scripts">Source <span aria-hidden="true">↗</span></a></article><article class="project-row"><div><h3>This website</h3><figure class="project-figure"><img src="Assets/projects/this-website.webp" alt="This website image from the original portfolio" width="992" height="750" loading="lazy" decoding="async" data-thumbnail="Assets/projects/this-website-thumb.webp"><figcaption>From the original portfolio</figcaption></figure></div><p>My personal portfolio, started in 2018 and still evolving.</p><a href="https://github.com/Acelogic/acelogic.github.io">Source <span aria-hidden="true">↗</span></a></article><p class="project-note">More academic work is collected on the <a href="school.html">coursework page</a>.</p></section>
-  </main>
-  <!-- shared:footer:start -->
-</div>
-    <div class="click-wheel" id="click-wheel" role="group" aria-label="Click wheel. Drag around the ring to move selection; center to open; Menu to go back.">
-      <button class="wheel-menu" data-control="back" type="button" aria-label="Menu: Go back"><span>MENU</span></button>
-      <button class="wheel-previous" data-control="up" type="button" aria-label="Previous item"><span>◀◀</span></button>
-      <button class="wheel-next" data-control="down" type="button" aria-label="Next item"><span>▶▶</span></button>
-      <button class="wheel-play" data-control="accept" type="button" aria-label="Open selected item"><span>▶Ⅱ</span></button>
-      <button class="wheel-center" data-control="accept" type="button" aria-label="Select: Open highlighted item"></button>
+  <div id="master"></div>
+  <!-- NavBar insertation Code-->
+  <div id="navBar"></div>
+
+  <!-- Title Hero-->
+  <section class="hero is-primary has-background-black">
+    <div class="hero-body">
+      <div class="container">
+        <h1 class="title">
+          <span class="Proj-Title">Projects</span> <i class="em em-art"></i>
+        </h1>
+        <h2 class="subtitle">
+          <span class="Proj-Subtitle"> Checkout Some Of The Projects I Put My <i class="em em-heart"></i> Into</span>
+        </h2>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Systems &amp; Hardware -->
+  <div class="container">
+    <h3 class="title is-4 has-text-centered content-wrapper">Systems &amp; Hardware</h3>
+  </div>
+
+  <div class="container">
+    <div class="columns has-same-height is-centered level roundit">
+      <div class="column">
+        <!-- Aurora Silicon -->
+        <div class="card">
+          <header class="card-header">
+            <p class="card-header-title">
+              <span>Aurora Silicon</span>
+              <span class="is-pulled-right">
+                <span class="tag is-dark">C</span>
+              </span>
+            </p>
+          </header>
+          <div class="card-content">
+            <figure class="image progressive roundit">
+              <img class="progressive__img progressive--not-loaded" data-progressive="Assets/projects/aurora-silicon.webp"
+                src="Assets/projects/aurora-silicon-thumb.webp" alt="Aurora Silicon">
+            </figure>
+            <div style="margin-top:1em" class="content">
+              My work with Aurora Silicon explores bringing Windows on ARM to Apple Silicon Macs: understanding the hardware, building the boot path, and developing the platform support and drivers Windows needs. The project is experimental. Its public documentation and firmware repositories provide a starting point for following development.
+            </div>
+            <div class="field is-grouped-multiline">
+              <div class="control">
+                <div class="tags">
+                  <a class="tag is-primary">Current work</a>
+                  <a class="tag is-success">Experimental</a>
+                  <a class="tag is-link">C / ARM64</a>
+                  <a class="tag is-danger">2026</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <footer class="card-footer">
+            <a href="https://github.com/aurora-silicon/aurora-silicon.github.io" class="card-footer-item">
+              <span class="icon">
+                <i class="fab fa-github"> </i>
+              </span>
+              Documentation
+            </a>
+            <a href="https://github.com/aurora-silicon/mu" class="card-footer-item">
+              <span class="icon">
+                <i class="fab fa-github"> </i>
+              </span>
+              Project Mu / UEFI
+            </a>
+            <a href="https://github.com/aurora-silicon/aurora-installer" class="card-footer-item">
+              <span class="icon">
+                <i class="fab fa-github"> </i>
+              </span>
+              Installer
+            </a>
+          </footer>
+        </div>
+      </div>
+
+      <div class="column">
+        <!-- VibeStation5 -->
+        <div class="card">
+          <header class="card-header">
+            <p class="card-header-title">
+              <span>VibeStation5</span>
+              <span class="is-pulled-right">
+                <span class="tag is-warning">Swift</span>
+              </span>
+            </p>
+          </header>
+          <div class="card-content">
+            <figure class="image progressive roundit">
+              <img class="progressive__img progressive--not-loaded" data-progressive="Assets/projects/vibestation5.webp"
+                src="Assets/projects/vibestation5-thumb.webp" alt="VibeStation5">
+            </figure>
+            <div style="margin-top:1em" class="content">
+              An experimental PS4/PS5 runtime derived from SharpEmu, with native macOS, iPadOS, and Android targets. Work spans ARM64 interpretation, guest loading, graphics, audio, and input. Early compatibility research, not a general-purpose playable emulator.
+            </div>
+            <div class="field is-grouped-multiline">
+              <div class="control">
+                <div class="tags">
+                  <a class="tag is-primary">Port</a>
+                  <a class="tag is-success">Emulation</a>
+                  <a class="tag is-link">Kotlin / C++</a>
+                  <a class="tag is-danger">2026</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <footer class="card-footer">
+            <a href="https://github.com/Acelogic/VibeStation5" class="card-footer-item">
+              <span class="icon">
+                <i class="fab fa-github"> </i>
+              </span>
+              Source
+            </a>
+          </footer>
+        </div>
+      </div>
+
+      <div class="column">
+        <!-- q1n1 -->
+        <div class="card">
+          <header class="card-header">
+            <p class="card-header-title">
+              <span>q1n1</span>
+              <span class="is-pulled-right">
+                <span class="tag is-info">C / Python</span>
+              </span>
+            </p>
+          </header>
+          <div class="card-content">
+            <figure class="image progressive roundit">
+              <img class="progressive__img progressive--not-loaded" data-progressive="Assets/projects/q1n1.webp"
+                src="Assets/projects/q1n1-thumb.webp" alt="q1n1">
+            </figure>
+            <div style="margin-top:1em" class="content">
+              A fork of m1n1 retargeted from Apple Silicon to the ASUS Zenbook A16 (Snapdragon X2E). Firmware loads it as a UEFI application, it takes the machine at EL2 after ExitBootServices, and it serves m1n1&#x27;s proxy protocol over its own USB stack so the hardware can be driven interactively from a host. It pairs with Snapintosh, which runs stock, unmodified XNU on top of it.
+            </div>
+            <div class="field is-grouped-multiline">
+              <div class="control">
+                <div class="tags">
+                  <a class="tag is-primary">Firmware</a>
+                  <a class="tag is-success">Current work</a>
+                  <a class="tag is-link">AArch64 EL2</a>
+                  <a class="tag is-danger">2026</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <footer class="card-footer">
+            <a href="https://github.com/Acelogic/q1n1" class="card-footer-item">
+              <span class="icon">
+                <i class="fab fa-github"> </i>
+              </span>
+              Source Code
+            </a>
+            <a href="https://github.com/Acelogic/Snapintosh" class="card-footer-item">
+              <span class="icon">
+                <i class="fab fa-github"> </i>
+              </span>
+              Snapintosh
+            </a>
+          </footer>
+        </div>
+      </div>
     </div>
   </div>
-</div>
-<fieldset class="finish-picker" id="ipod-finish-picker" hidden disabled>
-  <legend>iPod finish</legend>
-  <div class="finish-options">
-    <label class="finish-option" title="Silver"><input type="radio" name="ipod-finish" value="silver" checked><span class="finish-dot" style="--finish-color:#d1d7dd"></span><span class="sr-only">Silver</span></label>
-    <label class="finish-option" title="Black"><input type="radio" name="ipod-finish" value="black"><span class="finish-dot" style="--finish-color:#242930"></span><span class="sr-only">Black</span></label>
-    <label class="finish-option" title="Blue"><input type="radio" name="ipod-finish" value="blue"><span class="finish-dot" style="--finish-color:#387fba"></span><span class="sr-only">Blue</span></label>
-    <label class="finish-option" title="Purple"><input type="radio" name="ipod-finish" value="purple"><span class="finish-dot" style="--finish-color:#9770b7"></span><span class="sr-only">Purple</span></label>
-    <label class="finish-option" title="Green"><input type="radio" name="ipod-finish" value="green"><span class="finish-dot" style="--finish-color:#549578"></span><span class="sr-only">Green</span></label>
-    <label class="finish-option" title="Red"><input type="radio" name="ipod-finish" value="red"><span class="finish-dot" style="--finish-color:#c43d51"></span><span class="sr-only">Red</span></label>
-    <label class="custom-finish">Custom<input type="color" id="ipod-custom-color" value="#387fba" aria-label="Custom iPod finish"></label>
-    <output id="ipod-finish-name" aria-live="polite">Silver</output>
+
+  <div class="container">
+    <div class="columns has-same-height is-centered level roundit">
+      <div class="column">
+        <!-- Omarchy -->
+        <div class="card">
+          <header class="card-header">
+            <p class="card-header-title">
+              <span>Omarchy</span>
+              <span class="is-pulled-right">
+                <span class="tag is-dark">Shell</span>
+              </span>
+            </p>
+          </header>
+          <div class="card-content">
+            <figure class="image progressive roundit">
+              <img class="progressive__img progressive--not-loaded" data-progressive="Assets/projects/omarchy.webp"
+                src="Assets/projects/omarchy-thumb.webp" alt="Omarchy">
+            </figure>
+            <div style="margin-top:1em" class="content">
+              Beautiful, modern and opinionated Linux: an Arch and Hyprland desktop. I am on the Omarchy M team, the group bringing Omarchy to the Mac.
+            </div>
+            <div class="field is-grouped-multiline">
+              <div class="control">
+                <div class="tags">
+                  <a class="tag is-primary">Linux</a>
+                  <a class="tag is-success">Core team</a>
+                  <a class="tag is-link">Hyprland</a>
+                  <a class="tag is-danger">2025</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <footer class="card-footer">
+            <a href="https://omarchy.org/teams/" class="card-footer-item">
+              <span class="icon">
+                <i class="fa fa-eye"> </i>
+              </span>
+              The Team
+            </a>
+            <a href="https://github.com/omacom/omarchy" class="card-footer-item">
+              <span class="icon">
+                <i class="fab fa-github"> </i>
+              </span>
+              Source Code
+            </a>
+          </footer>
+        </div>
+      </div>
+
+      <div class="column"></div>
+
+      <div class="column"></div>
+    </div>
   </div>
-</fieldset>
-<div class="view-controls" aria-label="Device view"><button id="rotate-device" type="button">Rotate iPod</button><button id="reset-device" type="button">Front view</button><span id="model-state" role="status">Interactive portfolio</span></div>
-<p class="outside-help">Circle the wheel to browse. Click the center to open. MENU goes back.<br>Keyboard: ↑ ↓ to browse · Enter to open · Esc to go back</p>
-<p class="outside-links"><a href="mailto:mcruz@mcruz.me">Contact</a><span>·</span><a href="/webinfo.html">About this site</a><span>·</span><a href="/Assets/models/ipod-classic.blend" download>Blender model</a></p>
-<!-- shared:footer:end -->
+
+  <!-- AI &amp; MLX Ports -->
+  <div class="container">
+    <h3 class="title is-4 has-text-centered content-wrapper">AI &amp; MLX Ports</h3>
+  </div>
+
+  <div class="container">
+    <div class="columns has-same-height is-centered level roundit">
+      <div class="column">
+        <!-- LTX-2 MLX -->
+        <div class="card">
+          <header class="card-header">
+            <p class="card-header-title">
+              <span>LTX-2 MLX</span>
+              <span class="is-pulled-right">
+                <span class="tag is-info">Python</span>
+              </span>
+            </p>
+          </header>
+          <div class="card-content">
+            <figure class="image progressive roundit">
+              <img class="progressive__img progressive--not-loaded" data-progressive="Assets/projects/ltx-2-mlx.webp"
+                src="Assets/projects/ltx-2-mlx-thumb.webp" alt="LTX-2 MLX">
+            </figure>
+            <div style="margin-top:1em" class="content">
+              Native MLX implementation of Lightricks’ LTX-2 video models, supporting LTX-2.0 and LTX-2.3 with automatic version detection.
+            </div>
+            <div class="field is-grouped-multiline">
+              <div class="control">
+                <div class="tags">
+                  <a class="tag is-primary">Video generation</a>
+                  <a class="tag is-success">MLX</a>
+                  <a class="tag is-danger">2026</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <footer class="card-footer">
+            <a href="https://github.com/Acelogic/LTX-2-MLX" class="card-footer-item">
+              <span class="icon">
+                <i class="fab fa-github"> </i>
+              </span>
+              Source
+            </a>
+          </footer>
+        </div>
+      </div>
+
+      <div class="column">
+        <!-- RVC MLX -->
+        <div class="card">
+          <header class="card-header">
+            <p class="card-header-title">
+              <span>RVC MLX</span>
+              <span class="is-pulled-right">
+                <span class="tag is-info">Python</span>
+              </span>
+            </p>
+          </header>
+          <div class="card-content">
+            <figure class="image progressive roundit">
+              <img class="progressive__img progressive--not-loaded" data-progressive="Assets/projects/rvc-mlx.webp"
+                src="Assets/projects/rvc-mlx-thumb.webp" alt="RVC MLX">
+            </figure>
+            <div style="margin-top:1em" class="content">
+              An MLX implementation of retrieval-based voice conversion, based on Applio. Ports the inference pipeline and RMVPE pitch detection to Apple Silicon.
+            </div>
+            <div class="field is-grouped-multiline">
+              <div class="control">
+                <div class="tags">
+                  <a class="tag is-primary">Voice conversion</a>
+                  <a class="tag is-success">MLX</a>
+                  <a class="tag is-danger">2024</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <footer class="card-footer">
+            <a href="https://github.com/Acelogic/Retrieval-based-Voice-Conversion-MLX" class="card-footer-item">
+              <span class="icon">
+                <i class="fab fa-github"> </i>
+              </span>
+              Source
+            </a>
+          </footer>
+        </div>
+      </div>
+
+      <div class="column">
+        <!-- PersonaPlex MLX -->
+        <div class="card">
+          <header class="card-header">
+            <p class="card-header-title">
+              <span>PersonaPlex MLX</span>
+              <span class="is-pulled-right">
+                <span class="tag is-info">Python</span>
+              </span>
+            </p>
+          </header>
+          <div class="card-content">
+            <figure class="image progressive roundit">
+              <img class="progressive__img progressive--not-loaded" data-progressive="Assets/projects/personaplex-mlx.webp"
+                src="Assets/projects/personaplex-mlx-thumb.webp" alt="PersonaPlex MLX">
+            </figure>
+            <div style="margin-top:1em" class="content">
+              NVIDIA’s PersonaPlex 7B ported to MLX for full-duplex voice conversation, with voice conditioning, configurable personas, quantization, and a browser interface.
+            </div>
+            <div class="field is-grouped-multiline">
+              <div class="control">
+                <div class="tags">
+                  <a class="tag is-primary">Conversational audio</a>
+                  <a class="tag is-success">MLX</a>
+                  <a class="tag is-danger">2026</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <footer class="card-footer">
+            <a href="https://github.com/Acelogic/personaplex-mlx" class="card-footer-item">
+              <span class="icon">
+                <i class="fab fa-github"> </i>
+              </span>
+              Source
+            </a>
+          </footer>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="columns has-same-height is-centered level roundit">
+      <div class="column">
+        <!-- HeartLib MLX -->
+        <div class="card">
+          <header class="card-header">
+            <p class="card-header-title">
+              <span>HeartLib MLX</span>
+              <span class="is-pulled-right">
+                <span class="tag is-info">Python</span>
+              </span>
+            </p>
+          </header>
+          <div class="card-content">
+            <figure class="image progressive roundit">
+              <img class="progressive__img progressive--not-loaded" data-progressive="Assets/projects/heartlib-mlx.webp"
+                src="Assets/projects/heartlib-mlx-thumb.webp" alt="HeartLib MLX">
+            </figure>
+            <div style="margin-top:1em" class="content">
+              Apple Silicon port of the HeartMuLa music models, with a web interface for generating songs, following progress, and managing a local music library.
+            </div>
+            <div class="field is-grouped-multiline">
+              <div class="control">
+                <div class="tags">
+                  <a class="tag is-primary">Music generation</a>
+                  <a class="tag is-success">MLX</a>
+                  <a class="tag is-danger">2026</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <footer class="card-footer">
+            <a href="https://github.com/Acelogic/heartlib-mlx" class="card-footer-item">
+              <span class="icon">
+                <i class="fab fa-github"> </i>
+              </span>
+              Source
+            </a>
+          </footer>
+        </div>
+      </div>
+
+      <div class="column">
+        <!-- daVinci-MagiHuman MLX -->
+        <div class="card">
+          <header class="card-header">
+            <p class="card-header-title">
+              <span>daVinci-MagiHuman MLX</span>
+              <span class="is-pulled-right">
+                <span class="tag is-info">Python</span>
+              </span>
+            </p>
+          </header>
+          <div class="card-content">
+            <figure class="image progressive roundit">
+              <img class="progressive__img progressive--not-loaded" data-progressive="Assets/projects/davinci-magihuman-mlx.webp"
+                src="Assets/projects/davinci-magihuman-mlx-thumb.webp" alt="daVinci-MagiHuman MLX">
+            </figure>
+            <div style="margin-top:1em" class="content">
+              Porting a 15B video model to MLX with sequential model loading, INT4 quantization, and a custom Metal kernel. The pipeline runs end to end; usable video output is still a work in progress.
+            </div>
+            <div class="field is-grouped-multiline">
+              <div class="control">
+                <div class="tags">
+                  <a class="tag is-primary">Video generation</a>
+                  <a class="tag is-success">Work in progress</a>
+                  <a class="tag is-link">MLX / Metal</a>
+                  <a class="tag is-danger">2026</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <footer class="card-footer">
+            <a href="https://github.com/Acelogic/daVinci-MagiHuman-mlx" class="card-footer-item">
+              <span class="icon">
+                <i class="fab fa-github"> </i>
+              </span>
+              Source
+            </a>
+          </footer>
+        </div>
+      </div>
+
+      <div class="column"></div>
+    </div>
+  </div>
+
+  <!-- Native Apps &amp; Developer Tools -->
+  <div class="container">
+    <h3 class="title is-4 has-text-centered content-wrapper">Native Apps &amp; Developer Tools</h3>
+  </div>
+
+  <div class="container">
+    <div class="columns has-same-height is-centered level roundit">
+      <div class="column">
+        <!-- UxPlay for macOS -->
+        <div class="card">
+          <header class="card-header">
+            <p class="card-header-title">
+              <span>UxPlay for macOS</span>
+              <span class="is-pulled-right">
+                <span class="tag is-dark">C</span>
+              </span>
+            </p>
+          </header>
+          <div class="card-content">
+            <figure class="image progressive roundit">
+              <img class="progressive__img progressive--not-loaded" data-progressive="Assets/projects/uxplay-for-macos.webp"
+                src="Assets/projects/uxplay-for-macos-thumb.webp" alt="UxPlay for macOS">
+            </figure>
+            <div style="margin-top:1em" class="content">
+              Contributed a native macOS AirPlay renderer using VideoToolbox and Metal, followed by improvements to window layout, rotation, cover art, and audio stability.
+            </div>
+            <div class="field is-grouped-multiline">
+              <div class="control">
+                <div class="tags">
+                  <a class="tag is-primary">Upstream contribution</a>
+                  <a class="tag is-success">C / Objective-C</a>
+                  <a class="tag is-danger">2021</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <footer class="card-footer">
+            <a href="https://github.com/FDH2/UxPlay/pull/490" class="card-footer-item">
+              <span class="icon">
+                <i class="fab fa-github"> </i>
+              </span>
+              Renderer PR
+            </a>
+            <a href="https://github.com/FDH2/UxPlay/pull/505" class="card-footer-item">
+              <span class="icon">
+                <i class="fab fa-github"> </i>
+              </span>
+              Follow-up improvements
+            </a>
+          </footer>
+        </div>
+      </div>
+
+      <div class="column">
+        <!-- MacGTop -->
+        <div class="card">
+          <header class="card-header">
+            <p class="card-header-title">
+              <span>MacGTop</span>
+              <span class="is-pulled-right">
+                <span class="tag is-info">Python</span>
+              </span>
+            </p>
+          </header>
+          <div class="card-content">
+            <figure class="image progressive roundit">
+              <img class="progressive__img progressive--not-loaded" data-progressive="Assets/projects/macgtop.webp"
+                src="Assets/projects/macgtop-thumb.webp" alt="MacGTop">
+            </figure>
+            <div style="margin-top:1em" class="content">
+              A terminal GPU monitor for Apple Silicon, exposing utilization and hardware metrics through IOKit and IOReport. An htop-style view into the Mac’s GPU.
+            </div>
+            <div class="field is-grouped-multiline">
+              <div class="control">
+                <div class="tags">
+                  <a class="tag is-primary">Hardware monitoring</a>
+                  <a class="tag is-success">IOKit</a>
+                  <a class="tag is-danger">2026</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <footer class="card-footer">
+            <a href="https://github.com/Acelogic/macgtop" class="card-footer-item">
+              <span class="icon">
+                <i class="fab fa-github"> </i>
+              </span>
+              Source
+            </a>
+          </footer>
+        </div>
+      </div>
+
+      <div class="column">
+        <!-- Ignition -->
+        <div class="card">
+          <header class="card-header">
+            <p class="card-header-title">
+              <span>Ignition</span>
+              <span class="is-pulled-right">
+                <span class="tag is-warning">Swift</span>
+              </span>
+            </p>
+          </header>
+          <div class="card-content">
+            <figure class="image progressive roundit">
+              <img class="progressive__img progressive--not-loaded" data-progressive="Assets/projects/ignition.webp"
+                src="Assets/projects/ignition-thumb.webp" alt="Ignition">
+            </figure>
+            <div style="margin-top:1em" class="content">
+              A SwiftUI manager for macOS launch agents and daemons, with lifecycle controls, live logs, a plist editor, and health monitoring.
+            </div>
+            <div class="field is-grouped-multiline">
+              <div class="control">
+                <div class="tags">
+                  <a class="tag is-primary">Native macOS app</a>
+                  <a class="tag is-success">SwiftUI</a>
+                  <a class="tag is-danger">2026</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <footer class="card-footer">
+            <a href="https://github.com/Acelogic/Ignition" class="card-footer-item">
+              <span class="icon">
+                <i class="fab fa-github"> </i>
+              </span>
+              Source
+            </a>
+          </footer>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="columns has-same-height is-centered level roundit">
+      <div class="column">
+        <!-- Kawaiidra MCP -->
+        <div class="card">
+          <header class="card-header">
+            <p class="card-header-title">
+              <span>Kawaiidra MCP</span>
+              <span class="is-pulled-right">
+                <span class="tag is-info">Python</span>
+              </span>
+            </p>
+          </header>
+          <div class="card-content">
+            <figure class="image progressive roundit">
+              <img class="progressive__img progressive--not-loaded" data-progressive="Assets/projects/kawaiidra-mcp.webp"
+                src="Assets/projects/kawaiidra-mcp-thumb.webp" alt="Kawaiidra MCP">
+            </figure>
+            <div style="margin-top:1em" class="content">
+              Contributions to a Ghidra MCP server: cross-platform Ghidra discovery, iOS research tools, a persistent JPype bridge, and Ghidra 12 compatibility.
+            </div>
+            <div class="field is-grouped-multiline">
+              <div class="control">
+                <div class="tags">
+                  <a class="tag is-primary">Reverse engineering</a>
+                  <a class="tag is-success">Upstream contribution</a>
+                  <a class="tag is-link">Ghidra / JPype</a>
+                  <a class="tag is-danger">2026</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <footer class="card-footer">
+            <a href="https://github.com/wagonbomb/kawaiidra-mcp/pull/5" class="card-footer-item">
+              <span class="icon">
+                <i class="fab fa-github"> </i>
+              </span>
+              Bridge PR
+            </a>
+            <a href="https://github.com/wagonbomb/kawaiidra-mcp/pull/7" class="card-footer-item">
+              <span class="icon">
+                <i class="fab fa-github"> </i>
+              </span>
+              Ghidra 12 fixes
+            </a>
+          </footer>
+        </div>
+      </div>
+
+      <div class="column">
+        <!-- SharpEmu agentic toolkit -->
+        <div class="card">
+          <header class="card-header">
+            <p class="card-header-title">
+              <span>SharpEmu agentic toolkit</span>
+              <span class="is-pulled-right">
+                <span class="tag is-info">Python</span>
+              </span>
+            </p>
+          </header>
+          <div class="card-content">
+            <figure class="image progressive roundit">
+              <img class="progressive__img progressive--not-loaded" data-progressive="Assets/projects/sharpemu-agentic-toolkit.webp"
+                src="Assets/projects/sharpemu-agentic-toolkit-thumb.webp" alt="SharpEmu agentic toolkit">
+            </figure>
+            <div style="margin-top:1em" class="content">
+              Tools for SharpEmu NID research, Ghidra-assisted analysis, and timestamped visual regression evidence.
+            </div>
+            <div class="field is-grouped-multiline">
+              <div class="control">
+                <div class="tags">
+                  <a class="tag is-primary">Emulation</a>
+                  <a class="tag is-success">Research tools</a>
+                  <a class="tag is-link">Reverse engineering</a>
+                  <a class="tag is-danger">2026</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <footer class="card-footer">
+            <a href="https://github.com/Acelogic/sharpemu-agentic-toolkit" class="card-footer-item">
+              <span class="icon">
+                <i class="fab fa-github"> </i>
+              </span>
+              Source
+            </a>
+          </footer>
+        </div>
+      </div>
+
+      <div class="column"></div>
+    </div>
+  </div>
+
+  <!-- Finance &amp; Data -->
+  <div class="container">
+    <h3 class="title is-4 has-text-centered content-wrapper">Finance &amp; Data</h3>
+  </div>
+
+  <div class="container">
+    <div class="columns has-same-height is-centered level roundit">
+      <div class="column">
+        <!-- Testfol Margin Stresser -->
+        <div class="card">
+          <header class="card-header">
+            <p class="card-header-title">
+              <span>Testfol Margin Stresser</span>
+              <span class="is-pulled-right">
+                <span class="tag is-info">Python</span>
+              </span>
+            </p>
+          </header>
+          <div class="card-content">
+            <figure class="image progressive roundit">
+              <img class="progressive__img progressive--not-loaded" data-progressive="Assets/projects/testfol-margin-stresser.webp"
+                src="Assets/projects/testfol-margin-stresser-thumb.webp" alt="Testfol Margin Stresser">
+            </figure>
+            <div style="margin-top:1em" class="content">
+              A research workbench for leveraged backtests, margin stress testing, tax-aware rebalancing, Nasdaq index reconstruction, and long-horizon risk analysis.
+            </div>
+            <div class="field is-grouped-multiline">
+              <div class="control">
+                <div class="tags">
+                  <a class="tag is-primary">Portfolio research</a>
+                  <a class="tag is-success">Streamlit</a>
+                  <a class="tag is-danger">2025</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <footer class="card-footer">
+            <a href="https://github.com/Acelogic/Testfol-MarginStresser" class="card-footer-item">
+              <span class="icon">
+                <i class="fab fa-github"> </i>
+              </span>
+              Source
+            </a>
+            <a href="https://testfol-marginstresser.streamlit.app/" class="card-footer-item">
+              <span class="icon">
+                <i class="fa fa-eye"> </i>
+              </span>
+              Open app
+            </a>
+          </footer>
+        </div>
+      </div>
+
+      <div class="column">
+        <!-- Earnings Volatility Calculator -->
+        <div class="card">
+          <header class="card-header">
+            <p class="card-header-title">
+              <span>Earnings Volatility Calculator</span>
+              <span class="is-pulled-right">
+                <span class="tag is-info">Python</span>
+              </span>
+            </p>
+          </header>
+          <div class="card-content">
+            <figure class="image progressive roundit">
+              <img class="progressive__img progressive--not-loaded" data-progressive="Assets/projects/earnings-volatility-calculator.webp"
+                src="Assets/projects/earnings-volatility-calculator-thumb.webp" alt="Earnings Volatility Calculator">
+            </figure>
+            <div style="margin-top:1em" class="content">
+              Analyzes options around earnings using implied and realized volatility, ATR, and Yang–Zhang estimates, with configurable screening criteria.
+            </div>
+            <div class="field is-grouped-multiline">
+              <div class="control">
+                <div class="tags">
+                  <a class="tag is-primary">Options research</a>
+                  <a class="tag is-success">Options</a>
+                  <a class="tag is-danger">2025</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <footer class="card-footer">
+            <a href="https://github.com/Acelogic/Earnings-Volatility-Calculator" class="card-footer-item">
+              <span class="icon">
+                <i class="fab fa-github"> </i>
+              </span>
+              Source
+            </a>
+          </footer>
+        </div>
+      </div>
+
+      <div class="column">
+        <!-- Market Drawdown Dashboard -->
+        <div class="card">
+          <header class="card-header">
+            <p class="card-header-title">
+              <span>Market Drawdown Dashboard</span>
+              <span class="is-pulled-right">
+                <span class="tag is-warning">HTML</span>
+              </span>
+            </p>
+          </header>
+          <div class="card-content">
+            <figure class="image progressive roundit">
+              <img class="progressive__img progressive--not-loaded" data-progressive="Assets/projects/market-drawdown-dashboard.webp"
+                src="Assets/projects/market-drawdown-dashboard-thumb.webp" alt="Market Drawdown Dashboard">
+            </figure>
+            <div style="margin-top:1em" class="content">
+              Tracks drawdowns from all-time highs for the S&amp;P 500, Nasdaq 100, and Nasdaq Composite, alongside historical intra-year comparisons.
+            </div>
+            <div class="field is-grouped-multiline">
+              <div class="control">
+                <div class="tags">
+                  <a class="tag is-primary">Market data</a>
+                  <a class="tag is-success">HTML / JavaScript</a>
+                  <a class="tag is-danger">2026</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <footer class="card-footer">
+            <a href="https://github.com/Acelogic/market-drawdown-dashboard" class="card-footer-item">
+              <span class="icon">
+                <i class="fab fa-github"> </i>
+              </span>
+              Source
+            </a>
+            <a href="https://mcruz.me/market-drawdown-dashboard/" class="card-footer-item">
+              <span class="icon">
+                <i class="fa fa-eye"> </i>
+              </span>
+              Open dashboard
+            </a>
+          </footer>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="columns has-same-height is-centered level roundit">
+      <div class="column">
+        <!-- Maginator -->
+        <div class="card">
+          <header class="card-header">
+            <p class="card-header-title">
+              <span>Maginator</span>
+              <span class="is-pulled-right">
+                <span class="tag is-info">Python</span>
+              </span>
+            </p>
+          </header>
+          <div class="card-content">
+            <figure class="image progressive roundit">
+              <img class="progressive__img progressive--not-loaded" data-progressive="Assets/projects/maginator.webp"
+                src="Assets/projects/maginator-thumb.webp" alt="Maginator">
+            </figure>
+            <div style="margin-top:1em" class="content">
+              A price projection tool for Roundhill’s MAGS ETF.
+            </div>
+            <div class="field is-grouped-multiline">
+              <div class="control">
+                <div class="tags">
+                  <a class="tag is-primary">Financial modeling</a>
+                  <a class="tag is-success">ETF research</a>
+                  <a class="tag is-danger">2025</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <footer class="card-footer">
+            <a href="https://github.com/Acelogic/Maginator" class="card-footer-item">
+              <span class="icon">
+                <i class="fab fa-github"> </i>
+              </span>
+              Source
+            </a>
+          </footer>
+        </div>
+      </div>
+
+      <div class="column">
+        <!-- Wayback Stock Scraper -->
+        <div class="card">
+          <header class="card-header">
+            <p class="card-header-title">
+              <span>Wayback Stock Scraper</span>
+              <span class="is-pulled-right">
+                <span class="tag is-info">Python</span>
+              </span>
+            </p>
+          </header>
+          <div class="card-content">
+            <figure class="image progressive roundit">
+              <img class="progressive__img progressive--not-loaded" data-progressive="Assets/projects/wayback-stock-scraper.webp"
+                src="Assets/projects/wayback-stock-scraper-thumb.webp" alt="Wayback Stock Scraper">
+            </figure>
+            <div style="margin-top:1em" class="content">
+              Recovers historical prices for delisted tickers from Yahoo Finance CSVs archived by the Internet Archive.
+            </div>
+            <div class="field is-grouped-multiline">
+              <div class="control">
+                <div class="tags">
+                  <a class="tag is-primary">Historical data</a>
+                  <a class="tag is-success">Data recovery</a>
+                  <a class="tag is-danger">2026</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <footer class="card-footer">
+            <a href="https://github.com/Acelogic/WayBackMachineStockScraper" class="card-footer-item">
+              <span class="icon">
+                <i class="fab fa-github"> </i>
+              </span>
+              Source
+            </a>
+          </footer>
+        </div>
+      </div>
+
+      <div class="column"></div>
+    </div>
+  </div>
+
+  <!-- Extensions &amp; Smaller Builds -->
+  <div class="container">
+    <h3 class="title is-4 has-text-centered content-wrapper">Extensions &amp; Smaller Builds</h3>
+  </div>
+
+  <div class="container">
+    <div class="columns has-same-height is-centered level roundit">
+      <div class="column">
+        <!-- Pi + LM Studio -->
+        <div class="card">
+          <header class="card-header">
+            <p class="card-header-title">
+              <span>Pi + LM Studio</span>
+              <span class="is-pulled-right">
+                <span class="tag is-link">TypeScript</span>
+              </span>
+            </p>
+          </header>
+          <div class="card-content">
+            <figure class="image progressive roundit">
+              <img class="progressive__img progressive--not-loaded" data-progressive="Assets/projects/pi-lm-studio.webp"
+                src="Assets/projects/pi-lm-studio-thumb.webp" alt="Pi + LM Studio">
+            </figure>
+            <div style="margin-top:1em" class="content">
+              Model discovery and provider registration for running Pi with local models in LM Studio.
+            </div>
+            <div class="field is-grouped-multiline">
+              <div class="control">
+                <div class="tags">
+                  <a class="tag is-primary">Extension</a>
+                  <a class="tag is-danger">2026</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <footer class="card-footer">
+            <a href="https://github.com/Acelogic/pi-lm-studio" class="card-footer-item">
+              <span class="icon">
+                <i class="fab fa-github"> </i>
+              </span>
+              Source
+            </a>
+          </footer>
+        </div>
+      </div>
+
+      <div class="column">
+        <!-- Pi memories -->
+        <div class="card">
+          <header class="card-header">
+            <p class="card-header-title">
+              <span>Pi memories</span>
+              <span class="is-pulled-right">
+                <span class="tag is-link">TypeScript</span>
+              </span>
+            </p>
+          </header>
+          <div class="card-content">
+            <figure class="image progressive roundit">
+              <img class="progressive__img progressive--not-loaded" data-progressive="Assets/projects/pi-memories.webp"
+                src="Assets/projects/pi-memories-thumb.webp" alt="Pi memories">
+            </figure>
+            <div style="margin-top:1em" class="content">
+              Persistent file-based memory for Pi sessions.
+            </div>
+            <div class="field is-grouped-multiline">
+              <div class="control">
+                <div class="tags">
+                  <a class="tag is-primary">Extension</a>
+                  <a class="tag is-danger">2026</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <footer class="card-footer">
+            <a href="https://github.com/Acelogic/pi-memories" class="card-footer-item">
+              <span class="icon">
+                <i class="fab fa-github"> </i>
+              </span>
+              Source
+            </a>
+          </footer>
+        </div>
+      </div>
+
+      <div class="column">
+        <!-- Pi Claude memories -->
+        <div class="card">
+          <header class="card-header">
+            <p class="card-header-title">
+              <span>Pi Claude memories</span>
+              <span class="is-pulled-right">
+                <span class="tag is-link">TypeScript</span>
+              </span>
+            </p>
+          </header>
+          <div class="card-content">
+            <figure class="image progressive roundit">
+              <img class="progressive__img progressive--not-loaded" data-progressive="Assets/projects/pi-claude-memories.webp"
+                src="Assets/projects/pi-claude-memories-thumb.webp" alt="Pi Claude memories">
+            </figure>
+            <div style="margin-top:1em" class="content">
+              Brings existing Claude Code memory files into Pi sessions on demand.
+            </div>
+            <div class="field is-grouped-multiline">
+              <div class="control">
+                <div class="tags">
+                  <a class="tag is-primary">Extension</a>
+                  <a class="tag is-danger">2026</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <footer class="card-footer">
+            <a href="https://github.com/Acelogic/pi-claude-memories" class="card-footer-item">
+              <span class="icon">
+                <i class="fab fa-github"> </i>
+              </span>
+              Source
+            </a>
+          </footer>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="columns has-same-height is-centered level roundit">
+      <div class="column">
+        <!-- Hermes Claude memories -->
+        <div class="card">
+          <header class="card-header">
+            <p class="card-header-title">
+              <span>Hermes Claude memories</span>
+              <span class="is-pulled-right">
+                <span class="tag is-info">Python</span>
+              </span>
+            </p>
+          </header>
+          <div class="card-content">
+            <figure class="image progressive roundit">
+              <img class="progressive__img progressive--not-loaded" data-progressive="Assets/projects/hermes-claude-memories.webp"
+                src="Assets/projects/hermes-claude-memories-thumb.webp" alt="Hermes Claude memories">
+            </figure>
+            <div style="margin-top:1em" class="content">
+              A read-only Hermes plugin for discovering and loading Claude Code memories.
+            </div>
+            <div class="field is-grouped-multiline">
+              <div class="control">
+                <div class="tags">
+                  <a class="tag is-primary">Extension</a>
+                  <a class="tag is-danger">2026</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <footer class="card-footer">
+            <a href="https://github.com/Acelogic/hermes-claude-memories" class="card-footer-item">
+              <span class="icon">
+                <i class="fab fa-github"> </i>
+              </span>
+              Source
+            </a>
+          </footer>
+        </div>
+      </div>
+
+      <div class="column">
+        <!-- Pi statusline -->
+        <div class="card">
+          <header class="card-header">
+            <p class="card-header-title">
+              <span>Pi statusline</span>
+              <span class="is-pulled-right">
+                <span class="tag is-link">TypeScript</span>
+              </span>
+            </p>
+          </header>
+          <div class="card-content">
+            <figure class="image progressive roundit">
+              <img class="progressive__img progressive--not-loaded" data-progressive="Assets/projects/pi-statusline.webp"
+                src="Assets/projects/pi-statusline-thumb.webp" alt="Pi statusline">
+            </figure>
+            <div style="margin-top:1em" class="content">
+              A compact statusline showing model, working directory, Git state, and context usage.
+            </div>
+            <div class="field is-grouped-multiline">
+              <div class="control">
+                <div class="tags">
+                  <a class="tag is-primary">Extension</a>
+                  <a class="tag is-danger">2026</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <footer class="card-footer">
+            <a href="https://github.com/Acelogic/pi-statusline" class="card-footer-item">
+              <span class="icon">
+                <i class="fab fa-github"> </i>
+              </span>
+              Source
+            </a>
+          </footer>
+        </div>
+      </div>
+
+      <div class="column">
+        <!-- Pi cd -->
+        <div class="card">
+          <header class="card-header">
+            <p class="card-header-title">
+              <span>Pi cd</span>
+              <span class="is-pulled-right">
+                <span class="tag is-link">TypeScript</span>
+              </span>
+            </p>
+          </header>
+          <div class="card-content">
+            <figure class="image progressive roundit">
+              <img class="progressive__img progressive--not-loaded" data-progressive="Assets/projects/pi-cd.webp"
+                src="Assets/projects/pi-cd-thumb.webp" alt="Pi cd">
+            </figure>
+            <div style="margin-top:1em" class="content">
+              Changes a Pi session’s working directory without restarting the conversation.
+            </div>
+            <div class="field is-grouped-multiline">
+              <div class="control">
+                <div class="tags">
+                  <a class="tag is-primary">Extension</a>
+                  <a class="tag is-danger">2026</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <footer class="card-footer">
+            <a href="https://github.com/Acelogic/pi-cd" class="card-footer-item">
+              <span class="icon">
+                <i class="fab fa-github"> </i>
+              </span>
+              Source
+            </a>
+          </footer>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="columns has-same-height is-centered level roundit">
+      <div class="column">
+        <!-- Pi numbered extensions -->
+        <div class="card">
+          <header class="card-header">
+            <p class="card-header-title">
+              <span>Pi numbered extensions</span>
+              <span class="is-pulled-right">
+                <span class="tag is-link">TypeScript</span>
+              </span>
+            </p>
+          </header>
+          <div class="card-content">
+            <figure class="image progressive roundit">
+              <img class="progressive__img progressive--not-loaded" data-progressive="Assets/projects/pi-numbered-extensions.webp"
+                src="Assets/projects/pi-numbered-extensions-thumb.webp" alt="Pi numbered extensions">
+            </figure>
+            <div style="margin-top:1em" class="content">
+              Makes the startup extension list easier to scan.
+            </div>
+            <div class="field is-grouped-multiline">
+              <div class="control">
+                <div class="tags">
+                  <a class="tag is-primary">Extension</a>
+                  <a class="tag is-danger">2026</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <footer class="card-footer">
+            <a href="https://github.com/Acelogic/pi-numbered-extensions" class="card-footer-item">
+              <span class="icon">
+                <i class="fab fa-github"> </i>
+              </span>
+              Source
+            </a>
+          </footer>
+        </div>
+      </div>
+
+      <div class="column">
+        <!-- Pi buddy -->
+        <div class="card">
+          <header class="card-header">
+            <p class="card-header-title">
+              <span>Pi buddy</span>
+              <span class="is-pulled-right">
+                <span class="tag is-link">TypeScript</span>
+              </span>
+            </p>
+          </header>
+          <div class="card-content">
+            <figure class="image progressive roundit">
+              <img class="progressive__img progressive--not-loaded" data-progressive="Assets/projects/pi-buddy.webp"
+                src="Assets/projects/pi-buddy-thumb.webp" alt="Pi buddy">
+            </figure>
+            <div style="margin-top:1em" class="content">
+              A virtual pet for the terminal, with species, stats, and speech bubbles.
+            </div>
+            <div class="field is-grouped-multiline">
+              <div class="control">
+                <div class="tags">
+                  <a class="tag is-primary">Extension</a>
+                  <a class="tag is-danger">2026</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <footer class="card-footer">
+            <a href="https://github.com/Acelogic/pi-buddy" class="card-footer-item">
+              <span class="icon">
+                <i class="fab fa-github"> </i>
+              </span>
+              Source
+            </a>
+          </footer>
+        </div>
+      </div>
+
+      <div class="column">
+        <!-- Agentic Coding Flywheel setup -->
+        <div class="card">
+          <header class="card-header">
+            <p class="card-header-title">
+              <span>Agentic Coding Flywheel setup</span>
+              <span class="is-pulled-right">
+                <span class="tag is-dark">Shell</span>
+              </span>
+            </p>
+          </header>
+          <div class="card-content">
+            <figure class="image progressive roundit">
+              <img class="progressive__img progressive--not-loaded" data-progressive="Assets/projects/agentic-coding-flywheel-setup.webp"
+                src="Assets/projects/agentic-coding-flywheel-setup-thumb.webp" alt="Agentic Coding Flywheel setup">
+            </figure>
+            <div style="margin-top:1em" class="content">
+              A simplified cross-platform installer for the Agentic Coding Flywheel tool collection.
+            </div>
+            <div class="field is-grouped-multiline">
+              <div class="control">
+                <div class="tags">
+                  <a class="tag is-primary">Extension</a>
+                  <a class="tag is-danger">2026</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <footer class="card-footer">
+            <a href="https://github.com/Acelogic/agentic-coding-flywheel-setup-simplified" class="card-footer-item">
+              <span class="icon">
+                <i class="fab fa-github"> </i>
+              </span>
+              Source
+            </a>
+          </footer>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="columns has-same-height is-centered level roundit">
+      <div class="column">
+        <!-- Moltiverse -->
+        <div class="card">
+          <header class="card-header">
+            <p class="card-header-title">
+              <span>Moltiverse</span>
+              <span class="is-pulled-right">
+                <span class="tag is-info">Python</span>
+              </span>
+            </p>
+          </header>
+          <div class="card-content">
+            <figure class="image progressive roundit">
+              <img class="progressive__img progressive--not-loaded" data-progressive="Assets/projects/moltiverse.webp"
+                src="Assets/projects/moltiverse-thumb.webp" alt="Moltiverse">
+            </figure>
+            <div style="margin-top:1em" class="content">
+              A central hub for the Molt Agent ecosystem.
+            </div>
+            <div class="field is-grouped-multiline">
+              <div class="control">
+                <div class="tags">
+                  <a class="tag is-primary">Extension</a>
+                  <a class="tag is-danger">2026</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <footer class="card-footer">
+            <a href="https://github.com/Acelogic/moltiverse" class="card-footer-item">
+              <span class="icon">
+                <i class="fab fa-github"> </i>
+              </span>
+              Source
+            </a>
+          </footer>
+        </div>
+      </div>
+
+      <div class="column">
+        <!-- Reddit YouTube Comments -->
+        <div class="card">
+          <header class="card-header">
+            <p class="card-header-title">
+              <span>Reddit YouTube Comments</span>
+              <span class="is-pulled-right">
+                <span class="tag is-warning">JavaScript</span>
+              </span>
+            </p>
+          </header>
+          <div class="card-content">
+            <figure class="image progressive roundit">
+              <img class="progressive__img progressive--not-loaded" data-progressive="Assets/projects/reddit-youtube-comments.webp"
+                src="Assets/projects/reddit-youtube-comments-thumb.webp" alt="Reddit YouTube Comments">
+            </figure>
+            <div style="margin-top:1em" class="content">
+              A browser extension that brings Reddit discussions onto YouTube video pages.
+            </div>
+            <div class="field is-grouped-multiline">
+              <div class="control">
+                <div class="tags">
+                  <a class="tag is-primary">Extension</a>
+                  <a class="tag is-danger">2026</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <footer class="card-footer">
+            <a href="https://github.com/Acelogic/reddit-youtube-comments" class="card-footer-item">
+              <span class="icon">
+                <i class="fab fa-github"> </i>
+              </span>
+              Source
+            </a>
+          </footer>
+        </div>
+      </div>
+
+      <div class="column">
+        <!-- Spicetify Plays Sort -->
+        <div class="card">
+          <header class="card-header">
+            <p class="card-header-title">
+              <span>Spicetify Plays Sort</span>
+              <span class="is-pulled-right">
+                <span class="tag is-warning">JavaScript</span>
+              </span>
+            </p>
+          </header>
+          <div class="card-content">
+            <figure class="image progressive roundit">
+              <img class="progressive__img progressive--not-loaded" data-progressive="Assets/projects/spicetify-plays-sort.webp"
+                src="Assets/projects/spicetify-plays-sort-thumb.webp" alt="Spicetify Plays Sort">
+            </figure>
+            <div style="margin-top:1em" class="content">
+              Sorts Spotify album tracks by play count.
+            </div>
+            <div class="field is-grouped-multiline">
+              <div class="control">
+                <div class="tags">
+                  <a class="tag is-primary">Extension</a>
+                  <a class="tag is-danger">2026</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <footer class="card-footer">
+            <a href="https://github.com/Acelogic/spicetify-plays-sort" class="card-footer-item">
+              <span class="icon">
+                <i class="fab fa-github"> </i>
+              </span>
+              Source
+            </a>
+          </footer>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="columns has-same-height is-centered level roundit">
+      <div class="column">
+        <!-- VoiceChatFinder -->
+        <div class="card">
+          <header class="card-header">
+            <p class="card-header-title">
+              <span>VoiceChatFinder</span>
+              <span class="is-pulled-right">
+                <span class="tag is-warning">JavaScript</span>
+              </span>
+            </p>
+          </header>
+          <div class="card-content">
+            <figure class="image progressive roundit">
+              <img class="progressive__img progressive--not-loaded" data-progressive="Assets/projects/voicechatfinder.webp"
+                src="Assets/projects/voicechatfinder-thumb.webp" alt="VoiceChatFinder">
+            </figure>
+            <div style="margin-top:1em" class="content">
+              A BetterDiscord plugin for finding servers with active voice chats.
+            </div>
+            <div class="field is-grouped-multiline">
+              <div class="control">
+                <div class="tags">
+                  <a class="tag is-primary">Extension</a>
+                  <a class="tag is-danger">2026</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <footer class="card-footer">
+            <a href="https://github.com/Acelogic/VoiceChatFinder" class="card-footer-item">
+              <span class="icon">
+                <i class="fab fa-github"> </i>
+              </span>
+              Source
+            </a>
+          </footer>
+        </div>
+      </div>
+
+      <div class="column">
+        <!-- Reddit-chan -->
+        <div class="card">
+          <header class="card-header">
+            <p class="card-header-title">
+              <span>Reddit-chan</span>
+              <span class="is-pulled-right">
+                <span class="tag is-warning">JavaScript</span>
+              </span>
+            </p>
+          </header>
+          <div class="card-content">
+            <figure class="image progressive roundit">
+              <img class="progressive__img progressive--not-loaded" data-progressive="Assets/projects/reddit-chan.webp"
+                src="Assets/projects/reddit-chan-thumb.webp" alt="Reddit-chan">
+            </figure>
+            <div style="margin-top:1em" class="content">
+              A userscript that gives 4chan an old Reddit-style interface.
+            </div>
+            <div class="field is-grouped-multiline">
+              <div class="control">
+                <div class="tags">
+                  <a class="tag is-primary">Extension</a>
+                  <a class="tag is-danger">2026</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <footer class="card-footer">
+            <a href="https://github.com/Acelogic/reddit-chan" class="card-footer-item">
+              <span class="icon">
+                <i class="fab fa-github"> </i>
+              </span>
+              Source
+            </a>
+          </footer>
+        </div>
+      </div>
+
+      <div class="column">
+        <!-- Credit Rebels Archive -->
+        <div class="card">
+          <header class="card-header">
+            <p class="card-header-title">
+              <span>Credit Rebels Archive</span>
+              <span class="is-pulled-right">
+                <span class="tag is-warning">HTML</span>
+              </span>
+            </p>
+          </header>
+          <div class="card-content">
+            <figure class="image progressive roundit">
+              <img class="progressive__img progressive--not-loaded" data-progressive="Assets/projects/credit-rebels-archive.webp"
+                src="Assets/projects/credit-rebels-archive-thumb.webp" alt="Credit Rebels Archive">
+            </figure>
+            <div style="margin-top:1em" class="content">
+              Preserves the Credit Rebels educational content on FICO scoring.
+            </div>
+            <div class="field is-grouped-multiline">
+              <div class="control">
+                <div class="tags">
+                  <a class="tag is-primary">Extension</a>
+                  <a class="tag is-danger">2026</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <footer class="card-footer">
+            <a href="https://github.com/Acelogic/CreditRebelsArchive" class="card-footer-item">
+              <span class="icon">
+                <i class="fab fa-github"> </i>
+              </span>
+              Source
+            </a>
+          </footer>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="columns has-same-height is-centered level roundit">
+      <div class="column">
+        <!-- Acelogic Cyber Consulting -->
+        <div class="card">
+          <header class="card-header">
+            <p class="card-header-title">
+              <span>Acelogic Cyber Consulting</span>
+              <span class="is-pulled-right">
+                <span class="tag is-warning">HTML</span>
+              </span>
+            </p>
+          </header>
+          <div class="card-content">
+            <figure class="image progressive roundit">
+              <img class="progressive__img progressive--not-loaded" data-progressive="Assets/projects/acelogic-cyber-consulting.webp"
+                src="Assets/projects/acelogic-cyber-consulting-thumb.webp" alt="Acelogic Cyber Consulting">
+            </figure>
+            <div style="margin-top:1em" class="content">
+              The website for my cybersecurity consulting work.
+            </div>
+            <div class="field is-grouped-multiline">
+              <div class="control">
+                <div class="tags">
+                  <a class="tag is-primary">Extension</a>
+                  <a class="tag is-danger">2026</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <footer class="card-footer">
+            <a href="https://github.com/Acelogic/acecyberconsult.com" class="card-footer-item">
+              <span class="icon">
+                <i class="fab fa-github"> </i>
+              </span>
+              Source
+            </a>
+          </footer>
+        </div>
+      </div>
+
+      <div class="column"></div>
+
+      <div class="column"></div>
+    </div>
+  </div>
+
+  <!-- Upstream Contributions -->
+  <div class="container">
+    <h3 class="title is-4 has-text-centered content-wrapper">Upstream Contributions</h3>
+  </div>
+
+  <div class="container">
+    <div class="columns has-same-height is-centered level roundit">
+      <div class="column">
+        <!-- SharpEmu -->
+        <div class="card">
+          <header class="card-header">
+            <p class="card-header-title">
+              <span>SharpEmu</span>
+              <span class="is-pulled-right">
+                <span class="tag is-info">C#</span>
+              </span>
+            </p>
+          </header>
+          <div class="card-content">
+            <figure class="image progressive roundit">
+              <img class="progressive__img progressive--not-loaded" data-progressive="Assets/projects/sharpemu.webp"
+                src="Assets/projects/sharpemu-thumb.webp" alt="SharpEmu">
+            </figure>
+            <div style="margin-top:1em" class="content">
+              Extended PS5 runtime and rendering compatibility in the AGC/Vulkan stack.
+            </div>
+            <div class="field is-grouped-multiline">
+              <div class="control">
+                <div class="tags">
+                  <a class="tag is-primary">Upstream contribution</a>
+                  <a class="tag is-danger">2026</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <footer class="card-footer">
+            <a href="https://github.com/sharpemu/sharpemu/pull/216" class="card-footer-item">
+              <span class="icon">
+                <i class="fab fa-github"> </i>
+              </span>
+              View PR
+            </a>
+          </footer>
+        </div>
+      </div>
+
+      <div class="column">
+        <!-- Ruff -->
+        <div class="card">
+          <header class="card-header">
+            <p class="card-header-title">
+              <span>Ruff</span>
+              <span class="is-pulled-right">
+                <span class="tag is-dark">Rust</span>
+              </span>
+            </p>
+          </header>
+          <div class="card-content">
+            <figure class="image progressive roundit">
+              <img class="progressive__img progressive--not-loaded" data-progressive="Assets/projects/ruff.webp"
+                src="Assets/projects/ruff-thumb.webp" alt="Ruff">
+            </figure>
+            <div style="margin-top:1em" class="content">
+              Added naming convention checks for bindings in Python match patterns.
+            </div>
+            <div class="field is-grouped-multiline">
+              <div class="control">
+                <div class="tags">
+                  <a class="tag is-primary">Upstream contribution</a>
+                  <a class="tag is-danger">2022</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <footer class="card-footer">
+            <a href="https://github.com/astral-sh/ruff/pull/23899" class="card-footer-item">
+              <span class="icon">
+                <i class="fab fa-github"> </i>
+              </span>
+              View PR
+            </a>
+          </footer>
+        </div>
+      </div>
+
+      <div class="column">
+        <!-- Exo -->
+        <div class="card">
+          <header class="card-header">
+            <p class="card-header-title">
+              <span>Exo</span>
+              <span class="is-pulled-right">
+                <span class="tag is-info">Python</span>
+              </span>
+            </p>
+          </header>
+          <div class="card-content">
+            <figure class="image progressive roundit">
+              <img class="progressive__img progressive--not-loaded" data-progressive="Assets/projects/exo.webp"
+                src="Assets/projects/exo-thumb.webp" alt="Exo">
+            </figure>
+            <div style="margin-top:1em" class="content">
+              Fixed partial model download progress on initial dashboard load.
+            </div>
+            <div class="field is-grouped-multiline">
+              <div class="control">
+                <div class="tags">
+                  <a class="tag is-primary">Upstream contribution</a>
+                  <a class="tag is-danger">2024</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <footer class="card-footer">
+            <a href="https://github.com/exo-explore/exo/pull/1706" class="card-footer-item">
+              <span class="icon">
+                <i class="fab fa-github"> </i>
+              </span>
+              View PR
+            </a>
+          </footer>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="columns has-same-height is-centered level roundit">
+      <div class="column">
+        <!-- Miden VM -->
+        <div class="card">
+          <header class="card-header">
+            <p class="card-header-title">
+              <span>Miden VM</span>
+              <span class="is-pulled-right">
+                <span class="tag is-dark">Rust</span>
+              </span>
+            </p>
+          </header>
+          <div class="card-content">
+            <figure class="image progressive roundit">
+              <img class="progressive__img progressive--not-loaded" data-progressive="Assets/projects/miden-vm.webp"
+                src="Assets/projects/miden-vm-thumb.webp" alt="Miden VM">
+            </figure>
+            <div style="margin-top:1em" class="content">
+              Fixed overflowing local counts in word-alignment handling.
+            </div>
+            <div class="field is-grouped-multiline">
+              <div class="control">
+                <div class="tags">
+                  <a class="tag is-primary">Upstream contribution</a>
+                  <a class="tag is-danger">2021</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <footer class="card-footer">
+            <a href="https://github.com/0xMiden/miden-vm/pull/2838" class="card-footer-item">
+              <span class="icon">
+                <i class="fab fa-github"> </i>
+              </span>
+              View PR
+            </a>
+          </footer>
+        </div>
+      </div>
+
+      <div class="column">
+        <!-- Homebrew / ipatool -->
+        <div class="card">
+          <header class="card-header">
+            <p class="card-header-title">
+              <span>Homebrew / ipatool</span>
+              <span class="is-pulled-right">
+                <span class="tag is-danger">Ruby</span>
+              </span>
+            </p>
+          </header>
+          <div class="card-content">
+            <figure class="image progressive roundit">
+              <img class="progressive__img progressive--not-loaded" data-progressive="Assets/projects/homebrew-ipatool.webp"
+                src="Assets/projects/homebrew-ipatool-thumb.webp" alt="Homebrew / ipatool">
+            </figure>
+            <div style="margin-top:1em" class="content">
+              Corrected the macOS dependency syntax in the ipatool formula.
+            </div>
+            <div class="field is-grouped-multiline">
+              <div class="control">
+                <div class="tags">
+                  <a class="tag is-primary">Upstream contribution</a>
+                  <a class="tag is-danger">2021</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <footer class="card-footer">
+            <a href="https://github.com/majd/homebrew-repo/pull/5" class="card-footer-item">
+              <span class="icon">
+                <i class="fab fa-github"> </i>
+              </span>
+              View PR
+            </a>
+          </footer>
+        </div>
+      </div>
+
+      <div class="column">
+        <!-- whisper.cpp -->
+        <div class="card">
+          <header class="card-header">
+            <p class="card-header-title">
+              <span>whisper.cpp</span>
+              <span class="is-pulled-right">
+                <span class="tag is-dark">C++</span>
+              </span>
+            </p>
+          </header>
+          <div class="card-content">
+            <figure class="image progressive roundit">
+              <img class="progressive__img progressive--not-loaded" data-progressive="Assets/projects/whisper-cpp.webp"
+                src="Assets/projects/whisper-cpp-thumb.webp" alt="whisper.cpp">
+            </figure>
+            <div style="margin-top:1em" class="content">
+              Proposed enabling encoder flash attention when DTW is enabled.
+            </div>
+            <div class="field is-grouped-multiline">
+              <div class="control">
+                <div class="tags">
+                  <a class="tag is-primary">Upstream contribution</a>
+                  <a class="tag is-danger">2022</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <footer class="card-footer">
+            <a href="https://github.com/ggml-org/whisper.cpp/pull/3704" class="card-footer-item">
+              <span class="icon">
+                <i class="fab fa-github"> </i>
+              </span>
+              View PR
+            </a>
+          </footer>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="columns has-same-height is-centered level roundit">
+      <div class="column">
+        <!-- Notchi -->
+        <div class="card">
+          <header class="card-header">
+            <p class="card-header-title">
+              <span>Notchi</span>
+              <span class="is-pulled-right">
+                <span class="tag is-warning">Swift</span>
+              </span>
+            </p>
+          </header>
+          <div class="card-content">
+            <figure class="image progressive roundit">
+              <img class="progressive__img progressive--not-loaded" data-progressive="Assets/projects/notchi.webp"
+                src="Assets/projects/notchi-thumb.webp" alt="Notchi">
+            </figure>
+            <div style="margin-top:1em" class="content">
+              Proposed Codex integration and custom sprite support.
+            </div>
+            <div class="field is-grouped-multiline">
+              <div class="control">
+                <div class="tags">
+                  <a class="tag is-primary">Upstream contribution</a>
+                  <a class="tag is-danger">2026</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <footer class="card-footer">
+            <a href="https://github.com/sk-ruban/notchi/pull/40" class="card-footer-item">
+              <span class="icon">
+                <i class="fab fa-github"> </i>
+              </span>
+              View PR
+            </a>
+          </footer>
+        </div>
+      </div>
+
+      <div class="column">
+        <!-- Homebrew / PureMac -->
+        <div class="card">
+          <header class="card-header">
+            <p class="card-header-title">
+              <span>Homebrew / PureMac</span>
+              <span class="is-pulled-right">
+                <span class="tag is-danger">Ruby</span>
+              </span>
+            </p>
+          </header>
+          <div class="card-content">
+            <figure class="image progressive roundit">
+              <img class="progressive__img progressive--not-loaded" data-progressive="Assets/projects/homebrew-puremac.webp"
+                src="Assets/projects/homebrew-puremac-thumb.webp" alt="Homebrew / PureMac">
+            </figure>
+            <div style="margin-top:1em" class="content">
+              Proposed a correction to the macOS dependency syntax.
+            </div>
+            <div class="field is-grouped-multiline">
+              <div class="control">
+                <div class="tags">
+                  <a class="tag is-primary">Upstream contribution</a>
+                  <a class="tag is-danger">2026</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <footer class="card-footer">
+            <a href="https://github.com/momenbasel/homebrew-tap/pull/1" class="card-footer-item">
+              <span class="icon">
+                <i class="fab fa-github"> </i>
+              </span>
+              View PR
+            </a>
+          </footer>
+        </div>
+      </div>
+
+      <div class="column"></div>
+    </div>
+  </div>
+
+  <!-- From The Archive -->
+  <div class="container">
+    <h3 class="title is-4 has-text-centered content-wrapper">From The Archive</h3>
+  </div>
+
+  <div class="container">
+    <div class="columns has-same-height is-centered level roundit">
+      <div class="column">
+        <!-- Nix-Opus -->
+        <div class="card">
+          <header class="card-header">
+            <p class="card-header-title">
+              <span>Nix-Opus</span>
+              <span class="is-pulled-right">
+                <span class="tag is-info">C / ASM</span>
+              </span>
+            </p>
+          </header>
+          <div class="card-content">
+            <figure class="image progressive roundit">
+              <img class="progressive__img progressive--not-loaded" data-progressive="Assets/projects/nix-opus.webp"
+                src="Assets/projects/nix-opus-thumb.webp" alt="Nix-Opus">
+            </figure>
+            <div style="margin-top:1em" class="content">
+              An experimental homebrew operating system for learning about x86 and x86-64.
+            </div>
+            <div class="field is-grouped-multiline">
+              <div class="control">
+                <div class="tags">
+                  <a class="tag is-primary">Archive</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <footer class="card-footer">
+            <a href="https://github.com/nix-opus" class="card-footer-item">
+              <span class="icon">
+                <i class="fab fa-github"> </i>
+              </span>
+              Source
+            </a>
+          </footer>
+        </div>
+      </div>
+
+      <div class="column">
+        <!-- CHIP-8 C -->
+        <div class="card">
+          <header class="card-header">
+            <p class="card-header-title">
+              <span>CHIP-8 C</span>
+              <span class="is-pulled-right">
+                <span class="tag is-dark">C</span>
+              </span>
+            </p>
+          </header>
+          <div class="card-content">
+            <figure class="image progressive roundit">
+              <img class="progressive__img progressive--not-loaded" data-progressive="Assets/projects/chip-8-c.webp"
+                src="Assets/projects/chip-8-c-thumb.webp" alt="CHIP-8 C">
+            </figure>
+            <div style="margin-top:1em" class="content">
+              A CHIP-8 interpreter built to explore emulator fundamentals.
+            </div>
+            <div class="field is-grouped-multiline">
+              <div class="control">
+                <div class="tags">
+                  <a class="tag is-primary">Archive</a>
+                  <a class="tag is-danger">2019</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <footer class="card-footer">
+            <a href="https://github.com/Acelogic/CHIP-8-C" class="card-footer-item">
+              <span class="icon">
+                <i class="fab fa-github"> </i>
+              </span>
+              Source
+            </a>
+          </footer>
+        </div>
+      </div>
+
+      <div class="column">
+        <!-- Tiny Shell -->
+        <div class="card">
+          <header class="card-header">
+            <p class="card-header-title">
+              <span>Tiny Shell</span>
+              <span class="is-pulled-right">
+                <span class="tag is-dark">C</span>
+              </span>
+            </p>
+          </header>
+          <div class="card-content">
+            <figure class="image progressive roundit">
+              <img class="progressive__img progressive--not-loaded" data-progressive="Assets/projects/tiny-shell.webp"
+                src="Assets/projects/tiny-shell-thumb.webp" alt="Tiny Shell">
+            </figure>
+            <div style="margin-top:1em" class="content">
+              A Unix shell in C, with process control, signals, and job control.
+            </div>
+            <div class="field is-grouped-multiline">
+              <div class="control">
+                <div class="tags">
+                  <a class="tag is-primary">Archive</a>
+                  <a class="tag is-danger">2022</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <footer class="card-footer">
+            <a href="https://github.com/Acelogic/TSHImplementation" class="card-footer-item">
+              <span class="icon">
+                <i class="fab fa-github"> </i>
+              </span>
+              Source
+            </a>
+          </footer>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="columns has-same-height is-centered level roundit">
+      <div class="column">
+        <!-- Image Segmentation -->
+        <div class="card">
+          <header class="card-header">
+            <p class="card-header-title">
+              <span>Image Segmentation</span>
+              <span class="is-pulled-right">
+                <span class="tag is-danger">Java</span>
+              </span>
+            </p>
+          </header>
+          <div class="card-content">
+            <figure class="image progressive roundit">
+              <img class="progressive__img progressive--not-loaded" data-progressive="Assets/projects/image-segmentation.webp"
+                src="Assets/projects/image-segmentation-thumb.webp" alt="Image Segmentation">
+            </figure>
+            <div style="margin-top:1em" class="content">
+              A graph-based implementation of Felzenszwalb’s image segmentation algorithm.
+            </div>
+            <div class="field is-grouped-multiline">
+              <div class="control">
+                <div class="tags">
+                  <a class="tag is-primary">Archive</a>
+                  <a class="tag is-danger">2022</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <footer class="card-footer">
+            <a href="https://github.com/Acelogic/ImageSegmentation" class="card-footer-item">
+              <span class="icon">
+                <i class="fab fa-github"> </i>
+              </span>
+              Source
+            </a>
+          </footer>
+        </div>
+      </div>
+
+      <div class="column">
+        <!-- FP Growth -->
+        <div class="card">
+          <header class="card-header">
+            <p class="card-header-title">
+              <span>FP Growth</span>
+              <span class="is-pulled-right">
+                <span class="tag is-danger">Java</span>
+              </span>
+            </p>
+          </header>
+          <div class="card-content">
+            <figure class="image progressive roundit">
+              <img class="progressive__img progressive--not-loaded" data-progressive="Assets/projects/fp-growth.webp"
+                src="Assets/projects/fp-growth-thumb.webp" alt="FP Growth">
+            </figure>
+            <div style="margin-top:1em" class="content">
+              Frequent-pattern mining and association rules for market basket analysis.
+            </div>
+            <div class="field is-grouped-multiline">
+              <div class="control">
+                <div class="tags">
+                  <a class="tag is-primary">Archive</a>
+                  <a class="tag is-danger">2022</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <footer class="card-footer">
+            <a href="https://github.com/Acelogic/FPGrowth" class="card-footer-item">
+              <span class="icon">
+                <i class="fab fa-github"> </i>
+              </span>
+              Source
+            </a>
+          </footer>
+        </div>
+      </div>
+
+      <div class="column">
+        <!-- Sorting Algorithms -->
+        <div class="card">
+          <header class="card-header">
+            <p class="card-header-title">
+              <span>Sorting Algorithms</span>
+              <span class="is-pulled-right">
+                <span class="tag is-danger">Java</span>
+              </span>
+            </p>
+          </header>
+          <div class="card-content">
+            <figure class="image progressive roundit">
+              <img class="progressive__img progressive--not-loaded" data-progressive="Assets/projects/sorting-algorithms.webp"
+                src="Assets/projects/sorting-algorithms-thumb.webp" alt="Sorting Algorithms">
+            </figure>
+            <div style="margin-top:1em" class="content">
+              Java implementations of quicksort, radix sort, and heapsort.
+            </div>
+            <div class="field is-grouped-multiline">
+              <div class="control">
+                <div class="tags">
+                  <a class="tag is-primary">Archive</a>
+                  <a class="tag is-danger">2022</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <footer class="card-footer">
+            <a href="https://github.com/Acelogic/SortingAlgos" class="card-footer-item">
+              <span class="icon">
+                <i class="fab fa-github"> </i>
+              </span>
+              Source
+            </a>
+          </footer>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="columns has-same-height is-centered level roundit">
+      <div class="column">
+        <!-- CoinMarketCap Go API -->
+        <div class="card">
+          <header class="card-header">
+            <p class="card-header-title">
+              <span>CoinMarketCap Go API</span>
+              <span class="is-pulled-right">
+                <span class="tag is-link">Go</span>
+              </span>
+            </p>
+          </header>
+          <div class="card-content">
+            <figure class="image progressive roundit">
+              <img class="progressive__img progressive--not-loaded" data-progressive="Assets/projects/coinmarketcap-go-api.webp"
+                src="Assets/projects/coinmarketcap-go-api-thumb.webp" alt="CoinMarketCap Go API">
+            </figure>
+            <div style="margin-top:1em" class="content">
+              A REST API for CoinMarketCap’s top 100 coins.
+            </div>
+            <div class="field is-grouped-multiline">
+              <div class="control">
+                <div class="tags">
+                  <a class="tag is-primary">Archive</a>
+                  <a class="tag is-danger">2021</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <footer class="card-footer">
+            <a href="https://github.com/Acelogic/coinmarketcap-go-api" class="card-footer-item">
+              <span class="icon">
+                <i class="fab fa-github"> </i>
+              </span>
+              Source
+            </a>
+          </footer>
+        </div>
+      </div>
+
+      <div class="column">
+        <!-- CoinMarketCap Go Server -->
+        <div class="card">
+          <header class="card-header">
+            <p class="card-header-title">
+              <span>CoinMarketCap Go Server</span>
+              <span class="is-pulled-right">
+                <span class="tag is-link">Go</span>
+              </span>
+            </p>
+          </header>
+          <div class="card-content">
+            <figure class="image progressive roundit">
+              <img class="progressive__img progressive--not-loaded" data-progressive="Assets/projects/coinmarketcap-go-server.webp"
+                src="Assets/projects/coinmarketcap-go-server-thumb.webp" alt="CoinMarketCap Go Server">
+            </figure>
+            <div style="margin-top:1em" class="content">
+              Collects coin data with DynamoDB storage, polling, and logging.
+            </div>
+            <div class="field is-grouped-multiline">
+              <div class="control">
+                <div class="tags">
+                  <a class="tag is-primary">Archive</a>
+                  <a class="tag is-danger">2021</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <footer class="card-footer">
+            <a href="https://github.com/Acelogic/coinmarketcap-go-server" class="card-footer-item">
+              <span class="icon">
+                <i class="fab fa-github"> </i>
+              </span>
+              Source
+            </a>
+          </footer>
+        </div>
+      </div>
+
+      <div class="column">
+        <!-- PlexiBot 2017 -->
+        <div class="card">
+          <header class="card-header">
+            <p class="card-header-title">
+              <span>PlexiBot 2017</span>
+              <span class="is-pulled-right">
+                <span class="tag is-danger">Java</span>
+              </span>
+            </p>
+          </header>
+          <div class="card-content">
+            <figure class="image progressive roundit">
+              <img class="progressive__img progressive--not-loaded" data-progressive="Assets/projects/plexibot-2017.webp"
+                src="Assets/projects/plexibot-2017-thumb.webp" alt="PlexiBot 2017">
+            </figure>
+            <div style="margin-top:1em" class="content">
+              Code for a FIRST Robotics Competition robot.
+            </div>
+            <div class="field is-grouped-multiline">
+              <div class="control">
+                <div class="tags">
+                  <a class="tag is-primary">Archive</a>
+                  <a class="tag is-danger">2018</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <footer class="card-footer">
+            <a href="https://github.com/Acelogic/PlexiBot2017" class="card-footer-item">
+              <span class="icon">
+                <i class="fab fa-github"> </i>
+              </span>
+              Source
+            </a>
+          </footer>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="columns has-same-height is-centered level roundit">
+      <div class="column">
+        <!-- ML: Dogs vs. Cats -->
+        <div class="card">
+          <header class="card-header">
+            <p class="card-header-title">
+              <span>ML: Dogs vs. Cats</span>
+              <span class="is-pulled-right">
+                <span class="tag is-warning">Jupyter Notebook</span>
+              </span>
+            </p>
+          </header>
+          <div class="card-content">
+            <figure class="image progressive roundit">
+              <img class="progressive__img progressive--not-loaded" data-progressive="Assets/projects/ml-dogs-vs-cats.webp"
+                src="Assets/projects/ml-dogs-vs-cats-thumb.webp" alt="ML: Dogs vs. Cats">
+            </figure>
+            <div style="margin-top:1em" class="content">
+              Image classification with TensorFlow, Keras, and OpenCV.
+            </div>
+            <div class="field is-grouped-multiline">
+              <div class="control">
+                <div class="tags">
+                  <a class="tag is-primary">Archive</a>
+                  <a class="tag is-danger">2022</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <footer class="card-footer">
+            <a href="https://github.com/Acelogic/ML-DogVsCat-Detector" class="card-footer-item">
+              <span class="icon">
+                <i class="fab fa-github"> </i>
+              </span>
+              Source
+            </a>
+          </footer>
+        </div>
+      </div>
+
+      <div class="column">
+        <!-- ML: Linear Regression -->
+        <div class="card">
+          <header class="card-header">
+            <p class="card-header-title">
+              <span>ML: Linear Regression</span>
+              <span class="is-pulled-right">
+                <span class="tag is-warning">Jupyter Notebook</span>
+              </span>
+            </p>
+          </header>
+          <div class="card-content">
+            <figure class="image progressive roundit">
+              <img class="progressive__img progressive--not-loaded" data-progressive="Assets/projects/ml-linear-regression.webp"
+                src="Assets/projects/ml-linear-regression-thumb.webp" alt="ML: Linear Regression">
+            </figure>
+            <div style="margin-top:1em" class="content">
+              Multiple linear regression and gradient descent implemented in Python.
+            </div>
+            <div class="field is-grouped-multiline">
+              <div class="control">
+                <div class="tags">
+                  <a class="tag is-primary">Archive</a>
+                  <a class="tag is-danger">2022</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <footer class="card-footer">
+            <a href="https://github.com/Acelogic/ML-Multiple-Linear-Regression" class="card-footer-item">
+              <span class="icon">
+                <i class="fab fa-github"> </i>
+              </span>
+              Source
+            </a>
+          </footer>
+        </div>
+      </div>
+
+      <div class="column">
+        <!-- ML: VAERS Data -->
+        <div class="card">
+          <header class="card-header">
+            <p class="card-header-title">
+              <span>ML: VAERS Data</span>
+              <span class="is-pulled-right">
+                <span class="tag is-warning">Jupyter Notebook</span>
+              </span>
+            </p>
+          </header>
+          <div class="card-content">
+            <figure class="image progressive roundit">
+              <img class="progressive__img progressive--not-loaded" data-progressive="Assets/projects/ml-vaers-data.webp"
+                src="Assets/projects/ml-vaers-data-thumb.webp" alt="ML: VAERS Data">
+            </figure>
+            <div style="margin-top:1em" class="content">
+              An academic project exploring association rules in vaccination data.
+            </div>
+            <div class="field is-grouped-multiline">
+              <div class="control">
+                <div class="tags">
+                  <a class="tag is-primary">Archive</a>
+                  <a class="tag is-danger">2022</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <footer class="card-footer">
+            <a href="https://github.com/Acelogic/ML-VAERS-Dataprocessing" class="card-footer-item">
+              <span class="icon">
+                <i class="fab fa-github"> </i>
+              </span>
+              Source
+            </a>
+          </footer>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="columns has-same-height is-centered level roundit">
+      <div class="column">
+        <!-- Dotfiles &amp; Scripts -->
+        <div class="card">
+          <header class="card-header">
+            <p class="card-header-title">
+              <span>Dotfiles &amp; Scripts</span>
+              <span class="is-pulled-right">
+                <span class="tag is-dark">Shell</span>
+              </span>
+            </p>
+          </header>
+          <div class="card-content">
+            <figure class="image progressive roundit">
+              <img class="progressive__img progressive--not-loaded" data-progressive="Assets/projects/dotfiles-scripts.webp"
+                src="Assets/projects/dotfiles-scripts-thumb.webp" alt="Dotfiles &amp; Scripts">
+            </figure>
+            <div style="margin-top:1em" class="content">
+              A collection of runtime configuration files and personal scripts.
+            </div>
+            <div class="field is-grouped-multiline">
+              <div class="control">
+                <div class="tags">
+                  <a class="tag is-primary">Archive</a>
+                  <a class="tag is-danger">2019</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <footer class="card-footer">
+            <a href="https://github.com/Acelogic/DotFiles-And-Scripts" class="card-footer-item">
+              <span class="icon">
+                <i class="fab fa-github"> </i>
+              </span>
+              Source
+            </a>
+          </footer>
+        </div>
+      </div>
+
+      <div class="column">
+        <!-- This website -->
+        <div class="card">
+          <header class="card-header">
+            <p class="card-header-title">
+              <span>This website</span>
+              <span class="is-pulled-right">
+                <span class="tag is-warning">HTML</span>
+              </span>
+            </p>
+          </header>
+          <div class="card-content">
+            <figure class="image progressive roundit">
+              <img class="progressive__img progressive--not-loaded" data-progressive="Assets/projects/this-website.webp"
+                src="Assets/projects/this-website-thumb.webp" alt="This website">
+            </figure>
+            <div style="margin-top:1em" class="content">
+              My personal portfolio, started in 2018 and still evolving.
+            </div>
+            <div class="field is-grouped-multiline">
+              <div class="control">
+                <div class="tags">
+                  <a class="tag is-primary">Archive</a>
+                  <a class="tag is-danger">2018</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <footer class="card-footer">
+            <a href="https://github.com/Acelogic/acelogic.github.io" class="card-footer-item">
+              <span class="icon">
+                <i class="fab fa-github"> </i>
+              </span>
+              Source
+            </a>
+          </footer>
+        </div>
+      </div>
+
+      <div class="column"></div>
+    </div>
+  </div>
+
+
+  <!--Footer Insertion Code-->
+  <div id="footer"></div>
 </body>
+
 </html>

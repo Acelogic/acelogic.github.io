@@ -1,85 +1,136 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
 <html lang="en">
+
 <head>
+  <title>Welcome</title>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#edf0f1">
-  <script src="/JS/theme.js"></script>
-  <title>Miguel Cruz — iPod portfolio</title>
-  <meta name="description" content="Explore Miguel Cruz’s work on Aurora Silicon, MLX model ports, emulation, native apps, and open source inside a 3D iPod Classic portfolio.">
-  <link rel="canonical" href="https://mcruz.me/">
-  <link rel="stylesheet" href="CSS/font.css">
-  <link rel="stylesheet" href="CSS/global.css">
-  <link rel="stylesheet" href="CSS/ipod.css">
-  <script defer src="/JS/ipod-transitions.js"></script>
-  <script defer src="JS/compLoader.js"></script>
+  <meta name="theme-color" content="#000000">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0,  user-scalable=0, maximum-scale=1.0">
+
+  <link rel="stylesheet" type="text/css" href="CSS/font.css">
+  </link>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/progressively/dist/progressively.min.css">
+  </link>
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.4/css/bulma.min.css">
+  </link>
+  <link rel="stylesheet" type="text/css" href="CSS/global.css">
+  </link>
+  <link rel="stylesheet" type="text/css" href="CSS/index.css">
+  </link>
+  <link rel="stylesheet" href="https://afeld.github.io/emoji-css/emoji.css">
+  </link>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="JS/compLoader.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/js/all.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/progressively/1.2.5/progressively.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/typeit/8.8.7/index.umd.min.js"></script>
   <script defer src="JS/index.js"></script>
-  <script type="importmap">{"imports":{"three":"/JS/vendor/three/build/three.module.js"}}</script>
-  <script type="module" src="/JS/ipod-scene.js"></script>
-  <link rel="stylesheet" href="/CSS/theme.css">
+
+<script>
+  document.addEventListener('keydown', function (event) {
+    if (event.code === 'Space' && !event.target.classList.contains('consoleLine')) {
+      event.preventDefault();
+    }
+  });
+</script>
+
+
+
 </head>
+
+
 <body>
-  <!-- shared:navBar:start -->
-<a class="skip-link" href="#main">Skip to portfolio</a>
-<div class="stage-heading"><a href="/index.html">Miguel Cruz</a><span>Software, on shuffle.</span><div class="stage-actions"><label class="theme-toggle" hidden><input id="dark-mode-switch" type="checkbox" role="switch" aria-label="Dark mode"><span class="theme-track" aria-hidden="true"></span><span>Dark</span></label><button id="theme-auto" class="theme-auto" type="button" aria-pressed="true" title="Follow device appearance" hidden>Auto</button><a href="https://github.com/Acelogic">GitHub ↗</a></div></div>
-<div class="ipod-stage" id="ipod-stage">
-  <div class="ipod-fallback" aria-hidden="true"></div>
-  <div class="ipod-front-ui" id="ipod-ui">
-    <div class="ipod-screen" id="game-screen" tabindex="-1" aria-label="iPod portfolio screen">
-      <header class="screen-header"><a href="/index.html" aria-label="Portfolio home">◀</a><span id="screen-location">Miguel’s iPod</span><span class="ipod-battery" aria-label="Full battery"></span></header>
-<!-- shared:navBar:end -->
-  <main id="main" class="wrap">
-    <section data-home-view="menu">
-      <div class="home-ipod-menu">
-        <nav class="game-menu" aria-label="Portfolio menu">
-          <a href="projects.html">Projects</a><a href="#about">About Miguel</a><a href="#terminal">Terminal</a><a href="blog.html">Field notes</a><a href="school.html">Coursework</a><a href="gallery.html">Pixel lab</a><a href="#contact">Contact</a>
-        </nav>
-        <div class="album-preview"><img src="Assets/selfCircular.png" alt="Miguel Cruz"><strong>Miguel Cruz</strong><span>Acelogic<br>Systems &amp; software</span></div>
+  <div id="master"></div>
+  <!-- NavBar insertation Code-->
+  <div id="navBar"></div>
+
+  <!-- Title Hero-->
+  <section class="hero is-parent has-background-black  heroPOS ">
+    <div class="hero-body ">
+      <div class="container">
+        <h1 class="title has-text-centered has-text-white">
+          <span class="type-it-hero"> Hello World... Welcome! </span><i class="em em-wave"></i>
+        </h1>
       </div>
-    </section>
-    <section data-home-view="about" id="about">
-      <h2>About Miguel</h2>
-      <p>I'm Miguel Cruz, also known as Acelogic. I work on operating systems, computer architecture, emulation, and AI.</p>
-      <p>My curiosity started with iOS and Android in 2011 and grew through robotics and systems programming. These days I port models to Apple Silicon, explore firmware, and build developer and quantitative research tools.</p>
-      <div class="game-menu"><a href="projects.html">EXPLORE MY WORK</a><a href="#">Main menu</a></div>
-    </section>
-    <section data-home-view="terminal" id="terminal">
-      <h2>Terminal</h2>
-      <p>miguel@mcruz.me:~<br>Type help for commands.</p>
-      <div id="console-output" role="log" aria-live="polite" aria-relevant="additions"></div>
-      <form id="console-form" class="terminal-form" hidden><label for="console-input">$<span class="sr-only"> Command</span></label><input id="console-input" name="command" type="text" placeholder="help" autocomplete="off" spellcheck="false" maxlength="200"><button type="submit" aria-label="Run command">↵</button></form>
-      <noscript><p>The interactive terminal needs JavaScript. All projects and contact links remain available in the main menu.</p></noscript>
-      <div class="game-menu"><a href="#">Main menu</a></div>
-    </section>
-    <section data-home-view="contact" id="contact"><h2>Contact</h2><p>Have something interesting to build?</p><nav class="game-menu" aria-label="Contact links"><a href="mailto:mcruz@mcruz.me">EMAIL ↗</a><a href="https://github.com/Acelogic">GITHUB ↗</a><a href="https://www.linkedin.com/in/mcruz4600/">LINKEDIN ↗</a><a href="https://x.com/Acelogic_">X / TWITTER ↗</a><a href="#">Main menu</a></nav></section>
-  </main>
-  <!-- shared:footer:start -->
-</div>
-    <div class="click-wheel" id="click-wheel" role="group" aria-label="Click wheel. Drag around the ring to move selection; center to open; Menu to go back.">
-      <button class="wheel-menu" data-control="back" type="button" aria-label="Menu: Go back"><span>MENU</span></button>
-      <button class="wheel-previous" data-control="up" type="button" aria-label="Previous item"><span>◀◀</span></button>
-      <button class="wheel-next" data-control="down" type="button" aria-label="Next item"><span>▶▶</span></button>
-      <button class="wheel-play" data-control="accept" type="button" aria-label="Open selected item"><span>▶Ⅱ</span></button>
-      <button class="wheel-center" data-control="accept" type="button" aria-label="Select: Open highlighted item"></button>
+    </div>
+  </section>
+  <!--Content-->
+  <div class="vid-container">
+    <video async height="100%" width="100%" playsinline autoplay muted loop poster="/Assets/Coding.jpg">
+      <source src="Assets\Coding.webm" type="video/webm">
+    </video>
+
+    <div class="vid-overlay">
+      <div class="columns">
+        <div class="column is-half is-offset-one-quarter">
+          <div class="hero-body">
+            <h3 class="subtitle is-3 has-text-centered has-text-weight-light has-text-white ">
+              <span class="vid-text type-it-video"></span>
+            </h3>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-</div>
-<fieldset class="finish-picker" id="ipod-finish-picker" hidden disabled>
-  <legend>iPod finish</legend>
-  <div class="finish-options">
-    <label class="finish-option" title="Silver"><input type="radio" name="ipod-finish" value="silver" checked><span class="finish-dot" style="--finish-color:#d1d7dd"></span><span class="sr-only">Silver</span></label>
-    <label class="finish-option" title="Black"><input type="radio" name="ipod-finish" value="black"><span class="finish-dot" style="--finish-color:#242930"></span><span class="sr-only">Black</span></label>
-    <label class="finish-option" title="Blue"><input type="radio" name="ipod-finish" value="blue"><span class="finish-dot" style="--finish-color:#387fba"></span><span class="sr-only">Blue</span></label>
-    <label class="finish-option" title="Purple"><input type="radio" name="ipod-finish" value="purple"><span class="finish-dot" style="--finish-color:#9770b7"></span><span class="sr-only">Purple</span></label>
-    <label class="finish-option" title="Green"><input type="radio" name="ipod-finish" value="green"><span class="finish-dot" style="--finish-color:#549578"></span><span class="sr-only">Green</span></label>
-    <label class="finish-option" title="Red"><input type="radio" name="ipod-finish" value="red"><span class="finish-dot" style="--finish-color:#c43d51"></span><span class="sr-only">Red</span></label>
-    <label class="custom-finish">Custom<input type="color" id="ipod-custom-color" value="#387fba" aria-label="Custom iPod finish"></label>
-    <output id="ipod-finish-name" aria-live="polite">Silver</output>
+
+
+
+  <section class="hero is-white is-fullheight">
+    <div class="hero-body">
+      <div class="container">
+        <h1 class="title has-text-centered">
+          <span class="console-typeit"> A Wild Console Has Appeared! <i class="em em-keyboard"></i> </span>
+        </h1>
+        <h2 class="subtitle has-text-centered">
+          <span class="console-typeit2"> What should you do ? </span>
+        </h2>
+
+        <!--Console-->
+        <div id="bar">
+          <div id="green"></div>
+          <div id="yellow"></div>
+          <div id="red"></div>
+          <div id="barText"> root@mcruz.me - ssh </div>
+        </div>
+      <div id="console">
+        <div class="greetingText has-text-success ">Welcome. Type 'help' for list of available commands.</div>
+        <div class="consoleLine blinkplz has-text-success">miguel:~ root$ </div>
+        <input id="console-input" type="text" class="hidden-input">
+      </div>
+
+      </div>
+
+    </div>
+    </div>
+  </section>
+
+<!--Resume Section-->
+<section class="hero is-medium is-primary">
+  <div class="hero-body">
+    <div class="container has-text-centered">
+      <h1 class="title">
+        My Resume
+      </h1>
+      <h2 class="subtitle">
+        Download my resume in PDF format to learn more about my skills and experience.
+      </h2>
+      <div class="buttons is-centered">
+        <a href="/path/to/resume.pdf" download class="button is-info is-medium">
+          <span class="icon">
+            <i class="fas fa-download"></i>
+          </span>
+          <span>Download</span>
+        </a>
+      </div>
+    </div>
   </div>
-</fieldset>
-<div class="view-controls" aria-label="Device view"><button id="rotate-device" type="button">Rotate iPod</button><button id="reset-device" type="button">Front view</button><span id="model-state" role="status">Interactive portfolio</span></div>
-<p class="outside-help">Circle the wheel to browse. Click the center to open. MENU goes back.<br>Keyboard: ↑ ↓ to browse · Enter to open · Esc to go back</p>
-<p class="outside-links"><a href="mailto:mcruz@mcruz.me">Contact</a><span>·</span><a href="/webinfo.html">About this site</a><span>·</span><a href="/Assets/models/ipod-classic.blend" download>Blender model</a></p>
-<!-- shared:footer:end -->
+</section>
+
+
+  <!--Footer Insertion Code-->
+  <div id="footer"></div>
 </body>
+
 </html>

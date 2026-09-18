@@ -5,18 +5,21 @@
 
 }
 
-/*DIRTY PATCH:Condtional to adjust the lengths of the cards according to screen size */
-/*Temp Solution for now */
-@media (min-width: 0px) and (max-width: 767px) {
-  .card-content {
-    height: 100%;
-  }
+/* Cards match the tallest card in their row instead of a fixed height, so the
+   shorter write-ups don't leave a block of empty card below them. The rows also
+   carry Bulma's .level, which centers its children, so stretch is set back here
+   for .card height:100% to have a row height to fill. */
+.columns.has-same-height {
+  align-items: stretch;
 }
 
-@media (min-width: 768px) {
-  .card-content {
-    height: 650px;
-  }
+.has-same-height .card {
+  display: flex;
+  flex-direction: column;
+}
+
+.has-same-height .card-content {
+  flex-grow: 1;
 }
 
 .card {

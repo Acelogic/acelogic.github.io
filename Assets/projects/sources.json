@@ -558,5 +558,15 @@
     "source": "Assets/Website.png",
     "caption": "This website image from the original portfolio",
     "repo": "Acelogic/acelogic.github.io"
+  },
+  {
+    "title": "q1n1",
+    "file": "Assets/projects/q1n1.webp",
+    "thumbnail": "Assets/projects/q1n1-thumb.webp",
+    "width": 1000,
+    "height": 625,
+    "source": "https://raw.githubusercontent.com/Acelogic/q1n1/main/docs/images/q1n1-boot-screen.png",
+    "caption": "The q1n1 boot console on a Zenbook A16, read back from the live framebuffer",
+    "repo": "Acelogic/q1n1"
   }
 ]

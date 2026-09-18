@@ -1,46 +1,62 @@
-document.addEventListener('DOMContentLoaded', () => {
-  const canvas = document.getElementById('pixel-lab');
-  const button = document.getElementById('animation-toggle');
-  if (!canvas || !button) return;
-  const context = canvas.getContext('2d');
-  if (!context) { button.hidden = true; return; }
-  const preference = window.matchMedia('(prefers-reduced-motion: reduce)');
-  let running = !preference.matches;
-  let phase = 0;
-  let frameId = null;
-  let background = getComputedStyle(document.documentElement).getPropertyValue('--pixel-lab-bg').trim() || '#eef4f8';
-  const draw = () => {
-    context.fillStyle = background;
-    context.fillRect(0, 0, 160, 144);
-    const colors = ['#178be4', '#e08c3d', '#8c5bba'];
-    for (let i = 0; i < 48; i++) {
-      const angle = i * Math.PI * 2 / 48 + phase;
-      const radius = 42 + Math.sin(i * .7 + phase * 3) * 13;
-      context.strokeStyle = colors[i % colors.length];
-      context.beginPath();
-      context.moveTo(Math.round(80 + Math.cos(angle) * 12), Math.round(72 + Math.sin(angle) * 12));
-      context.lineTo(Math.round(80 + Math.cos(angle) * radius), Math.round(72 + Math.sin(angle) * radius));
-      context.stroke();
+const wrapperEl = document.querySelector('.wrapper');
+const numberOfEls = 90;
+const duration = 6000;
+const delay = duration / numberOfEls;
+
+let tl = anime.timeline({
+  duration: delay,
+  complete: function () {
+    tl.restart();
+  }
+});
+
+function createEl(i) {
+  let el = document.createElement('div');
+  const rotate = (360 / numberOfEls) * i;
+  const translateY = -50;
+  const hue = Math.round(360 / numberOfEls * i);
+  el.classList.add('el');
+  el.style.backgroundColor = 'hsl(' + hue + ', 40%, 60%)';
+  el.style.transform = 'rotate(' + rotate + 'deg) translateY(' + translateY + '%)';
+  tl.add({
+    begin: function () {
+      anime({
+        targets: el,
+        backgroundColor: ['hsl(' + hue + ', 40%, 60%)', 'hsl(' + hue + ', 60%, 80%)'],
+        rotate: [rotate + 'deg', rotate + 10 + 'deg'],
+        translateY: [translateY + '%', translateY + 10 + '%'],
+        scale: [1, 1.25],
+        easing: 'easeInOutSine',
+        direction: 'alternate',
+        duration: duration * .1
+      });
     }
-  };
-  let lastTime = 0;
-  const loop = time => {
-    if (!running || document.hidden) { frameId = null; return; }
-    if (time - lastTime > 66) { phase += .02; draw(); lastTime = time; }
-    frameId = requestAnimationFrame(loop);
-  };
-  const sync = () => {
-    button.textContent = running ? 'PAUSE' : 'PLAY';
-    button.setAttribute('aria-pressed', String(running));
-    if (frameId !== null) cancelAnimationFrame(frameId);
-    frameId = running && !document.hidden ? requestAnimationFrame(loop) : null;
-  };
-  button.addEventListener('click', () => { running = !running; sync(); });
-  preference.addEventListener('change', event => { running = !event.matches; sync(); });
-  document.addEventListener('visibilitychange', sync);
-  window.addEventListener('portfolio:themechange', () => {
-    background = getComputedStyle(document.documentElement).getPropertyValue('--pixel-lab-bg').trim() || '#eef4f8';
-    draw();
   });
-    draw(); sync();
+  wrapperEl.appendChild(el);
+};
+
+for (let i = 0; i < numberOfEls; i++) createEl(i);
+
+
+
+new TypeIt('.Gal-Title', {
+
+}).go();
+
+new TypeIt('.Gal-Subtitle', {
+
+}).go();
+
+
+
+progressively.init({
+  delay: 50,
+  throttle: 300,
+  smBreakpoint: 600,
+  onLoad: function(elem) {
+    console.log(elem);
+  },
+  onLoadComplete: function() {
+    console.log('All images have finished loading (Gallery)!');
+  }
 });
