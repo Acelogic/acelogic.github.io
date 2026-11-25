@@ -3,7 +3,7 @@
 import argparse
 import json
 from pathlib import Path
-from urllib.parse import urljoin
+from urllib.parse import urljoin, urlsplit
 
 from playwright.sync_api import expect, sync_playwright
 
@@ -13,6 +13,41 @@ def visit_from_menu(page, label):
     if menu.is_visible() and menu.get_attribute("aria-expanded") == "false":
         menu.click()
     page.get_by_role("navigation", name="Main navigation").get_by_role("link", name=label, exact=True).click()
+
+
+def check_link_previews(page, base_url, routes):
+    cards = {}
+    for route in routes:
+        page.goto(urljoin(base_url, route))
+        canonical = urljoin("https://mcruz.me/", "" if route == "index.html" else route)
+        expect(page.locator('link[rel="canonical"]')).to_have_attribute("href", canonical)
+        expect(page.locator('meta[property="og:url"]')).to_have_attribute("content", canonical)
+        expect(page.locator('meta[name="twitter:card"]')).to_have_attribute("content", "summary_large_image")
+        title = page.locator('meta[property="og:title"]').get_attribute("content")
+        assert title and title in page.title(), route
+        expect(page.locator('meta[name="twitter:title"]')).to_have_attribute("content", title)
+        description = page.locator('meta[name="description"]').get_attribute("content")
+        expect(page.locator('meta[property="og:description"]')).to_have_attribute("content", description)
+        image = page.locator('meta[property="og:image"]').get_attribute("content")
+        assert image.startswith("https://mcruz.me/Assets/previews/"), route
+        expect(page.locator('meta[name="twitter:image"]')).to_have_attribute("content", image)
+        # Exercise the server under test even when canonical URLs point at production.
+        image_url = urljoin(base_url, urlsplit(image).path)
+        size = page.evaluate("""async src => {
+            const image = new Image();
+            image.src = src;
+            await image.decode();
+            return [image.naturalWidth, image.naturalHeight];
+        }""", image_url)
+        assert size == [1200, 630], (image, size)
+        cards[canonical] = image
+    for icon in page.locator('link[rel="icon"], link[rel="apple-touch-icon"]').all():
+        assert page.request.get(urljoin(base_url, icon.get_attribute("href"))).ok
+    manifest_url = page.locator('link[rel="manifest"]').get_attribute("href")
+    manifest = page.request.get(urljoin(base_url, manifest_url)).json()
+    for icon in manifest["icons"]:
+        assert page.request.get(urljoin(base_url, icon["src"])).ok, icon
+    return cards
 
 
 def check_site(browser, base_url, output):
@@ -203,6 +238,9 @@ def check_site(browser, base_url, output):
     expect(page.get_by_role("navigation", name="Project categories")).to_be_visible()
     expect(page.locator(".catalog-section[open]")).to_have_count(7)
     report["phone_navigation_without_javascript"] = "passed"
+    routes = [route for route in pages if route != "404.html"]
+    routes.extend(urlsplit(url).path.lstrip("/") for url, _ in article_links)
+    report["link_previews_without_javascript"] = check_link_previews(page, base_url, routes)
     offline.close()
     return report
 

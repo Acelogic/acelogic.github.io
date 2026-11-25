@@ -1,0 +1,13 @@
+{
+  "id": "/",
+  "name": "Miguel Cruz’s Home Page",
+  "short_name": "mcruz.me",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#ffffee",
+  "theme_color": "#ffffee",
+  "icons": [
+    { "src": "/Assets/icons/wafer-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "/Assets/icons/wafer-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}
