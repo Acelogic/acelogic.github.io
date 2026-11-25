@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#ffffee">
+  <meta name="description" content="Three pixels are enough to work through a graph-based segmentation by hand and see how two bookkeeping errors in the Java code can move a boundary.">
+  <title>Image Segmentation: Felzenszwalb Algorithm · Miguel Cruz</title>
+  <link rel="icon" href="../favicon.ico">
+  <link rel="stylesheet" href="../CSS/global.css">
+  <link rel="stylesheet" href="../CSS/blog.css">
+  <script defer src="../JS/layout.js"></script>
+  <script type="module" src="../JS/blog.js"></script>
+  <script type="module" src="../JS/type-titles.js"></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="site-name" href="../index.html">mcruz.me</a>
+    <button class="nav-toggle" type="button" aria-controls="site-links" aria-expanded="false" hidden>Menu</button>
+    <nav id="site-links" class="links" aria-label="Main navigation">
+        <a href="../index.html">Home</a>
+        <a href="../projects.html">Projects</a>
+        <a href="../school.html">Coursework</a>
+        <a href="../blog.html" aria-current="page">Writing</a>
+        <a href="../gallery.html">Hardware Lab</a>
+    </nav>
+  </header>
+  <main id="main">
+    <div id="writing-content" data-post-id="5">
+<article class="essay">
+      <header class="essay-header">
+        <a class="back-to-writing" href="../blog.html">← All writing</a>
+        <h1>Image Segmentation: Felzenszwalb Algorithm</h1>
+        <p class="essay-deck">Three pixels are enough to work through a graph-based segmentation by hand and see how two bookkeeping errors in the Java code can move a boundary.</p>
+        <p class="entry-meta">Miguel Cruz · <time datetime="2020-05-22">May 22, 2020</time> · 5 min read
+          <span class="revision">Revised <time datetime="2026-11-24">November 24, 2026</time></span>
+        </p>
+      </header>
+      <details class="article-contents">
+        <summary>On this page</summary>
+        <ul><li><a href="#section-1">Turning the image into edges</a></li>
+<li><a href="#section-2">How much graph does a photograph need?</a></li>
+<li><a href="#section-3">Three pixels and one boundary</a></li>
+<li><a href="#section-4">How the scale parameter changes a decision</a></li>
+<li><a href="#section-5">What the Java version actually computes</a></li></ul>
+      </details>
+      <div class="essay-body">
+<p>A color picker gives me three numbers for a pixel. Deciding where the object around that pixel ends takes more information. A single step from dark gray to light gray might mark the edge of a painted sign. The same step might occur a hundred times inside a patch of gravel. For my Java coursework I explored how to make that decision with a graph, using the algorithm described by Pedro Felzenszwalb and Daniel Huttenlocher. <a href="https://cs.brown.edu/people/pfelzens/papers/seg-ijcv.pdf">Efficient Graph-Based Image Segmentation</a>.</p>
+<h2 id="section-1">Turning the image into edges</h2>
+<p>The program opens an image through a file chooser and applies a Gaussian blur with ImageJ. Each pixel becomes a vertex. I connect it to the pixel on its right, the one below it, and the two diagonals to its right, wherever those coordinates fall inside the image. When the whole grid has been visited, an interior pixel is connected to all eight surrounding pixels. Generating edges in just four directions visits each neighboring pair once. <a href="https://github.com/Acelogic/ImageSegmentation/blob/508e51660828c347c3e8e752b538e554b21d76ef/Assignment%203/src/main/java/PixelVertex.java#L33-L51">Neighbor construction</a>.</p>
+<p>I sort the edges by increasing weight. Each pixel starts in its own component, so the cheapest edges get the first chance to form regions. A disjoint-set forest stores a parent, rank, and size for each entry. Finding a representative lets me ask whether two far-apart pixels have already become connected through a chain of accepted edges. Joining two representatives updates the region size in one place.</p>
+<h2 id="section-2">How much graph does a photograph need?</h2>
+<p>There’s a useful size check hidden in those four directions. For an image three pixels wide and two pixels high, I expect four horizontal edges, three vertical edges, and four diagonals. The graph builder should produce eleven. At a corner, some neighbor coordinates fall outside the grid. With a row only one pixel high, all the vertical and diagonal edges disappear. Those two shapes check the boundary logic without needing to squint at a segmented photograph.</p>
+<p>The same arithmetic explains a practical cost. For a grid of width <code>w</code> and height <code>h</code>, the count is <code>(w − 1)h + w(h − 1) + 2(w − 1)(h − 1)</code>. A 1920 by 1080 image gives 8,285,402 edge records before the first merge. The Java version keeps these records in a list and sorts the whole list. Each edge also carries endpoint objects and references used to retrieve coordinates and colors. If I were adapting the project to handle larger photographs, I’d start by measuring graph construction and sorting separately from union operations. Replacing the coordinates of an endpoint with its integer pixel index is one way to change the storage cost while preserving the neighborhood and weight calculations. <a href="https://github.com/Acelogic/ImageSegmentation/blob/508e51660828c347c3e8e752b538e554b21d76ef/Assignment%203/src/main/java/Main.java#L82-L91">Graph construction and sorting</a>.</p>
+<h2 id="section-3">Three pixels and one boundary</h2>
+<p>The decision at the next edge depends on both components it touches. The threshold for a component is its largest accepted edge weight plus <code>k / size</code>. A single pixel starts with internal difference zero. For a concrete first-pass example, take three pixels in a row, two successive edge weights of 4 and 11, and a value of 12 for <code>k</code>.</p>
+<p>The edge of weight 4 fits under both singleton thresholds of 12. Joining those two pixels gives a component of size two. Its new threshold is 4 + 12 / 2, or 10. When the edge of weight 11 comes up, the third pixel would accept it, since 11 is below 12. The pair already formed has the stricter limit of 10, so the boundary stays. Changing the second edge to 9 would merge all three. That one calculation shows why the sort order and the component sizes both matter.</p>
+<h2 id="section-4">How the scale parameter changes a decision</h2>
+<p>The program starts with <code>k = 1500</code>. The value of 12 above was deliberately small so I could trace a rejection in just three vertices. With the application’s setting, a component of 100 pixels gets an allowance of 15 on top of its largest accepted weight. At 1,000 pixels that allowance shrinks to 1.5. Suppose two such regions both have internal difference 7. An edge of weight 14 clears the smaller region’s threshold of 22, but exceeds the larger region’s threshold of 8.5. Increasing the number of similar pixels behind one side of a boundary can change the decision at its edge.</p>
+<p>The Gaussian blur happens before these weights are even calculated. Blurring a sharp transition changes the neighboring colors presented to the graph, while changing <code>k</code> changes the allowance used when combining the resulting components. To understand a result, I would hold the input and blur fixed while varying <code>k</code>, then hold <code>k</code> fixed while varying the blur. The component counts and their areas give me something comparable across runs even when the preview colors change. <a href="https://github.com/Acelogic/ImageSegmentation/blob/508e51660828c347c3e8e752b538e554b21d76ef/Assignment%203/src/main/java/Main.java#L37-L63">The starting parameters and processing order</a>.</p>
+<h2 id="section-5">What the Java version actually computes</h2>
+<p>Two details in my implementation can change that result. The edge weight was meant to be the Euclidean distance between RGB triples. The source subtracts the starting red channel from the ending green channel, and the starting green from the ending blue. Put two identical pixels with RGB values (10, 40, 90) next to each other. Their intended distance is zero. The current expression gives the square root of 30 squared plus 50 squared, about 58.3. An all-gray example hides the error because its three channel values coincide. <a href="https://github.com/Acelogic/ImageSegmentation/blob/508e51660828c347c3e8e752b538e554b21d76ef/Assignment%203/src/main/java/Edge.java#L25-L31">The edge-weight calculation</a>.</p>
+<p>The second detail concerns which representative survives a merge. On equal ranks, <code>join(a, b)</code> makes <code>b</code> the parent. The segmentation loop writes the new threshold to <code>a</code> and reads the size stored there. In the three-pixel example, the next lookup can therefore reach the surviving root with its old threshold of 12 and accept the edge of weight 11. Looking up the representative after the join would put the new threshold on the component the next edge actually sees. <a href="https://github.com/Acelogic/ImageSegmentation/blob/508e51660828c347c3e8e752b538e554b21d76ef/Assignment%203/src/main/java/DisjointSetForest.java#L65-L110">Union and threshold updates</a>.</p>
+<p>My application also makes a cleanup pass for components smaller than five pixels, then assigns a random display color to each final representative. To check the three-pixel calculation, I would inspect component membership immediately after the first pass. By the time the preview window opens, cleanup can have joined those tiny regions, and the colors can change each time the program runs. The representatives keep a much clearer record of which boundary the merge rule chose. <a href="https://github.com/Acelogic/ImageSegmentation/blob/508e51660828c347c3e8e752b538e554b21d76ef/Assignment%203/src/main/java/Main.java#L93-L126">Cleanup and rendering</a>.</p>
+      </div>
+      <footer class="essay-footer links">
+        <a href="../blog.html">All writing</a>
+        <a href="https://github.com/Acelogic/ImageSegmentation">Project source</a>
+      </footer>
+    </article>
+    </div>
+  </main>
+  <footer class="page-footer">
+    <address>Miguel Cruz</address>
+    <nav class="links" aria-label="Site information">
+      <a href="../webinfo.html">About this site</a>
+      <a href="mailto:mcruz@mcruz.me">Email</a>
+    </nav>
+  </footer>
+</body>
+</html>

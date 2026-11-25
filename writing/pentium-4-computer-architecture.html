@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#ffffee">
+  <meta name="description" content="A Pentium 4, four integers, and a short x86 loop explain why clock speed tells only part of the story.">
+  <title>My Journey into Computer Architecture · Miguel Cruz</title>
+  <link rel="icon" href="../favicon.ico">
+  <link rel="stylesheet" href="../CSS/global.css">
+  <link rel="stylesheet" href="../CSS/blog.css">
+  <script defer src="../JS/layout.js"></script>
+  <script type="module" src="../JS/blog.js"></script>
+  <script type="module" src="../JS/type-titles.js"></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="site-name" href="../index.html">mcruz.me</a>
+    <button class="nav-toggle" type="button" aria-controls="site-links" aria-expanded="false" hidden>Menu</button>
+    <nav id="site-links" class="links" aria-label="Main navigation">
+        <a href="../index.html">Home</a>
+        <a href="../projects.html">Projects</a>
+        <a href="../school.html">Coursework</a>
+        <a href="../blog.html" aria-current="page">Writing</a>
+        <a href="../gallery.html">Hardware Lab</a>
+    </nav>
+  </header>
+  <main id="main">
+    <div id="writing-content" data-post-id="6">
+<article class="essay">
+      <header class="essay-header">
+        <a class="back-to-writing" href="../blog.html">← All writing</a>
+        <h1>My Journey into Computer Architecture</h1>
+        <p class="essay-deck">A Pentium 4, four integers, and a short x86 loop explain why clock speed tells only part of the story.</p>
+        <p class="entry-meta">Miguel Cruz · <time datetime="2018-06-18">June 18, 2018</time> · 5 min read
+          <span class="revision">Revised <time datetime="2026-11-24">November 24, 2026</time></span>
+        </p>
+      </header>
+      <details class="article-contents">
+        <summary>On this page</summary>
+        <ul><li><a href="#section-1">Four numbers and a loop</a></li>
+<li><a href="#section-2">What the processor can do early</a></li>
+<li><a href="#section-3">Breaking a dependency on paper</a></li>
+<li><a href="#section-4">The final trip around the loop</a></li>
+<li><a href="#section-5">What I would measure</a></li></ul>
+      </details>
+      <div class="essay-body">
+      <figure class="essay-photo">
+        <a href="../Assets/CPU.jpg"><img src="../Assets/CPU.jpg" alt="Miguel holding a Pentium 4 processor"></a>
+        <figcaption>The underside of my Pentium 4, held above a motherboard.</figcaption>
+      </figure>
+<p>The Pentium 4 in the photograph is where my interest in computer architecture began. I’m holding it over a motherboard with the contacts facing the camera. From that side you can see how the package meets the socket. Everything I wanted to understand about the processor happens out of sight. What does it actually do between reading an instruction and making its result available to the next one?</p>
+
+<h2 id="section-1">Four numbers and a loop</h2>
+<p>I like to start with something I can work through on paper. Suppose an array contains four 32-bit integers, 4, 7, 1, and 3. I want their sum. In the following x86 assembly, written in Intel syntax, <code>ESI</code> initially holds the address of the first integer. <code>EAX</code> holds the running total and <code>ECX</code> counts the elements still to visit. <a href="https://www.intel.com/content/www/us/en/developer/articles/technical/intel-sdm.html">Intel’s instruction set reference, volume 2</a>.</p>
+
+<pre><code>xor eax, eax
+mov ecx, 4
+next_value:
+    add eax, [esi]
+    add esi, 4
+    dec ecx
+    jnz next_value</code></pre>
+
+<p>On the first pass the processor reads the integer at the address in <code>ESI</code> and adds 4 to the zero in <code>EAX</code>. Moving the pointer forward four bytes puts it at the second integer. Decrementing the counter leaves three, so the jump takes us back to <code>next_value</code>. The subsequent totals are 11, 12, and 15. On the last pass the decrement produces zero, sets the zero flag, and the conditional jump falls through. Those register values and that final branch outcome are the promises the instruction set makes to the program.</p>
+
+<h2 id="section-2">What the processor can do early</h2>
+<p>The instructions on the page look like a queue of jobs for a single worker. The Pentium 4’s NetBurst design has more options. Its front end decodes x86 instructions into smaller operations. It can keep a sequence of those operations in a trace cache, so a trip around a familiar loop can reuse the decoded work. Farther along, the execution engine can schedule an operation when its inputs and an appropriate execution unit are available. Instructions retire in program order, preserving the state the software expects to see. <a href="https://www.intel.com/content/dam/www/public/us/en/documents/research/2001-vol05-iss-1-intel-technology-journal.pdf">Intel’s description of the Pentium 4 microarchitecture</a>.</p>
+
+<p>There is a limit you can spot directly in the example. The second update of <code>EAX</code> needs the sum from the first. The pointer update, on the other hand, needs the old address and the constant 4. It can produce the next address without knowing the sum. This is why I draw arrows between inputs and results when I read assembly. Counting six lines of source gives me a poor basis for predicting how long the loop will take. Following the arrows tells me which calculations really have to wait.</p>
+
+<h2 id="section-3">Breaking a dependency on paper</h2>
+<p>There is a simple way to change the example and see what that dependency costs. Keep two running sums. Put 4 and 1 into the first sum and 7 and 3 into the second. The partial results are 5 and 10, and the final addition still produces 15. The order is valid here because the example uses small integers that fit in a register. A floating-point reduction would need a separate discussion about rounding before changing its order.</p>
+
+<p>With two accumulators, an instruction updating the second only needs the previous value of that accumulator. It can overlap arithmetic from the first chain when the inputs and execution resources are ready. Now imagine a longer array with the same layout. A single accumulator has one addition feeding the next for the entire length. The two-way version has two shorter chains and a final addition joining them. It still has to read every element. If waiting for memory dominates that particular run, rearranging the additions may do little for elapsed time.</p>
+
+<p>This thought experiment gives me a way to separate two numbers in a processor manual. Latency answers how long a result takes to become available to an instruction that needs it. Throughput describes how frequently the machine can start or finish operations under suitable conditions. A unit can accept another independent operation while the first one is still in flight. I can exploit that property only if the program supplies independent work. The two running sums make that requirement visible without assigning a cycle count to the particular chip in my hand.</p>
+
+<h2 id="section-4">The final trip around the loop</h2>
+<p>A branch creates a different kind of wait. To keep a deep pipeline busy, the front end predicts where instruction fetching should continue. In this example the backward jump is taken three times and falls through once. If the processor predicts another trip on that last iteration, it can start work that the program will never use. When the branch resolves, younger work from the wrong path is discarded and fetching resumes at the fall-through address. The answer remains 15. The time spent obtaining it depends in part on how well the predictions matched those four outcomes. <a href="https://www.intel.com/content/dam/doc/manual/64-ia-32-architectures-optimization-manual.pdf">Intel’s optimization manual, NetBurst branch prediction</a>.</p>
+
+<h2 id="section-5">What I would measure</h2>
+<p>I can change one aspect of the experiment without changing its arithmetic. Put 1,024 integers next to one another, then place the same values 4,096 bytes apart in a second version. The first traversal reads a 4 KiB span. The second visits addresses spread across roughly 4 MiB. A fetched cache line can supply several successive integers in the first layout. The widely spaced layout gives fewer opportunities to reuse the neighboring bytes and also touches more virtual-memory pages.</p>
+
+<p>The placement also matters if I decide to count instructions. The same number of element loads can generate very different amounts of traffic farther down the memory hierarchy. When a block of neighboring bytes has already arrived, another load from that block can be served nearby. A large stride makes a subsequent load more likely to need another block. Repeating a traversal might keep more of one layout resident than the other. Looking only at the static assembly would miss both effects.</p>
+
+<p>Before timing the two, I would make both return the sum, check that the answers agree, and inspect the generated code. Then I’d repeat each traversal with the same data and record whether it was the first or a later pass. That turns an intuition about memory locality into a question a real machine can answer. It is the reason I still like the photograph. A chip small enough to hold in two fingers can run that same handful of instructions in ways the printed program barely hints at.</p>
+      </div>
+      <footer class="essay-footer links">
+        <a href="../blog.html">All writing</a>
+      </footer>
+    </article>
+    </div>
+  </main>
+  <footer class="page-footer">
+    <address>Miguel Cruz</address>
+    <nav class="links" aria-label="Site information">
+      <a href="../webinfo.html">About this site</a>
+      <a href="mailto:mcruz@mcruz.me">Email</a>
+    </nav>
+  </footer>
+</body>
+</html>

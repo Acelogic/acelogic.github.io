@@ -1,59 +1,316 @@
-/*Pace Library Loading Bar*/
-body{
-overflow-x: hidden;
+:root {
+  color-scheme: light;
+  --paper: #ffffee;
+  --ink: #24231e;
+  --muted: #5f5b4c;
+  --rule: #c6c2aa;
+  --red: #ad2019;
+  --blue: #0000aa;
+  --mono: ui-monospace, "SFMono-Regular", Consolas, monospace;
 }
 
-.pace {
-  -webkit-pointer-events: none;
-  pointer-events: none;
+* { box-sizing: border-box; }
 
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  user-select: none;
+html {
+  background: var(--paper);
+  color: var(--ink);
+  font: 17px/1.5 Georgia, "Times New Roman", serif;
 }
 
-.pace-inactive {
-  display: none;
+body {
+  margin: 0 auto;
+  width: min(100% - 3rem, 64rem);
 }
 
-.pace .pace-progress {
-  background: #29d;
-  position: fixed;
-  z-index: 2000;
-  top: 0;
-  right: 100%;
-  width: 100%;
-  height: 2px;
+a { color: var(--red); text-underline-offset: 0.14em; }
+a:visited { color: var(--blue); }
+a:hover { text-decoration-thickness: 2px; }
+:focus-visible { outline: 2px solid #164484; outline-offset: 4px; }
+[id] { scroll-margin-top: 1rem; }
+h1, h2, h3, p, ul, dl, figure { margin: 0; }
+h1, h2, h3 { line-height: 1.14; }
+h1 { font-size: clamp(2.2rem, 5.4vw, 3.9rem); letter-spacing: -0.045em; }
+.intro h1 { display: flow-root; }
+.typing-title { position: relative; color: transparent; }
+.typing-layer { position: absolute; inset: 0; color: var(--ink); pointer-events: none; }
+.typing-layer .ti-cursor { color: var(--red); }
+@media print, (prefers-reduced-motion: reduce) {
+  .typing-title { color: var(--ink); }
+  .typing-layer { display: none; }
 }
 
-/*Global Element to Change Border Radius*/
-.roundit{
-  border-radius: 12px;
+h2 { font-size: 1.65rem; letter-spacing: -0.025em; }
+h3 { font-size: 1.12rem; }
+p + p { margin-top: 0.65rem; }
+ul, ol { padding-left: 1.35rem; }
+li { padding-left: 0.12rem; }
+li + li { margin-top: 0.33rem; }
+
+.skip {
+  position: absolute;
+  left: -100vw;
+}
+.skip:focus {
+  left: 1rem;
+  top: 0.5rem;
+  background: var(--paper);
+  padding: 0.3rem;
+}
+
+.masthead, .page-footer, .links {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+}
+.masthead {
+  justify-content: space-between;
+  gap: 0.5rem 1.5rem;
+  padding: 1.35rem 0 0.75rem;
+  border-bottom: 1px solid var(--rule);
+}
+.site-name, .site-name:visited {
+  color: var(--ink);
+  font: bold 1.05rem/1.4 var(--mono);
+  letter-spacing: -0.06em;
+  text-decoration: none;
+}
+.links {
+  gap: 0.25rem 1.1rem;
+}
+.masthead nav { font-size: 0.92rem; }
+nav [aria-current="page"] { color: var(--ink); font-weight: bold; text-decoration: none; }
+
+.intro, .page-title {
+  padding: 2rem 0 1.55rem;
+  border-bottom: 3px double var(--rule);
+}
+.intro {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem 2.5rem;
+}
+.intro p, .page-title p {
+  max-width: 48rem;
+  margin-top: 0.65rem;
+}
+.intro p { font-size: 1.12rem; }
+.intro .links { margin-top: 0.85rem; font-size: 0.92rem; }
+.intro-art {
+  order: 1;
+  flex-shrink: 0;
+  position: relative;
+  width: clamp(9rem, 21vw, 14.4rem);
+  aspect-ratio: 1.2;
+  background: url("../Assets/silicon-wafer.webp") right top / auto 100% no-repeat;
+}
+.portrait {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 46%;
+  height: auto;
+  aspect-ratio: 1;
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  padding: 3px;
+}
+.home-columns {
+  display: grid;
+  grid-template-columns: minmax(0, 1.95fr) minmax(15rem, 1fr);
+  gap: clamp(1.25rem, 4vw, 3.5rem);
+  padding-top: 1.65rem;
+}
+.home-columns aside { padding-left: 1.65rem; border-left: 1px solid var(--rule); }
+.home-columns section + section { margin-top: 1.65rem; }
+.home-columns h2 { margin-bottom: 0.85rem; }
+.home-columns h3 { margin: 1rem 0 0.35rem; }
+.home-columns ul { margin-left: 0.2rem; }
+.more { margin-top: 0.75rem; font-style: italic; }
+.home-columns p + ul { margin-top: 0.5rem; }
+.course-index, .writing-index { list-style: none; padding: 0; }
+.home-columns .course-index, .home-columns .writing-index { margin-left: 0; }
+.course-index li, .writing-index li {
+  padding: 0;
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 0.75rem;
+  align-items: baseline;
+}
+.course-index a, .writing-index time, .metadata, .date {
+  font-family: var(--mono);
+  font-size: 0.77rem;
+}
+.writing-index time, .metadata, .date { color: var(--muted); }
+.page-footer {
+  justify-content: space-between;
+  gap: 0.4rem 1.25rem;
+  margin: 2rem 0 1.25rem;
+  padding-top: 0.7rem;
+  border-top: 1px solid var(--rule);
+  font-size: 0.88rem;
+  color: var(--muted);
+}
+.page-footer address { font-style: italic; }
+.page-footer .links { gap: 0.3rem 0.9rem; }
+
+.reading { max-width: 48rem; }
+.reading section, .catalog-section { margin-top: 1.55rem; }
+.reading h2, .catalog-section h2 { margin-bottom: 0.65rem; }
+.contents {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.2rem 1rem;
+  margin-top: 1rem;
+  font-size: 0.93rem;
+}
+.catalog { max-width: 52rem; padding-left: 1.25rem; }
+.catalog > li + li { margin-top: 0.95rem; }
+.catalog p { margin-top: 0.15rem; }
+.catalog .links { font-size: 0.87rem; gap: 0.15rem 0.9rem; }
+.metadata { margin-left: 0.5rem; }
+.course-list { list-style: none; padding: 0; }
+.course-list li { padding: 0 0 1rem; margin: 1rem 0; border-bottom: 1px solid var(--rule); }
+.course-list li:last-child { border: 0; }
+.course-list h2 { font-size: 1.32rem; margin-bottom: 0.3rem; }
+.course-list .links { margin-top: 0.25rem; font-size: 0.94rem; }
+.earlier-notes { margin-top: 1.25rem; }
+.earlier-notes > summary { color: var(--muted); cursor: pointer; }
+blockquote { border-left: 2px solid var(--rule); margin: 0.85rem 0; padding-left: 1rem; }
+blockquote footer { color: var(--muted); font-style: italic; }
+
+button, input { font: inherit; color: var(--ink); }
+button { border: 1px solid #817b66; background: var(--paper); padding: 0.15rem 0.65rem; cursor: pointer; }
+button:hover { border-color: var(--ink); }
+/* Closed menus stay out of the reading order even though .links uses flex. */
+.masthead [hidden], .home-jumps, .project-count, .category-label { display: none; }
+.catalog-section > summary { list-style: none; cursor: pointer; }
+.catalog-section > summary::-webkit-details-marker { display: none; }
+.catalog-section > summary h2 { display: flex; align-items: center; gap: 0.7rem; }
+.catalog-section > summary h2::after, .nav-toggle::after {
+  content: "";
+  display: inline-block;
+  width: 0.43rem;
+  height: 0.43rem;
+  border: solid currentColor;
+  border-width: 0 1.5px 1.5px 0;
+  transform: rotate(45deg);
+}
+.catalog-section[open] > summary h2::after, .nav-toggle[aria-expanded="true"]::after {
+  transform: rotate(225deg);
+}
+@media screen and (max-width: 1100px) {
+  .masthead .links a, .page-footer .links a, .intro .links a,
+  .catalog .links a, .course-list .links a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
   }
-
-  
-
-  /* vietnamese */
-@font-face {
-  font-family: 'VT323';
-  font-style: normal;
-  font-weight: 400;
-  src: local('VT323 Regular'), local('VT323-Regular'), url(/Assets/VT323-Regular.ttf) format('woff2');
-  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;
+  .catalog { list-style: none; padding: 0; }
+  .catalog > li { padding: 0.8rem 0; border-top: 1px solid var(--rule); }
+  .catalog > li + li { margin: 0; }
+  .catalog > li > strong { display: block; font-size: 1.14rem; }
+  .catalog .metadata { display: block; margin: 0.15rem 0 0.4rem; line-height: 1.5; }
+  .catalog .links { margin-top: 0.2rem; row-gap: 0; }
+  .page-title p, .reading p { max-width: 64ch; }
 }
-/* latin-ext */
-@font-face {
-  font-family: 'VT323';
-  font-style: normal;
-  font-weight: 400;
-  src: local('VT323 Regular'), local('VT323-Regular'), url(/Assets/VT323-Regular.ttf) format('woff2');
-  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+@media screen and (min-width: 700px) and (max-width: 1100px) {
+  body { width: calc(100% - 3.5rem); }
+  .masthead { align-items: center; padding-block: 0.5rem; }
+  .intro, .page-title { padding-block: 1.65rem 1.25rem; }
+  .intro-art { width: clamp(8.5rem, 18vw, 11rem); }
+  .home-columns { grid-template-columns: minmax(0, 1.6fr) minmax(13rem, 1fr); gap: 1.6rem; }
+  .home-columns aside { padding-left: 1.15rem; }
+  .project-page {
+    display: grid;
+    grid-template-columns: clamp(9.5rem, 23vw, 14rem) minmax(0, 1fr);
+    column-gap: clamp(1.25rem, 4vw, 2.75rem);
+    align-items: start;
+  }
+  .project-page .page-title { grid-column: 1 / -1; }
+  .project-page .contents {
+    position: sticky;
+    top: 1rem;
+    display: grid;
+    gap: 0;
+    max-height: calc(100vh - 2rem);
+    overflow-y: auto;
+    padding: 0.15rem 0.85rem 0.3rem 0;
+    border-right: 1px solid var(--rule);
+  }
+  .category-label { display: block; margin-bottom: 0.3rem; font-weight: bold; }
+  .project-page .contents a { display: flex; align-items: center; min-height: 44px; line-height: 1.3; }
+  .catalog-section:first-child { margin-top: 1.1rem; }
+  .catalog-section h2 { font-size: 1.45rem; }
+  .course-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 2rem;
+    max-width: none;
+  }
+  .course-list li { margin: 0; padding: 1.3rem 0 0.8rem; border: 0; border-top: 1px solid var(--rule); }
+  .course-list li:nth-child(-n+2) { border-top: 0; }
 }
-/* latin */
-@font-face {
-  font-family: 'VT323';
-  font-style: normal;
-  font-weight: 400;
-  src: local('VT323 Regular'), local('VT323-Regular'), url(/Assets/VT323-Regular.ttf) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+@media screen and (max-width: 699px) {
+  html { font-size: 16px; line-height: 1.55; }
+  body { width: min(calc(100% - 2rem), 35rem); overflow-wrap: break-word; }
+  .masthead { align-items: center; gap: 0 1rem; padding-block: 0.25rem; }
+  .site-name { display: inline-flex; align-items: center; min-height: 44px; }
+  .nav-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    min-height: 44px;
+    padding-inline: 0.65rem 0.3rem;
+    border: 0;
+    background: transparent;
+    font-size: 1rem;
+  }
+  .masthead .links { width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 0 1rem; }
+  .masthead .links[hidden] { display: none; }
+  .masthead .links a { border-top: 1px solid var(--rule); }
+  .intro, .page-title { padding: 1.4rem 0 1.05rem; }
+  .intro { display: block; }
+  .intro-art { width: clamp(5.25rem, 21vw, 8.5rem); float: right; margin: 0 0 0.5rem 0.7rem; }
+  .portrait { width: 62%; }
+  .intro h1 { font-size: clamp(2rem, 6.8vw, 2.55rem); }
+  .intro p { clear: both; font-size: 1.04rem; }
+  .intro .links { margin-top: 0.35rem; gap: 0 1rem; }
+  .home-jumps { display: flex; gap: 0 1.15rem; border-bottom: 1px solid var(--rule); }
+  .home-jumps a { display: inline-flex; align-items: center; min-height: 44px; }
+  .home-columns { display: block; padding-top: 1.2rem; }
+  .home-columns aside, .home-columns aside section + section {
+    margin-top: 1.35rem;
+    padding: 1.2rem 0 0;
+    border: 0;
+    border-top: 1px solid var(--rule);
+  }
+  .home-columns li + li { margin-top: 0.55rem; }
+  .home-columns .writing-index li, .home-columns .course-index li { padding-block: 0.2rem; }
+  .project-page.compact-categories .contents { display: none; }
+  .catalog-groups { margin-top: 0.45rem; }
+  .catalog-section { margin: 0; border-bottom: 1px solid var(--rule); }
+  .catalog-section > summary { padding-block: 1rem; }
+  .catalog-section > summary h2 {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto 0.6rem;
+    gap: 0.65rem;
+    align-items: center;
+    margin: 0;
+    font-size: 1.23rem;
+    line-height: 1.25;
+  }
+  .catalog-section > summary h2::after { grid-column: -2 / -1; color: var(--muted); }
+  .project-count { display: inline; color: var(--muted); font: normal 0.73rem/1.4 var(--mono); }
+  .catalog > li { padding-block: 0.9rem 0.6rem; }
+  .course-list h2 { font-size: 1.22rem; line-height: 1.3; }
+  .course-list .date { display: block; margin-bottom: 0.35rem; }
+  .page-footer { margin-top: 1.3rem; padding-top: 0.3rem; align-items: center; }
+}
+@media print {
+  body { width: 100%; }
+  .masthead, .skip, .page-footer nav { display: none; }
+  .home-columns { display: block; }
+  .home-columns aside { border: 0; padding: 1rem 0 0; }
 }

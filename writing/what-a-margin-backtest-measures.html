@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#ffffee">
+  <meta name="description" content="Follow a $40,000 loan through five portfolio observations to see how financing, maintenance usage, and drawdowns diverge.">
+  <title>What a Margin Backtest Measures · Miguel Cruz</title>
+  <link rel="icon" href="../favicon.ico">
+  <link rel="stylesheet" href="../CSS/global.css">
+  <link rel="stylesheet" href="../CSS/blog.css">
+  <script defer src="../JS/layout.js"></script>
+  <script type="module" src="../JS/blog.js"></script>
+  <script type="module" src="../JS/type-titles.js"></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="site-name" href="../index.html">mcruz.me</a>
+    <button class="nav-toggle" type="button" aria-controls="site-links" aria-expanded="false" hidden>Menu</button>
+    <nav id="site-links" class="links" aria-label="Main navigation">
+        <a href="../index.html">Home</a>
+        <a href="../projects.html">Projects</a>
+        <a href="../school.html">Coursework</a>
+        <a href="../blog.html" aria-current="page">Writing</a>
+        <a href="../gallery.html">Hardware Lab</a>
+    </nav>
+  </header>
+  <main id="main">
+    <div id="writing-content" data-post-id="8">
+<article class="essay">
+      <header class="essay-header">
+        <a class="back-to-writing" href="../blog.html">← All writing</a>
+        <h1>What a Margin Backtest Measures</h1>
+        <p class="essay-deck">Follow a $40,000 loan through five portfolio observations to see how financing, maintenance usage, and drawdowns diverge.</p>
+        <p class="entry-meta">Miguel Cruz · <time datetime="2026-11-24">November 24, 2026</time> · 6 min read
+        </p>
+      </header>
+      <details class="article-contents">
+        <summary>On this page</summary>
+        <ul><li><a href="#section-1">Start with two balances</a></li>
+<li><a href="#section-2">Why Monday picks up three days of interest</a></li>
+<li><a href="#section-3">What 100% usage measures</a></li>
+<li><a href="#section-4">A drawdown needs a named series</a></li>
+<li><a href="#section-5">Daily-reset leverage changes the path itself</a></li></ul>
+      </details>
+      <div class="essay-body">
+<p>A portfolio starts at $100,000, falls sharply, and returns to $100,000 by Wednesday. Did the account recover? With borrowed money, the answer depends on which line I’m watching. The holdings can be worth exactly what they were on Thursday while the owner’s equity is still lower. In Testfol Margin Stresser I keep the value of the investments and the debt ledger on separate timelines. That lets me explain the gap down to the dollar.</p>
+<h2 id="section-1">Start with two balances</h2>
+<p>The margin simulation accepts a dated series of gross portfolio values, a starting loan, a borrowing-rate configuration, and a maintenance fraction. Once it has a liability for a given date, it calculates equity by subtracting that liability from the value of the holdings. It divides equity by gross value to give the share of the account that belongs to the investor. The debt figure includes interest that has accrued but has yet to post to principal. <a href="https://github.com/Acelogic/Testfol-MarginStresser/blob/1ade9ce9d2641f5f66b9b9e2b22fc77db0c8328a/app/services/testfol_api.py#L185-L205">Margin simulation inputs</a> and <a href="https://github.com/Acelogic/Testfol-MarginStresser/blob/1ade9ce9d2641f5f66b9b9e2b22fc77db0c8328a/app/services/testfol_api.py#L285-L301">output calculations</a>.</p>
+<p>For this walkthrough I supplied five invented portfolio values directly to that function. I chose a starting loan of $40,000, a fixed annual borrowing rate of 9%, and a maintenance fraction of 25%. Withdrawals, repayments, tax payments, and margin-funded contributions are all zero. Thursday is a prior-session valuation anchor. Friday is the requested start for interest accrual. With those inputs I can check the portfolio arithmetic independently of historical prices, corporate actions, or where a price provider sets the first observation.</p>
+<div class="essay-table" tabindex="0" role="region" aria-label="Data table"><table>
+  <caption>Five observations from the margin simulation, rounded for display</caption>
+  <thead><tr><th scope="col">Day</th><th scope="col">Holdings</th><th scope="col">Liability</th><th scope="col">Equity</th><th scope="col">Usage</th></tr></thead>
+  <tbody>
+    <tr><th scope="row">Thu</th><td>$100,000</td><td>$40,000</td><td>$60,000</td><td>53.33%</td></tr>
+    <tr><th scope="row">Fri</th><td>$100,000</td><td>$40,010</td><td>$59,990</td><td>53.35%</td></tr>
+    <tr><th scope="row">Mon</th><td>$85,000</td><td>$40,040</td><td>$44,960</td><td>62.81%</td></tr>
+    <tr><th scope="row">Tue</th><td>$53,300</td><td>$40,050</td><td>$13,250</td><td>100.19%</td></tr>
+    <tr><th scope="row">Wed</th><td>$100,000</td><td>$40,060</td><td>$59,940</td><td>53.41%</td></tr>
+  </tbody>
+</table></div>
+<h2 id="section-2">Why Monday picks up three days of interest</h2>
+<p>A $40,000 settled loan at 9% costs $10 for one day under the model’s Actual/360 convention. Friday accrues that first $10. The next price observation is Monday, so the ledger advances through Saturday and Sunday before processing Monday. Its liability increases by $30 between the two closes. There are now $40 of charges since the start. For this particular price path, a loop that charged interest only when a new quote arrived would already be off by $20.</p>
+<p>The ledger maintains separate balances for settled principal and accrued charges. Within this example the settled balance stays at $40,000, which makes the $10 figure easy to verify. For a run that crosses a month boundary, the implementation moves earlier months’ accrued interest into principal on the third observed trading day of the new month. It then uses the updated principal for subsequent daily accrual. The posting moves a charge between two ledger balances. The account’s liability already reflected that charge on the day it accrued. <a href="https://github.com/Acelogic/Testfol-MarginStresser/blob/1ade9ce9d2641f5f66b9b9e2b22fc77db0c8328a/app/core/margin_interest.py#L146-L195">Daily accrual and monthly posting</a>.</p>
+<p>The fixed rate is convenient for a paper calculation. A variable-rate run can use a dated base rate plus a spread. With tiered rates the code applies each spread only to the principal falling inside that tier, sums the daily charges, and reports the effective annual percentage for the whole balance. As a simple illustration, $100,000 at 6% plus another $50,000 at 5% produces $8,500 in annualized charges, or about 5.67% of $150,000. Applying 5% to the whole balance would understate the model’s daily accrual. <a href="https://github.com/Acelogic/Testfol-MarginStresser/blob/1ade9ce9d2641f5f66b9b9e2b22fc77db0c8328a/app/core/margin_interest.py#L100-L143">Rate and tier calculations</a>.</p>
+<h2 id="section-3">What 100% usage measures</h2>
+<p>At a maintenance fraction of 25%, the model reserves one quarter of gross value as required equity. The remaining three quarters form the modeled loan capacity. Margin usage is total liability divided by that capacity. On Monday the calculation is $40,040 divided by $63,750, which gives 62.81%. That number describes how much of a chosen borrowing limit the account has consumed. Looking at the loan as a percentage of the holdings would give a different quantity.</p>
+<p>On Tuesday the modeled capacity falls to $39,975, while liability reaches $40,050. The difference is $75, and usage rounds to 100.19%. Equity is still positive at $13,250. It is $75 short of the model’s required equity of $13,325. These two ways of measuring the shortfall give me a quick arithmetic check. The results view records observations with usage at or above 100% as breaches. The five-row calculation continues with the gross values I supplied, including Wednesday’s rebound. A breach marker records what happened to the modeled ratio at an observation. Any forced-sale scenario would also need assumptions about what was sold, at what time and price, and how the proceeds changed the loan. <a href="https://github.com/Acelogic/Testfol-MarginStresser/blob/1ade9ce9d2641f5f66b9b9e2b22fc77db0c8328a/app/ui/results/tabs_chart.py#L287-L329">How the chart records breaches</a>.</p>
+<p>The maintenance fraction here is an explicit scenario input. The app can also combine per-ticker assumptions using allocation weights. For example, weights of 60% and 40% with requirements of 25% and 50% produce a weighted fraction of 35%. For any particular live account, the broker sets and applies its own requirements. A single allocation-weighted percentage and a closing-price series cannot establish the requirement a broker applied intraday to an individual position. <a href="https://github.com/Acelogic/Testfol-MarginStresser/blob/1ade9ce9d2641f5f66b9b9e2b22fc77db0c8328a/app/core/backtest_orchestrator.py#L559-L586">Weighted maintenance in the backtest</a>.</p>
+<h2 id="section-4">A drawdown needs a named series</h2>
+<p>The drawdown calculation tracks the highest observed value so far and measures each observation against that peak. For the holdings, Tuesday is $53,300 divided by $100,000 minus one, or −46.70%. Applying exactly the same calculation to equity gives $13,250 divided by $60,000 minus one, or −77.92%. Each dollar of price decline passes through to the owner’s smaller starting equity, and accrued interest adds another $50 to the loss by Tuesday.</p>
+<p>Wednesday sets the gross drawdown back to zero. Equity would need another $60 to reach its own earlier peak of $60,000. The episode finder records a recovery date when the series regains its running high. If the final observation is still below that high, a qualifying episode remains open. On these five values it reports Wednesday as the recovery date for holdings and leaves the equity recovery date empty. Both results are correct for the series passed to the function. <a href="https://github.com/Acelogic/Testfol-MarginStresser/blob/1ade9ce9d2641f5f66b9b9e2b22fc77db0c8328a/app/core/calculations/stats.py#L298-L334">Drawdown episodes and recovery dates</a>.</p>
+<h2 id="section-5">Daily-reset leverage changes the path itself</h2>
+<p>The local engine can also model a ticker with a daily leverage multiplier. To isolate that mechanism, take an underlying that rises from 100 to 110, then returns to 100. Its second return is approximately −9.09%. Isolate a 2× return series by setting its financing contribution and expense drag to zero. The first move takes the series to 120. The second applies roughly −18.18% to that new base, leaving about 98.18. The difference survives even though the underlying made a round trip.</p>
+<p>In that calculation the multiplier acts on each session’s return. The earlier $40,000 example instead carried a dollar loan from day to day and charged it calendar-day interest. The code reflects the distinction. The synthetic ticker transforms a return series and can deduct funding and expense terms using a 252-session convention. The account ledger tracks principal, payments, and accrued interest using calendar dates. Putting both on a chart is meaningful when the account actually holds a modeled leveraged instrument and separately borrows cash. For this five-observation example, the gross price path and the account loan are sufficient to reproduce every number in the table. <a href="https://github.com/Acelogic/Testfol-MarginStresser/blob/1ade9ce9d2641f5f66b9b9e2b22fc77db0c8328a/app/core/shadow_backtest.py#L504-L546">Daily leverage and expense handling</a>.</p>
+      </div>
+      <footer class="essay-footer links">
+        <a href="../blog.html">All writing</a>
+        <a href="https://github.com/Acelogic/Testfol-MarginStresser">Project source</a>
+      </footer>
+    </article>
+    </div>
+  </main>
+  <footer class="page-footer">
+    <address>Miguel Cruz</address>
+    <nav class="links" aria-label="Site information">
+      <a href="../webinfo.html">About this site</a>
+      <a href="mailto:mcruz@mcruz.me">Email</a>
+    </nav>
+  </footer>
+</body>
+</html>

@@ -1,73 +1,48 @@
-new TypeIt('.Blog-Title', {
+import { renderArticle, renderIndex } from "./writing.mjs";
 
-}).go();
+const content = document.querySelector("#writing-content");
+const standaloneId = content.dataset.postId;
+const root = standaloneId ? "../" : "";
+const published = new Map([...content.querySelectorAll(".essay-index li")].map(entry =>
+  [entry.id.slice(5), entry.querySelector(".entry-title a").getAttribute("href")]));
+const previewId = new URLSearchParams(location.search).get("post");
 
-new TypeIt('.Blog-Subtitle', {
+function followOldLink() {
+  if (standaloneId || previewId) return false;
+  const id = /^#post-(\d+)$/.exec(location.hash)?.[1];
+  if (!id) return false;
+  location.replace(published.get(id) || "blog.html?post=" + id);
+  return true;
+}
 
-}).go();
-
-
-// Load and display blog posts
-async function loadBlogPosts() {
+async function refreshWriting() {
+  // The checked-in pages already contain the full archive. JSON edits can also
+  // be previewed immediately, including entries without a generated page yet.
+  const original = content.innerHTML.trim();
   try {
-    const response = await fetch('blog-posts.json');
-    const data = await response.json();
-    displayRecentPosts(data.posts);
-  } catch (error) {
-    console.error('Error loading blog posts:', error);
+    const response = await fetch(root + "blog-posts.json");
+    if (!response.ok) return;
+    const { posts } = await response.json();
+    const id = standaloneId || previewId;
+    const post = posts.find(entry => String(entry.id) === id);
+    if (standaloneId && !post) return;
+    const template = document.createElement("template");
+    if (post) {
+      document.title = post.title + " · Miguel Cruz";
+      template.innerHTML = renderArticle(post, root);
+      document.querySelector(".earlier-notes")?.setAttribute("hidden", "");
+    } else {
+      template.innerHTML = renderIndex(posts, entry =>
+        published.get(String(entry.id)) || "blog.html?post=" + encodeURIComponent(entry.id));
+    }
+    if (template.innerHTML.trim() !== original) {
+      content.replaceChildren(template.content);
+      document.dispatchEvent(new Event("writing-rendered"));
+    }
+  } catch {
+    // Keep the static edition available while offline.
   }
 }
 
-function displayRecentPosts(posts) {
-  // Get the top 3 most recent posts
-  const recentPosts = posts.slice(0, 3);
-  const container = document.getElementById('recent-blog-posts');
-
-  if (!container) return;
-
-  container.innerHTML = '';
-
-  recentPosts.forEach(post => {
-    const postHTML = `
-      <article class="message is-link">
-        <div class="message-header">
-          <p>${post.category}</p>
-        </div>
-        <div class="message-body">
-          <div class="columns">
-            <div class="column is-one-third">
-              <figure class="image is-3by2">
-                <img src="${post.image}" alt="${post.title}">
-              </figure>
-            </div>
-            <div class="column is-two-thirds">
-              <p class="title is-4">${post.title}</p>
-              <p class="subtitle is-6">Posted on ${post.date}</p>
-              <p class="content">
-                ${post.excerpt}
-              </p>
-              ${post.githubUrl ? `<a class="button is-primary" href="${post.githubUrl}" target="_blank">Read more</a>` : ''}
-            </div>
-          </div>
-        </div>
-      </article>
-    `;
-    container.insertAdjacentHTML('beforeend', postHTML);
-  });
-}
-
-// Load posts when page loads
-document.addEventListener('DOMContentLoaded', loadBlogPosts);
-
-progressively.init({
-    delay: 100,
-    throttle: 300,
-    smBreakpoint: 600,
-    onLoad: function(elem) {
-      console.log(elem);
-    },
-    onLoadComplete: function() {
-      console.log('All images have finished loading (Blog)! ');
-    }
-  });
-
+if (!followOldLink()) refreshWriting();
+window.addEventListener("hashchange", followOldLink);

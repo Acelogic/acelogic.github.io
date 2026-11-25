@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#ffffee">
+  <meta name="description" content="How Linux joined a running display coprocessor, shared its address tables, and kept presenting frames after the panel powered back on.">
+  <title>Bringing the M5 MacBook Air’s Internal Display Up on Linux · Miguel Cruz</title>
+  <link rel="icon" href="../favicon.ico">
+  <link rel="stylesheet" href="../CSS/global.css">
+  <link rel="stylesheet" href="../CSS/blog.css">
+  <script defer src="../JS/layout.js"></script>
+  <script type="module" src="../JS/blog.js"></script>
+  <script type="module" src="../JS/type-titles.js"></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="site-name" href="../index.html">mcruz.me</a>
+    <button class="nav-toggle" type="button" aria-controls="site-links" aria-expanded="false" hidden>Menu</button>
+    <nav id="site-links" class="links" aria-label="Main navigation">
+        <a href="../index.html">Home</a>
+        <a href="../projects.html">Projects</a>
+        <a href="../school.html">Coursework</a>
+        <a href="../blog.html" aria-current="page">Writing</a>
+        <a href="../gallery.html">Hardware Lab</a>
+    </nav>
+  </header>
+  <main id="main">
+    <div id="writing-content" data-post-id="7">
+<article class="essay">
+      <header class="essay-header">
+        <a class="back-to-writing" href="../blog.html">← All writing</a>
+        <h1>Bringing the M5 MacBook Air’s Internal Display Up on Linux</h1>
+        <p class="essay-deck">How Linux joined a running display coprocessor, shared its address tables, and kept presenting frames after the panel powered back on.</p>
+        <p class="entry-meta">Miguel Cruz · <time datetime="2026-11-24">November 24, 2026</time> · 6 min read
+        </p>
+      </header>
+      <details class="article-contents">
+        <summary>On this page</summary>
+        <ul><li><a href="#section-1">Attaching to a display already in motion</a></li>
+<li><a href="#section-2">Agreeing on which memory a device address means</a></li>
+<li><a href="#section-3">Giving the firmware a surface to present</a></li>
+<li><a href="#section-4">Why the second power-on needs its own test</a></li></ul>
+      </details>
+      <div class="essay-body">
+<p>The 13-inch M5 MacBook Air can already show a picture when Linux starts. Apple's boot firmware has powered the panel, chosen a mode, and left a framebuffer for the next stage. A console can draw into that buffer. The harder milestone was getting Linux to present a new frame through the display coprocessor, receive confirmation that the frame went on screen, and do it again after turning the panel off and on. My patch for the J813 MacBook Air targeted that sequence on the M5's T8142 chip and the H17-generation display firmware supplied with macOS 26. It builds on DjDeveloperr's H17 work. <a href="https://github.com/aurora-silicon/linux/pull/166">Native M5 Air display patch and hardware report</a>.</p>
+
+<h2 id="section-1">Attaching to a display already in motion</h2>
+<p>The display coprocessor, abbreviated DCP, runs firmware independently of the main CPU. By the time the Linux driver probes it, iBoot has left that firmware running. Its memory mappings are live and some of its translation tables are locked. Restarting the processor would discard the session Linux is supposed to join. I gave the T8142 driver an explicit setting for adopting a live session. It reads the coprocessor's control register and requires the run bit to be set. If that precondition fails, probing ends with an error. Otherwise the driver initializes the RTKit mailbox transport and negotiates with the running firmware. <a href="https://github.com/aurora-silicon/linux/blob/1f30c693c1f133260b83ddc29e5cb2939cc64346/drivers/gpu/drm/apple/dcp.c#L1941-L1957">Run-state check</a>. <a href="https://github.com/aurora-silicon/linux/blob/1f30c693c1f133260b83ddc29e5cb2939cc64346/drivers/gpu/drm/apple/dcp.c#L2034-L2053">RTKit wake sequence</a>.</p>
+
+<p>The board description says which hardware participates in that conversation. It gives DCP a mailbox with interrupts for send and receive events. It identifies separate DART address translators for the coprocessor and the display subsystem. It also assigns the primary scanout plane to IOMFB surface 2. The loader has aliases for the DCP, display, and display DMA nodes so it can attach the correct memory reservations to each. The DCP and display DART nodes begin disabled in the board file. The loader enables them after preparing the handoff. The presence of the hardware and readiness for Linux to drive it are two different facts in that device tree. <a href="https://github.com/aurora-silicon/linux/blob/1f30c693c1f133260b83ddc29e5cb2939cc64346/arch/arm64/boot/dts/apple/t8142-j813-display.dtsi">J813 display topology</a>.</p>
+
+<h2 id="section-2">Agreeing on which memory a device address means</h2>
+<p>A DART translates an address issued by a device into a physical memory address. The loader has to describe the memory the display firmware already occupies so that Linux keeps it reserved. One firmware segment can span noncontiguous physical pages, and two addresses can refer to the same physical page. The companion m1n1 change walks the inherited translations page by page. Memory already inside a reserved carveout needs its device address recorded. Other pages also need a physical reservation. On the J813 tests, the loader report counted seven regions and fifteen mappings and found that the exported reservations matched the live translations on every boot it checked. <a href="https://github.com/aurora-silicon/m1n1/pull/19">Loader change and reservation checks</a>.</p>
+
+<p>There is a second agreement to make inside the kernel. Imagine a firmware page table that maps device pages A and B to physical pages P and Q. Linux prepares a table describing A as P. The tables occupy different memory and Linux's table says nothing about B. Both nevertheless give the same answer for the page Linux needs. The new DART check walks each valid Linux leaf entry and asks whether the firmware entry is valid and points to the same physical page. If every such entry matches, the hardware can keep walking its original table. The extra firmware mapping for B remains available to its owner. <a href="https://github.com/aurora-silicon/linux/blob/1f30c693c1f133260b83ddc29e5cb2939cc64346/drivers/iommu/apple-dart.c#L520-L555">Comparing Linux and firmware leaf entries</a>.</p>
+
+<p>Now suppose Linux later requests B as R. A comparison made only at attach time would miss that disagreement. The map path checks each affected page in a firmware-owned slot before accepting a new mapping and returns <code>-EBUSY</code> when the physical addresses differ. It can publish Linux translations into vacant root slots and track which slots Linux installed. It also consults the firmware mappings when asked to translate a shared device address that its own table cannot resolve. Those rules let a live coprocessor and a new kernel refer to the same buffers through the whole session. <a href="https://github.com/aurora-silicon/linux/blob/1f30c693c1f133260b83ddc29e5cb2939cc64346/drivers/iommu/apple-dart.c#L1167-L1228">Checking later mappings and resolving shared addresses</a>.</p>
+
+<h2 id="section-3">Giving the firmware a surface to present</h2>
+<p>After RTKit connects, the display protocol still has to establish a framebuffer surface. H17 asks the host to create its default surface through a callback. The host must make a nested registration call with the surface description, provide room for the firmware's four-byte reply, and then acknowledge the original request. An acknowledgment sent before registration would leave the display engine without a valid surface base. The source documents the resulting DMA fault. The driver also obtains the framebuffer dimensions from the firmware, checks that both fit the supported bounds, and sends the dimensions back before committing the description. The board file therefore needs no table of panel timings copied from another machine. <a href="https://github.com/aurora-silicon/linux/blob/1f30c693c1f133260b83ddc29e5cb2939cc64346/drivers/gpu/drm/apple/iomfb_template.c#L349-L367">Surface-registration callback</a>. <a href="https://github.com/aurora-silicon/linux/blob/1f30c693c1f133260b83ddc29e5cb2939cc64346/drivers/gpu/drm/apple/iomfb_template.c#L1024-L1058">Firmware dimension exchange</a>.</p>
+
+<p>The timing generator presents a different problem. The standard call to program the digital output mode fails on this live H17 panel. The driver source records the firmware error and the consequence. Without a running timing generator, the host receives neither the vertical blank event nor confirmation that a frame swap completed. The H17 path inherits the mode programmed at boot. The panel reports 2560 by 1664 pixels. With the 64-pixel notch region hidden, Linux exposes 2560 by 1600 at 60 Hz. That figure describes the configured display mode. It supplies no measurement of the rate at which a particular application produces new frames. <a href="https://github.com/aurora-silicon/linux/blob/1f30c693c1f133260b83ddc29e5cb2939cc64346/drivers/gpu/drm/apple/iomfb_template.c#L85-L96">Inherited mode handling</a>. <a href="https://github.com/aurora-silicon/linux/blob/1f30c693c1f133260b83ddc29e5cb2939cc64346/Documentation/arch/arm64/apple-j813.rst#L246-L278">Reported panel geometry and mode</a>.</p>
+
+<h2 id="section-4">Why the second power-on needs its own test</h2>
+<p>Turning the display back on makes the firmware report its modes again. The parser sets a variable-refresh flag when a mode supplies the corresponding information. The old allocator left the mode array uninitialized, so a fixed-refresh mode could inherit a nonzero flag from memory previously used for something else. The result was a plausible-looking mode object that asked the driver to issue the wrong kind of swap. A desktop that had been presenting frames could stall after the display powered back up. The fix allocates a zeroed array. A mode starts with variable refresh off, and the parser turns it on only when it reads the relevant evidence. It applies to the shared parser across chips. <a href="https://github.com/aurora-silicon/linux/blob/1f30c693c1f133260b83ddc29e5cb2939cc64346/drivers/gpu/drm/apple/parser.c#L518-L535">Variable-refresh conditions</a>. <a href="https://github.com/aurora-silicon/linux/blob/1f30c693c1f133260b83ddc29e5cb2939cc64346/drivers/gpu/drm/apple/parser.c#L573-L599">Mode allocation and parsing</a>.</p>
+
+<p>The hardware results in the pull request are tied to a RAM-booted J813 using public m1n1 and U-Boot with their companion changes. Five fresh boots of the final kernel source reached DCP startup and registered <code>appledrmfb</code> as the console, with no reported DART faults or warnings. A sixth attempt stopped at the preflight before Linux because DCP had not yet settled. Three display power-off and power-on cycles completed with page flips continuing. KDE Plasma 6.6 then provided a Wayland desktop on the internal panel with the built-in keyboard and trackpad. Software rendering produced its frames. The evidence from that series covers internal scanout, power cycling, and interactive desktop use. GPU acceleration, brightness control, a separate cursor plane, external displays, and system suspend remained outside its validation. <a href="https://github.com/aurora-silicon/linux/pull/166">Test conditions and results from the merged patch</a>.</p>
+      </div>
+      <footer class="essay-footer links">
+        <a href="../blog.html">All writing</a>
+        <a href="https://github.com/aurora-silicon/linux/pull/166">Project source</a>
+      </footer>
+    </article>
+    </div>
+  </main>
+  <footer class="page-footer">
+    <address>Miguel Cruz</address>
+    <nav class="links" aria-label="Site information">
+      <a href="../webinfo.html">About this site</a>
+      <a href="mailto:mcruz@mcruz.me">Email</a>
+    </nav>
+  </footer>
+</body>
+</html>

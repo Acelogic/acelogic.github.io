@@ -1,0 +1,97 @@
+.year-links { font: 0.9rem/1.5 var(--mono); margin-top: 0.85rem; }
+.year-group { margin-top: 1.4rem; }
+.essay-index {
+  list-style: none;
+  padding: 0;
+  max-width: 52rem;
+}
+.essay-index li {
+  display: grid;
+  grid-template-columns: 8.75rem minmax(0, 1fr);
+  padding: 1.1rem 0;
+  margin: 0;
+  border-bottom: 1px solid var(--rule);
+}
+.essay-index .entry-title { font-size: 1.4rem; }
+.essay-index p { margin-top: 0.35rem; }
+.entry-date, .entry-meta, .essay-photo figcaption {
+  color: var(--muted);
+  font: 0.79rem/1.6 var(--mono);
+}
+.entry-date { padding-top: 0.15rem; }
+.essay { max-width: 43rem; margin-inline: auto; }
+.essay-header {
+  padding: 1.6rem 0 1.2rem;
+  border-bottom: 3px double var(--rule);
+}
+.back-to-writing { display: inline-block; margin-bottom: 1rem; font-size: 0.9rem; }
+.essay-header h1 { font-size: clamp(2.1rem, 4.6vw, 3.25rem); }
+.essay-deck { margin: 0.8rem 0; font-size: 1.13rem; line-height: 1.48; }
+.revision { display: block; }
+.essay-body { font-size: 1.07rem; line-height: 1.65; overflow-wrap: break-word; }
+.essay-body p, .essay-body ul, .essay-body ol { margin: 0.8rem 0; }
+.essay-body h2 { margin: 1.7rem 0 0.55rem; font-size: 1.52rem; }
+.essay-body code { font: 0.85em/1.5 var(--mono); }
+.essay-body pre {
+  max-width: 100%;
+  overflow-x: auto;
+  background: #f5f3df;
+  border-left: 2px solid var(--rule);
+  padding: 0.8rem 1rem;
+  font: 0.87rem/1.55 var(--mono);
+  tab-size: 4;
+}
+.essay-body pre code { font: inherit; }
+.essay-table { max-width: 100%; overflow-x: auto; margin: 1rem 0; }
+.essay-body table { width: 100%; border-collapse: collapse; font-size: 0.94em; }
+.essay-table table { min-width: 26rem; }
+.essay-body caption { text-align: left; font-style: italic; padding-bottom: 0.4rem; }
+.essay-body td, .essay-body th { text-align: left; vertical-align: top; padding: 0.4rem; border-bottom: 1px solid var(--rule); }
+.essay-photo { margin: 1.4rem 0 0; }
+.essay-photo img { display: block; max-width: 100%; width: auto; height: auto; max-height: 25rem; }
+.essay-photo a { display: inline-block; max-width: 100%; }
+.article-contents { padding-top: 0.8rem; font-size: 0.92rem; }
+.article-contents summary { cursor: pointer; color: var(--muted); }
+.article-contents ul { margin: 0.4rem 0 0; }
+.essay-photo figcaption { margin-top: 0.35rem; }
+.essay-footer { margin-top: 1.5rem; padding-top: 0.8rem; border-top: 1px solid var(--rule); }
+@media screen and (max-width: 1100px) {
+  .year-links { gap: 0 1.05rem; margin-top: 0.35rem; }
+  .year-links a, .back-to-writing, .essay-footer a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+  .article-contents { padding: 0; border-bottom: 1px solid var(--rule); }
+  .article-contents summary { padding: 0.65rem 0; min-height: 44px; }
+  .article-contents ul { margin: 0 0 0.65rem; }
+  .article-contents a { display: inline-block; padding: 0.35rem 0; }
+  .essay-header { padding-top: 0.55rem; }
+  .back-to-writing { margin-bottom: 0.4rem; }
+  .essay-index li { grid-template-columns: 1fr; align-content: start; gap: 0.25rem; }
+  .essay-index .entry-title { line-height: 1.2; }
+}
+@media screen and (min-width: 700px) and (max-width: 1100px) {
+  .essay { max-width: 64ch; }
+  .essay-index {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 2rem;
+    max-width: none;
+  }
+  .essay-index li { padding: 0.9rem 0 1.05rem; }
+  .essay-index .entry-title { font-size: 1.28rem; }
+}
+@media screen and (max-width: 699px) {
+  .year-group { margin-top: 1.1rem; }
+  .year-group h2 { font-size: 1.45rem; }
+  .essay-index li { padding: 0.8rem 0 0.95rem; }
+  .essay-index .entry-title { font-size: 1.29rem; }
+  .essay-header h1 { font-size: clamp(1.9rem, 7vw, 2.45rem); }
+  .essay-deck { font-size: 1.05rem; line-height: 1.5; }
+  .essay-body { font-size: 1.03rem; line-height: 1.65; }
+  .essay-body h2 { font-size: 1.38rem; }
+  .essay-body pre { padding: 0.65rem 0.75rem; }
+  .essay-table table { min-width: 26rem; }
+  .essay-table th, .essay-table td { padding: 0.4rem; }
+}

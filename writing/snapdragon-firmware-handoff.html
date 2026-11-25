@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#ffffee">
+  <meta name="description" content="What a photograph, a framebuffer, and six USB cable pairings can establish about code running on an ASUS Zenbook A16.">
+  <title>Keeping a Snapdragon Laptop Talking After the Firmware Handoff · Miguel Cruz</title>
+  <link rel="icon" href="../favicon.ico">
+  <link rel="stylesheet" href="../CSS/global.css">
+  <link rel="stylesheet" href="../CSS/blog.css">
+  <script defer src="../JS/layout.js"></script>
+  <script type="module" src="../JS/blog.js"></script>
+  <script type="module" src="../JS/type-titles.js"></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="site-name" href="../index.html">mcruz.me</a>
+    <button class="nav-toggle" type="button" aria-controls="site-links" aria-expanded="false" hidden>Menu</button>
+    <nav id="site-links" class="links" aria-label="Main navigation">
+        <a href="../index.html">Home</a>
+        <a href="../projects.html">Projects</a>
+        <a href="../school.html">Coursework</a>
+        <a href="../blog.html" aria-current="page">Writing</a>
+        <a href="../gallery.html">Hardware Lab</a>
+    </nav>
+  </header>
+  <main id="main">
+    <div id="writing-content" data-post-id="10">
+<article class="essay">
+      <header class="essay-header">
+        <a class="back-to-writing" href="../blog.html">← All writing</a>
+        <h1>Keeping a Snapdragon Laptop Talking After the Firmware Handoff</h1>
+        <p class="essay-deck">What a photograph, a framebuffer, and six USB cable pairings can establish about code running on an ASUS Zenbook A16.</p>
+        <p class="entry-meta">Miguel Cruz · <time datetime="2026-11-24">November 24, 2026</time> · 6 min read
+        </p>
+      </header>
+      <details class="article-contents">
+        <summary>On this page</summary>
+        <ul><li><a href="#section-1">Finding the end of the firmware console</a></li>
+<li><a href="#section-2">Drawing a receipt for the handoff</a></li>
+<li><a href="#section-3">From a photograph to a conversation</a></li>
+<li><a href="#section-4">Moving the cable is part of the test</a></li>
+<li><a href="#section-5">What I would keep for the next port</a></li></ul>
+      </details>
+      <div class="essay-body">
+      <figure class="essay-photo">
+        <a href="../Assets/writing/q1n1-framebuffer.png"><img src="../Assets/writing/q1n1-framebuffer.png" alt="q1n1 boot console read back from the Zenbook A16 framebuffer"></a>
+        <figcaption>A later framebuffer readback from the running A16, published in the q1n1 repository.</figcaption>
+      </figure>
+<p>There are two different ways for a laptop to tell you that it has booted your program. Firmware can print a message on the program’s behalf, or the program can draw one for itself after the firmware has stopped providing that service. Both messages look perfectly convincing in a photograph. For q1n1, the distinction matters. I wanted to know whether code was still running on the Snapdragon after the UEFI handoff, at the Arm exception level the bring-up tools expected. A message printed five instructions too early would answer a much easier question.</p>
+<p>q1n1 adapts the bring-up ideas in Asahi Linux’s m1n1 to the ASUS Zenbook A16. The tested machine is the UX3607OA with a Snapdragon X2E-96-100. On an Apple Silicon Mac, m1n1 enters through Apple’s boot environment. The A16 loads q1n1 as a UEFI application. The useful part to carry over is the conversation with a second computer. The part that needs new engineering is everything the laptop must do to stay reachable once firmware stops answering its calls. <a href="https://github.com/Snapintosh/q1n1/blob/5b440d42b7f10a19aa24d43b63e293ca0405fd12/README.md">Project overview and upstream attribution</a>.</p>
+
+<h2 id="section-1">Finding the end of the firmware console</h2>
+<p>Before the handoff, the program can ask UEFI about the current display mode and memory layout. It can also print an error and return. Those conveniences make preflight useful. If the graphics protocol supplies a framebuffer address and usable dimensions, the next stage has somewhere to draw. If the processor reports its current exception level, the program can record where it started. A preflight result still describes an application inside the boot environment. There is another observation to make on the other side.</p>
+<p>The handoff itself has a bookkeeping constraint. UEFI gives a caller a memory map and a key identifying that particular map. An allocation between reading the map and handing back its key can make the key stale. q1n1 reserves storage for the map before beginning that exchange. Inside the retry loop it obtains the map, records the descriptor information, and calls <code>ExitBootServices</code> with the returned key. An invalid key can trigger a fresh attempt. The loop avoids unrelated firmware calls such as printing another progress line. At this particular boundary, adding a diagnostic can change the state the diagnostic is supposed to describe. <a href="https://github.com/Snapintosh/q1n1/blob/5b440d42b7f10a19aa24d43b63e293ca0405fd12/platform/uefi/main.c#L1139-L1166">Memory-map capture and handoff</a>.</p>
+
+<h2 id="section-2">Drawing a receipt for the handoff</h2>
+<p>A framebuffer is an area of memory containing the pixels being displayed. Starting a drawing routine requires surprisingly little information, but each piece has a job. The base locates the first pixel. Width and height bound the visible rectangle. The stride says how many pixels of storage separate two successive rows. The pixel format tells the writer which bits represent red, green, and blue. A glyph renderer can draw text using those values without asking firmware to draw a single character.</p>
+<p>Consider an illustrative display with eight visible pixels on each row and a stride of ten. Pixel three on row two lives at index 23 when rows and columns start at zero. A calculation using visible width would choose index 19, which is padding at the end of the previous stored row. The first printed row could look entirely correct while the second is displaced and the third begins to wrap strangely. This is why the q1n1 renderer takes width and stride separately. Its initialization also checks the visible geometry against the size advertised for the framebuffer. <a href="https://github.com/Snapintosh/q1n1/blob/5b440d42b7f10a19aa24d43b63e293ca0405fd12/platform/uefi/fbcon.c#L42-L83">Framebuffer geometry and pixel writes</a>.</p>
+<p>The first hardware record, dated September 16, 2026, reports exception level 2 at entry and again after the handoff. EL2 is the Arm execution level normally used by a hypervisor. The display showed the standalone q1n1 console along with the post-handoff status. A second boot reproduced the observation on the same firmware configuration. Reading the two fields separately matters here. This machine already entered at EL2. Exiting boot services did not itself promote the program to another execution level. <a href="https://github.com/Snapintosh/q1n1/blob/5b440d42b7f10a19aa24d43b63e293ca0405fd12/docs/A16-FIRST-EL2-BOOT.md">First boot and repeat boot records</a>.</p>
+
+<h2 id="section-3">From a photograph to a conversation</h2>
+<p>The photograph preserved a moment. It could show which message reached the screen, but a still image could not tell us whether a heartbeat kept advancing. The early binary also reported that USB serial was unimplemented. Reading a UART description from firmware meant that q1n1 had found some information about a port. It did not mean that a character had passed through a cable to another computer. A useful next milestone was a host receiving a reply generated by code on the A16 after the handoff.</p>
+<p>USB brings a second distinction into the experiment. A connector on the enclosure is a physical location. Host and device are roles on a particular connection. The later q1n1 work supported both a serial-class device connection and a network-class connection with the A16 acting as host. A direct cable and a cable routed through a dock can therefore reach the same laptop by different paths. Remembering one serial-device name on the Mac would only find the path that happened to create that name.</p>
+<p>In an early experiment a controller enumerated the Mac and the receive path saw 33 Ethernet frames. Three attempted echo requests yielded no reply. Those observations belonged in separate columns of the notebook. Enumeration identified a partner, incoming frames demonstrated one direction of traffic, and there was still no successful round trip. That separation narrowed the next question from “Does USB work?” to “What happens to the return path?” <a href="https://github.com/Snapintosh/q1n1/blob/5b440d42b7f10a19aa24d43b63e293ca0405fd12/docs/A16-USB-PORT-INDEPENDENCE.md#physical-evidence-before-changes">The initial two-port observations</a>.</p>
+
+<h2 id="section-4">Moving the cable is part of the test</h2>
+<p>Independent state for each A16 controller allowed one connection to keep working while the other disappeared. On the Mac, candidate endpoints could be discovered and checked by asking for a valid protocol reply. That design had a physical test that a stationary laptop could never complete. Move the cable to the other port. See whether the old connection is retired, whether the new endpoint is found, and whether the next exchange belongs to the same running stage.</p>
+<p>The qualification record describes a revealing failure during a cable move. Device mode could remain marked configured while the controller reported sustained suspend. Waiting exclusively for an explicit disconnect left discovery stuck. Treating every brief suspend as removal would disturb a healthy connection. The recorded fix accommodates short suspends and rechecks a port after an extended one. The native test models both cases. Physically moving the cable supplies the additional evidence that the model represents something this controller actually does. <a href="https://github.com/Snapintosh/q1n1/blob/5b440d42b7f10a19aa24d43b63e293ca0405fd12/docs/A16-USB-PORT-INDEPENDENCE.md#failures-found-by-physical-movement-and-handoff-tests">Cable movement and suspend behavior</a>.</p>
+<p>Three tested Mac ports and two A16 ports give six direct combinations. Every combination in the record passed a 256 KiB write/read comparison and 100 no-operation requests. The large transfer checks that the bytes returned agree with the bytes sent. The small requests exercise repeated framing. For the dock, one Mac port worked through the dock to both A16 ports, another showed no USB hub on that route, and the remaining pairings were untested. That table is useful precisely because its empty cells survive publication. A reader deciding which topology to repeat can see where the evidence ends. <a href="https://github.com/Snapintosh/q1n1/blob/5b440d42b7f10a19aa24d43b63e293ca0405fd12/docs/A16-USB-PORT-INDEPENDENCE.md#direct-cable-port-movement-results">The physical pairing matrix</a>.</p>
+
+<h2 id="section-5">What I would keep for the next port</h2>
+<p>I would keep the early photograph even after getting a much better console. It answers a question about the transition that a later successful USB session can obscure. I would also keep the exact firmware configuration with that photograph, the QEMU run that exercises the binary, and the cable matrix alongside the driver changes. They describe different parts of the system. One shows execution across the handoff on this board, one makes software regressions repeatable, and one records what happens when the physical connection changes.</p>
+<p>The payoff for Snapintosh is a machine that can answer questions before a full guest operating system is ready. When an experiment stops producing output, there is a series of smaller observations to revisit. Did firmware start the program? Did the framebuffer show the post-handoff state? Did the selected endpoint return a reply from the current stage? That sequence has proved much more useful to document than a single claim that a laptop boots.</p>
+      </div>
+      <footer class="essay-footer links">
+        <a href="../blog.html">All writing</a>
+        <a href="https://github.com/Snapintosh/q1n1">Project source</a>
+      </footer>
+    </article>
+    </div>
+  </main>
+  <footer class="page-footer">
+    <address>Miguel Cruz</address>
+    <nav class="links" aria-label="Site information">
+      <a href="../webinfo.html">About this site</a>
+      <a href="mailto:mcruz@mcruz.me">Email</a>
+    </nav>
+  </footer>
+</body>
+</html>

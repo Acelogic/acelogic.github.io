@@ -1,136 +1,109 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<!doctype html>
 <html lang="en">
-
 <head>
-  <title>Welcome</title>
   <meta charset="utf-8">
-  <meta name="theme-color" content="#000000">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0,  user-scalable=0, maximum-scale=1.0">
-
-  <link rel="stylesheet" type="text/css" href="CSS/font.css">
-  </link>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/progressively/dist/progressively.min.css">
-  </link>
-  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.4/css/bulma.min.css">
-  </link>
-  <link rel="stylesheet" type="text/css" href="CSS/global.css">
-  </link>
-  <link rel="stylesheet" type="text/css" href="CSS/index.css">
-  </link>
-  <link rel="stylesheet" href="https://afeld.github.io/emoji-css/emoji.css">
-  </link>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-  <script src="JS/compLoader.js"></script>
-  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/js/all.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/progressively/1.2.5/progressively.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/typeit/8.8.7/index.umd.min.js"></script>
-  <script defer src="JS/index.js"></script>
-
-<script>
-  document.addEventListener('keydown', function (event) {
-    if (event.code === 'Space' && !event.target.classList.contains('consoleLine')) {
-      event.preventDefault();
-    }
-  });
-</script>
-
-
-
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#ffffee">
+  <meta name="description" content="Miguel Cruz’s work on Linux bring-up, console emulation, machine learning on Apple Silicon, and options trading tools.">
+  <title>Miguel Cruz’s Home Page</title>
+  <link rel="icon" href="favicon.ico">
+  <link rel="stylesheet" href="CSS/global.css">
+  <script defer src="JS/layout.js"></script>
+  <script type="module" src="JS/type-titles.js"></script>
 </head>
-
-
 <body>
-  <div id="master"></div>
-  <!-- NavBar insertation Code-->
-  <div id="navBar"></div>
-
-  <!-- Title Hero-->
-  <section class="hero is-parent has-background-black  heroPOS ">
-    <div class="hero-body ">
-      <div class="container">
-        <h1 class="title has-text-centered has-text-white">
-          <span class="type-it-hero"> Hello World... Welcome! </span><i class="em em-wave"></i>
-        </h1>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="site-name" href="index.html">mcruz.me</a>
+    <button class="nav-toggle" type="button" aria-controls="site-links" aria-expanded="false" hidden>Menu</button>
+    <nav id="site-links" class="links" aria-label="Main navigation">
+        <a href="index.html" aria-current="page">Home</a>
+        <a href="projects.html">Projects</a>
+        <a href="school.html">Coursework</a>
+        <a href="blog.html">Writing</a>
+        <a href="gallery.html">Hardware Lab</a>
+    </nav>
+  </header>
+  <main id="main">
+    <header class="intro">
+      <div class="intro-art">
+        <img class="portrait" src="Assets/miguel-at-google.png" width="400" height="400" alt="Miguel Cruz standing outside a Google building">
       </div>
-    </div>
-  </section>
-  <!--Content-->
-  <div class="vid-container">
-    <video async height="100%" width="100%" playsinline autoplay muted loop poster="/Assets/Coding.jpg">
-      <source src="Assets\Coding.webm" type="video/webm">
-    </video>
-
-    <div class="vid-overlay">
-      <div class="columns">
-        <div class="column is-half is-offset-one-quarter">
-          <div class="hero-body">
-            <h3 class="subtitle is-3 has-text-centered has-text-weight-light has-text-white ">
-              <span class="vid-text type-it-video"></span>
-            </h3>
-          </div>
+      <div>
+        <h1>Miguel Cruz’s Home Page</h1>
+        <p>I got my start in 2011 tinkering with iOS 5 and Android Gingerbread. These days I bring up Linux on Apple and Qualcomm chips, port machine-learning models to the Mac, and write tools for my own options trading.</p>
+        <div class="links">
+          <a href="mailto:mcruz@mcruz.me">mcruz@mcruz.me</a>
+          <a href="https://github.com/Acelogic">GitHub</a>
+          <a href="https://www.linkedin.com/in/mcruz4600/">LinkedIn</a>
         </div>
       </div>
-    </div>
-  </div>
+    </header>
 
+    <nav class="home-jumps links" aria-label="On the home page">
+      <a href="#software">Software</a>
+      <a href="#courses">Coursework</a>
+      <a href="#writing">Writing</a>
+    </nav>
+    <div class="home-columns">
+      <div>
+        <section aria-labelledby="software">
+          <h2 id="software">Selected software</h2>
+          <h3>Operating systems and emulation</h3>
+          <ul>
+            <li>With <a href="https://github.com/aurora-silicon/linux">Aurora Silicon</a>, I work on Linux support for Apple Silicon Macs. Two of my M5 patches bring up the <a href="https://github.com/aurora-silicon/linux/pull/166">display</a> and <a href="https://github.com/aurora-silicon/linux/pull/165">USB host controllers</a>.</li>
+            <li><a href="https://github.com/Snapintosh/Snapintosh">Snapintosh</a> boots Apple’s XNU kernel on a Snapdragon laptop. Its companion <a href="https://github.com/Snapintosh/q1n1">q1n1</a> lets me probe the hardware over USB.</li>
+            <li>I started exploring emulation with <a href="https://github.com/Acelogic/CHIP-8-C">CHIP-8 in C</a>. My latest emulation project is <a href="https://github.com/Acelogic/VibeStation5">VibeStation5</a>, an experimental PlayStation 4 and 5 runtime.</li>
+            <li>I work with the <a href="https://omarchy.org/teams/">Omarchy M and Dragon teams</a> to bring this Linux desktop to Macs and Snapdragon machines.</li>
+          </ul>
+          <h3>Models and tools for Apple Silicon</h3>
+          <ul>
+            <li><a href="https://github.com/Acelogic/LTX-2-MLX">LTX-2 MLX</a> brings Lightricks’ video generation models to the Mac. <a href="https://github.com/Acelogic/Retrieval-based-Voice-Conversion-MLX">RVC MLX</a> uses the same framework for voice conversion.</li>
+            <li><a href="https://github.com/Acelogic/macgtop">MacGTop</a> lets you watch an Apple Silicon GPU from the terminal.</li>
+          </ul>
+          <h3>Markets</h3>
+          <ul>
+            <li>I use the <a href="https://github.com/Acelogic/Earnings-Volatility-Calculator">Earnings Volatility Calculator</a> to compare what the options market is pricing in before earnings with how much the stock has actually moved.</li>
+            <li><a href="https://github.com/Acelogic/Testfol-MarginStresser">Testfol Margin Stresser</a> replays historical drawdowns so I can see how leverage, margin requirements, and taxes affect a portfolio.</li>
+          </ul>
+          <p class="more"><a href="projects.html">Complete project index</a></p>
+        </section>
 
-
-  <section class="hero is-white is-fullheight">
-    <div class="hero-body">
-      <div class="container">
-        <h1 class="title has-text-centered">
-          <span class="console-typeit"> A Wild Console Has Appeared! <i class="em em-keyboard"></i> </span>
-        </h1>
-        <h2 class="subtitle has-text-centered">
-          <span class="console-typeit2"> What should you do ? </span>
-        </h2>
-
-        <!--Console-->
-        <div id="bar">
-          <div id="green"></div>
-          <div id="yellow"></div>
-          <div id="red"></div>
-          <div id="barText"> root@mcruz.me - ssh </div>
-        </div>
-      <div id="console">
-        <div class="greetingText has-text-success ">Welcome. Type 'help' for list of available commands.</div>
-        <div class="consoleLine blinkplz has-text-success">miguel:~ root$ </div>
-        <input id="console-input" type="text" class="hidden-input">
       </div>
 
-      </div>
+      <aside>
+        <section aria-labelledby="courses">
+          <h2 id="courses">Coursework</h2>
+          <ul class="course-index">
+            <li><a href="school.html#csc-212">CSC 212</a><span>Programming and computation</span></li>
+            <li><a href="school.html#csc-322">CSC 322</a><span>Operating systems</span></li>
+            <li><a href="school.html#csc-344">CSC 344</a><span>Programming languages</span></li>
+            <li><a href="school.html#csc-365">CSC 365</a><span>Data structures and algorithms</span></li>
+            <li><a href="school.html#csc-366">CSC 366</a><span>Cognitive science</span></li>
+            <li><a href="school.html#csc-490">CSC 490</a><span>Machine learning</span></li>
+          </ul>
+        </section>
 
+        <section aria-labelledby="writing">
+          <h2 id="writing">Writing</h2>
+          <ul class="writing-index">
+            <li><time datetime="2026">2026</time><a href="writing/m5-macbook-air-linux-display.html">Bringing the M5 MacBook Air’s Internal Display Up on Linux</a></li>
+            <li><time datetime="2026">2026</time><a href="writing/porting-voice-conversion-to-mlx.html">Porting Voice Conversion to MLX on Apple Silicon</a></li>
+            <li><time datetime="2026">2026</time><a href="writing/what-a-margin-backtest-measures.html">What a Margin Backtest Measures</a></li>
+            <li><time datetime="2020">2020</time><a href="writing/unix-shell-job-control.html">Implementing a Unix Shell in C</a></li>
+            <li><time datetime="2019">2019</time><a href="writing/chip-8-pong-in-c.html">Building a CHIP-8 Emulator in C</a></li>
+          </ul>
+          <p class="more"><a href="blog.html">All writing</a></p>
+        </section>
+      </aside>
     </div>
-    </div>
-  </section>
-
-<!--Resume Section-->
-<section class="hero is-medium is-primary">
-  <div class="hero-body">
-    <div class="container has-text-centered">
-      <h1 class="title">
-        My Resume
-      </h1>
-      <h2 class="subtitle">
-        Download my resume in PDF format to learn more about my skills and experience.
-      </h2>
-      <div class="buttons is-centered">
-        <a href="/path/to/resume.pdf" download class="button is-info is-medium">
-          <span class="icon">
-            <i class="fas fa-download"></i>
-          </span>
-          <span>Download</span>
-        </a>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-  <!--Footer Insertion Code-->
-  <div id="footer"></div>
+  </main>
+  <footer class="page-footer">
+    <address>Miguel Cruz</address>
+    <nav class="links" aria-label="Site information">
+      <a href="webinfo.html">About this site</a>
+      <a href="mailto:mcruz@mcruz.me">Email</a>
+    </nav>
+  </footer>
 </body>
-
 </html>

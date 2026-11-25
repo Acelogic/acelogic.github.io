@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#ffffee">
+  <meta name="description" content="Two copies of a program are running. What happens when you press Control-Z? A shell lab trace follows the signal from the terminal to the job table.">
+  <title>Implementing a Unix Shell in C · Miguel Cruz</title>
+  <link rel="icon" href="../favicon.ico">
+  <link rel="stylesheet" href="../CSS/global.css">
+  <link rel="stylesheet" href="../CSS/blog.css">
+  <script defer src="../JS/layout.js"></script>
+  <script type="module" src="../JS/blog.js"></script>
+  <script type="module" src="../JS/type-titles.js"></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="site-name" href="../index.html">mcruz.me</a>
+    <button class="nav-toggle" type="button" aria-controls="site-links" aria-expanded="false" hidden>Menu</button>
+    <nav id="site-links" class="links" aria-label="Main navigation">
+        <a href="../index.html">Home</a>
+        <a href="../projects.html">Projects</a>
+        <a href="../school.html">Coursework</a>
+        <a href="../blog.html" aria-current="page">Writing</a>
+        <a href="../gallery.html">Hardware Lab</a>
+    </nav>
+  </header>
+  <main id="main">
+    <div id="writing-content" data-post-id="2">
+<article class="essay">
+      <header class="essay-header">
+        <a class="back-to-writing" href="../blog.html">← All writing</a>
+        <h1>Implementing a Unix Shell in C</h1>
+        <p class="essay-deck">Two copies of a program are running. What happens when you press Control-Z? A shell lab trace follows the signal from the terminal to the job table.</p>
+        <p class="entry-meta">Miguel Cruz · <time datetime="2020-04-08">April 8, 2020</time> · 5 min read
+          <span class="revision">Revised <time datetime="2026-11-24">November 24, 2026</time></span>
+        </p>
+      </header>
+      <details class="article-contents">
+        <summary>On this page</summary>
+        <ul><li><a href="#section-1">What the shell remembers</a></li>
+<li><a href="#section-2">Following two jobs through a stop and resume</a></li>
+<li><a href="#section-3">When a foreground job has two processes</a></li>
+<li><a href="#section-4">The race between launch and bookkeeping</a></li></ul>
+      </details>
+      <div class="essay-body">
+<p>Start two copies of the same program, leave one in the background, and press Control-Z while the other is running in the foreground. Which copy should stop? How does the shell know when it can print another prompt? These questions are the core of my tiny Unix shell. The CS:APP Shell Lab gave me a driver, helper programs, and traces that make job control observable. My implementation connects the commands at the prompt to the process groups and signals underneath. <a href="https://github.com/Acelogic/TSHImplementation/blob/b1b0a71e3d741513fcef823c3bd7cc74f30f220f/src/README">Shell Lab files</a>.</p>
+
+<h2 id="section-1">What the shell remembers</h2>
+<p>Each entry in the job table holds a process ID, a shell-assigned job number, the original command line, and a state. The process ID is how the shell refers to a child when talking to the kernel. The job number is the short handle you can type as <code>%1</code> or <code>%2</code>. Keeping the original text lets <code>jobs</code> show that two instances of the same executable came from different commands. At most one entry should be in the foreground. Other entries can be running in the background or stopped. <a href="https://github.com/Acelogic/TSHImplementation/blob/b1b0a71e3d741513fcef823c3bd7cc74f30f220f/src/mcruz-tsh.c#L24-L51">Job states and records</a>.</p>
+
+<p>When I enter <code>./myspin 4 &amp;</code>, the parser removes the final ampersand from the argument list and reports a background command. For an external command the shell forks, and the child calls <code>setpgid(0, 0)</code> to become the leader of a new process group. It then passes the executable path, arguments, and inherited environment to <code>execve</code>. This explains why the traces spell out paths such as <code>./myspin</code> and <code>/bin/echo</code>. The implementation passes the first argument directly to the kernel. <a href="https://github.com/Acelogic/TSHImplementation/blob/b1b0a71e3d741513fcef823c3bd7cc74f30f220f/src/mcruz-tsh.c#L166-L219">Launching a command</a>.</p>
+
+<h2 id="section-2">Following two jobs through a stop and resume</h2>
+<p>The ninth trace starts one helper for four seconds in the background and another for five seconds in the foreground. The helper sleeps in one-second increments. After two seconds, the driver sends the shell the stop signal an interactive user would normally produce with Control-Z. It then asks for the job list, resumes job 2 in the background, and asks for the list again. <a href="https://github.com/Acelogic/TSHImplementation/blob/b1b0a71e3d741513fcef823c3bd7cc74f30f220f/src/trace09.txt">Trace 9</a>.</p>
+
+<p>The foreground lookup is what makes that sequence work. The stop handler finds job 2's process ID and passes its negative to <code>kill</code>. In this call, a negative ID addresses the process group. The background helper belongs to a different group and keeps running. The first listing in the reference transcript shows job 1 running and job 2 stopped. On <code>bg %2</code>, the shell looks up the entry by its job number, sends the group <code>SIGCONT</code>, and records the background state. The second listing shows both jobs running. Their process IDs stay the same throughout. <a href="https://github.com/Acelogic/TSHImplementation/blob/b1b0a71e3d741513fcef823c3bd7cc74f30f220f/src/tshref.out">Reference transcript</a>.</p>
+
+<h2 id="section-3">When a foreground job has two processes</h2>
+<p>The two-helper example still leaves room for a subtle mistake. If the stop handler sent a signal to just the individual foreground PID, the first listing would look right. Each copy of <code>myspin</code> consists of a single process. The twelfth trace changes that detail. It launches <code>./mysplit 4</code>, which forks its own child. The child sleeps in a loop while the original process waits for it. The shell still creates exactly one job-table entry because it directly launched only the original process. Both processes inherit membership in the foreground job's group. <a href="https://github.com/Acelogic/TSHImplementation/blob/b1b0a71e3d741513fcef823c3bd7cc74f30f220f/src/mysplit.c#L14-L35">Two-process helper</a>.</p>
+
+<p>Trace 12 sends the stop signal two seconds in and then requests both <code>jobs</code> and <code>/bin/ps a</code>. Those commands observe different things. My shell can report its one entry as stopped as soon as the stop handler updates the table. The <code>ps</code> output observes the individual processes. In the saved reference transcript there are two entries for <code>./mysplit 4</code>, and both have status <code>T</code>, meaning stopped. If the shell had signaled just the leader, the child could have continued sleeping while the job list still looked correct. <a href="https://github.com/Acelogic/TSHImplementation/blob/b1b0a71e3d741513fcef823c3bd7cc74f30f220f/src/trace12.txt">Group-stop trace</a>. <a href="https://github.com/Acelogic/TSHImplementation/blob/b1b0a71e3d741513fcef823c3bd7cc74f30f220f/src/tshref.out">Reference process listing</a>.</p>
+
+<p>Resuming uses the same group identity in the opposite direction. With <code>fg %1</code>, the builtin finds job 1, sets its table state to foreground, sends <code>SIGCONT</code> to the group, and enters <code>waitfg</code>. Both the waiting parent and the sleeping child can resume. The child eventually exits, its parent collects it and exits in turn, and the shell collects the parent. With <code>bg %1</code>, the group likewise resumes, but the shell leaves the prompt available for another command. Looking at which process waits for which child explains why the terminal sees a single job throughout that sequence. <a href="https://github.com/Acelogic/TSHImplementation/blob/b1b0a71e3d741513fcef823c3bd7cc74f30f220f/src/mcruz-tsh.c#L350-L382">Resume and foreground-wait code</a>.</p>
+
+<h2 id="section-4">The race between launch and bookkeeping</h2>
+<p>When a child exits, the kernel can deliver <code>SIGCHLD</code> while the parent is still processing the launch. My handler calls <code>waitpid</code> in a loop, asking for any child whose status is ready. <code>WNOHANG</code> lets the loop finish when there is nothing left to collect. <code>WUNTRACED</code> also reports stopped children. An ordinary exit removes the corresponding job from the table. <a href="https://github.com/Acelogic/TSHImplementation/blob/b1b0a71e3d741513fcef823c3bd7cc74f30f220f/src/mcruz-tsh.c#L396-L422">Collecting child status</a>.</p>
+
+<p>Reading the launch code again, I can see a timing hole. The parent blocks signals before the fork, but unblocks them before adding the new job. A short-lived child can finish in that interval. The handler can collect its exit and find no record to remove. Then the parent inserts a job whose process has already gone. A foreground wait can keep checking that stale entry. Registering the child while the signals are still blocked would give the handler a consistent table when delivery resumes. <a href="https://github.com/Acelogic/TSHImplementation/blob/b1b0a71e3d741513fcef823c3bd7cc74f30f220f/src/mcruz-tsh.c#L180-L218">Signal ordering in the parent</a>.</p>
+
+<p>Signal reporting has a similar gap between intent and observation. The interrupt handler prints a termination message and deletes the job immediately after forwarding <code>SIGINT</code>. Forwarding requests an action from another process. The status returned by <code>waitpid</code> is where the shell can learn how that process actually ended. A program can handle an interrupt itself, for example. The implementation also prints fixed signal numbers in parts of the status handler. Reading the terminating or stopping signal from the returned status would distinguish an interrupt from other reasons a child was stopped or killed. <a href="https://github.com/Acelogic/TSHImplementation/blob/b1b0a71e3d741513fcef823c3bd7cc74f30f220f/src/mcruz-tsh.c#L396-L442">Signal forwarding and status reporting</a>.</p>
+
+<p>The traces capture what a user should see, down to which job stays running. They also explain why the same transcript can look right while an ordering bug survives. A sleeping helper leaves ample time to register the child. A command such as <code>/bin/true</code> can exit while the parent is still returning from <code>fork</code>. The first case tells me where Control-Z went. The second makes me ask whether the shell remembered the job in time to forget it.</p>
+      </div>
+      <footer class="essay-footer links">
+        <a href="../blog.html">All writing</a>
+        <a href="https://github.com/Acelogic/TSHImplementation">Project source</a>
+      </footer>
+    </article>
+    </div>
+  </main>
+  <footer class="page-footer">
+    <address>Miguel Cruz</address>
+    <nav class="links" aria-label="Site information">
+      <a href="../webinfo.html">About this site</a>
+      <a href="mailto:mcruz@mcruz.me">Email</a>
+    </nav>
+  </footer>
+</body>
+</html>

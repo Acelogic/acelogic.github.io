@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#ffffee">
+  <meta name="description" content="Take two samples from one process and work out its share of GPU time. Then follow the numbers into the terminal to see which comparisons hold up.">
+  <title>What MacGTop’s GPU Percentages Actually Measure · Miguel Cruz</title>
+  <link rel="icon" href="../favicon.ico">
+  <link rel="stylesheet" href="../CSS/global.css">
+  <link rel="stylesheet" href="../CSS/blog.css">
+  <script defer src="../JS/layout.js"></script>
+  <script type="module" src="../JS/blog.js"></script>
+  <script type="module" src="../JS/type-titles.js"></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="site-name" href="../index.html">mcruz.me</a>
+    <button class="nav-toggle" type="button" aria-controls="site-links" aria-expanded="false" hidden>Menu</button>
+    <nav id="site-links" class="links" aria-label="Main navigation">
+        <a href="../index.html">Home</a>
+        <a href="../projects.html">Projects</a>
+        <a href="../school.html">Coursework</a>
+        <a href="../blog.html" aria-current="page">Writing</a>
+        <a href="../gallery.html">Hardware Lab</a>
+    </nav>
+  </header>
+  <main id="main">
+    <div id="writing-content" data-post-id="11">
+<article class="essay">
+      <header class="essay-header">
+        <a class="back-to-writing" href="../blog.html">← All writing</a>
+        <h1>What MacGTop’s GPU Percentages Actually Measure</h1>
+        <p class="essay-deck">Take two samples from one process and work out its share of GPU time. Then follow the numbers into the terminal to see which comparisons hold up.</p>
+        <p class="entry-meta">Miguel Cruz · <time datetime="2026-11-24">November 24, 2026</time> · 6 min read
+        </p>
+      </header>
+      <details class="article-contents">
+        <summary>On this page</summary>
+        <ul><li><a href="#section-1">Three bars, three driver properties</a></li>
+<li><a href="#section-2">Turning a counter into a rate</a></li>
+<li><a href="#section-3">When a row starts at zero</a></li>
+<li><a href="#section-4">Why the history can fool your eye</a></li>
+<li><a href="#section-5">Reading the monitor during an experiment</a></li></ul>
+      </details>
+      <div class="essay-body">
+<p>Imagine a video export slows down. A terminal monitor says the GPU is 61% busy, the window compositor is at the top of a process list, and the tiler and renderer each have a bar of their own. Which number helps explain the export? Before I would blame an application, I’d want to know where each number came from and what interval it describes. Building MacGTop gave me a way to ask those questions of the Apple Silicon GPU from a terminal.</p>
+<p>The monitor is written in C. Its display combines information from the I/O Registry with process and power measurements that have different collection paths. Drawing a bar is easy once there is a percentage. The more interesting code decides whether the available data supports calculating that percentage at all. <a href="https://github.com/Acelogic/macgtop/blob/c3791a674587322909d853a3b3d8b8e7b910f18e/src/main.c#L147-L219">The monitor’s collection and display loop</a>.</p>
+
+<h2 id="section-1">Three bars, three driver properties</h2>
+<p>For the device panel, MacGTop reads a <code>PerformanceStatistics</code> dictionary from the GPU service. The dictionary exposes separate properties for device, tiler, and renderer utilization. The code reads each as an integer and passes the values to the display. That distinction matters when reading a screen capture. The tiler and renderer are parts of a graphics pipeline. Each percentage refers to activity in its own part, and the device figure is a third value supplied by the driver. Adding the two stage percentages together does not produce a meaningful device reading.</p>
+<p>Think about two stages working on successive pieces of a frame. Stage B can be working on an earlier piece at the moment stage A starts a later one. A time interval can therefore contain work at both stages. Even if a display shows 50% alongside each, the two labels alone leave the timing of their overlap unknown. The registry code does not reconstruct that timeline. The useful follow-up is to compare how each indicator changes when the workload changes, then look for a GPU trace if the order of the work matters. <a href="https://github.com/Acelogic/macgtop/blob/c3791a674587322909d853a3b3d8b8e7b910f18e/src/iokit.c#L208-L226">The three registry readings</a>.</p>
+
+<h2 id="section-2">Turning a counter into a rate</h2>
+<p>The per-process path starts with a different quantity. MacGTop walks the GPU service’s user clients, reads the creator’s process ID, and collects accumulated GPU time from entries in the client’s <code>AppUsage</code> array. A process can own multiple clients, so the code first adds the available counters for the same PID. A single sample now answers “How much time has been counted up to this point?” It takes a second sample and a clock to answer “How quickly is that total growing?” <a href="https://github.com/Acelogic/macgtop/blob/c3791a674587322909d853a3b3d8b8e7b910f18e/src/iokit.c#L402-L492">Collecting client counters by PID</a>.</p>
+<p>Here is an illustrative pair of samples for a single process with two clients. The counters in this table are in milliseconds for readability. The implementation uses nanoseconds after converting the elapsed Mach clock ticks with the timebase. The second sample is taken 1,200 milliseconds after the first.</p>
+<div class="essay-table" tabindex="0" role="region" aria-label="Data table"><table><caption>Example cumulative GPU time for one PID</caption>
+<thead><tr><th scope="col">Sample</th><th scope="col">Client A</th><th scope="col">Client B</th><th scope="col">Sum</th></tr></thead>
+<tbody><tr><th scope="row">First</th><td>2,000 ms</td><td>800 ms</td><td>2,800 ms</td></tr>
+<tr><th scope="row">Second</th><td>2,180 ms</td><td>860 ms</td><td>3,040 ms</td></tr></tbody></table></div>
+<p>The difference is 240 milliseconds. Dividing 240 by 1,200 and multiplying by 100 gives a process reading of 20%. Dividing by the nominal one-second refresh setting would give 24%. The monitor uses the measured interval because a collection cycle includes work of its own. It walks the registry, collects other fields, formats the output, and then sleeps. A requested sleep duration tells me little about how long all of those operations took together. <a href="https://github.com/Acelogic/macgtop/blob/c3791a674587322909d853a3b3d8b8e7b910f18e/src/iokit.c#L493-L533">Elapsed-time calculation and sample retention</a>.</p>
+<p>There is another ambiguity in the 20% figure. The process could accumulate those 240 milliseconds in one concentrated burst or in many small bursts spread across the interval. Both histories end at the same counter. For an interactive workload, a burst at the wrong moment can matter more than the average. Shortening the sample interval can show more of the variation, although it also means asking the system for information more often. For an individual missed frame, I would want timestamps for that frame’s work and deadline.</p>
+
+<h2 id="section-3">When a row starts at zero</h2>
+<p>The first time a PID appears, the monitor has no previous counter for it. The calculation also requires the previous accumulated value to be positive and the elapsed interval to be greater than zero. A newly discovered client can consequently appear in the process list before the monitor has a usable rate. The list of candidate processes and the calculation of their rates are separate steps. For example, the discovery code explicitly looks for the window server. To learn whether the compositor dominated that interval, I need to see its counter advance. <a href="https://github.com/Acelogic/macgtop/blob/c3791a674587322909d853a3b3d8b8e7b910f18e/src/iokit.c#L282-L324">Finding processes to display</a>.</p>
+<p>Changing the set of clients can also change a PID’s total. Suppose a client with a large accumulated time disappears before the next sample. Summing the remaining clients can produce a smaller total even though they continued doing work. The current code subtracts unsigned counters and accepts a delta only if it fits inside the elapsed wall time. A backwards jump typically becomes a very large unsigned difference and fails that check. The next collection stores a new baseline. If I were revising the UI, I’d give an unavailable or discontinuous sample its own mark. Zero recorded activity and a missing pair of comparable readings answer different questions.</p>
+
+<h2 id="section-4">Why the history can fool your eye</h2>
+<p>The device panel includes sparklines, a convenient way to see a busy period after its instantaneous bar has fallen. Looking at the actual display code revealed an important detail of this revision. The loop appends only device utilization to a history buffer. The drawing function receives that one buffer and uses it beside all three bars. The live tiler and renderer values are independent registry readings, but their little historical traces repeat the device series. A screenshot showing three identical peaks does not establish that the stages peaked together. <a href="https://github.com/Acelogic/macgtop/blob/c3791a674587322909d853a3b3d8b8e7b910f18e/src/display.c#L105-L131">Utilization bars and sparklines</a>.</p>
+<p>A useful regression check for a future three-history implementation would feed the renderer deliberately different sequences. Let device utilization rise steadily, tiler activity stay flat, and renderer activity spike in the middle. A person reviewing the output can recognize each pattern immediately. Three synchronized series of realistic-looking numbers would make the wiring harder to verify. This is one of those interfaces where a deliberately simple input can explain a defect better than a beautiful screenshot of a live desktop.</p>
+
+<h2 id="section-5">Reading the monitor during an experiment</h2>
+<p>For a long-running task, I would start with the device reading before the workload begins, keep sampling through the active phase, and let the process rows establish their baselines. Then I would ask whether the proposed explanation fits all three pieces of evidence. Does device activity rise at the expected time? Does accumulated time grow for the process of interest? Does the behavior change in the predictable direction when the workload ends? Those observations can support a hypothesis about who is using the GPU without pretending the monitor measured which shader or command buffer was responsible.</p>
+<p>The public revision has one more practical wrinkle. Its JSON output writes the device utilization field, while the interactive screen exposes more of the collected data. Saving that JSON stream is useful for a device-level comparison. It cannot later recreate the process table somebody remembers seeing on screen. I’d decide which question an experiment needs to answer before choosing its recording format. The most useful thing MacGTop gives me is a way to read one number closely enough to know what other measurement to collect next. <a href="https://github.com/Acelogic/macgtop/blob/c3791a674587322909d853a3b3d8b8e7b910f18e/src/main.c#L193-L231">History, export, and refresh behavior</a>.</p>
+      </div>
+      <footer class="essay-footer links">
+        <a href="../blog.html">All writing</a>
+        <a href="https://github.com/Acelogic/macgtop">Project source</a>
+      </footer>
+    </article>
+    </div>
+  </main>
+  <footer class="page-footer">
+    <address>Miguel Cruz</address>
+    <nav class="links" aria-label="Site information">
+      <a href="../webinfo.html">About this site</a>
+      <a href="mailto:mcruz@mcruz.me">Email</a>
+    </nav>
+  </footer>
+</body>
+</html>

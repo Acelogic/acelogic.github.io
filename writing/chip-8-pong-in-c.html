@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#ffffee">
+  <meta name="description" content="Fourteen bytes set up both paddles in Pong. Follow them from a ROM file into CHIP-8 memory and through my C disassembler.">
+  <title>Building a CHIP-8 Emulator in C · Miguel Cruz</title>
+  <link rel="icon" href="../favicon.ico">
+  <link rel="stylesheet" href="../CSS/global.css">
+  <link rel="stylesheet" href="../CSS/blog.css">
+  <script defer src="../JS/layout.js"></script>
+  <script type="module" src="../JS/blog.js"></script>
+  <script type="module" src="../JS/type-titles.js"></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="site-name" href="../index.html">mcruz.me</a>
+    <button class="nav-toggle" type="button" aria-controls="site-links" aria-expanded="false" hidden>Menu</button>
+    <nav id="site-links" class="links" aria-label="Main navigation">
+        <a href="../index.html">Home</a>
+        <a href="../projects.html">Projects</a>
+        <a href="../school.html">Coursework</a>
+        <a href="../blog.html" aria-current="page">Writing</a>
+        <a href="../gallery.html">Hardware Lab</a>
+    </nav>
+  </header>
+  <main id="main">
+    <div id="writing-content" data-post-id="1">
+<article class="essay">
+      <header class="essay-header">
+        <a class="back-to-writing" href="../blog.html">← All writing</a>
+        <h1>Building a CHIP-8 Emulator in C</h1>
+        <p class="essay-deck">Fourteen bytes set up both paddles in Pong. Follow them from a ROM file into CHIP-8 memory and through my C disassembler.</p>
+        <p class="entry-meta">Miguel Cruz · <time datetime="2019-11-15">November 15, 2019</time> · 5 min read
+          <span class="revision">Revised <time datetime="2026-11-24">November 24, 2026</time></span>
+        </p>
+      </header>
+      <details class="article-contents">
+        <summary>On this page</summary>
+        <ul><li><a href="#section-1">Giving the ROM an address</a></li>
+<li><a href="#section-2">Reading Pong's opening instructions</a></li>
+<li><a href="#section-3">Following a call into the score display</a></li>
+<li><a href="#section-4">Where the listing ends</a></li></ul>
+      </details>
+      <div class="essay-body">
+<p>The first fourteen bytes of the Pong ROM in my CHIP-8 project describe both paddles. Four instructions give their positions, one picks a sprite, and two draw it. Those bytes make a good tour of the code because you can follow them from a file on disk to an address in the emulated machine, then read what each instruction asks the machine to do. My C implementation gets as far as loading the ROM and producing that listing. <a href="https://github.com/Acelogic/CHIP-8-C/blob/dc02680c1ec27ce3cd52ecfb1e110a2f6a139f54/roms/Pong.rom">Pong ROM</a>.</p>
+
+<h2 id="section-1">Giving the ROM an address</h2>
+<p>I represented the machine in one C structure. It has 4,096 bytes of memory, sixteen byte-sized registers, a program counter, an index register called <code>I</code>, and room for sixteen return addresses. The screen is a 64 by 32 array laid out in one dimension. Initialization clears the arrays and sets the program counter to hexadecimal <code>0x200</code>. It also copies eighty bytes of font data into low memory at <code>0x50</code>. There are five rows for each hexadecimal digit, so the glyph for A begins at <code>0x82</code>. <a href="https://github.com/Acelogic/CHIP-8-C/blob/dc02680c1ec27ce3cd52ecfb1e110a2f6a139f54/include/cpu.h#L4-L53">Machine layout and font</a>.</p>
+
+<p>The ROM file starts at byte zero on disk, but its instructions use addresses relative to the machine. My loader writes file byte zero at <code>0x200</code>, file byte one at <code>0x201</code>, and so on. That leaves 3,584 bytes for a program. The loader checks that length, copies the bytes, and writes the whole memory image to <code>memory.dump</code>. You can inspect both the built-in font and the program in a single file. <a href="https://github.com/Acelogic/CHIP-8-C/blob/dc02680c1ec27ce3cd52ecfb1e110a2f6a139f54/src/cpu.c#L121-L156">ROM loading and memory dump</a>.</p>
+
+<h2 id="section-2">Reading Pong's opening instructions</h2>
+<p>From the checkout, <code>make</code> builds the command-line tool. Run <code>./emu -d roms/Pong.rom</code> to see the disassembly. Each line includes the machine address, the two instruction bytes, and a mnemonic. Here are the first seven instructions with their operands written out in words. <a href="https://github.com/Acelogic/CHIP-8-C/blob/dc02680c1ec27ce3cd52ecfb1e110a2f6a139f54/src/disassembler.c#L5-L51">Instruction decoder</a>.</p>
+
+<pre><code>0200  6A 02   Load VA with 2
+0202  6B 0C   Load VB with 12
+0204  6C 3F   Load VC with 63
+0206  6D 0C   Load VD with 12
+0208  A2 EA   Set I to 0x2EA
+020A  DA B6   Draw 6 rows at (VA, VB)
+020C  DC D6   Draw 6 rows at (VC, VD)</code></pre>
+
+<p>The pieces have different meanings depending on the first four bits. In <code>6A 02</code>, the 6 selects a load, A identifies the destination register, and the entire second byte is the value. In <code>A2 EA</code>, three digits combine into one address. In <code>DA B6</code>, A and B name two registers, and 6 gives the sprite height. My decoder uses a shift to select the instruction family, then masks or shifts the remaining bits according to that family's format. <a href="https://github.com/Acelogic/CHIP-8-C/blob/dc02680c1ec27ce3cd52ecfb1e110a2f6a139f54/src/disassembler.c#L89-L103">Address and sprite decoding</a>.</p>
+
+<p>You can check the paddle shape independently. Run <code>./emu -f roms/Pong.rom</code>, then <code>od -An -tx1 -j 746 -N 6 memory.dump</code>. Decimal 746 is the address the ROM placed in <code>I</code>. The six bytes there are all <code>80</code> in hexadecimal. Each row has only its leftmost bit set, so the same six-byte sprite describes a one-pixel-wide paddle on each side of the screen. The file offset for those bytes is just <code>0xEA</code>. The extra <code>0x200</code> comes from the loader.</p>
+
+<h2 id="section-3">Following a call into the score display</h2>
+<p>A few bytes after the paddles, Pong gives the reader a different exercise. At <code>0x20E</code>, it loads zero into register <code>VE</code>. At <code>0x210</code>, the bytes <code>22 D4</code> call the subroutine at <code>0x2D4</code>. To find the subroutine in the ROM, subtract the program base again. File offset <code>0xD4</code> is 212 in decimal. From the checkout, <code>od -An -tx1 -j 212 -N 22 roms/Pong.rom</code> shows the complete routine, including its return. <a href="https://github.com/Acelogic/CHIP-8-C/blob/dc02680c1ec27ce3cd52ecfb1e110a2f6a139f54/roms/Pong.rom">Pong program bytes</a>.</p>
+
+<pre><code>02D4  A2 F2   Point I at the three-byte score buffer
+02D6  FE 33   Write the decimal digits of VE to that buffer
+02D8  F2 65   Load those three bytes into V0, V1, V2
+02DA  F1 29   Point I at the font glyph for the digit in V1</code></pre>
+
+<p>Take a hypothetical score of 27. The decimal conversion at <code>0x2D6</code> would write three ordinary bytes, <code>00 02 07</code>, at addresses <code>0x2F2</code> through <code>0x2F4</code>. Loading those bytes puts the tens digit in <code>V1</code> and the units digit in <code>V2</code>. The font lookup then selects the glyph for 2. With this project's font base and five bytes per glyph, that makes <code>I</code> equal to <code>0x5A</code>. These are the same font bytes copied during initialization, now used for something a player can recognize. <a href="https://github.com/Acelogic/CHIP-8-C/blob/dc02680c1ec27ce3cd52ecfb1e110a2f6a139f54/src/disassembler.c#L118-L146">Font, decimal, and register-transfer opcodes</a>.</p>
+
+<p>The rest of the routine supplies the coordinates. It sets <code>V4</code> to hexadecimal <code>14</code>, or 20, and <code>V5</code> to zero. A five-row draw would put the tens digit at (20, 0). Adding hexadecimal <code>15</code> to <code>V4</code> moves the next draw to (41, 0). The routine looks up <code>V2</code>'s glyph, draws the units digit, and returns. Its caller would continue at <code>0x212</code>. With the actual initial <code>VE</code> value of zero, both lookups would select the zero glyph.</p>
+
+<p>This also gives a concrete design question for the unfinished execution loop. My stack helper pushes the current program counter, and the pop helper restores it. To return to <code>0x212</code>, the call implementation and instruction fetch would have to agree on when to advance by two. If the saved address were still <code>0x210</code> when the return completed, the next fetch would call the score routine again. The same two bytes make a perfectly readable listing either way. Only executing the control flow would expose the difference. <a href="https://github.com/Acelogic/CHIP-8-C/blob/dc02680c1ec27ce3cd52ecfb1e110a2f6a139f54/src/cpu.c#L87-L94">Stack helpers</a>.</p>
+
+<h2 id="section-4">Where the listing ends</h2>
+<p>The disassembler walks forward two bytes at a time. It will eventually reach those six sprite bytes and try to print instructions for them as well. A reader who follows the pointer in <code>I</code> can recognize the drawing data. The linear scan has no record of how the program uses it. Likewise, seeing a draw mnemonic in the listing tells you what the ROM requests. In this revision, the command-line paths end after disassembly or a memory dump. Rendering those paddles, moving them in response to keys, and advancing the game would require an execution loop and frontend. <a href="https://github.com/Acelogic/CHIP-8-C/blob/dc02680c1ec27ce3cd52ecfb1e110a2f6a139f54/src/main.c#L7-L38">Command-line entry points</a>.</p>
+      </div>
+      <footer class="essay-footer links">
+        <a href="../blog.html">All writing</a>
+        <a href="https://github.com/Acelogic/CHIP-8-C">Project source</a>
+      </footer>
+    </article>
+    </div>
+  </main>
+  <footer class="page-footer">
+    <address>Miguel Cruz</address>
+    <nav class="links" aria-label="Site information">
+      <a href="../webinfo.html">About this site</a>
+      <a href="mailto:mcruz@mcruz.me">Email</a>
+    </nav>
+  </footer>
+</body>
+</html>

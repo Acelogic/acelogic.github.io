@@ -1,212 +1,185 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<!doctype html>
 <html lang="en">
-
 <head>
-  <title>Welcome</title>
   <meta charset="utf-8">
-  <meta name="theme-color" content="#000000">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0,  user-scalable=0, maximum-scale=1.0">
-
-  <link rel="stylesheet" type="text/css" href="CSS/font.css">
-  </link>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/progressively/dist/progressively.min.css">
-  </link>
-  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.4/css/bulma.min.css">
-  </link>
-  <link rel="stylesheet" type="text/css" href="CSS/global.css">
-  </link>
-  <link rel="stylesheet" type="text/css" href="CSS/index.css">
-  </link>
-  <link rel="stylesheet" href="https://afeld.github.io/emoji-css/emoji.css">
-  </link>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-  <script src="JS/compLoader.js"></script>
-  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/js/all.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/progressively/1.2.5/progressively.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/typeit/8.8.7/index.umd.min.js"></script>
-  <script defer src="JS/blog.js"></script>
-
-
-
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#ffffee">
+  <meta name="description" content="Project notes by Miguel Cruz, with full articles and links to source code.">
+  <title>Writing · Miguel Cruz</title>
+  <link rel="icon" href="favicon.ico">
+  <link rel="stylesheet" href="CSS/global.css">
+  <link rel="stylesheet" href="CSS/blog.css">
+  <script defer src="JS/layout.js"></script>
+  <script type="module" src="JS/blog.js"></script>
+  <script type="module" src="JS/type-titles.js"></script>
 </head>
-
-
 <body>
-  <div id="master"></div>
-  <!-- NavBar insertation Code-->
-  <div id="navBar"></div>
-
-  <!-- Title Hero-->
-  <section class="hero is-primary has-background-black">
-    <div class="hero-body">
-      <div class="container">
-        <h1 class="title">
-          <span class="Blog-Title">Blog</span> <i class="em em-lower_left_ballpoint_pen"></i>
-        </h1>
-        <h2 class="subtitle">
-          <span class="Blog-Subtitle">Read up on things I'm working on <i class="em em-bookmark_tabs"></i></span>
-        </h2>
-      </div>
-    </div>
-  </section>
-
-  <!-- Blog section -->
-  <section class="hero is-medium">
-    <div class="hero-body">
-      <div class="container">
-        <div class="columns is-centered">
-          <div class="column is-half" id="recent-blog-posts">
-            <!-- Blog posts will be loaded here dynamically -->
-          </div>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="site-name" href="index.html">mcruz.me</a>
+    <button class="nav-toggle" type="button" aria-controls="site-links" aria-expanded="false" hidden>Menu</button>
+    <nav id="site-links" class="links" aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <a href="projects.html">Projects</a>
+        <a href="school.html">Coursework</a>
+        <a href="blog.html" aria-current="page">Writing</a>
+        <a href="gallery.html">Hardware Lab</a>
+    </nav>
+  </header>
+  <main id="main">
+    <!-- Writing index begins -->
+    <div id="writing-content">
+<header class="page-title">
+      <h1>Writing</h1>
+      <p>Engineering notes on bringing up hardware, porting models, and building tools for markets. Earlier articles follow the coursework that got me started.</p>
+      <nav class="year-links links" aria-label="Browse articles by year">
+        <a href="#year-2026">2026</a> <a href="#year-2021">2021</a> <a href="#year-2020">2020</a> <a href="#year-2019">2019</a> <a href="#year-2018">2018</a>
+      </nav>
+    </header>
+<section class="year-group" aria-labelledby="year-2026">
+    <h2 id="year-2026">2026</h2>
+    <ol class="essay-index">
+      <li id="post-7">
+        <div class="entry-date"><time datetime="2026-11-24">November 24</time></div>
+        <div>
+          <h3 class="entry-title"><a href="writing/m5-macbook-air-linux-display.html">Bringing the M5 MacBook Air’s Internal Display Up on Linux</a></h3>
+          <p>How Linux joined a running display coprocessor, shared its address tables, and kept presenting frames after the panel powered back on.</p>
+          <p class="entry-meta">Operating Systems · 6 min read</p>
         </div>
-      </div>
-    </div>
-  </section>
-  <section class="hero is-fullheight is-warning has-text-centered">
-    <div class="hero-body">
-      <div class="container">
-        <h1 class="title">
-          Upcoming Events <i class="em em-star-struck"></i>
-        </h1>
-        <div class="columns is-multiline">
-          <div class="column is-one-third">
-            <article class="notification is-link">
-              <p class="title">Options Volatility Tools</p>
-              <p class="subtitle">2025 Project</p>
-              <p>Building Python tools for analyzing options volatility around earnings events and stress testing portfolio margins under various market conditions.</p>
-              <a class="button is-primary" href="https://github.com/Acelogic/Earnings-Volatility-Calculator" target="_blank">View Project</a>
-            </article>
-          </div>
-          <div class="column is-one-third">
-            <article class="notification is-link">
-              <p class="title">Computer Architecture</p>
-              <p class="subtitle">Core Interest</p>
-              <p>Deep dive into CPU design, instruction sets, and low-level firmware. Exploring how hardware and software interact at the most fundamental level.</p>
-              <a class="button is-primary" href="https://github.com/Acelogic" target="_blank">GitHub Profile</a>
-            </article>
-          </div>
-          <div class="column is-one-third">
-            <article class="notification is-link">
-              <p class="title">Operating Systems</p>
-              <p class="subtitle">Continuous Learning</p>
-              <p>From building custom shells to exploring Linux internals, I'm passionate about understanding how operating systems manage processes, memory, and I/O.</p>
-              <a class="button is-primary" href="https://github.com/nix-opus" target="_blank">Nix-Opus OS</a>
-            </article>
-          </div>
+      </li>
+      <li id="post-8">
+        <div class="entry-date"><time datetime="2026-11-24">November 24</time></div>
+        <div>
+          <h3 class="entry-title"><a href="writing/what-a-margin-backtest-measures.html">What a Margin Backtest Measures</a></h3>
+          <p>Follow a $40,000 loan through five portfolio observations to see how financing, maintenance usage, and drawdowns diverge.</p>
+          <p class="entry-meta">Markets · 6 min read</p>
         </div>
-      </div>
-    </div>
-  </section>
-  <!-- Testimonials -->
-  <section class="hero is-medium has-text-centered">
-    <div class="hero-body">
-      <div class="container">
-        <h1 class="title">
-          Testimonials <i class="em em-clap"></i>
-        </h1>
-        <div class="columns is-multiline">
-          <div class="column is-half is-offset-one-quarter">
-            <article class="message is-link">
-              <div class="message-body">
-                <p>"Miguel's work on low-level systems programming demonstrates a solid understanding of computer
-                architecture and operating systems fundamentals. His implementations of emulators and shells show
-                attention to detail and proper handling of edge cases."</p>
-                <p><strong>Computer Science Faculty</strong>, Operating Systems Course</p>
-              </div>
-            </article>
-          </div>
-          <div class="column is-half is-offset-one-quarter">
-            <article class="message is-link">
-              <div class="message-body">
-                <p>"The ability to bridge hardware and software concepts is what separates good developers from great
-                engineers. Miguel's projects in systems programming, algorithm implementation, and fintech tools
-                showcase this versatility across different domains."</p>
-                <p><strong>Technical Reviewer</strong>, GitHub Community</p>
-              </div>
-            </article>
-          </div>
+      </li>
+      <li id="post-9">
+        <div class="entry-date"><time datetime="2026-11-24">November 24</time></div>
+        <div>
+          <h3 class="entry-title"><a href="writing/porting-voice-conversion-to-mlx.html">Porting Voice Conversion to MLX on Apple Silicon</a></h3>
+          <p>Follow the hiss and vowel in a single word through pitch estimation, feature retrieval, and synthesis on the Mac.</p>
+          <p class="entry-meta">Machine Learning · 6 min read</p>
         </div>
-      </div>
-    </div>
-  </section>
-  <!-- Blog -->
-  <section class="hero is-medium has-background-black">
-    <div class="hero-body">
-      <div class="container">
-        <h1 class="title has-text-white">
-          From the Blog <i class="em em-newspaper"></i>
-        </h1>
-        <div class="columns is-multiline">
-          <div class="column is-half">
-            <article class="box">
-              <div class="media-content">
-                <p class="title is-4 has-text-white">Building RESTful APIs with Go</p>
-                <p class="subtitle is-6 has-text-white">February 10, 2021</p>
-              </div>
-              <div class="content">
-                <p>Created a CoinMarketCap API wrapper in Go to explore concurrent programming and RESTful API design.
-                Go's simplicity and performance make it ideal for building scalable backend services. This project
-                explores proper error handling, JSON marshaling, and HTTP client best practices.
-                </p>
-                <a href="https://github.com/nix-opus" class="button is-primary" target="_blank">Read More</a>
-              </div>
-            </article>
-          </div>
-          <div class="column is-half">
-            <article class="box">
-              <div class="media-content">
-                <p class="title is-4 has-text-white">Image Segmentation: Felzenszwalb Algorithm</p>
-                <p class="subtitle is-6 has-text-white">May 22, 2020</p>
-              </div>
-              <div class="content">
-                <p>Implemented Felzenszwalb's graph-based image segmentation algorithm in Java for computer vision
-                coursework. This project explores how to efficiently partition images into meaningful regions using
-                minimum spanning trees and demonstrates practical applications of graph algorithms.
-                </p>
-                <a href="https://github.com/Acelogic/ImageSegmentation" class="button is-primary" target="_blank">Read More</a>
-              </div>
-            </article>
-          </div>
-          <div class="column is-half">
-            <article class="box">
-              <div class="media-content">
-                <p class="title is-4 has-text-white">The OG CPU</p>
-                <p class="subtitle is-6 has-text-white">June 18, 2018</p>
-              </div>
-              <div class="content">
-                <figure class="image is-4by3">
-                <img class="progressive__img progressive--not-loaded" data-progressive="Assets/CPU.jpg" src="Assets/CPU-lowly.jpg" alt="Picture of me holding a Pentium 4 CPU">
-                </figure>
-                <p>My journey into computer architecture started with this Pentium 4. Understanding how CPUs execute
-                instructions, manage pipelines, and handle memory hierarchies is fundamental to writing efficient code.
-                From x86 assembly to modern multi-core architectures, the evolution of processor design continues to fascinate me.
-                </p>
-              </div>
-            </article>
-          </div>
-          <div class="column is-half">
-            <article class="box">
-              <div class="media-content">
-                <p class="title is-4 has-text-white">Twitter Feed</p>
-                <p class="subtitle is-6 has-text-white">March 1, 2023</p>
-              </div>
-              <div class="content">
-                <a class="twitter-timeline" data-width="500" data-height="500"
-                  href="https://twitter.com/Acelogic_?ref_src=twsrc%5Etfw">Tweets
-                  by Acelogic_</a>
-                <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-              </div>
-            </article>
-          </div>
+      </li>
+      <li id="post-10">
+        <div class="entry-date"><time datetime="2026-11-24">November 24</time></div>
+        <div>
+          <h3 class="entry-title"><a href="writing/snapdragon-firmware-handoff.html">Keeping a Snapdragon Laptop Talking After the Firmware Handoff</a></h3>
+          <p>What a photograph, a framebuffer, and six USB cable pairings can establish about code running on an ASUS Zenbook A16.</p>
+          <p class="entry-meta">Firmware · 6 min read</p>
         </div>
-      </div>
-
+      </li>
+      <li id="post-11">
+        <div class="entry-date"><time datetime="2026-11-24">November 24</time></div>
+        <div>
+          <h3 class="entry-title"><a href="writing/reading-apple-silicon-gpu-counters.html">What MacGTop’s GPU Percentages Actually Measure</a></h3>
+          <p>Take two samples from one process and work out its share of GPU time. Then follow the numbers into the terminal to see which comparisons hold up.</p>
+          <p class="entry-meta">Developer Tools · 6 min read</p>
+        </div>
+      </li>
+    </ol>
+    </section>
+<section class="year-group" aria-labelledby="year-2021">
+    <h2 id="year-2021">2021</h2>
+    <ol class="essay-index">
+      <li id="post-4">
+        <div class="entry-date"><time datetime="2021-02-10">February 10</time></div>
+        <div>
+          <h3 class="entry-title"><a href="writing/coinmarketcap-api-in-go.html">Building RESTful APIs with Go</a></h3>
+          <p>Follow a Bitcoin quote from a saved CoinMarketCap response through DynamoDB to a Go HTTP handler. The path explains what a successful lookup can tell you about the quote’s age.</p>
+          <p class="entry-meta">Web Development · 5 min read</p>
+        </div>
+      </li>
+    </ol>
+    </section>
+<section class="year-group" aria-labelledby="year-2020">
+    <h2 id="year-2020">2020</h2>
+    <ol class="essay-index">
+      <li id="post-3">
+        <div class="entry-date"><time datetime="2020-09-12">September 12</time></div>
+        <div>
+          <h3 class="entry-title"><a href="writing/fp-growth-market-baskets.html">FP-Growth Algorithm for Market Basket Analysis</a></h3>
+          <p>Six grocery baskets show how a prefix tree compresses transactions, and which counts you need before you can turn a pattern into an association rule.</p>
+          <p class="entry-meta">Algorithms · 5 min read</p>
+        </div>
+      </li>
+      <li id="post-5">
+        <div class="entry-date"><time datetime="2020-05-22">May 22</time></div>
+        <div>
+          <h3 class="entry-title"><a href="writing/graph-based-image-segmentation.html">Image Segmentation: Felzenszwalb Algorithm</a></h3>
+          <p>Three pixels are enough to work through a graph-based segmentation by hand and see how two bookkeeping errors in the Java code can move a boundary.</p>
+          <p class="entry-meta">Computer Vision · 5 min read</p>
+        </div>
+      </li>
+      <li id="post-2">
+        <div class="entry-date"><time datetime="2020-04-08">April 8</time></div>
+        <div>
+          <h3 class="entry-title"><a href="writing/unix-shell-job-control.html">Implementing a Unix Shell in C</a></h3>
+          <p>Two copies of a program are running. What happens when you press Control-Z? A shell lab trace follows the signal from the terminal to the job table.</p>
+          <p class="entry-meta">Operating Systems · 5 min read</p>
+        </div>
+      </li>
+    </ol>
+    </section>
+<section class="year-group" aria-labelledby="year-2019">
+    <h2 id="year-2019">2019</h2>
+    <ol class="essay-index">
+      <li id="post-1">
+        <div class="entry-date"><time datetime="2019-11-15">November 15</time></div>
+        <div>
+          <h3 class="entry-title"><a href="writing/chip-8-pong-in-c.html">Building a CHIP-8 Emulator in C</a></h3>
+          <p>Fourteen bytes set up both paddles in Pong. Follow them from a ROM file into CHIP-8 memory and through my C disassembler.</p>
+          <p class="entry-meta">Systems Programming · 5 min read</p>
+        </div>
+      </li>
+    </ol>
+    </section>
+<section class="year-group" aria-labelledby="year-2018">
+    <h2 id="year-2018">2018</h2>
+    <ol class="essay-index">
+      <li id="post-6">
+        <div class="entry-date"><time datetime="2018-06-18">June 18</time></div>
+        <div>
+          <h3 class="entry-title"><a href="writing/pentium-4-computer-architecture.html">My Journey into Computer Architecture</a></h3>
+          <p>A Pentium 4, four integers, and a short x86 loop explain why clock speed tells only part of the story.</p>
+          <p class="entry-meta">Hardware · 5 min read</p>
+        </div>
+      </li>
+    </ol>
+    </section>
     </div>
-  </section>
-  <!-- Footer insertion code -->
-  <div id="footer"></div>
+    <!-- Writing index ends -->
+    <details class="reading earlier-notes">
+      <summary>From the earlier site</summary>
+      <section>
+        <h2>Projects and interests</h2>
+        <ul>
+          <li><a href="https://github.com/Acelogic/Earnings-Volatility-Calculator">Options Volatility Tools</a> (2025). Building Python tools for analyzing options volatility around earnings events and stress testing portfolio margins under various market conditions.</li>
+          <li><a href="https://github.com/Acelogic">Computer Architecture</a>. Deep dive into CPU design, instruction sets, and low-level firmware. Exploring how hardware and software interact at the most fundamental level.</li>
+          <li><a href="https://github.com/nix-opus">Operating Systems</a>. From building custom shells to exploring Linux internals, I'm passionate about understanding how operating systems manage processes, memory, and I/O.</li>
+        </ul>
+      </section>
+      <section>
+        <h2>Testimonials</h2>
+        <blockquote>
+          <p>“Miguel's work on low-level systems programming demonstrates a solid understanding of computer architecture and operating systems fundamentals. His implementations of emulators and shells show attention to detail and proper handling of edge cases.”</p>
+          <footer>Computer Science Faculty, Operating Systems Course</footer>
+        </blockquote>
+        <blockquote>
+          <p>“The ability to bridge hardware and software concepts is what separates good developers from great engineers. Miguel's projects in systems programming, algorithm implementation, and fintech tools showcase this versatility across different domains.”</p>
+          <footer>Technical Reviewer, GitHub Community</footer>
+        </blockquote>
+      </section>
+    </details>
+  </main>
+  <footer class="page-footer">
+    <address>Miguel Cruz</address>
+    <nav class="links" aria-label="Site information">
+      <a href="webinfo.html">About this site</a>
+      <a href="mailto:mcruz@mcruz.me">Email</a>
+    </nav>
+  </footer>
 </body>
-
 </html>

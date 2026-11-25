@@ -1,69 +1,108 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<!doctype html>
 <html lang="en">
-
 <head>
-  <title>Gallery</title>
   <meta charset="utf-8">
-  <meta name="theme-color" content="#000000">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0,  user-scalable=0, maximum-scale=1.0">
-
-  <link rel="stylesheet" type="text/css" href="CSS/font.css">
-  </link>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/progressively/dist/progressively.min.css">
-  </link>
-  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.4/css/bulma.min.css">
-  </link>
-  <link rel="stylesheet" type="text/css" href="CSS/global.css">
-  </link>
-  <link rel="stylesheet" type="text/css" href="CSS/gallery.css">
-  </link>
-  <link rel="stylesheet" href="https://afeld.github.io/emoji-css/emoji.css">
-  </link>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-  <script src="JS/compLoader.js"></script>
-  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/js/all.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/progressively/1.2.5/progressively.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/typeit/8.8.7/index.umd.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.2.0/anime.min.js"></script>
-  <script defer src="JS/gallery.js"></script>
-
-
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#ffffee">
+  <meta name="description" content="Lay out dies on a silicon wafer and explore Miguel Cruz’s notes on a Pentium 4 and the Snapdragon boot console.">
+  <title>Hardware Lab · Miguel Cruz</title>
+  <link rel="icon" href="favicon.ico">
+  <link rel="stylesheet" href="CSS/global.css">
+  <link rel="stylesheet" href="CSS/gallery.css">
+  <script src="JS/gallery.js" defer></script>
+  <script defer src="JS/layout.js"></script>
+  <script type="module" src="JS/type-titles.js"></script>
 </head>
-
 <body>
-  <div id="master"></div>
-  <!-- NavBar insertation Code-->
-  <div id="navBar"></div>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="site-name" href="index.html">mcruz.me</a>
+    <button class="nav-toggle" type="button" aria-controls="site-links" aria-expanded="false" hidden>Menu</button>
+    <nav id="site-links" class="links" aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <a href="projects.html">Projects</a>
+        <a href="school.html">Coursework</a>
+        <a href="blog.html">Writing</a>
+        <a href="gallery.html" aria-current="page">Hardware Lab</a>
+    </nav>
+  </header>
+  <main id="main">
+    <header class="page-title">
+      <h1>Hardware Lab</h1>
+      <nav class="links lab-contents" aria-label="On this page">
+        <a href="#wafer-layout">Wafer layout</a>
+        <a href="#workbench">Workbench notes</a>
+      </nav>
+    </header>
 
-  <!-- Title Hero-->
-  <section class="hero is-primary has-background-black">
-    <div class="hero-body">
-      <div class="container">
-        <h1 class="title">
-          <span class="Gal-Title">Something Cool</span> <i class="em em-sunglasses"></i>
-        </h1>
-        <h2 class="subtitle">
-          <span class="Gal-Subtitle"> Usage of Anime.js for animations <i class="em em-film_frames"></i></span>
-        </h2>
+    <section class="wafer-study" aria-labelledby="wafer-layout">
+      <figure class="wafer-figure">
+        <img id="wafer-fallback" src="Assets/silicon-wafer.webp" alt="A round silicon wafer patterned with rectangular dies" width="400" height="400">
+        <canvas id="wafer-map" width="800" height="800" role="img" aria-label="Silicon wafer layout" hidden></canvas>
+        <figcaption id="wafer-key" hidden>
+          <span><i class="die-swatch" aria-hidden="true"></i>Whole die</span>
+          <span><i class="edge-swatch" aria-hidden="true"></i>Partial die at edge</span>
+        </figcaption>
+      </figure>
+      <div class="wafer-settings">
+        <h2 id="wafer-layout">How many dies fit on a wafer?</h2>
+        <p>Each rectangle is one chip before the wafer is cut. Change its width or height and watch where whole dies disappear along the curved edge.</p>
+        <form id="wafer-controls" hidden>
+          <div class="dimensions">
+            <label for="wafer-diameter">Wafer diameter
+              <select id="wafer-diameter" name="diameter">
+                <option value="150">150 mm</option>
+                <option value="200" selected>200 mm</option>
+                <option value="300">300 mm</option>
+              </select>
+            </label>
+            <label for="die-width">Die width (mm)
+              <input id="die-width" name="dieWidth" type="number" required min="3" max="40" step="0.5" value="14">
+            </label>
+            <label for="die-height">Die height (mm)
+              <input id="die-height" name="dieHeight" type="number" required min="3" max="40" step="0.5" value="12">
+            </label>
+          </div>
+          <div class="wafer-results" aria-live="polite" aria-atomic="true">
+            <p class="field-error" id="layout-error" hidden>Enter dimensions from 3 to 40 mm in half-millimeter steps. The map shows the last valid layout.</p>
+            <dl class="measurements">
+              <div><dt>Whole dies</dt><dd id="die-count"></dd></div>
+              <div><dt>Usable area covered</dt><dd id="die-coverage"></dd></div>
+            </dl>
+          </div>
+          <button type="reset">Reset dimensions</button>
+        </form>
+        <noscript><p>Enable JavaScript to change the dimensions and calculate a layout.</p></noscript>
+        <p class="model-note">The model centers one die on the wafer, leaves 0.1 mm between neighbors for cutting, and reserves a 3 mm rim. Coverage is the fraction of the inner circle occupied by whole dies.</p>
       </div>
-    </div>
-  </section>
+    </section>
 
-
-
-  <section class="hero is-primary has-background-black">
-    <div class="hero-body">
-      <div class="container">
-        <div class="wrapper"></div>
+    <section class="bench-notes" aria-labelledby="workbench">
+      <h2 id="workbench">Workbench notes</h2>
+      <div class="bench-grid">
+        <article>
+          <a class="bench-photo" href="Assets/CPU.jpg"><img src="Assets/CPU.jpg" alt="Enlarge the photo of the underside of my Pentium 4 above a motherboard" width="640" height="640" loading="lazy"></a>
+          <div>
+            <h3><a href="writing/pentium-4-computer-architecture.html">My Pentium 4</a></h3>
+            <p>The contacts facing the camera are where this chip meets the board. To follow what happens inside, I trace a four-integer sum through an x86 loop.</p>
+          </div>
+        </article>
+        <article>
+          <a class="bench-photo" href="Assets/writing/q1n1-framebuffer.png"><img src="Assets/writing/q1n1-framebuffer.png" alt="Open the full-resolution q1n1 framebuffer capture from the Zenbook A16" width="2880" height="1800" loading="lazy"></a>
+          <div>
+            <h3><a href="writing/snapdragon-firmware-handoff.html">After the Snapdragon firmware handoff</a></h3>
+            <p>These are pixels read back from the Zenbook A16’s framebuffer. The q1n1 console shows what the machine could report before a guest OS took over.</p>
+          </div>
+        </article>
       </div>
-    </div>
-  </section>
-
-
-  <!---Footer Insertion Code-->
-  <div id="footer"></div>
+    </section>
+  </main>
+  <footer class="page-footer">
+    <address>Miguel Cruz</address>
+    <nav class="links" aria-label="Site information">
+      <a href="webinfo.html">About this site</a>
+      <a href="mailto:mcruz@mcruz.me">Email</a>
+    </nav>
+  </footer>
 </body>
-
 </html>

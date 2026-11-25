@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#ffffee">
+  <meta name="description" content="Six grocery baskets show how a prefix tree compresses transactions, and which counts you need before you can turn a pattern into an association rule.">
+  <title>FP-Growth Algorithm for Market Basket Analysis · Miguel Cruz</title>
+  <link rel="icon" href="../favicon.ico">
+  <link rel="stylesheet" href="../CSS/global.css">
+  <link rel="stylesheet" href="../CSS/blog.css">
+  <script defer src="../JS/layout.js"></script>
+  <script type="module" src="../JS/blog.js"></script>
+  <script type="module" src="../JS/type-titles.js"></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="site-name" href="../index.html">mcruz.me</a>
+    <button class="nav-toggle" type="button" aria-controls="site-links" aria-expanded="false" hidden>Menu</button>
+    <nav id="site-links" class="links" aria-label="Main navigation">
+        <a href="../index.html">Home</a>
+        <a href="../projects.html">Projects</a>
+        <a href="../school.html">Coursework</a>
+        <a href="../blog.html" aria-current="page">Writing</a>
+        <a href="../gallery.html">Hardware Lab</a>
+    </nav>
+  </header>
+  <main id="main">
+    <div id="writing-content" data-post-id="3">
+<article class="essay">
+      <header class="essay-header">
+        <a class="back-to-writing" href="../blog.html">← All writing</a>
+        <h1>FP-Growth Algorithm for Market Basket Analysis</h1>
+        <p class="essay-deck">Six grocery baskets show how a prefix tree compresses transactions, and which counts you need before you can turn a pattern into an association rule.</p>
+        <p class="entry-meta">Miguel Cruz · <time datetime="2020-09-12">September 12, 2020</time> · 5 min read
+          <span class="revision">Revised <time datetime="2026-11-24">November 24, 2026</time></span>
+        </p>
+      </header>
+      <details class="article-contents">
+        <summary>On this page</summary>
+        <ul><li><a href="#section-1">Deciding what counts as one basket</a></li>
+<li><a href="#section-2">Reading a branch of the tree</a></li>
+<li><a href="#section-3">What happens when two items tie?</a></li>
+<li><a href="#section-4">Following apples back to the root</a></li>
+<li><a href="#section-5">A basket file that separates pairs from triples</a></li></ul>
+      </details>
+      <div class="essay-body">
+<p>Suppose three shoppers buy apples and two of them also buy milk. If a fourth shopper arrives with apples, how much reason do I have to expect milk in their basket? My Java market basket project starts several steps upstream of that question. The input has one grocery item per row. Before I can count a combination, I need to decide which rows belong to the same shopping trip.</p>
+<h2 id="section-1">Deciding what counts as one basket</h2>
+<p>The parser groups rows by date and member number. Under that definition, milk bought on Monday and apples bought on Friday belong to separate baskets even if the same person paid for both. Two visits from one member on the same date collapse into a single basket. That choice sets a limit on what the result can tell me about individual trips. <a href="https://github.com/Acelogic/FPGrowth/blob/2cd6d4cfb5bfd8a2fe2bf7578a032decdf7111e6/Assignment%202/src/TransactionCSVParser.java#L80-L116">Transaction grouping in the CSV parser</a>.</p>
+<p>I count support by asking how many baskets contain an item. A shopper can buy three cartons of milk and still contribute one observation of milk. The driver sets a minimum support count of 90 for the grocery data. For a small example, I’ll lower it to two and use six baskets where the arithmetic fits on paper. <a href="https://github.com/Acelogic/FPGrowth/blob/2cd6d4cfb5bfd8a2fe2bf7578a032decdf7111e6/Assignment%202/src/FPGrowth.java#L22-L81">Support counting and item ordering</a>.</p>
+<pre><code>1   bread, milk, apples
+2   bread, milk, apples
+3   bread, milk
+4   bread, apples
+5   bread
+6   milk</code></pre>
+<h2 id="section-2">Reading a branch of the tree</h2>
+<p>Bread appears in five baskets, milk in four, and apples in three. I put the most frequent item first in each basket, then insert the items into a prefix tree. The first two baskets follow exactly the same branch. Inserting basket three increments the bread and milk nodes and stops there. Basket four shares the bread node but gives it a second child, apples. Basket six starts a fresh milk branch at the root.</p>
+<p>There are now two milk nodes. The one below bread has count three, which means three baskets began with bread followed by milk in the chosen ordering. The one at the root has count one. Adding them recovers the global milk count of four. Reversing that calculation would lose information. A global count of four tells me nothing about which three baskets also had bread. The branching structure carries that evidence. <a href="https://github.com/Acelogic/FPGrowth/blob/2cd6d4cfb5bfd8a2fe2bf7578a032decdf7111e6/Assignment%202/src/FPTree.java#L27-L70">Prefix insertion in FPTree</a>.</p>
+<h2 id="section-3">What happens when two items tie?</h2>
+<p>Ordering matters because the tree only shares prefixes that look identical. In the six-basket example, the support counts happen to rank every item unambiguously. Imagine instead two receipts with identical contents, one recorded as bread then milk and the other as milk then bread. Both items have support two. Ideally both receipts increment the same two nodes. That takes a rule for breaking the tie, such as ordering equal-frequency products by name.</p>
+<p>There are two sorts in the Java code. The frequency list starts with a map ordered by product name. When sorting each receipt, however, the implementation builds a fresh map in the receipt’s own order and sorts its entries by frequency alone. A stable sort preserves the original order of a tie. Our two receipts can therefore follow different branches. An index of all nodes named milk still lets me recover milk’s total, but the bread–milk pair is split across two different choices of suffix. With a threshold of two, a miner that treats each orientation separately can drop both one-count pieces. I would give every product a position in the global ordering and use that position for every insertion. <a href="https://github.com/Acelogic/FPGrowth/blob/2cd6d4cfb5bfd8a2fe2bf7578a032decdf7111e6/Assignment%202/src/FPGrowth.java#L42-L81">The two ordering steps</a>.</p>
+<h2 id="section-4">Following apples back to the root</h2>
+<p>My tree keeps an index of nodes by item name. Looking up apples finds two nodes. One has count two and the prefix bread, milk. The other has count one and the prefix bread. These weighted paths are the conditional pattern base for apples. Bread gets a total of three and milk gets two. The pair apples and milk therefore has support two. Reading the association in one direction gives a confidence of two out of three for milk given apples. Reading it in the other direction gives two out of four for apples given milk.</p>
+<p>Working that example by hand exposes a problem in my final reporting method. Its printed confidence adds the global counts of the suffix item and one prefix item, then divides by the number of retained baskets. For apples and milk that expression gives seven divided by six. A conditional probability above one is enough to show why the report needs the joint count and the antecedent’s count. Both are available for this pair. <a href="https://github.com/Acelogic/FPGrowth/blob/2cd6d4cfb5bfd8a2fe2bf7578a032decdf7111e6/Assignment%202/src/FPTree.java#L174">The rule-reporting code</a>.</p>
+<p>Longer combinations need another step. My code pools prefix-item counts and forms subsets with a power set. Two frequent partners of apples might come from entirely separate baskets. To check whether all three occurred together, I need the weighted paths that still preserve those relationships. Han, Pei, and Yin build and mine conditional trees for that purpose. If I continued the project, I’d use the six original baskets to check each reported combination by direct counting before trusting it on a larger file. <a href="https://www.cs.sfu.ca/~jpei/publications/sigmod00.pdf">The original FP-growth paper</a>.</p>
+<h2 id="section-5">A basket file that separates pairs from triples</h2>
+<p>Here’s the smallest change I’d make to that hand check to expose the power-set problem. Start a second file with two apples-and-milk baskets, two apples-and-bread baskets, two bread-and-milk baskets, one basket of bread alone, and one of milk alone. Milk and bread each have five observations, apples four. Keep the same support threshold of two. Both apple pairs still qualify. A trip containing all three products has never occurred in this file.</p>
+<p>The apple prefix paths retain enough detail to answer the triple question. The milk path has weight two, and the separate bread path also has weight two. Neither path contains both partners. Once those paths are pooled into a map with just the two item names and totals, that distinction disappears. This is a particularly useful case for a data-mining project because every individual count looks plausible even as the resulting combination changes meaning.</p>
+<p>I would also keep the original number of baskets alongside the filtered data. Add a seventh receipt to the first file containing only a rare spice. After filtering, it contributes no tree nodes. The apple-and-milk pair still has two occurrences and the confidence for milk given apples is unchanged. Its share of all shopping trips does change, from two in six to two in seven. Remembering that empty receipt matters whenever a report turns an absolute support count into a percentage.</p>
+      </div>
+      <footer class="essay-footer links">
+        <a href="../blog.html">All writing</a>
+        <a href="https://github.com/Acelogic/FPGrowth">Project source</a>
+      </footer>
+    </article>
+    </div>
+  </main>
+  <footer class="page-footer">
+    <address>Miguel Cruz</address>
+    <nav class="links" aria-label="Site information">
+      <a href="../webinfo.html">About this site</a>
+      <a href="mailto:mcruz@mcruz.me">Email</a>
+    </nav>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#ffffee">
+  <meta name="description" content="Follow the hiss and vowel in a single word through pitch estimation, feature retrieval, and synthesis on the Mac.">
+  <title>Porting Voice Conversion to MLX on Apple Silicon · Miguel Cruz</title>
+  <link rel="icon" href="../favicon.ico">
+  <link rel="stylesheet" href="../CSS/global.css">
+  <link rel="stylesheet" href="../CSS/blog.css">
+  <script defer src="../JS/layout.js"></script>
+  <script type="module" src="../JS/blog.js"></script>
+  <script type="module" src="../JS/type-titles.js"></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="site-name" href="../index.html">mcruz.me</a>
+    <button class="nav-toggle" type="button" aria-controls="site-links" aria-expanded="false" hidden>Menu</button>
+    <nav id="site-links" class="links" aria-label="Main navigation">
+        <a href="../index.html">Home</a>
+        <a href="../projects.html">Projects</a>
+        <a href="../school.html">Coursework</a>
+        <a href="../blog.html" aria-current="page">Writing</a>
+        <a href="../gallery.html">Hardware Lab</a>
+    </nav>
+  </header>
+  <main id="main">
+    <div id="writing-content" data-post-id="9">
+<article class="essay">
+      <header class="essay-header">
+        <a class="back-to-writing" href="../blog.html">← All writing</a>
+        <h1>Porting Voice Conversion to MLX on Apple Silicon</h1>
+        <p class="essay-deck">Follow the hiss and vowel in a single word through pitch estimation, feature retrieval, and synthesis on the Mac.</p>
+        <p class="entry-meta">Miguel Cruz · <time datetime="2026-11-24">November 24, 2026</time> · 6 min read
+        </p>
+      </header>
+      <details class="article-contents">
+        <summary>On this page</summary>
+        <ul><li><a href="#section-1">Starting with a common clock</a></li>
+<li><a href="#section-2">Two descriptions of the same vowel</a></li>
+<li><a href="#section-3">Giving the frames the same addresses</a></li>
+<li><a href="#section-4">What the retrieval dial changes</a></li>
+<li><a href="#section-5">Carrying a model across frameworks</a></li></ul>
+      </details>
+      <div class="essay-body">
+<p>Say the word “see” and stretch out the vowel. The hiss at the beginning tells a listener which word you said. The vowel carries a pitch you can raise or lower while leaving the word recognizable. A voice converter has to preserve details like that hiss while generating audio with the character of the target voice. When I ported retrieval-based voice conversion to MLX for Apple Silicon, those two sounds gave me a way to reason about what each stage should carry forward.</p>
+
+<h2 id="section-1">Starting with a common clock</h2>
+<p>Consider the Python file-conversion path in the port. The loader reads samples from disk, averages the channels if the file is stereo, and resamples the signal to 16,000 samples per second. The pipeline applies a high-pass filter at 48 Hz and reflects 1,600 samples onto each end. That supplies a tenth of a second of context around both boundaries. A model processing the first vowel now has some audio to its left, just as it would for a vowel in the middle of a sentence. <a href="https://github.com/Acelogic/Retrieval-based-Voice-Conversion-MLX/blob/eec7791a59eb09d0f56f1189df55e9852848e692/rvc_mlx/infer/infer_mlx.py#L91-L104">Audio loader</a> and <a href="https://github.com/Acelogic/Retrieval-based-Voice-Conversion-MLX/blob/eec7791a59eb09d0f56f1189df55e9852848e692/rvc_mlx/infer/pipeline_mlx.py#L284-L330">filtering and padding</a>.</p>
+
+<p>A one-second, 48 kHz stereo recording starts with 48,000 sample values per channel. After mixing and resampling, the analysis path has 16,000 mono samples. Padding brings that to 19,200. The pitch path uses a 160-sample hop, so it has a budget of 120 ten-millisecond positions in that padded input. A hop measures the distance between consecutive estimates. It does not restrict the estimator to hearing ten milliseconds of context. That distinction matters when interpreting an abrupt change in pitch at the edge of a syllable.</p>
+
+<h2 id="section-2">Two descriptions of the same vowel</h2>
+<p>The content branch sends the audio through a HuBERT-style encoder. Convolutions produce features a short distance apart, and the encoder refines them using context. Each result is a vector of learned values that helps the synthesizer recover the speech sounds. Keeping the vectors avoids having to transcribe the word, pick a dictionary pronunciation, and reconstruct the original timing from those symbols. It also means that a change to one feature coordinate rarely has a simple name like “more sibilance.” <a href="https://github.com/Acelogic/Retrieval-based-Voice-Conversion-MLX/blob/eec7791a59eb09d0f56f1189df55e9852848e692/rvc_mlx/lib/mlx/hubert.py#L161-L201">Content encoder</a>.</p>
+
+<p>The other branch estimates fundamental frequency, or F0. On a voiced stretch of “see,” the vibration of the vocal folds produces a roughly repeating pattern. If the pitch extractor reports 110 Hz, the estimated period is about 9.1 milliseconds. On the hiss, a frame may receive zero because there is no stable periodic source to track. That zero is a meaningful input to the converter. The content branch still carries the shape and timing of the consonant. The file runner uses RMVPE as its default pitch method, with other estimators selectable through the same interface. <a href="https://github.com/Acelogic/Retrieval-based-Voice-Conversion-MLX/blob/eec7791a59eb09d0f56f1189df55e9852848e692/rvc_mlx/lib/mlx/pitch_extractors.py#L20-L48">Pitch extractor interface</a>.</p>
+
+<p>Suppose I request a shift of twelve semitones with autotune disabled. The pipeline multiplies each estimate by two raised to the power of the shift divided by twelve. The 110 Hz vowel becomes 220 Hz. Zero stays zero. The code saves those continuous values and makes a second, coarse representation on a mel scale. With the port’s 50-to-1,100 Hz mapping, 110 Hz rounds to bin 23 and 220 Hz rounds to bin 60. An unvoiced frame lands at the lower bin of 1 while its continuous F0 remains zero. Those two arrays now convey different information about precisely the same frame. <a href="https://github.com/Acelogic/Retrieval-based-Voice-Conversion-MLX/blob/eec7791a59eb09d0f56f1189df55e9852848e692/rvc_mlx/infer/pipeline_mlx.py#L135-L164">Transposition and pitch quantization</a>.</p>
+
+<h2 id="section-3">Giving the frames the same addresses</h2>
+<p>The HuBERT front end takes a stride of five followed by six strides of two. Multiply those numbers and adjacent content vectors correspond to input positions 320 samples apart, or 20 milliseconds at 16 kHz. The pitch path advances twice as often. To align the two, the port repeats each content vector. Two consecutive pitch estimates can therefore accompany the same content vector. If the vowel is sliding upward, the pitch estimates can change over those two frames even though the repeated content vector stays identical. <a href="https://github.com/Acelogic/Retrieval-based-Voice-Conversion-MLX/blob/eec7791a59eb09d0f56f1189df55e9852848e692/rvc_mlx/lib/mlx/hubert.py#L257-L279">Convolution strides</a>.</p>
+
+<p>There is a small edge case hiding in those tidy numbers. The last convolution window must fit its input. Dividing the original sample count by 320 gives the spacing, but it does not establish how many complete feature vectors the convolutions produce. The implementation bounds the length using the smaller of the input’s 160-sample positions and the repeated content sequence, then trims the pitch arrays to that span. When tracking an alignment problem, I would inspect the last frame that goes into the synthesizer before blaming a pitch detector for dropping a syllable. <a href="https://github.com/Acelogic/Retrieval-based-Voice-Conversion-MLX/blob/eec7791a59eb09d0f56f1189df55e9852848e692/rvc_mlx/infer/pipeline_mlx.py#L209-L227">Frame repetition and trimming</a>.</p>
+
+<h2 id="section-4">What the retrieval dial changes</h2>
+<p>If I supply a feature index and select a positive index rate, the converter asks FAISS for eight neighboring vectors for each content frame. It squares the reciprocal of each returned distance and normalizes those weights before combining the neighbors. A neighbor with distance 1 consequently has four times the influence of one with distance 2 before the common normalization. The resulting vector is blended with the original content according to the index rate. This lookup happens before the content vectors are repeated and leaves the pitch estimates alone.</p>
+
+<p>Here is the arithmetic for one imaginary coordinate. Let the original value be 0.20 and the weighted neighborhood value be 0.80. An index rate of 0.75 produces 0.65. With protection set to 0.25, a voiced frame keeps that 0.65. An unvoiced frame blends one quarter of 0.65 with three quarters of the original 0.20, yielding 0.3125. The protection branch is active for settings below 0.5. This gives the hiss more of its input features while letting the sustained vowel use the retrieved ones. The example follows one coordinate for legibility. The actual blend operates over whole vectors. <a href="https://github.com/Acelogic/Retrieval-based-Voice-Conversion-MLX/blob/eec7791a59eb09d0f56f1189df55e9852848e692/rvc_mlx/infer/pipeline_mlx.py#L180-L247">Retrieval weights and unvoiced protection</a>.</p>
+
+<h2 id="section-5">Carrying a model across frameworks</h2>
+<p>The synthesizer combines content and coarse pitch in its encoder, uses an embedding for the speaker ID, and passes a latent representation through the reverse flow. The decoder receives that representation and the continuous F0 contour to generate samples at the model’s output rate. A 40 kHz model needs 4,000 output samples trimmed at either end to remove the tenth of a second of context we added. Trimming 1,600 output samples instead would remove only 40 milliseconds at that rate. <a href="https://github.com/Acelogic/Retrieval-based-Voice-Conversion-MLX/blob/eec7791a59eb09d0f56f1189df55e9852848e692/rvc_mlx/lib/mlx/synthesizers.py#L193-L234">Synthesizer inference</a>.</p>
+
+<p>A checkpoint also has an ordering contract. For an ordinary one-dimensional convolution, the conversion tool moves the PyTorch axes for output channel, input channel, and kernel position into MLX’s output channel, kernel position, and input channel order. Transposed convolutions need a different permutation. If two axes happen to have the same length, a mistaken swap can pass a shape check and still connect a coefficient to the wrong channel. A short reference clip and intermediate feature values can locate that error far more precisely than an inspection of the final waveform alone. <a href="https://github.com/Acelogic/Retrieval-based-Voice-Conversion-MLX/blob/eec7791a59eb09d0f56f1189df55e9852848e692/tools/convert_rvc_model.py#L375-L396">Checkpoint layout conversion</a>.</p>
+
+<p>For a listening comparison I would keep the same recording and voice model, convert once at zero pitch shift and once at twelve semitones, and listen separately to the onset and the held vowel. For timing I would also specify whether the interval includes file I/O, index retrieval, and writing the output. MLX can defer computation, so a timer around construction of an array expression captures different work from a timer that waits for the samples. One short recording can reveal all three kinds of mistake if I preserve its inputs and ask a specific question at each stage. <a href="https://ml-explore.github.io/mlx/build/html/usage/lazy_evaluation.html">MLX evaluation semantics</a>.</p>
+      </div>
+      <footer class="essay-footer links">
+        <a href="../blog.html">All writing</a>
+        <a href="https://github.com/Acelogic/Retrieval-based-Voice-Conversion-MLX">Project source</a>
+      </footer>
+    </article>
+    </div>
+  </main>
+  <footer class="page-footer">
+    <address>Miguel Cruz</address>
+    <nav class="links" aria-label="Site information">
+      <a href="../webinfo.html">About this site</a>
+      <a href="mailto:mcruz@mcruz.me">Email</a>
+    </nav>
+  </footer>
+</body>
+</html>

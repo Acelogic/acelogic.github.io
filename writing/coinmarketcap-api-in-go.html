@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#ffffee">
+  <meta name="description" content="Follow a Bitcoin quote from a saved CoinMarketCap response through DynamoDB to a Go HTTP handler. The path explains what a successful lookup can tell you about the quote’s age.">
+  <title>Building RESTful APIs with Go · Miguel Cruz</title>
+  <link rel="icon" href="../favicon.ico">
+  <link rel="stylesheet" href="../CSS/global.css">
+  <link rel="stylesheet" href="../CSS/blog.css">
+  <script defer src="../JS/layout.js"></script>
+  <script type="module" src="../JS/blog.js"></script>
+  <script type="module" src="../JS/type-titles.js"></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="site-name" href="../index.html">mcruz.me</a>
+    <button class="nav-toggle" type="button" aria-controls="site-links" aria-expanded="false" hidden>Menu</button>
+    <nav id="site-links" class="links" aria-label="Main navigation">
+        <a href="../index.html">Home</a>
+        <a href="../projects.html">Projects</a>
+        <a href="../school.html">Coursework</a>
+        <a href="../blog.html" aria-current="page">Writing</a>
+        <a href="../gallery.html">Hardware Lab</a>
+    </nav>
+  </header>
+  <main id="main">
+    <div id="writing-content" data-post-id="4">
+<article class="essay">
+      <header class="essay-header">
+        <a class="back-to-writing" href="../blog.html">← All writing</a>
+        <h1>Building RESTful APIs with Go</h1>
+        <p class="essay-deck">Follow a Bitcoin quote from a saved CoinMarketCap response through DynamoDB to a Go HTTP handler. The path explains what a successful lookup can tell you about the quote’s age.</p>
+        <p class="entry-meta">Miguel Cruz · <time datetime="2021-02-10">February 10, 2021</time> · 5 min read
+          <span class="revision">Revised <time datetime="2026-11-24">November 24, 2026</time></span>
+        </p>
+      </header>
+      <details class="article-contents">
+        <summary>On this page</summary>
+        <ul><li><a href="#section-1">Two programs and one table</a></li>
+<li><a href="#section-2">Following one Bitcoin quote</a></li>
+<li><a href="#section-3">The cost of a short request</a></li>
+<li><a href="#section-4">When the name is almost right</a></li>
+<li><a href="#section-5">How old is the answer?</a></li></ul>
+      </details>
+      <div class="essay-body">
+<p>For a software deployment course at SUNY Oswego, I built a service to answer a small question about CoinMarketCap’s top 100 cryptocurrencies. If someone asks for BTC, what name, rank, and dollar price should come back? Making the HTTP route was the shortest part of the job. The interesting decisions were how a quote got there in the first place and what the service could promise about it.</p>
+
+<h2 id="section-1">Two programs and one table</h2>
+<p>The project has two Go programs with different schedules. The collector requests CoinMarketCap’s latest listings, decodes the response, and writes a record for each coin to DynamoDB. The HTTP service accepts requests whenever a reader has a question. It reads the database, so ten people looking up Bitcoin do not trigger ten calls to CoinMarketCap. A reader can also retrieve the last stored price while the collector waits for its next poll. <a href="https://github.com/Acelogic/coinmarketcap-go-server/blob/59f77fde5678b5851a13d17b26efe0277e840eca/src/main.go#L175-L203">Collector loop</a>.</p>
+
+<p>The upstream response has a nested structure. Each entry carries a name and symbol, a field called <code>cmc_rank</code>, and a <code>quote</code> object containing values for USD. My <code>DBitem</code> type keeps four fields. The collector copies the rank, name, symbol, and price into that type, then sends it to DynamoDB with <code>PutItem</code>. Market capitalization appears in the upstream data, but it drops out at this step. Adding it to the HTTP response later would also require changing what the collector stores.</p>
+
+<h2 id="section-2">Following one Bitcoin quote</h2>
+<p>The repository includes a saved listing with 100 entries. Its Bitcoin record has rank 1 and a USD price of 61422.28861379695. That file gives me a fixed input for tracing a lookup without depending on today’s market. Given that record in the table, a request to <code>GET /mcruz/search?coinName=BTC</code> would produce this JSON, shown here with the whitespace expanded. <a href="https://github.com/Acelogic/coinmarketcap-go-server/blob/59f77fde5678b5851a13d17b26efe0277e840eca/src/coinlist.json#L1-L13">Saved input record</a>.</p>
+
+<pre><code>[
+  {
+    "coinRank": 1,
+    "coinName": "Bitcoin",
+    "coinSymbol": "BTC",
+    "coinPrice": 61422.28861379695
+  }
+]</code></pre>
+
+<p>Even one match comes back in an array because the search handler collects matching records. The parameter is named <code>coinName</code>, yet the server compares it with both the name and the symbol. An empty query gets HTTP 400. A supplied term with no matching record gets HTTP 404. A reader handling both cases can distinguish a missing input from a search that the service actually carried out. <a href="https://github.com/Acelogic/coinmarketcap-go-api/blob/b7ec4bf3744d95533864040222fd58f89108f189/src/main.go#L107-L159">Search handler</a>.</p>
+
+<h2 id="section-3">The cost of a short request</h2>
+<p>The URL suggests a direct lookup. Inside the handler, DynamoDB scans the table and returns the four selected fields. The server encodes those records as JSON, immediately decodes them into a Go slice, walks the slice looking for a match, and encodes the matching records again. A small table makes that path easy to follow. It also makes the round trip through JSON easy to overlook. I would have the search handler filter the slice returned by <code>DumpDB</code> and reserve the encoder for the HTTP response.</p>
+
+<p>There is a second limit in the database call. A DynamoDB scan can return one page and a key indicating where to continue. The coursework implementation makes one scan. If the table ever grows beyond that first page, the handler could return 404 for a coin that exists on the next one. A repeatable check would load enough records to force pagination, pick a symbol from the second page, and look it up through the public route. <a href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Scan.html#Scan.Pagination">DynamoDB scan pagination</a>.</p>
+
+<h2 id="section-4">When the name is almost right</h2>
+<p>A small input matrix exposes a detail that a successful BTC lookup hides. Given the Bitcoin fixture, <code>Bitcoin</code>, <code>bitcoin</code>, and <code>BITCOIN</code> all match. <code>bItCoIn</code> misses. The handler builds the lowercase and uppercase forms of the stored name and compares each with the query as submitted. That happens to accept the spellings people are likeliest to try. A mixed-case query makes the difference between this implementation and a truly case-insensitive comparison visible.</p>
+
+<p>A second example concerns the shape of the result. Imagine a record with the name and symbol both set to <code>EXAMPLE</code>. Searching for that word would append the record twice. The name and symbol are tested by separate conditions, and each condition appends a match. One route-level check with that invented record would justify a small change to the loop. Test whether either field matches, then append the record once. The sample is deliberately artificial because a successful Bitcoin lookup cannot reveal the duplicate.</p>
+
+<p>These examples also clarify the response format. A script consuming the route needs to check the status before parsing the body. Success gets a JSON array, including the brackets around a single match. The two error branches send text with an HTML content type. Trying to decode that text into a slice produces a parsing error that obscures the more informative HTTP 400 or 404. I would keep those status codes and give every response from the route a documented representation. <a href="https://github.com/Acelogic/coinmarketcap-go-api/blob/b7ec4bf3744d95533864040222fd58f89108f189/src/main.go#L117-L159">Name matching and HTTP responses</a>.</p>
+
+<h2 id="section-5">How old is the answer?</h2>
+<p>Consider an upstream response containing a perfectly valid JSON error object and no listings. The collector has a two-second HTTP client timeout, but a server can return an error response well inside that deadline. The fetch path reads the body and proceeds to decode it without branching on the HTTP status. When the data slice is empty, the write loop has no items to refresh. A stored Bitcoin record could still produce a convincing reply afterward. A check on the refresh operation should therefore capture the provider’s status and the number of records accepted as well as the time it took. <a href="https://github.com/Acelogic/coinmarketcap-go-server/blob/59f77fde5678b5851a13d17b26efe0277e840eca/src/main.go#L69-L123">Upstream request and decoding path</a>.</p>
+
+<p>The collector sleeps for six hours before each fetch, including the first. It then writes one coin at a time. A request arriving midway through a refresh can therefore see records from different polls. The status route reports the table name and item count, and the stored quote has no collection time. A successful BTC lookup establishes that a record exists. To let a reader judge its age, I would store the observation time beside the price and return both. That one field would answer a question no amount of decimal precision can settle.</p>
+      </div>
+      <footer class="essay-footer links">
+        <a href="../blog.html">All writing</a>
+        <a href="https://github.com/Acelogic/coinmarketcap-go-api">Project source</a>
+      </footer>
+    </article>
+    </div>
+  </main>
+  <footer class="page-footer">
+    <address>Miguel Cruz</address>
+    <nav class="links" aria-label="Site information">
+      <a href="../webinfo.html">About this site</a>
+      <a href="mailto:mcruz@mcruz.me">Email</a>
+    </nav>
+  </footer>
+</body>
+</html>

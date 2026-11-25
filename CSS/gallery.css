@@ -1,26 +1,104 @@
+.lab-contents { margin-top: 0.85rem; font-size: 0.94rem; }
 
-/*For Anime.JS Animation*/
-
-body {
-  background-color: black;
-}
-
-.wrapper {
-  position: relative;
-  display: flex;
-  justify-content: center;
+.wafer-study {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1fr);
   align-items: center;
-  flex-wrap: wrap;
-  width: 100%;
-  height: 100vh;
+  gap: clamp(2rem, 6vw, 5rem);
+  padding: 1.65rem 0 1.8rem;
 }
+.wafer-figure { text-align: center; }
+.wafer-figure canvas, .wafer-figure img {
+  width: min(100%, 23rem);
+  height: auto;
+  object-fit: contain;
+  vertical-align: middle;
+}
+.wafer-figure figcaption {
+  margin: 0.4rem auto 0;
+  color: var(--muted);
+  font-size: 0.84rem;
+}
+.wafer-figure figcaption span { display: inline-block; margin: 0.15rem 0.45rem; }
+.wafer-figure figcaption i {
+  display: inline-block;
+  width: 0.8rem;
+  height: 0.8rem;
+  margin-right: 0.35rem;
+  border: 1px solid #645e59;
+  vertical-align: -0.04rem;
+}
+.die-swatch { background: linear-gradient(120deg, #659392, #b18d9d, #dda071); }
+.edge-swatch {
+  background: repeating-linear-gradient(-45deg, #e6e1cc 0 3px, #a49e87 3px 4px);
+}
+.wafer-settings > p { margin-top: 0.65rem; }
+.dimensions {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.7rem;
+  margin: 1.2rem 0;
+}
+.dimensions label { font-size: 0.88rem; }
+.dimensions input, .dimensions select {
+  display: block;
+  margin-top: 0.2rem;
+  width: 100%;
+  min-height: 2.45rem;
+  padding: 0.3rem 0.45rem;
+  background: #fffef8;
+  border: 1px solid #8e8978;
+  border-radius: 0;
+  color: var(--ink);
+  font: 0.9rem/1.45 var(--mono);
+}
+.measurements {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 2rem;
+  padding: 0.6rem 0;
+  border-block: 1px solid var(--rule);
+}
+.measurements dt { color: var(--muted); font-size: 0.84rem; }
+.measurements dd { margin: 0; font: 1.6rem/1.4 var(--mono); }
+.field-error { margin-bottom: 0.6rem; color: var(--red); }
+.wafer-settings button { margin: 0.8rem 0 0.3rem; font-size: 0.85rem; }
+.model-note { color: var(--muted); font-size: 0.85rem; }
 
-.el {
-  position: absolute;
-  opacity: 1;
-  width: 2px;
-  height: 24vh;
-  margin-top: -12vh;
-  transform-origin: 50% 100%;
-  background: white;
+.bench-notes { padding-top: 1.35rem; border-top: 3px double var(--rule); }
+.bench-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.45rem 2.25rem;
+  margin-top: 1.15rem;
+}
+.bench-grid article { display: grid; grid-template-columns: 7rem 1fr; gap: 1rem; }
+.bench-grid h3 { margin-bottom: 0.4rem; }
+.bench-grid p { font-size: 0.95rem; }
+.bench-photo { display: block; align-self: start; }
+.bench-photo img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border: 1px solid var(--rule);
+}
+@media screen and (min-width: 700px) and (max-width: 1100px) {
+  .wafer-study { gap: 1.2rem; grid-template-columns: minmax(0, 0.85fr) minmax(0, 1fr); }
+}
+@media screen and (max-width: 699px) {
+  .wafer-study { display: flex; flex-direction: column; align-items: stretch; }
+  .wafer-settings { display: contents; }
+  .wafer-settings h2 { order: -3; }
+  .wafer-settings > p:first-of-type { order: -2; margin: 0; }
+  .wafer-figure { order: -1; }
+  .wafer-figure canvas, .wafer-figure img { width: clamp(11rem, 49vw, 15rem); }
+  .dimensions { margin-top: 0; gap: 0.45rem; }
+  .wafer-settings .model-note { margin: 0; }
+  .bench-grid article { grid-template-columns: 5.5rem minmax(0, 1fr); gap: 0.75rem; }
+}
+@media screen and (max-width: 1100px) {
+  .bench-grid { grid-template-columns: 1fr; }
+  .lab-contents { margin-top: 0.35rem; }
+  .lab-contents a { display: inline-flex; align-items: center; min-height: 44px; }
+  .dimensions input, .dimensions select, .wafer-settings button { min-height: 44px; font-size: 1rem; }
 }

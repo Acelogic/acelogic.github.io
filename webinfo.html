@@ -1,120 +1,52 @@
-<!DOCTYPE html>
-<html>
-
+<!doctype html>
+<html lang="en">
 <head>
-  <title>Web Info</title>
   <meta charset="utf-8">
-  <meta name="theme-color" content="#000000">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0,  user-scalable=0, maximum-scale=1.0">
-  
-  <link rel="stylesheet" type="text/css" href="CSS/font.css">
-  </link>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/progressively/dist/progressively.min.css">
-  </link>
-  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.4/css/bulma.min.css">
-  </link>
-  <link rel="stylesheet" type="text/css" href="CSS/global.css">
-  </link>
-  <link rel="stylesheet" type="text/css" href="CSS/webinfo.css">
-  </link>
-  <link rel="stylesheet" href="https://afeld.github.io/emoji-css/emoji.css">
-  </link>
-  
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-  <script src="JS/compLoader.js"></script>
-  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/js/all.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/progressively/1.2.5/progressively.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/typeit/8.8.7/index.umd.min.js"></script>
-  <script defer src="JS/webinfo.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#ffffee">
+  <meta name="description" content="About the design and source of mcruz.me.">
+  <title>About this site · Miguel Cruz</title>
+  <link rel="icon" href="favicon.ico">
+  <link rel="stylesheet" href="CSS/global.css">
+  <script defer src="JS/layout.js"></script>
+  <script type="module" src="JS/type-titles.js"></script>
 </head>
-
 <body>
-
-  <!-- Navigation bar insertion code -->
-  <div id="navBar"></div>
-
-  <!-- Hero section -->
-  <section class="hero is-primary has-background-black">
-    <div class="hero-body">
-      <div class="container">
-        <h1 class="title">
-          <span class="About-Title">About this website</span> <i class="em em-mag"></i>
-        </h1>
-        <h2 class="subtitle">
-          <span class="About-Subtitle">We aim to provide you with the latest and most useful information on web
-            development, design, and related technologies.</span>
-        </h2>
-      </div>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a class="site-name" href="index.html">mcruz.me</a>
+    <button class="nav-toggle" type="button" aria-controls="site-links" aria-expanded="false" hidden>Menu</button>
+    <nav id="site-links" class="links" aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <a href="projects.html">Projects</a>
+        <a href="school.html">Coursework</a>
+        <a href="blog.html">Writing</a>
+        <a href="gallery.html">Hardware Lab</a>
+    </nav>
+  </header>
+  <main id="main">
+    <header class="page-title">
+      <h1>About this site</h1>
+      <p>I started mcruz.me in 2018 as a place to keep my projects and coursework.</p>
+    </header>
+    <div class="reading">
+      <section>
+        <h2>Acknowledgment</h2>
+        <p>The model for this edition is <a href="https://gee.cs.oswego.edu/">Doug Lea’s home page</a> at SUNY Oswego. He was my professor. I like that you can follow a link from the front page straight to a paper or a piece of software. I wanted my own work to be just as easy to find.</p>
+      </section>
+      <section>
+        <h2>Source</h2>
+        <p>The pages are written in HTML, share a stylesheet, and are hosted on GitHub Pages. The title animations use <a href="https://github.com/alexmacarthur/typeit/tree/v8.8.7">TypeIt</a>. The <a href="https://github.com/Acelogic/acelogic.github.io">website repository</a> includes the project catalog and links to the original course worksites.</p>
+        <p>If you find a broken link, <a href="mailto:mcruz@mcruz.me">send me an email</a>.</p>
+      </section>
     </div>
-  </section>
-
-  <!-- Libraries section -->
-  <section class="section">
-    <div class="container">
-      <h2 class="title has-text-centered">Libraries and Frameworks Used</h2>
-      <div class="columns is-multiline is-centered">
-        <div class="column is-4">
-          <div class="card">
-            <div class="card-content has-text-centered">
-              <figure class="image is-128x128">
-                <img src="img/bulma.png" alt="Bulma logo">
-              </figure>
-              <h4 class="title is-4">Bulma</h4>
-              <p class="subtitle is-6 has-text-grey">A modern CSS framework based on Flexbox</p>
-            </div>
-          </div>
-        </div>
-        <div class="column is-4">
-          <div class="card">
-            <div class="card-content has-text-centered">
-              <figure class="image is-128x128">
-                <img src="img/jquery.png" alt="jQuery logo">
-              </figure>
-              <h4 class="title is-4">jQuery</h4>
-              <p class="subtitle is-6 has-text-grey">A fast, small, and feature-rich JavaScript library</p>
-            </div>
-          </div>
-        </div>
-        <div class="column is-4">
-          <div class="card">
-            <div class="card-content has-text-centered">
-              <figure class="image is-128x128">
-                <img src="img/typeit.png" alt="TypeIt logo">
-              </figure>
-              <h4 class="title is-4">TypeIt</h4>
-              <p class="subtitle is-6 has-text-grey">A jQuery-free, lightweight, and flexible JavaScript typing
-                animation library</p>
-            </div>
-          </div>
-        </div>
-        <div class="column is-4">
-        <div class="card">
-          <div class="card-content has-text-centered">
-            <figure class="image is-128x128">
-              <i class="fab fa-font-awesome-alt"></i>
-            </figure>
-            <h4 class="title is-4">Font Awesome</h4>
-            <p class="subtitle is-6 has-text-grey">A popular icon set and toolkit</p>
-          </div>
-        </div>
-        </div>
-        <div class="column is-4">
-          <div class="card">
-            <div class="card-content has-text-centered">
-              <figure class="image is-128x128">
-                <img src="img/progressively.png" alt="Progressively logo">
-              </figure>
-              <h4 class="title is-4">Progressively</h4>
-              <p class="subtitle is-6 has-text-grey">A JavaScript library for progressive image loading</p>
-            </div>
-          </div>
-        </div>
-        </div>
-        </div>
-        </section>
-        <!-- Footer insertion code -->
-        <div id="footer"></div>
-        </body>
-        
-        </html>
+  </main>
+  <footer class="page-footer">
+    <address>Miguel Cruz</address>
+    <nav class="links" aria-label="Site information">
+      <a href="webinfo.html" aria-current="page">About this site</a>
+      <a href="mailto:mcruz@mcruz.me">Email</a>
+    </nav>
+  </footer>
+</body>
+</html>
